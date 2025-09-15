@@ -1,0 +1,480 @@
+{
+  "courseInfo": {
+    "title": "Інформаційні банківські технології",
+    "subtitle": "Курс для студентів 3 курсу спеціальності \"Кібербезпека\"",
+    "version": "2.1",
+    "lastUpdated": "2025-09-16",
+    "totalModules": 6,
+    "totalLectures": 18,
+    "estimatedHours": 54,
+    "language": "uk",
+    "institution": "Навчальний заклад",
+    "github": {
+      "repository": "https://github.com/PirogovAleksey/banking-information-systems",
+      "branch": "dev",
+      "liveUrl": "https://pirogovaleksey.github.io/banking-information-systems/"
+    }
+  },
+  "modules": [
+    {
+      "id": 1,
+      "title": "Основи банківських ІТ-систем",
+      "description": "Вивчення фундаментальних концепцій банківських ІТ-систем, їх архітектури та принципів захисту в контексті кібербезпеки.",
+      "emoji": "🏦",
+      "status": "active",
+      "difficulty": "beginner",
+      "estimatedHours": 9,
+      "lectures": [
+        {
+          "id": "1.1",
+          "title": "Архітектура банківських ІТ-систем",
+          "description": "Еволюція банківських технологій та багаторівнева архітектура сучасних банківських систем",
+          "duration": 80,
+          "topics": [
+            "Еволюція банківських технологій",
+            "Багаторівнева архітектура банківських систем",
+            "Кібербезпека: Threat modeling для банківської архітектури",
+            "Інтеграційні шини та безпека API"
+          ],
+          "securityFocus": "Threat modeling для банківської архітектури",
+          "bankingExamples": ["Архітектура ПриватБанку", "Система Monobank"],
+          "status": "planned"
+        },
+        {
+          "id": "1.2",
+          "title": "Центральні банківські системи (Core Banking)",
+          "description": "Функціональність CBS, типи систем та підходи до захисту критичної інфраструктури",
+          "duration": 80,
+          "topics": [
+            "Функціональність CBS та критичні компоненти",
+            "Типи CBS: централізовані vs розподілені",
+            "Кібербезпека: Захист критичної банківської інфраструктури",
+            "Backup, disaster recovery та business continuity"
+          ],
+          "securityFocus": "Захист критичної банківської інфраструктури",
+          "bankingExamples": ["Temenos T24", "FIS Profile", "Oracle FLEXCUBE"],
+          "status": "planned"
+        },
+        {
+          "id": "1.3",
+          "title": "Банківські бази даних та їх захист",
+          "description": "СУБД у банківському середовищі, транзакційна цілісність та методи захисту баз даних",
+          "duration": 80,
+          "topics": [
+            "СУБД у банківському середовищі",
+            "Транзакційна цілісність та ACID",
+            "Кібербезпека: Database security, encryption at rest",
+            "Аудит доступу до критичних даних"
+          ],
+          "securityFocus": "Database security, encryption at rest",
+          "bankingExamples": ["Oracle Database у банках", "IBM Db2 for Banking", "PostgreSQL security"],
+          "status": "planned"
+        }
+      ],
+      "practicalTasks": [
+        {
+          "id": "1.P1",
+          "title": "Аналіз архітектури банківської системи",
+          "description": "Дослідження та документування архітектури реальної банківської системи з фокусом на безпеку",
+          "estimatedTime": 160,
+          "type": "analysis"
+        }
+      ],
+      "keywords": ["Banking Architecture", "Core Banking", "Database Security", "Threat Modeling"]
+    },
+    {
+      "id": 2,
+      "title": "Core Banking Systems",
+      "description": "Детальне вивчення центральних банківських систем, їх функціональності, інтеграції та безпекових аспектів.",
+      "emoji": "⚙️",
+      "status": "planned",
+      "difficulty": "intermediate",
+      "estimatedHours": 9,
+      "lectures": [
+        {
+          "id": "2.1",
+          "title": "Функціональність та компоненти CBS",
+          "description": "Глибокий аналіз компонентів CBS, управління клієнтськими даними та системи виявлення шахрайств",
+          "duration": 80,
+          "topics": [
+            "Customer Information File (CIF)",
+            "Account management та transaction processing",
+            "Кібербезпека: Access controls та privilege management",
+            "Real-time fraud detection системи"
+          ],
+          "securityFocus": "Access controls та privilege management",
+          "bankingExamples": ["CIF в Temenos", "Fraud detection у Monobank", "Real-time processing"],
+          "status": "planned"
+        },
+        {
+          "id": "2.2",
+          "title": "Інтеграція CBS з зовнішніми системами",
+          "description": "APIs у банкінгу, event-driven архітектура та безпека інтеграційних рішень",
+          "duration": 80,
+          "topics": [
+            "APIs та web services у банкінгу",
+            "Message queues та event-driven architecture",
+            "Кібербезпека: API security, OAuth, JWT токени",
+            "Network segmentation для CBS"
+          ],
+          "securityFocus": "API security, OAuth, JWT токени",
+          "bankingExamples": ["Open Banking API", "SWIFT Integration", "PSD2 API"],
+          "status": "planned"
+        },
+        {
+          "id": "2.3",
+          "title": "CBS провайдери та їх security frameworks",
+          "description": "Огляд провайдерів CBS, хмарні рішення та оцінка ризиків постачальників",
+          "duration": 80,
+          "topics": [
+            "Огляд світових CBS (Temenos, FIS, Oracle)",
+            "Хмарні vs on-premise рішення",
+            "Кібербезпека: Vendor risk assessment",
+            "Compliance вимоги до CBS (PCI DSS, SOX)"
+          ],
+          "securityFocus": "Vendor risk assessment",
+          "bankingExamples": ["Temenos на AWS", "FIS Cloud Solutions", "Oracle Banking Cloud"],
+          "status": "planned"
+        }
+      ],
+      "labs": [
+        {
+          "id": "2.L1",
+          "title": "Налаштування безпеки CBS",
+          "description": "Практичне налаштування контролів доступу та моніторингу в симуляторі CBS",
+          "estimatedTime": 160,
+          "type": "hands-on"
+        }
+      ],
+      "keywords": ["CBS", "API Security", "OAuth", "Vendor Risk", "Access Controls"]
+    },
+    {
+      "id": 3,
+      "title": "Платіжні системи та технології",
+      "description": "Вивчення сучасних платіжних систем, карткового бізнесу, мобільних платежів та криптовалют у контексті безпеки.",
+      "emoji": "💳",
+      "status": "planned",
+      "difficulty": "intermediate",
+      "estimatedHours": 9,
+      "lectures": [
+        {
+          "id": "3.1",
+          "title": "Картковий бізнес та платіжні мережі",
+          "description": "Архітектура Visa/Mastercard, EMV стандарти та комплайнс PCI DSS",
+          "duration": 80,
+          "topics": [
+            "Visa, Mastercard: архітектура та протоколи",
+            "EMV стандарти та токенізація",
+            "Кібербезпека: Card fraud prevention, 3D Secure",
+            "PCI DSS compliance - детальний розгляд"
+          ],
+          "securityFocus": "Card fraud prevention, 3D Secure, PCI DSS",
+          "bankingExamples": ["Visa Token Service", "Mastercard Digital Enablement", "3D Secure 2.0"],
+          "status": "planned"
+        },
+        {
+          "id": "3.2",
+          "title": "Електронні платежі та мобільний банкінг",
+          "description": "Digital wallets, contactless платежі та безпека мобільних додатків",
+          "duration": 80,
+          "topics": [
+            "Digital wallets (Apple Pay, Google Pay)",
+            "QR-коди та contactless платежі",
+            "Кібербезпека: Mobile app security, biometric authentication",
+            "Device fingerprinting та behavioral analytics"
+          ],
+          "securityFocus": "Mobile app security, biometric authentication",
+          "bankingExamples": ["Apple Pay tokenization", "Google Pay security", "Samsung Pay MST"],
+          "status": "planned"
+        },
+        {
+          "id": "3.3",
+          "title": "Криптовалюти та блокчейн у банкінгу",
+          "description": "CBDC, DeFi інтеграція та регуляторні виклики криптовалютного банкінгу",
+          "duration": 80,
+          "topics": [
+            "Central Bank Digital Currencies (CBDC)",
+            "DeFi та традиційний банкінг",
+            "Кібербезпека: Blockchain security, smart contract auditing",
+            "Regulatory challenges для crypto-banking"
+          ],
+          "securityFocus": "Blockchain security, smart contract auditing",
+          "bankingExamples": ["Digital Euro pilot", "JP Morgan JPM Coin", "Bank for International Settlements"],
+          "status": "planned"
+        }
+      ],
+      "labs": [
+        {
+          "id": "3.L1",
+          "title": "PCI DSS Assessment",
+          "description": "Проведення оцінки відповідності PCI DSS для модельної платіжної системи",
+          "estimatedTime": 160,
+          "type": "assessment"
+        }
+      ],
+      "practicalTasks": [
+        {
+          "id": "3.P1",
+          "title": "Аналіз безпеки мобільного банкінгу",
+          "description": "Тестування безпеки мобільного додатка банку та аналіз виявлених вразливостей",
+          "estimatedTime": 160,
+          "type": "security-analysis"
+        }
+      ],
+      "keywords": ["Payment Systems", "PCI DSS", "Mobile Security", "Blockchain", "CBDC"]
+    },
+    {
+      "id": 4,
+      "title": "Безпека банківських систем",
+      "description": "ОСНОВНИЙ модуль з кібербезпеки: аналіз загроз, системи захисту, пентестинг та управління вразливостями.",
+      "emoji": "🔒",
+      "status": "planned",
+      "difficulty": "advanced",
+      "estimatedHours": 9,
+      "lectures": [
+        {
+          "id": "4.1",
+          "title": "Кіберзагрози в банківській сфері",
+          "description": "APT групи, banking trojans та комплексний аналіз векторів атак на банки",
+          "duration": 80,
+          "topics": [
+            "APT групи, що атакують банки (Lazarus, Carbanak)",
+            "Banking trojans (Zeus, Emotet, Trickbot)",
+            "Кібербезпека: Threat intelligence для банків",
+            "Attack vectors та kill chain analysis"
+          ],
+          "securityFocus": "Threat intelligence для банків, Kill chain analysis",
+          "bankingExamples": ["Carbanak campaign", "Bangladesh Bank heist", "SWIFT attacks"],
+          "status": "planned"
+        },
+        {
+          "id": "4.2",
+          "title": "Системи захисту банківської інфраструктури",
+          "description": "Zero trust архітектура, SIEM системи та операційні центри кібербезпеки",
+          "duration": 80,
+          "topics": [
+            "Multi-factor authentication та zero trust",
+            "SIEM системи для банків (IBM QRadar, Splunk)",
+            "Кібербезпека: Security Operations Center (SOC)",
+            "Incident response playbooks"
+          ],
+          "securityFocus": "Security Operations Center (SOC), Incident response",
+          "bankingExamples": ["JPMorgan Chase SOC", "Bank of America Cyber Defense", "Wells Fargo Security"],
+          "status": "planned"
+        },
+        {
+          "id": "4.3",
+          "title": "Пентестинг та vulnerability management",
+          "description": "Red team операції, автоматизоване тестування безпеки та bug bounty програми",
+          "duration": 80,
+          "topics": [
+            "Red team vs Blue team у банківському контексті",
+            "Automated security testing у CI/CD",
+            "Кібербезпека: Bug bounty програми банків",
+            "Remediation priorities та risk scoring"
+          ],
+          "securityFocus": "Bug bounty програми, Risk scoring",
+          "bankingExamples": ["Goldman Sachs bug bounty", "Capital One red team", "ING security testing"],
+          "status": "planned"
+        }
+      ],
+      "labs": [
+        {
+          "id": "4.L1",
+          "title": "Incident Response Simulation",
+          "description": "Симуляція кіберінциденту в банку з повним циклом реагування",
+          "estimatedTime": 160,
+          "type": "simulation"
+        },
+        {
+          "id": "4.L2",
+          "title": "Penetration Testing Banking App",
+          "description": "Проведення пентесту банківського додатку в контрольованому середовищі",
+          "estimatedTime": 160,
+          "type": "penetration-testing"
+        }
+      ],
+      "keywords": ["APT Groups", "Banking Trojans", "SOC", "Incident Response", "Penetration Testing"]
+    },
+    {
+      "id": 5,
+      "title": "Регуляторні технології (RegTech)",
+      "description": "Автоматизація комплайнс процедур, AML/KYC системи та регуляторна звітність з забезпеченням приватності.",
+      "emoji": "📋",
+      "status": "planned",
+      "difficulty": "intermediate",
+      "estimatedHours": 6,
+      "lectures": [
+        {
+          "id": "5.1",
+          "title": "AML/KYC автоматизація",
+          "description": "Machine learning для виявлення шахрайств та системи моніторингу транзакцій",
+          "duration": 80,
+          "topics": [
+            "Machine learning для fraud detection",
+            "Transaction monitoring системи",
+            "Кібербезпека: Privacy-preserving analytics",
+            "GDPR compliance у фінансовому секторі"
+          ],
+          "securityFocus": "Privacy-preserving analytics, GDPR compliance",
+          "bankingExamples": ["SAS AML solutions", "FICO Falcon", "IBM RegTech"],
+          "status": "planned"
+        },
+        {
+          "id": "5.2",
+          "title": "Regulatory reporting та compliance automation",
+          "description": "Автоматизована регуляторна звітність та забезпечення цілісності даних",
+          "duration": 80,
+          "topics": [
+            "BCBS 239 та data governance",
+            "Automated regulatory reporting",
+            "Кібербезпека: Data integrity та audit trails",
+            "RegTech sandbox та innovation hubs"
+          ],
+          "securityFocus": "Data integrity та audit trails",
+          "bankingExamples": ["BCBS 239 implementation", "MiFID II reporting", "Regulatory sandbox UK"],
+          "status": "planned"
+        }
+      ],
+      "practicalTasks": [
+        {
+          "id": "5.P1",
+          "title": "Розробка AML процедур",
+          "description": "Створення автоматизованих процедур протидії відмиванню коштів з використанням ML",
+          "estimatedTime": 160,
+          "type": "development"
+        }
+      ],
+      "keywords": ["RegTech", "AML", "KYC", "GDPR", "Machine Learning", "Compliance Automation"]
+    },
+    {
+      "id": 6,
+      "title": "Кіберзагрози в банкінгу",
+      "description": "Аналіз реальних кіберінцидентів, emerging threats та міжнародна співпраця у сфері кіберзахисту банків.",
+      "emoji": "🚨",
+      "status": "planned",
+      "difficulty": "advanced",
+      "estimatedHours": 9,
+      "lectures": [
+        {
+          "id": "6.1",
+          "title": "Актуальні кіберінциденти у фінсекторі",
+          "description": "Case studies найбільших кіберінцидентів та уроки, винесені з них",
+          "duration": 80,
+          "topics": [
+            "Case studies: Bangladesh Bank, Equifax, Capital One",
+            "Lessons learned та post-incident improvements",
+            "Кібербезпека: Digital forensics у банківських інцидентах",
+            "Legal aspects та breach notification"
+          ],
+          "securityFocus": "Digital forensics, Breach notification",
+          "bankingExamples": ["Bangladesh Bank $81M heist", "Equifax breach", "Capital One data breach"],
+          "status": "planned"
+        },
+        {
+          "id": "6.2",
+          "title": "Emerging threats та майбутнє кібербезпеки",
+          "description": "AI-powered атаки, квантові загрози та post-quantum криптографія",
+          "duration": 80,
+          "topics": [
+            "AI-powered attacks та deepfakes",
+            "Quantum computing threats to encryption",
+            "Кібербезпека: Post-quantum cryptography",
+            "Cyber resilience frameworks"
+          ],
+          "securityFocus": "Post-quantum cryptography, Cyber resilience",
+          "bankingExamples": ["NIST post-quantum standards", "EU cyber resilience act", "Quantum-safe banking"],
+          "status": "planned"
+        },
+        {
+          "id": "6.3",
+          "title": "Міжнародна співпраця у кіберзахисті банків",
+          "description": "Information sharing, міжнародне реагування та регуляторна співпраця",
+          "duration": 80,
+          "topics": [
+            "Information sharing consortiums (FS-ISAC)",
+            "Cross-border incident response",
+            "Кібербезпека: Threat intelligence sharing",
+            "Regulatory cooperation (Basel, EU, US)"
+          ],
+          "securityFocus": "Threat intelligence sharing",
+          "bankingExamples": ["FS-ISAC threat sharing", "Basel cybersecurity framework", "EU-US cooperation"],
+          "status": "planned"
+        }
+      ],
+      "labs": [
+        {
+          "id": "6.L1",
+          "title": "Digital Forensics Investigation",
+          "description": "Розслідування симульованого кіберінциденту в банку з використанням forensics tools",
+          "estimatedTime": 160,
+          "type": "forensics"
+        }
+      ],
+      "practicalTasks": [
+        {
+          "id": "6.P1",
+          "title": "Cyber Resilience Assessment",
+          "description": "Оцінка кіберстійкості банку згідно міжнародних frameworks",
+          "estimatedTime": 160,
+          "type": "assessment"
+        }
+      ],
+      "keywords": ["Cyber Incidents", "Digital Forensics", "Quantum Threats", "International Cooperation", "FS-ISAC"]
+    }
+  ],
+  "progressTracking": {
+    "totalProgress": {
+      "completed": 0,
+      "inProgress": 1,
+      "planned": 5
+    },
+    "lectureProgress": {
+      "completed": 0,
+      "total": 18
+    },
+    "labProgress": {
+      "completed": 0,
+      "total": 6
+    },
+    "practicalProgress": {
+      "completed": 0,
+      "total": 6
+    }
+  },
+  "assessment": {
+    "weightings": {
+      "lectures": 40,
+      "labs": 35,
+      "practicalTasks": 20,
+      "participation": 5
+    },
+    "gradingScale": {
+      "excellent": "90-100",
+      "good": "75-89",
+      "satisfactory": "60-74",
+      "unsatisfactory": "0-59"
+    },
+    "securityFocusWeight": 60
+  },
+  "resources": {
+    "standards": [
+      "PCI DSS v4.0",
+      "ISO 27001/27002",
+      "NIST Cybersecurity Framework",
+      "Basel Committee guidelines"
+    ],
+    "tools": [
+      "OWASP ZAP",
+      "Burp Suite",
+      "Splunk",
+      "IBM QRadar",
+      "Wireshark"
+    ],
+    "certifications": [
+      "Certified Information Systems Security Professional (CISSP)",
+      "Certified Ethical Hacker (CEH)",
+      "Payment Card Industry Professional (PCIP)"
+    ]
+  }
+}

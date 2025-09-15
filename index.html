@@ -3,125 +3,188 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Інформаційні банківські технології - курс для студентів спеціальності Кібербезпека">
+    <meta name="description" content="Інформаційні банківські технології - курс для студентів 3 курсу спеціальності Кібербезпека">
+    <meta name="keywords" content="банківські технології, кібербезпека, CBS, платіжні системи, blockchain">
+    <meta name="author" content="Кафедра кібербезпеки">
     <title>Інформаційні банківські технології | Кібербезпека</title>
-    <link rel="stylesheet" href="assets/css/main.css">
+
+    <!-- Favicon -->
+    <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
+
+    <!-- CSS - ITCSS Architecture -->
+    <link rel="stylesheet" href="assets/css/base.css">
+    <link rel="stylesheet" href="assets/css/layout.css">
+    <link rel="stylesheet" href="assets/css/components.css">
+    <link rel="stylesheet" href="assets/css/pages.css">
 </head>
-<body>
-<div class="container">
-    <!-- Header -->
-    <header class="header">
-        <h1>🏦 Інформаційні банківські технології</h1>
-        <p class="subtitle">Курс для студентів 3 курсу спеціальності "Кібербезпека"</p>
+<body class="page">
+<!-- Hero Section -->
+<section class="landing-hero">
+    <div class="container">
+        <div class="landing-hero-content">
+            <h1 class="landing-title">🏦 Інформаційні банківські технології</h1>
+            <p class="landing-subtitle">
+                Курс для студентів 3 курсу спеціальності "Кібербезпека"
+            </p>
 
-        <div class="stats">
-            <div class="stat-item">
-                <span class="stat-value">36</span>
-                <span class="stat-label">години лекцій</span>
-            </div>
-            <div class="stat-item">
-                <span class="stat-value">192</span>
-                <span class="stat-label">годин практики</span>
-            </div>
-            <div class="stat-item">
-                <span class="stat-value">18</span>
-                <span class="stat-label">лекцій</span>
-            </div>
-            <div class="stat-item">
-                <span class="stat-value">6</span>
-                <span class="stat-label">модулів</span>
+            <!-- Course Statistics -->
+            <div class="landing-stats">
+                <div class="landing-stat">
+                    <span class="landing-stat-number" id="total-modules">6</span>
+                    <span class="landing-stat-label">Модулів</span>
+                </div>
+                <div class="landing-stat">
+                    <span class="landing-stat-number" id="total-lectures">18</span>
+                    <span class="landing-stat-label">Лекцій</span>
+                </div>
+                <div class="landing-stat">
+                    <span class="landing-stat-number" id="total-hours">54</span>
+                    <span class="landing-stat-label">Годин</span>
+                </div>
+                <div class="landing-stat">
+                    <span class="landing-stat-number">2025</span>
+                    <span class="landing-stat-label">Версія</span>
+                </div>
             </div>
         </div>
-    </header>
+    </div>
+</section>
 
-    <!-- Navigation -->
-    <nav class="navigation">
-        <button class="nav-btn active" data-filter="all">Всі матеріали</button>
-        <button class="nav-btn" data-filter="lectures">Лекції</button>
-        <button class="nav-btn" data-filter="labs">Лабораторні</button>
-        <button class="nav-btn" data-filter="practices">Практичні</button>
-    </nav>
+<!-- Main Content -->
+<main class="main">
+    <div class="container">
+        <!-- Course Overview -->
+        <section class="course-info">
+            <div class="section-header">
+                <h2 class="section-title">📚 Навчальні матеріали</h2>
+                <p class="section-subtitle">
+                    Оберіть тип матеріалів для вивчення
+                </p>
+            </div>
+        </section>
 
-    <!-- Modules Grid -->
-    <main class="modules-grid" id="modules-container">
-        <!-- Модулі будуть тут -->
-    </main>
+        <!-- Main Navigation Tabs -->
+        <nav class="main-tabs">
+            <button class="tab-btn active" data-tab="lectures" type="button">
+                📖 Лекції
+            </button>
+            <button class="tab-btn" data-tab="practicals" type="button">
+                💻 Практичні
+            </button>
+        </nav>
 
-    <!-- Resources Section -->
-    <section class="resources-section">
-        <h2>📚 Додаткові ресурси</h2>
-        <div class="resources-grid">
-            <a href="https://bank.gov.ua" target="_blank" class="resource-card">
-                <span class="resource-icon">🏛️</span>
-                <h3>НБУ - Кібербезпека</h3>
-                <p>Офіційні вимоги НБУ щодо кібербезпеки банків</p>
-            </a>
-            <a href="https://www.pcisecuritystandards.org/" target="_blank" class="resource-card">
-                <span class="resource-icon">💳</span>
-                <h3>PCI DSS</h3>
-                <p>Стандарт безпеки платіжних карток</p>
-            </a>
-            <a href="https://www.iso.org/isoiec-27001-information-security.html" target="_blank" class="resource-card">
-                <span class="resource-icon">🔐</span>
-                <h3>ISO 27001</h3>
-                <p>Управління інформаційною безпекою</p>
-            </a>
-            <a href="https://www.swift.com/csp" target="_blank" class="resource-card">
-                <span class="resource-icon">🌐</span>
-                <h3>SWIFT CSP</h3>
-                <p>Customer Security Programme</p>
-            </a>
-            <a href="https://owasp.org/" target="_blank" class="resource-card">
-                <span class="resource-icon">🛡️</span>
-                <h3>OWASP</h3>
-                <p>Web Application Security</p>
-            </a>
-            <a href="https://cert.gov.ua/" target="_blank" class="resource-card">
-                <span class="resource-icon">🚨</span>
-                <h3>CERT-UA</h3>
-                <p>Кіберінцидентні реагування</p>
-            </a>
+        <!-- Content Sections -->
+        <section class="tab-content active" id="lectures-tab">
+            <div class="section-header">
+                <h3 class="section-subtitle">Теоретичний курс по модулях</h3>
+            </div>
+            <div class="modules-grid" id="lectures-container">
+                <!-- Лекції завантажуються динамічно з modules.json -->
+                <div class="loading">
+                    <div class="spinner"></div>
+                    <div class="loading-text">Завантаження лекцій...</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="tab-content" id="practicals-tab">
+            <div class="section-header">
+                <h3 class="section-subtitle">Практичні завдання та проекти</h3>
+            </div>
+            <div class="practicals-grid" id="practicals-container">
+                <!-- Практичні завантажуються динамічно з modules.json -->
+                <div class="loading">
+                    <div class="spinner"></div>
+                    <div class="loading-text">Завантаження практичних...</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Resources Section -->
+        <section class="section">
+            <div class="section-header">
+                <h2 class="section-title">🔗 Корисні ресурси</h2>
+                <p class="section-subtitle">
+                    Офіційні джерела та стандарти для банківської кібербезпеки
+                </p>
+            </div>
+
+            <div class="course-highlights">
+                <a href="https://bank.gov.ua" target="_blank" class="highlight-item card card-clickable" rel="noopener noreferrer">
+                    <div class="highlight-icon">🏛️</div>
+                    <h3 class="highlight-title">Національний банк України</h3>
+                    <p class="highlight-description">
+                        Офіційні вимоги НБУ щодо кібербезпеки банків
+                    </p>
+                </a>
+
+                <a href="https://www.pcisecuritystandards.org/" target="_blank" class="highlight-item card card-clickable" rel="noopener noreferrer">
+                    <div class="highlight-icon">💳</div>
+                    <h3 class="highlight-title">PCI DSS</h3>
+                    <p class="highlight-description">
+                        Стандарт безпеки платіжних карток
+                    </p>
+                </a>
+
+                <a href="https://www.swift.com/csp" target="_blank" class="highlight-item card card-clickable" rel="noopener noreferrer">
+                    <div class="highlight-icon">🌐</div>
+                    <h3 class="highlight-title">SWIFT CSP</h3>
+                    <p class="highlight-description">
+                        Customer Security Programme
+                    </p>
+                </a>
+
+                <a href="https://www.iso.org/isoiec-27001-information-security.html" target="_blank" class="highlight-item card card-clickable" rel="noopener noreferrer">
+                    <div class="highlight-icon">🔐</div>
+                    <h3 class="highlight-title">ISO 27001</h3>
+                    <p class="highlight-description">
+                        Управління інформаційною безпекою
+                    </p>
+                </a>
+
+                <a href="https://owasp.org/" target="_blank" class="highlight-item card card-clickable" rel="noopener noreferrer">
+                    <div class="highlight-icon">🛡️</div>
+                    <h3 class="highlight-title">OWASP</h3>
+                    <p class="highlight-description">
+                        Web Application Security
+                    </p>
+                </a>
+
+                <a href="https://cert.gov.ua/" target="_blank" class="highlight-item card card-clickable" rel="noopener noreferrer">
+                    <div class="highlight-icon">🚨</div>
+                    <h3 class="highlight-title">CERT-UA</h3>
+                    <p class="highlight-description">
+                        Кіберінцидентне реагування
+                    </p>
+                </a>
+            </div>
+        </section>
+    </div>
+</main>
+
+<!-- Footer -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-content flex justify-between items-center">
+            <div class="footer-info">
+                <p>&copy; 2025 Кафедра кібербезпеки | Версія 2.1</p>
+                <p class="text-muted">Курс "Інформаційні банківські технології"</p>
+            </div>
+            <div class="footer-links">
+                <a href="https://github.com/PirogovAleksey/banking-information-systems"
+                   target="_blank"
+                   class="btn btn-ghost"
+                   rel="noopener noreferrer"
+                   aria-label="Перейти до репозиторію на GitHub">
+                    📱 GitHub
+                </a>
+            </div>
         </div>
-    </section>
+    </div>
+</footer>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <p>© 2025 Кафедра кібербезпеки | Версія 2.0.0</p>
-        <p>
-            <a href="https://github.com/PirogovAleksey/banking-information-systems" target="_blank">GitHub</a> |
-            <a href="docs/README.md">Документація</a> |
-            <a href="#course-stats" onclick="showCourseStats()">Статистика курсу</a>
-        </p>
-    </footer>
-</div>
-
-<!-- Scripts -->
-<script src="assets/js/modules-data.js"></script>
-<script src="assets/js/main.js"></script>
-
-<script>
-    // Функція для показу статистики курсу
-    function showCourseStats() {
-        const stats = window.COURSE_STATS || {};
-        alert(`📊 Статистика курсу "Інформаційні банківські технології":
-
-🏫 Модулів: ${stats.modules || 6}
-📚 Лекцій: ${stats.lectures || 18}
-🧪 Лабораторних робіт: ${stats.labs || 14}
-⚙️ Практичних занять: ${stats.practices || 16}
-
-⏰ Загальний обсяг:
-• Лекції: ${stats.lectureHours || 36} годин
-• Практика: ${stats.practiceHours || 192} години
-• Всього: ${stats.totalHours || 228} годин
-
-🎯 Співвідношення лекції:практика = 1:5.3
-
-🔐 Особливий фокус на кібербезпеку:
-• Модуль 4: "Безпека банківських систем"
-• Модуль 6: "Кіберзагрози в банкінгу"
-• 50% курсу присвячено кібербезпеці`);
-    }
-</script>
+<!-- JavaScript -->
+<script src="assets/js/storage.js"></script>
+<script src="assets/js/landing.js"></script>
 </body>
 </html>
