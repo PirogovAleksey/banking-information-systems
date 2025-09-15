@@ -12,16 +12,20 @@
     <!-- Header -->
     <header class="header">
         <h1>🏦 Інформаційні банківські технології</h1>
-        <p class="subtitle">Курс для студентів 2 курсу спеціальності "Кібербезпека"</p>
+        <p class="subtitle">Курс для студентів 3 курсу спеціальності "Кібербезпека"</p>
 
         <div class="stats">
             <div class="stat-item">
-                <span class="stat-value">34</span>
+                <span class="stat-value">36</span>
                 <span class="stat-label">години лекцій</span>
             </div>
             <div class="stat-item">
-                <span class="stat-value">168</span>
+                <span class="stat-value">192</span>
                 <span class="stat-label">годин практики</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-value">18</span>
+                <span class="stat-label">лекцій</span>
             </div>
             <div class="stat-item">
                 <span class="stat-value">6</span>
@@ -50,7 +54,7 @@
             <a href="https://bank.gov.ua" target="_blank" class="resource-card">
                 <span class="resource-icon">🏛️</span>
                 <h3>НБУ - Кібербезпека</h3>
-                <p>Офіційні вимоги НБУ</p>
+                <p>Офіційні вимоги НБУ щодо кібербезпеки банків</p>
             </a>
             <a href="https://www.pcisecuritystandards.org/" target="_blank" class="resource-card">
                 <span class="resource-icon">💳</span>
@@ -67,15 +71,26 @@
                 <h3>SWIFT CSP</h3>
                 <p>Customer Security Programme</p>
             </a>
+            <a href="https://owasp.org/" target="_blank" class="resource-card">
+                <span class="resource-icon">🛡️</span>
+                <h3>OWASP</h3>
+                <p>Web Application Security</p>
+            </a>
+            <a href="https://cert.gov.ua/" target="_blank" class="resource-card">
+                <span class="resource-icon">🚨</span>
+                <h3>CERT-UA</h3>
+                <p>Кіберінцидентні реагування</p>
+            </a>
         </div>
     </section>
 
     <!-- Footer -->
     <footer class="footer">
-        <p>© 2025 Кафедра кібербезпеки | Версія 1.0.0</p>
+        <p>© 2025 Кафедра кібербезпеки | Версія 2.0.0</p>
         <p>
             <a href="https://github.com/PirogovAleksey/banking-information-systems" target="_blank">GitHub</a> |
-            <a href="docs/README.md">Документація</a>
+            <a href="docs/README.md">Документація</a> |
+            <a href="#course-stats" onclick="showCourseStats()">Статистика курсу</a>
         </p>
     </footer>
 </div>
@@ -83,5 +98,30 @@
 <!-- Scripts -->
 <script src="assets/js/modules-data.js"></script>
 <script src="assets/js/main.js"></script>
+
+<script>
+    // Функція для показу статистики курсу
+    function showCourseStats() {
+        const stats = window.COURSE_STATS || {};
+        alert(`📊 Статистика курсу "Інформаційні банківські технології":
+
+🏫 Модулів: ${stats.modules || 6}
+📚 Лекцій: ${stats.lectures || 18}
+🧪 Лабораторних робіт: ${stats.labs || 14}
+⚙️ Практичних занять: ${stats.practices || 16}
+
+⏰ Загальний обсяг:
+• Лекції: ${stats.lectureHours || 36} годин
+• Практика: ${stats.practiceHours || 192} години
+• Всього: ${stats.totalHours || 228} годин
+
+🎯 Співвідношення лекції:практика = 1:5.3
+
+🔐 Особливий фокус на кібербезпеку:
+• Модуль 4: "Безпека банківських систем"
+• Модуль 6: "Кіберзагрози в банкінгу"
+• 50% курсу присвячено кібербезпеці`);
+    }
+</script>
 </body>
 </html>
