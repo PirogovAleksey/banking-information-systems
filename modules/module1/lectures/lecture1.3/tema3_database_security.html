@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тема 3: Database Security та Encryption at Rest</title>
+    <link rel="stylesheet" href="../../../../assets/css/slides.css">
+</head>
+<body class="slides-page">
+<div class="slides-wrapper">
+    <!-- Navigation -->
+    <div class="slide-navigation">
+        <button class="slide-btn" onclick="previousSlide()">◀</button>
+        <span class="slide-counter" id="slideCounter">1 / 8</span>
+        <button class="slide-btn" onclick="nextSlide()">▶</button>
+        <button class="slide-btn" onclick="toggleFullscreen()">⛶</button>
+        <button class="slide-btn" onclick="exitPresentation()">✕</button>
+    </div>
+
+    <!-- Progress Bar -->
+    <div class="slide-progress">
+        <div class="slide-progress-bar" id="progressBar" style="width: 12.5%;"></div>
+    </div>
+
+    <!-- Slide 1: Title -->
+    <div class="slide active" id="slide1">
+        <div class="slide-container">
+            <div class="slide-title">
+                <h1>Database Security та Encryption at Rest</h1>
+                <div class="subtitle">Тема 3 • Лекція 1.3</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 2: Класифікація банківських даних -->
+    <div class="slide" id="slide2">
+        <div class="slide-container">
+            <div class="slide-content">
+                <h2>Класифікація банківських даних</h2>
+                <h3>📊 Рівні критичності даних:</h3>
+                <div class="slide-statistics">
+                    <div class="stat-item" style="border-left: 4px solid #dc2626;">
+                        <h4>🔴 КРИТИЧНІ</h4>
+                        <ul>
+                            <li>Номери рахунків та картки</li>
+                            <li>PIN-коди та паролі</li>
+                            <li>Персональні дані клієнтів</li>
+                            <li>Фінансові операції</li>
+                        </ul>
+                        <p><strong>Вимоги:</strong> AES-256, HSM, Role-based access</p>
+                    </div>
+                    <div class="stat-item" style="border-left: 4px solid #f59e0b;">
+                        <h4>🟡 ЧУТЛИВІ</h4>
+                        <ul>
+                            <li>Кредитні історії</li>
+                            <li>Внутрішня звітність</li>
+                            <li>Бізнес-логіка</li>
+                            <li>Аналітика клієнтів</li>
+                        </ul>
+                        <p><strong>Вимоги:</strong> AES-128, Database encryption, Audit logs</p>
+                    </div>
+                    <div class="stat-item" style="border-left: 4px solid #10b981;">
+                        <h4>🟢 ВНУТРІШНІ</h4>
+                        <ul>
+                            <li>Операційні дані</li>
+                            <li>Логи системи</li>
+                            <li>Конфігурації</li>
+                            <li>Технічна документація</li>
+                        </ul>
+                        <p><strong>Вимоги:</strong> Basic encryption, Access controls</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 3: TDE -->
+    <div class="slide" id="slide3">
+        <div class="slide-container">
+            <div class="slide-content">
+                <h2>Transparent Data Encryption (TDE)</h2>
+                <h3>🔒 TDE в банківських СУБД:</h3>
+                <h4>Принцип роботи:</h4>
+                <ol class="slide-list">
+                    <li><strong>Automatic encryption</strong> - дані шифруються при записі</li>
+                    <li><strong>Automatic decryption</strong> - дані розшифровуються при читанні</li>
+                    <li><strong>Transparent to applications</strong> - програми не знають про шифрування</li>
+                    <li><strong>Database-level encryption</strong> - захист всієї БД</li>
+                </ol>
+                <h4>Переваги TDE:</h4>
+                <ul class="slide-list">
+                    <li>Захист backup файлів</li>
+                    <li>Захист від викрадення дисків</li>
+                    <li>Compliance з PCI DSS</li>
+                    <li>Мінімальний вплив на продуктивність (~3-5%)</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 4: Шифрування в Monobank -->
+    <div class="slide" id="slide4">
+        <div class="slide-container">
+            <div class="slide-banking-example">
+                <div class="banking-logo">🔐</div>
+                <div class="banking-title">Архітектура безпеки Monobank</div>
+                <h4>Рівні шифрування:</h4>
+                <ul class="slide-list">
+                    <li><strong>Application Level:</strong>
+                        <ul>
+                            <li>AES-256 для PAN (Primary Account Number)</li>
+                            <li>SHA-256 для хешування паролів</li>
+                            <li>JWT токени з RSA-2048 підписом</li>
+                        </ul>
+                    </li>
+                    <li><strong>Database Level:</strong>
+                        <ul>
+                            <li>Oracle TDE для всієї БД</li>
+                            <li>Column-level encryption для CVV</li>
+                            <li>Tablespace encryption для backup</li>
+                        </ul>
+                    </li>
+                    <li><strong>Infrastructure Level:</strong>
+                        <ul>
+                            <li>LUKS full disk encryption</li>
+                            <li>TLS 1.3 для всіх з'єднань</li>
+                            <li>VPN IPSec для внутрішнього трафіку</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 5: Управління ключами -->
+    <div class="slide" id="slide5">
+        <div class="slide-container">
+            <div class="slide-content">
+                <h2>Управління ключами шифрування</h2>
+                <h3>🗝️ Key Management в банках:</h3>
+                <ul class="slide-list">
+                    <li><strong>Hardware Security Modules (HSM)</strong>
+                        <ul>
+                            <li>Фізично захищені пристрої для ключів</li>
+                            <li>FIPS 140-2 Level 3+ сертифікація</li>
+                            <li>Автоматичне знищення при втручанні</li>
+                            <li>Високопродуктивне шифрування</li>
+                        </ul>
+                    </li>
+                    <li><strong>Key Rotation Policies</strong>
+                        <ul>
+                            <li>Автоматична ротація ключів (30-90 днів)</li>
+                            <li>Версіонування для backward compatibility</li>
+                            <li>Emergency key revocation</li>
+                            <li>Audit trail всіх операцій з ключами</li>
+                        </ul>
+                    </li>
+                    <li><strong>Backup та Recovery</strong>
+                        <ul>
+                            <li>M-of-N key sharing (наприклад, 3-of-5)</li>
+                            <li>Geographically distributed key storage</li>
+                            <li>Secure key escrow процедури</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 6: Захист від SQL Injection -->
+    <div class="slide" id="slide6">
+        <div class="slide-container">
+            <div class="slide-cyber-security">
+                <h2>Захист від SQL Injection</h2>
+                <div class="cyber-threat-level threat-high">💉 SQL INJECTION В БАНКІВСЬКИХ СИСТЕМАХ</div>
+                <h4>Методи захисту:</h4>
+                <ul class="slide-list">
+                    <li><strong>Prepared Statements</strong>
+                        <ul>
+                            <li>Параметризовані запити</li>
+                            <li>Розділення коду та даних</li>
+                            <li>Обов'язковий стандарт для всіх банківських додатків</li>
+                        </ul>
+                    </li>
+                    <li><strong>Input Validation</strong>
+                        <ul>
+                            <li>Whitelist validation для всіх полів</li>
+                            <li>Довжина, тип, формат</li>
+                            <li>Спеціальна увага до номерів рахунків та сум</li>
+                        </ul>
+                    </li>
+                    <li><strong>Database Permissions</strong>
+                        <ul>
+                            <li>Principle of least privilege</li>
+                            <li>Окремі ролі для читання/запису</li>
+                            <li>Заборона DDL операцій для app users</li>
+                        </ul>
+                    </li>
+                    <li><strong>Web Application Firewall (WAF)</strong>
+                        <ul>
+                            <li>Pattern matching для SQL injection</li>
+                            <li>Rate limiting для підозрілих запитів</li>
+                            <li>Real-time blocking</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 7: Кейс Equifax -->
+    <div class="slide" id="slide7">
+        <div class="slide-container">
+            <div class="slide-content">
+                <h2>Кейс: Equifax Data Breach</h2>
+                <h3>💔 Витік даних Equifax (2017)</h3>
+                <p><strong>Постраждали:</strong> 147 млн записів</p>
+                <p><strong>Причина:</strong> Незакритая уразливість + відсутність шифрування</p>
+                <h4>Що пішло не так:</h4>
+                <ol class="slide-list">
+                    <li><strong>Незастосований патч</strong> Apache Struts (CVE-2017-5638)</li>
+                    <li><strong>Незашифровані дані</strong> в базі даних</li>
+                    <li><strong>Відсутність network segmentation</strong></li>
+                    <li><strong>Неналежний моніторинг</strong> доступу до БД</li>
+                    <li><strong>Запізніле виявлення</strong> (77 днів компрометації)</li>
+                </ol>
+                <div class="alert alert-error">
+                    <strong>Урок для банків:</strong> Шифрування at rest могло б значно зменшити шкоду
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 8: Токенізація -->
+    <div class="slide" id="slide8">
+        <div class="slide-container">
+            <div class="slide-content">
+                <h2>Tokenization банківських даних</h2>
+                <h3>🎭 Токенізація чутливих даних:</h3>
+                <h4>Принцип роботи:</h4>
+                <ol class="slide-list">
+                    <li><strong>Sensitive data</strong> замінюється на <strong>token</strong></li>
+                    <li><strong>Token</strong> - рандомне значення без математичного зв'язку</li>
+                    <li><strong>Mapping</strong> зберігається в secure token vault</li>
+                    <li><strong>Applications</strong> працюють тільки з токенами</li>
+                </ol>
+                <h4>Переваги для банків:</h4>
+                <ul class="slide-list">
+                    <li><strong>PCI DSS scope reduction</strong> - зменшення compliance периметру</li>
+                    <li><strong>Data breach protection</strong> - токени безпечні навіть при витіку</li>
+                    <li><strong>Format preservation</strong> - токени мають той же формат</li>
+                    <li><strong>Reversibility</strong> - можливість detokenization для авторизованих систем</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    let currentSlide = 1;
+    const totalSlides = 8;
+
+    function showSlide(n) {
+        const slides = document.querySelectorAll('.slide');
+        const progressBar = document.getElementById('progressBar');
+        const counter = document.getElementById('slideCounter');
+
+        if (n > totalSlides) currentSlide = 1;
+        if (n < 1) currentSlide = totalSlides;
+
+        slides.forEach(slide => slide.classList.remove('active'));
+        document.getElementById(`slide${currentSlide}`).classList.add('active');
+
+        progressBar.style.width = (currentSlide / totalSlides * 100) + '%';
+        counter.textContent = `${currentSlide} / ${totalSlides}`;
+    }
+
+    function nextSlide() {
+        currentSlide++;
+        showSlide(currentSlide);
+    }
+
+    function previousSlide() {
+        currentSlide--;
+        showSlide(currentSlide);
+    }
+
+    function toggleFullscreen() {
+        if (!document.fullscreenElement) {
+            document.documentElement.requestFullscreen();
+        } else {
+            document.exitFullscreen();
+        }
+    }
+
+    function exitPresentation() {
+        window.location.href = 'index.html';
+    }
+
+    // Keyboard navigation
+    document.addEventListener('keydown', function(e) {
+        switch(e.key) {
+            case 'ArrowRight':
+            case ' ':
+                nextSlide();
+                break;
+            case 'ArrowLeft':
+                previousSlide();
+                break;
+            case 'Escape':
+                exitPresentation();
+                break;
+            case 'f':
+            case 'F':
+                toggleFullscreen();
+                break;
+        }
+    });
+
+    // Touch events for mobile
+    let startX = null;
+    document.addEventListener('touchstart', function(e) {
+        startX = e.touches[0].clientX;
+    });
+
+    document.addEventListener('touchend', function(e) {
+        if (!startX) return;
+
+        const endX = e.changedTouches[0].clientX;
+        const diffX = startX - endX;
+
+        if (Math.abs(diffX) > 50) {
+            if (diffX > 0) {
+                nextSlide();
+            } else {
+                previousSlide();
+            }
+        }
+        startX = null;
+    });
+
+    // Initialize
+    showSlide(1);
+</script>
+</body>
+</html>

@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тема 2: Транзакційна цілісність та ACID</title>
+    <link rel="stylesheet" href="../../../../assets/css/slides.css">
+</head>
+<body class="slides-page">
+<div class="slides-wrapper">
+    <!-- Navigation -->
+    <div class="slide-navigation">
+        <button class="slide-btn" onclick="previousSlide()">◀</button>
+        <span class="slide-counter" id="slideCounter">1 / 9</span>
+        <button class="slide-btn" onclick="nextSlide()">▶</button>
+        <button class="slide-btn" onclick="toggleFullscreen()">⛶</button>
+        <button class="slide-btn" onclick="exitPresentation()">✕</button>
+    </div>
+
+    <!-- Progress Bar -->
+    <div class="slide-progress">
+        <div class="slide-progress-bar" id="progressBar" style="width: 11.1%;"></div>
+    </div>
+
+    <!-- Slide 1: Title -->
+    <div class="slide active" id="slide1">
+        <div class="slide-container">
+            <div class="slide-title">
+                <h1>Транзакційна цілісність та ACID</h1>
+                <div class="subtitle">Тема 2 • Лекція 1.3</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 2: Що таке ACID -->
+    <div class="slide" id="slide2">
+        <div class="slide-container">
+            <div class="slide-content">
+                <h2>Що таке ACID?</h2>
+                <h3>🔬 ACID - фундамент банківських транзакцій:</h3>
+                <div class="slide-statistics">
+                    <div class="stat-item">
+                        <h4>A - Atomicity</h4>
+                        <p>Транзакція виконується повністю або не виконується взагалі</p>
+                    </div>
+                    <div class="stat-item">
+                        <h4>C - Consistency</h4>
+                        <p>База даних залишається в узгодженому стані</p>
+                    </div>
+                    <div class="stat-item">
+                        <h4>I - Isolation</h4>
+                        <p>Одночасні транзакції не впливають одна на одну</p>
+                    </div>
+                    <div class="stat-item">
+                        <h4>D - Durability</h4>
+                        <p>Зафіксовані зміни зберігаються назавжди</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 3: Atomicity приклад -->
+    <div class="slide" id="slide3">
+        <div class="slide-container">
+            <div class="slide-banking-example">
+                <div class="banking-logo">💸</div>
+                <div class="banking-title">Atomicity в банківському переказі</div>
+                <h3>Приклад: Переказ 1000 грн</h3>
+                <h4>Операції в транзакції:</h4>
+                <ol class="slide-list">
+                    <li><strong>BEGIN TRANSACTION</strong></li>
+                    <li>Списати 1000 грн з рахунку А</li>
+                    <li>Зарахувати 1000 грн на рахунок Б</li>
+                    <li>Оновити журнал операцій</li>
+                    <li>Відправити повідомлення клієнту</li>
+                    <li><strong>COMMIT</strong> або <strong>ROLLBACK</strong></li>
+                </ol>
+                <div class="alert alert-warning">
+                    <strong>Правило атомарності:</strong> Якщо будь-яка операція не виконалася - вся транзакція скасовується
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 4: Рівні ізоляції -->
+    <div class="slide" id="slide4">
+        <div class="slide-container">
+            <div class="slide-content">
+                <h2>Рівні ізоляції транзакцій</h2>
+                <h3>🔒 Isolation Levels в банківських СУБД:</h3>
+                <table style="width: 100%; border-collapse: collapse; margin: 20px 0;">
+                    <tr style="background: var(--color-primary); color: white;">
+                        <th style="padding: 12px; border: 1px solid #ddd;">Рівень</th>
+                        <th style="padding: 12px; border: 1px solid #ddd;">Dirty Read</th>
+                        <th style="padding: 12px; border: 1px solid #ddd;">Non-repeatable</th>
+                        <th style="padding: 12px; border: 1px solid #ddd;">Phantom</th>
+                        <th style="padding: 12px; border: 1px solid #ddd;">Використання</th>
+                    </tr>
+                    <tr>
+                        <td style="padding: 12px; border: 1px solid #ddd;"><strong>READ UNCOMMITTED</strong></td>
+                        <td style="padding: 12px; border: 1px solid #ddd;">❌</td>
+                        <td style="padding: 12px; border: 1px solid #ddd;">❌</td>
+                        <td style="padding: 12px; border: 1px solid #ddd;">❌</td>
+                        <td style="padding: 12px; border: 1px solid #ddd;">Не використовується в банках</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 12px; border: 1px solid #ddd;"><strong>READ COMMITTED</strong></td>
+                        <td style="padding: 12px; border: 1px solid #ddd;">✅</td>
+                        <td style="padding: 12px; border: 1px solid #ddd;">❌</td>
+                        <td style="padding: 12px; border: 1px solid #ddd;">❌</td>
+                        <td style="padding: 12px; border: 1px solid #ddd;">Звіти та аналітика</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 12px; border: 1px solid #ddd;"><strong>REPEATABLE READ</strong></td>
+                        <td style="padding: 12px; border: 1px solid #ddd;">✅</td>
+                        <td style="padding: 12px; border: 1px solid #ddd;">✅</td>
+                        <td style="padding: 12px; border: 1px solid #ddd;">❌</td>
+                        <td style="padding: 12px; border: 1px solid #ddd;">Розрахунки відсотків</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 12px; border: 1px solid #ddd;"><strong>SERIALIZABLE</strong></td>
+                        <td style="padding: 12px; border: 1px solid #ddd;">✅</td>
+                        <td style="padding: 12px; border: 1px solid #ddd;">✅</td>
+                        <td style="padding: 12px; border: 1px solid #ddd;">✅</td>
+                        <td style="padding: 12px; border: 1px solid #ddd;">Критичні операції</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 5: 2PC Protocol -->
+    <div class="slide" id="slide5">
+        <div class="slide-container">
+            <div class="slide-content">
+                <h2>Двофазний протокол фіксації (2PC)</h2>
+                <h3>🔄 Two-Phase Commit Protocol</h3>
+                <div class="slide-statistics">
+                    <div class="stat-item">
+                        <h4>Фаза 1: Підготовка (Prepare)</h4>
+                        <ul>
+                            <li>Coordinator відправляє PREPARE всім учасникам</li>
+                            <li>Кожен учасник готується до commit</li>
+                            <li>Відповідь: READY або ABORT</li>
+                            <li>Учасники блокують ресурси</li>
+                        </ul>
+                    </div>
+                    <div class="stat-item">
+                        <h4>Фаза 2: Фіксація (Commit)</h4>
+                        <ul>
+                            <li>Якщо всі READY → COMMIT</li>
+                            <li>Якщо хтось ABORT → ROLLBACK</li>
+                            <li>Coordinator відправляє рішення</li>
+                            <li>Учасники виконують та звільняють ресурси</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 6: 2PC в міжбанківських переказах -->
+    <div class="slide" id="slide6">
+        <div class="slide-container">
+            <div class="slide-banking-example">
+                <div class="banking-logo">🏦</div>
+                <div class="banking-title">SWIFT переказ через кореспондентські банки</div>
+                <p><strong>Сценарій:</strong> Переказ $10,000 з ПриватБанку в Deutsche Bank</p>
+                <h4>Учасники 2PC:</h4>
+                <ul class="slide-list">
+                    <li><strong>ПриватБанк</strong> - списання з рахунку клієнта</li>
+                    <li><strong>НБУ</strong> - зміна корреспондентського рахунку</li>
+                    <li><strong>Federal Reserve</strong> - міжнародний клірінг</li>
+                    <li><strong>Deutsche Bank</strong> - зарахування отримувачу</li>
+                </ul>
+                <div class="alert alert-success">
+                    <strong>Результат:</strong> Або всі банки проведуть операцію, або жоден
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 7: Атаки на транзакційну цілісність -->
+    <div class="slide" id="slide7">
+        <div class="slide-container">
+            <div class="slide-cyber-security">
+                <h2>Атаки на транзакційну цілісність</h2>
+                <div class="cyber-threat-level threat-medium">⚠️ ЗАГРОЗИ ДЛЯ ACID ВЛАСТИВОСТЕЙ</div>
+                <ul class="slide-list">
+                    <li><strong>Race Conditions</strong>
+                        <ul>
+                            <li>Одночасний доступ до рахунку</li>
+                            <li>Можливість подвійного списання</li>
+                            <li>Потреба в правильних блокуваннях</li>
+                        </ul>
+                    </li>
+                    <li><strong>Deadlock атаки</strong>
+                        <ul>
+                            <li>Навмисне створення взаємних блокувань</li>
+                            <li>DoS через заморожування транзакцій</li>
+                            <li>Необхідність timeout механізмів</li>
+                        </ul>
+                    </li>
+                    <li><strong>Транзакційні replay атаки</strong>
+                        <ul>
+                            <li>Повтор законних транзакцій</li>
+                            <li>Обхід idempotency механізмів</li>
+                            <li>Потреба в unique transaction IDs</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 8: Bangladesh Bank Heist -->
+    <div class="slide" id="slide8">
+        <div class="slide-container">
+            <div class="slide-content">
+                <h2>Кейс: Bangladesh Bank Heist</h2>
+                <h3>💥 Пограбування Bangladesh Bank (2016)</h3>
+                <p><strong>Втрати:</strong> $81 млн (з запланованих $951 млн)</p>
+                <h4>Як обійшли ACID:</h4>
+                <ol class="slide-list">
+                    <li><strong>Компрометація SWIFT терміналів</strong></li>
+                    <li><strong>Підробка transaction IDs</strong> - обхід унікальності</li>
+                    <li><strong>Маніпуляція часовими мітками</strong> - обхід послідовності</li>
+                    <li><strong>Вимкнення принтерів підтверджень</strong> - приховування транзакцій</li>
+                    <li><strong>Використання вихідних днів</strong> - затримка виявлення</li>
+                </ol>
+                <div class="alert alert-error">
+                    <strong>Урок:</strong> Недостатній контроль цілісності дозволив масштабне шахрайство
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 9: Оптимізація продуктивності -->
+    <div class="slide" id="slide9">
+        <div class="slide-container">
+            <div class="slide-content">
+                <h2>Оптимізація транзакційної продуктивності</h2>
+                <h3>⚡ Техніки оптимізації:</h3>
+                <ul class="slide-list">
+                    <li><strong>Connection Pooling</strong>
+                        <ul>
+                            <li>Переважне використання з'єднань</li>
+                            <li>Зменшення overhead встановлення з'єднань</li>
+                            <li>Типове налаштування: 50-200 з'єднань на pool</li>
+                        </ul>
+                    </li>
+                    <li><strong>Batch Processing</strong>
+                        <ul>
+                            <li>Групування схожих операцій</li>
+                            <li>Зменшення кількості commit операцій</li>
+                            <li>Особливо ефективно для bulk операцій</li>
+                        </ul>
+                    </li>
+                    <li><strong>Read Replicas</strong>
+                        <ul>
+                            <li>Розподіл читання по репліках</li>
+                            <li>Зменшення навантаження на master</li>
+                            <li>Eventual consistency для non-critical queries</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    let currentSlide = 1;
+    const totalSlides = 9;
+
+    function showSlide(n) {
+        const slides = document.querySelectorAll('.slide');
+        const progressBar = document.getElementById('progressBar');
+        const counter = document.getElementById('slideCounter');
+
+        if (n > totalSlides) currentSlide = 1;
+        if (n < 1) currentSlide = totalSlides;
+
+        slides.forEach(slide => slide.classList.remove('active'));
+        document.getElementById(`slide${currentSlide}`).classList.add('active');
+
+        progressBar.style.width = (currentSlide / totalSlides * 100) + '%';
+        counter.textContent = `${currentSlide} / ${totalSlides}`;
+    }
+
+    function nextSlide() {
+        currentSlide++;
+        showSlide(currentSlide);
+    }
+
+    function previousSlide() {
+        currentSlide--;
+        showSlide(currentSlide);
+    }
+
+    function toggleFullscreen() {
+        if (!document.fullscreenElement) {
+            document.documentElement.requestFullscreen();
+        } else {
+            document.exitFullscreen();
+        }
+    }
+
+    function exitPresentation() {
+        window.location.href = 'index.html';
+    }
+
+    // Keyboard navigation
+    document.addEventListener('keydown', function(e) {
+        switch(e.key) {
+            case 'ArrowRight':
+            case ' ':
+                nextSlide();
+                break;
+            case 'ArrowLeft':
+                previousSlide();
+                break;
+            case 'Escape':
+                exitPresentation();
+                break;
+            case 'f':
+            case 'F':
+                toggleFullscreen();
+                break;
+        }
+    });
+
+    // Touch events for mobile
+    let startX = null;
+    document.addEventListener('touchstart', function(e) {
+        startX = e.touches[0].clientX;
+    });
+
+    document.addEventListener('touchend', function(e) {
+        if (!startX) return;
+
+        const endX = e.changedTouches[0].clientX;
+        const diffX = startX - endX;
+
+        if (Math.abs(diffX) > 50) {
+            if (diffX > 0) {
+                nextSlide();
+            } else {
+                previousSlide();
+            }
+        }
+        startX = null;
+    });
+
+    // Initialize
+    showSlide(1);
+</script>
+</body>
+</html>
