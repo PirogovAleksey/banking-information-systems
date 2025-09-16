@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тема 4: Аудит доступу до критичних даних</title>
+    <link rel="stylesheet" href="../../../../assets/css/slides.css">
+</head>
+<body class="slides-page">
+<div class="slides-wrapper">
+    <!-- Navigation -->
+    <div class="slide-navigation">
+        <button class="slide-btn" onclick="previousSlide()">◀</button>
+        <span class="slide-counter" id="slideCounter">1 / 9</span>
+        <button class="slide-btn" onclick="nextSlide()">▶</button>
+        <button class="slide-btn" onclick="toggleFullscreen()">⛶</button>
+        <button class="slide-btn" onclick="exitPresentation()">✕</button>
+    </div>
+
+    <!-- Progress Bar -->
+    <div class="slide-progress">
+        <div class="slide-progress-bar" id="progressBar" style="width: 11.1%;"></div>
+    </div>
+
+    <!-- Slide 1: Title -->
+    <div class="slide active" id="slide1">
+        <div class="slide-container">
+            <div class="slide-title">
+                <h1>Аудит доступу до критичних даних</h1>
+                <div class="subtitle">Тема 4 • Лекція 1.3</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 2: Вимоги до аудиту -->
+    <div class="slide" id="slide2">
+        <div class="slide-container">
+            <div class="slide-content">
+                <h2>Вимоги до аудиту банківських БД</h2>
+                <h3>📋 Регуляторні стандарти:</h3>
+                <ul class="slide-list">
+                    <li><strong>PCI DSS Requirement 10</strong>
+                        <ul>
+                            <li>Логування всіх дій з карточковими даними</li>
+                            <li>Щоденний моніторинг логів</li>
+                            <li>Захищене зберігання аудит-логів (1 рік)</li>
+                            <li>Синхронізація часу по NTP</li>
+                        </ul>
+                    </li>
+                    <li><strong>НБУ Постанова №95</strong>
+                        <ul>
+                            <li>Контроль доступу до критичних систем</li>
+                            <li>Логування привілейованих операцій</li>
+                            <li>Квартальне тестування систем аудиту</li>
+                            <li>Incident response procedures</li>
+                        </ul>
+                    </li>
+                    <li><strong>ISO 27001</strong>
+                        <ul>
+                            <li>Risk-based аудит контролі</li>
+                            <li>Regular access reviews</li>
+                            <li>Audit trail integrity</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 3: Архітектура системи аудиту -->
+    <div class="slide" id="slide3">
+        <div class="slide-container">
+            <div class="slide-content">
+                <h2>Архітектура системи аудиту</h2>
+                <h3>🏗️ Компоненти audit системи:</h3>
+                <div class="slide-statistics">
+                    <div class="stat-item">
+                        <h4>📊 Database Audit Agents</h4>
+                        <ul>
+                            <li>Встановлені на всіх БД серверах</li>
+                            <li>Перехоплення всіх SQL команд</li>
+                            <li>Minimal performance impact (<2%)</li>
+                            <li>Tamper-proof logging</li>
+                        </ul>
+                    </div>
+                    <div class="stat-item">
+                        <h4>🔄 Log Aggregation</h4>
+                        <ul>
+                            <li>Centralized log collection (SIEM)</li>
+                            <li>Real-time correlation</li>
+                            <li>Data normalization</li>
+                            <li>Encrypted log transmission</li>
+                        </ul>
+                    </div>
+                    <div class="stat-item">
+                        <h4>📈 Analytics Engine</h4>
+                        <ul>
+                            <li>Machine learning anomaly detection</li>
+                            <li>Behavioral baselining</li>
+                            <li>Risk scoring algorithms</li>
+                            <li>Automated alerting</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 4: Система аудиту Ощадбанку -->
+    <div class="slide" id="slide4">
+        <div class="slide-container">
+            <div class="slide-banking-example">
+                <div class="banking-logo">🏛️</div>
+                <div class="banking-title">Audit infrastructure Ощадбанку</div>
+                <h4>Технічна архітектура:</h4>
+                <ul class="slide-list">
+                    <li><strong>Database level:</strong> Oracle Audit Vault + Database Firewall</li>
+                    <li><strong>Application level:</strong> Custom audit framework</li>
+                    <li><strong>Infrastructure level:</strong> Splunk SIEM + IBM QRadar</li>
+                    <li><strong>Analytics:</strong> Machine learning для fraud detection</li>
+                </ul>
+                <h4>Key metrics:</h4>
+                <div class="slide-statistics">
+                    <div class="stat-item">
+                        <div class="stat-value">>50M</div>
+                        <div class="stat-description">audit records/day</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">7 років</div>
+                        <div class="stat-description">retention period</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value"><5 хв</div>
+                        <div class="stat-description">alert response</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">99.8%</div>
+                        <div class="stat-description">compliance rate</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 5: Database Activity Monitoring -->
+    <div class="slide" id="slide5">
+        <div class="slide-container">
+            <div class="slide-content">
+                <h2>Database Activity Monitoring (DAM)</h2>
+                <h3>👁️ Моніторинг активності БД:</h3>
+                <ul class="slide-list">
+                    <li><strong>Real-time Monitoring</strong>
+                        <ul>
+                            <li>Аналіз всіх SQL запитів</li>
+                            <li>Виявлення аномальних паттернів</li>
+                            <li>Алерти при підозрілих діях</li>
+                        </ul>
+                    </li>
+                    <li><strong>Policy-based Protection</strong>
+                        <ul>
+                            <li>Правила доступу по ролях</li>
+                            <li>Часові обмеження</li>
+                            <li>IP whitelist для критичних операцій</li>
+                        </ul>
+                    </li>
+                    <li><strong>Compliance Reporting</strong>
+                        <ul>
+                            <li>Автоматичні звіти для аудиторів</li>
+                            <li>PCI DSS compliance</li>
+                            <li>НБУ звітність про інциденти</li>
+                        </ul>
+                    </li>
+                    <li><strong>Forensic Analysis</strong>
+                        <ul>
+                            <li>Детальні логи всіх операцій</li>
+                            <li>Timeline відтворення інцидентів</li>
+                            <li>Evidence collection для правоохоронних органів</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 6: Детекція insider threats -->
+    <div class="slide" id="slide6">
+        <div class="slide-container">
+            <div class="slide-cyber-security">
+                <h2>Детекція insider threats</h2>
+                <div class="cyber-threat-level threat-high">🕵️ ВИЯВЛЕННЯ ВНУТРІШНІХ ЗАГРОЗ</div>
+                <h4>Типові patterns внутрішніх зловмисників:</h4>
+                <ul class="slide-list">
+                    <li><strong>Data hoarding</strong>
+                        <ul>
+                            <li>Незвичайно великі обсяги запитів</li>
+                            <li>Доступ до даних поза робочими обов'язками</li>
+                            <li>Частое копіювання даних</li>
+                        </ul>
+                    </li>
+                    <li><strong>Off-hours activity</strong>
+                        <ul>
+                            <li>Доступ в неробочий час</li>
+                            <li>Дії у вихідні та свята</li>
+                            <li>Активність після звільнення</li>
+                        </ul>
+                    </li>
+                    <li><strong>Privilege abuse</strong>
+                        <ul>
+                            <li>Використання admin прав для особистих цілей</li>
+                            <li>Доступ до рахунків родичів/друзів</li>
+                            <li>Обхід standard процедур</li>
+                        </ul>
+                    </li>
+                </ul>
+                <h4>ML detection алгоритми:</h4>
+                <ul class="slide-list">
+                    <li>User behavior analytics (UBA)</li>
+                    <li>Peer group analysis</li>
+                    <li>Anomaly scoring</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 7: Кейс Morgan Stanley -->
+    <div class="slide" id="slide7">
+        <div class="slide-container">
+            <div class="slide-content">
+                <h2>Кейс: Morgan Stanley insider</h2>
+                <h3>🏦 Внутрішня загроза в Morgan Stanley (2021)</h3>
+                <p><strong>Інцидент:</strong> Фінансовий консультант скопіював дані 350,000 клієнтів</p>
+                <h4>Як це сталося:</h4>
+                <ol class="slide-list">
+                    <li><strong>Legitimate access</strong> - співробітник мав доступ до CRM</li>
+                    <li><strong>Data extraction</strong> - систематичне копіювання клієнтських даних</li>
+                    <li><strong>Personal device</strong> - збереження на особистому комп'ютері</li>
+                    <li><strong>External sharing</strong> - передача конкурентам</li>
+                </ol>
+                <h4>Що виявив аудит:</h4>
+                <ul class="slide-list">
+                    <li>Незвичайні паттерни доступу до даних</li>
+                    <li>Великі обсяги export операцій</li>
+                    <li>Доступ до клієнтів з інших регіонів</li>
+                </ul>
+                <div class="alert alert-warning">
+                    <strong>Урок:</strong> Потреба в real-time monitoring навіть legitimate users
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 8: Incident Response -->
+    <div class="slide" id="slide8">
+        <div class="slide-container">
+            <div class="slide-content">
+                <h2>Incident Response для БД</h2>
+                <h3>🚨 Реагування на інциденти безпеки БД:</h3>
+                <div class="slide-statistics">
+                    <div class="stat-item">
+                        <h4>Phase 1: Detection and Analysis</h4>
+                        <ul>
+                            <li>Automated alert triage</li>
+                            <li>Impact assessment</li>
+                            <li>Evidence preservation</li>
+                            <li>Stakeholder notification</li>
+                        </ul>
+                    </div>
+                    <div class="stat-item">
+                        <h4>Phase 2: Containment and Eradication</h4>
+                        <ul>
+                            <li>Account lockout</li>
+                            <li>Network isolation</li>
+                            <li>Database quarantine</li>
+                            <li>Malware removal</li>
+                        </ul>
+                    </div>
+                    <div class="stat-item">
+                        <h4>Phase 3: Recovery</h4>
+                        <ul>
+                            <li>Data restoration from backups</li>
+                            <li>System hardening</li>
+                            <li>Access recertification</li>
+                            <li>Monitoring enhancement</li>
+                        </ul>
+                    </div>
+                    <div class="stat-item">
+                        <h4>Phase 4: Post-Incident</h4>
+                        <ul>
+                            <li>Forensic analysis</li>
+                            <li>Lessons learned</li>
+                            <li>Process improvement</li>
+                            <li>Regulatory reporting</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 9: Підсумок та контрольні питання -->
+    <div class="slide" id="slide9">
+        <div class="slide-container">
+            <div class="slide-content">
+                <h2>Підсумок та контрольні питання</h2>
+                <h3>🎯 Ключові takeaways:</h3>
+                <ul class="slide-list">
+                    <li><strong>СУБД у банках</strong> мають особливі вимоги до надійності, продуктивності та безпеки</li>
+                    <li><strong>ACID властивості</strong> забезпечують цілісність фінансових транзакцій</li>
+                    <li><strong>Encryption at rest</strong> та TDE - обов'язкові для захисту банківських даних</li>
+                    <li><strong>Comprehensive audit</strong> необхідний для compliance та безпеки</li>
+                    <li><strong>Insider threats</strong> - одна з найбільших загроз для банківських БД</li>
+                </ul>
+                <h3>❓ Контрольні питання:</h3>
+                <ol class="slide-list">
+                    <li>Які основні вимоги до банківських СУБД та чому вони відрізняються від звичайних корпоративних систем?</li>
+                    <li>Поясніть кожну складову ACID на прикладі банківського переказу.</li>
+                    <li>Чим TDE відрізняється від application-level encryption? Які переваги та недоліки кожного підходу?</li>
+                    <li>Які методи використовуються для захисту від SQL injection в банківських системах?</li>
+                    <li>Як системи аудиту допомагають виявляти insider threats? Наведіть приклади підозрілих паттернів поведінки.</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    let currentSlide = 1;
+    const totalSlides = 9;
+
+    function showSlide(n) {
+        const slides = document.querySelectorAll('.slide');
+        const progressBar = document.getElementById('progressBar');
+        const counter = document.getElementById('slideCounter');
+
+        if (n > totalSlides) currentSlide = 1;
+        if (n < 1) currentSlide = totalSlides;
+
+        slides.forEach(slide => slide.classList.remove('active'));
+        document.getElementById(`slide${currentSlide}`).classList.add('active');
+
+        progressBar.style.width = (currentSlide / totalSlides * 100) + '%';
+        counter.textContent = `${currentSlide} / ${totalSlides}`;
+    }
+
+    function nextSlide() {
+        currentSlide++;
+        showSlide(currentSlide);
+    }
+
+    function previousSlide() {
+        currentSlide--;
+        showSlide(currentSlide);
+    }
+
+    function toggleFullscreen() {
+        if (!document.fullscreenElement) {
+            document.documentElement.requestFullscreen();
+        } else {
+            document.exitFullscreen();
+        }
+    }
+
+    function exitPresentation() {
+        window.location.href = 'index.html';
+    }
+
+    // Keyboard navigation
+    document.addEventListener('keydown', function(e) {
+        switch(e.key) {
+            case 'ArrowRight':
+            case ' ':
+                nextSlide();
+                break;
+            case 'ArrowLeft':
+                previousSlide();
+                break;
+            case 'Escape':
+                exitPresentation();
+                break;
+            case 'f':
+            case 'F':
+                toggleFullscreen();
+                break;
+        }
+    });
+
+    // Touch events for mobile
+    let startX = null;
+    document.addEventListener('touchstart', function(e) {
+        startX = e.touches[0].clientX;
+    });
+
+    document.addEventListener('touchend', function(e) {
+        if (!startX) return;
+
+        const endX = e.changedTouches[0].clientX;
+        const diffX = startX - endX;
+
+        if (Math.abs(diffX) > 50) {
+            if (diffX > 0) {
+                nextSlide();
+            } else {
+                previousSlide();
+            }
+        }
+        startX = null;
+    });
+
+    // Initialize
+    showSlide(1);
+</script>
+</body>
+</html>

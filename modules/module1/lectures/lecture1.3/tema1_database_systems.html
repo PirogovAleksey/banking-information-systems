@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тема 1: СУБД у банківському середовищі</title>
+    <link rel="stylesheet" href="../../../../assets/css/slides.css">
+</head>
+<body class="slides-page">
+<div class="slides-wrapper">
+    <!-- Navigation -->
+    <div class="slide-navigation">
+        <button class="slide-btn" onclick="previousSlide()">◀</button>
+        <span class="slide-counter" id="slideCounter">1 / 8</span>
+        <button class="slide-btn" onclick="nextSlide()">▶</button>
+        <button class="slide-btn" onclick="toggleFullscreen()">⛶</button>
+        <button class="slide-btn" onclick="exitPresentation()">✕</button>
+    </div>
+
+    <!-- Progress Bar -->
+    <div class="slide-progress">
+        <div class="slide-progress-bar" id="progressBar" style="width: 12.5%;"></div>
+    </div>
+
+    <!-- Slide 1: Title -->
+    <div class="slide active" id="slide1">
+        <div class="slide-container">
+            <div class="slide-title">
+                <h1>СУБД у банківському середовищі</h1>
+                <div class="subtitle">Тема 1 • Лекція 1.3</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 2: Особливості банківських СУБД -->
+    <div class="slide" id="slide2">
+        <div class="slide-container">
+            <div class="slide-content">
+                <h2>Особливості банківських СУБД</h2>
+                <h3>Ключові вимоги до банківських БД:</h3>
+                <ul class="slide-list">
+                    <li><strong>Високопродуктивність</strong> - тисячі транзакцій на секунду</li>
+                    <li><strong>Надійність 99.99%</strong> - мінімальні простої</li>
+                    <li><strong>Real-time обробка</strong> - миттєве виконання операцій</li>
+                    <li><strong>Масштабованість</strong> - підтримка зростання навантаження</li>
+                    <li><strong>Безпека даних</strong> - захист фінансової інформації</li>
+                    <li><strong>Compliance</strong> - відповідність регуляторним вимогам</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 3: Архітектурні підходи -->
+    <div class="slide" id="slide3">
+        <div class="slide-container">
+            <div class="slide-content">
+                <h2>Архітектурні підходи банківських СУБД</h2>
+                <div class="slide-statistics">
+                    <div class="stat-item">
+                        <h4>🏢 Монолітна архітектура</h4>
+                        <ul>
+                            <li>Централізована база даних</li>
+                            <li>Простота управління</li>
+                            <li>Високі вимоги до ресурсів</li>
+                            <li>Складне масштабування</li>
+                        </ul>
+                    </div>
+                    <div class="stat-item">
+                        <h4>🔗 Розподілена архітектура</h4>
+                        <ul>
+                            <li>Кілька взаємозв'язаних БД</li>
+                            <li>Горизонтальне масштабування</li>
+                            <li>Складність синхронізації</li>
+                            <li>Підвищена стійкість</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 4: Приклад ПриватБанк -->
+    <div class="slide" id="slide4">
+        <div class="slide-container">
+            <div class="slide-banking-example">
+                <div class="banking-logo">🏦</div>
+                <div class="banking-title">Архітектура даних ПриватБанку</div>
+                <ul class="slide-list">
+                    <li><strong>Core Banking:</strong> IBM DB2 на мейнфреймах</li>
+                    <li><strong>Digital Banking:</strong> PostgreSQL кластери</li>
+                    <li><strong>Analytics:</strong> Apache Spark + Hadoop</li>
+                    <li><strong>Cache:</strong> Redis для швидкого доступу</li>
+                    <li><strong>Обсяг:</strong> >40 млн клієнтів, >1 млрд транзакцій/місяць</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 5: Основні СУБД -->
+    <div class="slide" id="slide5">
+        <div class="slide-container">
+            <div class="slide-content">
+                <h2>Основні СУБД у банківському секторі</h2>
+                <h3>🏆 Лідери ринку:</h3>
+                <div class="slide-statistics">
+                    <div class="stat-item">
+                        <div class="stat-value">45%</div>
+                        <div class="stat-description">Oracle Database</div>
+                        <p>Висока надійність та продуктивність, розширені функції безпеки</p>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">30%</div>
+                        <div class="stat-description">IBM DB2</div>
+                        <p>Оптимізація для мейнфреймів, відмінна масштабованість</p>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">15%</div>
+                        <div class="stat-description">Microsoft SQL Server</div>
+                        <p>Інтеграція з Microsoft екосистемою</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 6: Загрози безпеці -->
+    <div class="slide" id="slide6">
+        <div class="slide-container">
+            <div class="slide-cyber-security">
+                <h2>Загрози безпеці банківських СУБД</h2>
+                <div class="cyber-threat-level threat-high">🚨 ВИСОКИЙ РІВЕНЬ ЗАГРОЗИ</div>
+                <h3>Основні вектори атак:</h3>
+                <ul class="slide-list">
+                    <li><strong>SQL Injection</strong> - маніпуляції через вразливі запити</li>
+                    <li><strong>Privilege Escalation</strong> - підвищення прав доступу</li>
+                    <li><strong>Data Exfiltration</strong> - витік чутливих даних</li>
+                    <li><strong>Insider Threats</strong> - загрози від співробітників</li>
+                    <li><strong>Database Hijacking</strong> - перехоплення управління БД</li>
+                </ul>
+                <p><strong>Статистика:</strong> 60% кібератак на банки націлені на бази даних</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 7: Кейс Carbanak -->
+    <div class="slide" id="slide7">
+        <div class="slide-container">
+            <div class="slide-content">
+                <h2>Практичний кейс: Carbanak</h2>
+                <h3>💰 Атака Carbanak (2013-2015)</h3>
+                <p><strong>Ціль:</strong> Банківські СУБД по всьому світу</p>
+                <p><strong>Метод:</strong> SQL-ін'єкції + APT</p>
+                <p><strong>Збитки:</strong> $1 млрд з 100+ банків</p>
+                <h4>Як працювала атака:</h4>
+                <ol class="slide-list">
+                    <li>Фішингові листи співробітникам банків</li>
+                    <li>Встановлення backdoor через макроси</li>
+                    <li>Lateral movement в банківській мережі</li>
+                    <li>Доступ до СУБД core banking систем</li>
+                    <li>Маніпуляції з балансами та переказами</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 8: Вимоги НБУ -->
+    <div class="slide" id="slide8">
+        <div class="slide-container">
+            <div class="slide-content">
+                <h2>Вимоги НБУ до банківських СУБД</h2>
+                <h3>📋 Регуляторні вимоги:</h3>
+                <ul class="slide-list">
+                    <li><strong>Постанова НБУ №95</strong> - вимоги до ІТ-ризиків
+                        <ul>
+                            <li>Класифікація критичності систем</li>
+                            <li>Вимоги до відмовостійкості</li>
+                            <li>Процедури backup та recovery</li>
+                        </ul>
+                    </li>
+                    <li><strong>Закон про платіжні системи</strong>
+                        <ul>
+                            <li>Захист персональних даних</li>
+                            <li>Аудит доступу до даних</li>
+                            <li>Звітність про інциденти</li>
+                        </ul>
+                    </li>
+                    <li><strong>GDPR та Закон про персональні дані</strong>
+                        <ul>
+                            <li>Right to be forgotten</li>
+                            <li>Data minimization</li>
+                            <li>Consent management</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    let currentSlide = 1;
+    const totalSlides = 8;
+
+    function showSlide(n) {
+        const slides = document.querySelectorAll('.slide');
+        const progressBar = document.getElementById('progressBar');
+        const counter = document.getElementById('slideCounter');
+
+        if (n > totalSlides) currentSlide = 1;
+        if (n < 1) currentSlide = totalSlides;
+
+        slides.forEach(slide => slide.classList.remove('active'));
+        document.getElementById(`slide${currentSlide}`).classList.add('active');
+
+        progressBar.style.width = (currentSlide / totalSlides * 100) + '%';
+        counter.textContent = `${currentSlide} / ${totalSlides}`;
+    }
+
+    function nextSlide() {
+        currentSlide++;
+        showSlide(currentSlide);
+    }
+
+    function previousSlide() {
+        currentSlide--;
+        showSlide(currentSlide);
+    }
+
+    function toggleFullscreen() {
+        if (!document.fullscreenElement) {
+            document.documentElement.requestFullscreen();
+        } else {
+            document.exitFullscreen();
+        }
+    }
+
+    function exitPresentation() {
+        window.location.href = 'index.html';
+    }
+
+    // Keyboard navigation
+    document.addEventListener('keydown', function(e) {
+        switch(e.key) {
+            case 'ArrowRight':
+            case ' ':
+                nextSlide();
+                break;
+            case 'ArrowLeft':
+                previousSlide();
+                break;
+            case 'Escape':
+                exitPresentation();
+                break;
+            case 'f':
+            case 'F':
+                toggleFullscreen();
+                break;
+        }
+    });
+
+    // Touch events for mobile
+    let startX = null;
+    document.addEventListener('touchstart', function(e) {
+        startX = e.touches[0].clientX;
+    });
+
+    document.addEventListener('touchend', function(e) {
+        if (!startX) return;
+
+        const endX = e.changedTouches[0].clientX;
+        const diffX = startX - endX;
+
+        if (Math.abs(diffX) > 50) {
+            if (diffX > 0) {
+                nextSlide();
+            } else {
+                previousSlide();
+            }
+        }
+        startX = null;
+    });
+
+    // Initialize
+    showSlide(1);
+</script>
+</body>
+</html>
