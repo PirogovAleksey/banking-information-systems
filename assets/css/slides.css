@@ -19,7 +19,7 @@ html, body {
 }
 
 body.slides-page {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+    background: linear-gradient(135deg, #1e3a8a 0%, #3730a3 50%, #581c87 100%) !important;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
     width: 100vw !important;
     height: 100vh !important;
@@ -227,11 +227,31 @@ body.slides-page {
     max-height: 80vh !important;
     overflow-y: auto !important;
     text-align: center !important;
+    position: relative !important;
+}
+
+/* Add semi-transparent overlay for better text contrast */
+.slide-banking-example::before {
+    content: '' !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    background: rgba(0, 0, 0, 0.3) !important;
+    border-radius: 15px !important;
+    z-index: 1 !important;
+}
+
+.slide-banking-example > * {
+    position: relative !important;
+    z-index: 2 !important;
 }
 
 .banking-logo {
     font-size: 3rem !important;
     margin-bottom: 15px !important;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8) !important;
 }
 
 .banking-title {
@@ -239,59 +259,117 @@ body.slides-page {
     font-weight: bold !important;
     margin-bottom: 25px !important;
     color: #fff !important;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8) !important;
 }
 
 .slide-banking-example h3 {
-    color: #e3f2fd !important;
+    color: #ffffff !important;
     font-size: 1.5rem !important;
     margin: 20px 0 10px 0 !important;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8) !important;
 }
 
 .slide-banking-example h4 {
-    color: #e3f2fd !important;
+    color: #ffffff !important;
     font-size: 1.3rem !important;
     margin: 15px 0 10px 0 !important;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8) !important;
+}
+
+.slide-banking-example p {
+    color: #ffffff !important;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6) !important;
 }
 
 .slide-banking-example .slide-list {
     text-align: left !important;
 }
 
+.slide-banking-example .slide-list li {
+    color: #ffffff !important;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6) !important;
+}
+
+.slide-banking-example .slide-list li strong {
+    color: #ffffff !important;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8) !important;
+}
+
 .slide-banking-example .stat-item {
-    background: rgba(255, 255, 255, 0.1) !important;
-    border-left: 4px solid #64b5f6 !important;
+    background: rgba(255, 255, 255, 0.15) !important;
+    border-left: 4px solid #ffffff !important;
     color: white !important;
+    border-radius: 8px !important;
+    backdrop-filter: blur(5px) !important;
 }
 
 .slide-banking-example .stat-value {
-    color: #64b5f6 !important;
+    color: #ffffff !important;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8) !important;
 }
 
 /* ----------------------------------------------------------------
    CYBERSECURITY
    ---------------------------------------------------------------- */
 .slide-cyber-security {
-    background: linear-gradient(135deg, #c31432 0%, #240b36 100%) !important;
+    background: linear-gradient(135deg, #dc2626 0%, #7f1d1d 100%) !important;
     color: white !important;
     border-radius: 15px !important;
     padding: 40px !important;
     width: 100% !important;
     max-height: 80vh !important;
     overflow-y: auto !important;
+    position: relative !important;
+}
+
+/* Add semi-transparent overlay for better text contrast */
+.slide-cyber-security::before {
+    content: '' !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    background: rgba(0, 0, 0, 0.2) !important;
+    border-radius: 15px !important;
+    z-index: 1 !important;
+}
+
+.slide-cyber-security > * {
+    position: relative !important;
+    z-index: 2 !important;
 }
 
 .slide-cyber-security h2 {
     color: white !important;
-    border-bottom: 3px solid #ff5722 !important;
+    border-bottom: 3px solid #ffffff !important;
     text-align: center !important;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8) !important;
 }
 
 .slide-cyber-security h3 {
-    color: #ffcdd2 !important;
+    color: #ffffff !important;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8) !important;
 }
 
 .slide-cyber-security h4 {
-    color: #ffcdd2 !important;
+    color: #ffffff !important;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8) !important;
+}
+
+.slide-cyber-security p {
+    color: #ffffff !important;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6) !important;
+}
+
+.slide-cyber-security .slide-list li {
+    color: #ffffff !important;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6) !important;
+}
+
+.slide-cyber-security .slide-list li strong {
+    color: #ffffff !important;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8) !important;
 }
 
 .cyber-threat-level {
