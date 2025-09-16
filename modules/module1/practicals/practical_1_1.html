@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Практична робота 1.1: Аналіз архітектури банківської системи</title>
+    <link rel="stylesheet" href="../../../../assets/css/base.css">
+    <link rel="stylesheet" href="../../../../assets/css/layout.css">
+    <link rel="stylesheet" href="../../../../assets/css/components.css">
+    <link rel="stylesheet" href="../../../../assets/css/pages.css">
+    <style>
+        /* Додаткові стилі для практичної роботи */
+        .practical-content {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .practical-content h1 {
+            color: var(--color-primary);
+            border-bottom: 3px solid var(--color-primary);
+            padding-bottom: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .practical-content h2 {
+            color: var(--color-primary-dark);
+            margin-top: 3rem;
+            margin-bottom: 1.5rem;
+            padding-left: 1rem;
+            border-left: 4px solid var(--color-secondary);
+        }
+
+        .practical-content h3 {
+            color: var(--color-text-primary);
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .practical-content table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .practical-content th {
+            background: var(--color-primary);
+            color: white;
+            padding: 0.75rem;
+            text-align: left;
+        }
+
+        .practical-content td {
+            padding: 0.75rem;
+            border: 1px solid var(--color-gray-200);
+        }
+
+        .practical-content tr:nth-child(even) {
+            background: var(--color-gray-50);
+        }
+
+        .practical-content pre {
+            background: var(--color-gray-900);
+            color: var(--color-text-inverse);
+            padding: 1rem;
+            border-radius: var(--radius-md);
+            overflow-x: auto;
+        }
+
+        .practical-content code {
+            background: var(--color-gray-100);
+            padding: 0.2rem 0.4rem;
+            border-radius: var(--radius-sm);
+            font-family: var(--font-family-mono);
+        }
+
+        .task-box {
+            background: var(--color-bg-secondary);
+            border: 2px solid var(--color-primary-light);
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .task-box h4 {
+            color: var(--color-primary);
+            margin-top: 0;
+        }
+
+        .checklist {
+            list-style: none;
+            padding: 0;
+        }
+
+        .checklist li {
+            padding: 0.5rem 0;
+            padding-left: 2rem;
+            position: relative;
+        }
+
+        .checklist li:before {
+            content: "☐";
+            position: absolute;
+            left: 0;
+            font-size: 1.2rem;
+        }
+
+        .checklist li.done:before {
+            content: "☑";
+            color: var(--color-success);
+        }
+
+        .info-box {
+            background: #e3f2fd;
+            border-left: 4px solid var(--color-info);
+            padding: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .warning-box {
+            background: #fff3e0;
+            border-left: 4px solid var(--color-warning);
+            padding: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .success-box {
+            background: #e8f5e9;
+            border-left: 4px solid var(--color-success);
+            padding: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .download-section {
+            background: linear-gradient(135deg, var(--color-primary-light), var(--color-primary));
+            color: white;
+            padding: 2rem;
+            border-radius: var(--radius-lg);
+            text-align: center;
+            margin: 2rem 0;
+        }
+
+        .download-btn {
+            background: white;
+            color: var(--color-primary);
+            padding: 1rem 2rem;
+            border-radius: var(--radius-md);
+            text-decoration: none;
+            display: inline-block;
+            margin: 0.5rem;
+            transition: transform 0.2s;
+        }
+
+        .download-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .mermaid {
+            text-align: center;
+            margin: 2rem 0;
+        }
+    </style>
+</head>
+<body class="page">
+<div class="container">
+    <!-- Breadcrumb Navigation -->
+    <nav class="breadcrumb">
+        <a href="../../../../index.html">🏠 Головна</a>
+        <span class="breadcrumb-separator">→</span>
+        <a href="../../index.html">Модуль 1</a>
+        <span class="breadcrumb-separator">→</span>
+        <span>Практична робота 1.1</span>
+    </nav>
+
+    <!-- Header -->
+    <header class="section-header text-center mb-8">
+        <h1 class="section-title">💻 Практична робота №1</h1>
+        <h2 class="section-subtitle">Аналіз архітектури банківської системи</h2>
+        <p class="text-secondary">Дослідження та документування архітектури реальної банківської системи з фокусом на безпеку</p>
+    </header>
+
+    <!-- Main Content -->
+    <main class="practical-content">
+        <!-- Info Card -->
+        <div class="card mb-8">
+            <div class="card-header">
+                <h3 class="card-title">📋 Загальна інформація</h3>
+            </div>
+            <div class="card-body">
+                <div class="grid grid-cols-2 gap-4 mb-6">
+                    <div>
+                        <strong>Модуль:</strong> 1 - Основи банківських ІТ-систем
+                    </div>
+                    <div>
+                        <strong>Тривалість:</strong> 160 хвилин (4 академічні години)
+                    </div>
+                    <div>
+                        <strong>Рівень складності:</strong> <span class="badge badge-warning">Середній</span>
+                    </div>
+                    <div>
+                        <strong>Спеціальність:</strong> Кібербезпека, 3 курс
+                    </div>
+                </div>
+
+                <div class="alert alert-info">
+                    <div class="alert-title">🎯 Мета роботи</div>
+                    <ol>
+                        <li>Дослідити архітектуру сучасної банківської системи на прикладі українського банку</li>
+                        <li>Ідентифікувати ключові компоненти та їх взаємозв'язки</li>
+                        <li>Проаналізувати механізми забезпечення безпеки на різних рівнях архітектури</li>
+                        <li>Виявити потенційні вразливості та запропонувати покращення</li>
+                        <li>Документувати результати дослідження згідно з best practices</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+
+        <!-- Download Section -->
+        <div class="download-section">
+            <h3>📥 Завантажити матеріали</h3>
+            <p>Отримайте повну версію практичної роботи з усіма шаблонами та додатками</p>
+            <div>
+                <a href="practical_1_banking_architecture_analysis.md" class="download-btn" download>
+                    📄 Markdown версія
+                </a>
+                <a href="practical_1_banking_architecture_analysis.pdf" class="download-btn">
+                    📑 PDF версія
+                </a>
+                <a href="templates.zip" class="download-btn">
+                    📦 Шаблони документів
+                </a>
+            </div>
+        </div>
+
+        <!-- Content Sections -->
+        <section>
+            <h2>📚 Теоретична база</h2>
+
+            <div class="task-box">
+                <h4>Основні архітектурні патерни банківських систем</h4>
+
+                <h5>1. Монолітна архітектура</h5>
+                <pre><code>┌─────────────────────────────────┐
+│     Core Banking System         │
+│  ┌───────────────────────────┐  │
+│  │    Database Layer         │  │
+│  ├───────────────────────────┤  │
+│  │    Business Logic         │  │
+│  ├───────────────────────────┤  │
+│  │    Presentation Layer     │  │
+│  └───────────────────────────┘  │
+└─────────────────────────────────┘</code></pre>
+
+                <h5>2. Мікросервісна архітектура</h5>
+                <pre><code>┌─────────┐ ┌─────────┐ ┌─────────┐
+│Account  │ │Payment  │ │Security │
+│Service  │ │Service  │ │Service  │
+└────┬────┘ └────┬────┘ └────┬────┘
+     │           │           │
+     └───────────┼───────────┘
+                 │
+            ┌────▼────┐
+            │   API   │
+            │ Gateway │
+            └─────────┘</code></pre>
+            </div>
+
+            <h3>Ключові компоненти банківської системи</h3>
+            <table>
+                <thead>
+                <tr>
+                    <th>Компонент</th>
+                    <th>Функція</th>
+                    <th>Технології</th>
+                    <th>Безпека</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td><strong>Core Banking System</strong></td>
+                    <td>Управління рахунками, транзакції</td>
+                    <td>IBM DB2, Oracle</td>
+                    <td>TDE, RBAC</td>
+                </tr>
+                <tr>
+                    <td><strong>Payment Gateway</strong></td>
+                    <td>Обробка платежів</td>
+                    <td>Java, .NET</td>
+                    <td>PCI DSS, SSL/TLS</td>
+                </tr>
+                <tr>
+                    <td><strong>Digital Channels</strong></td>
+                    <td>Web/Mobile banking</td>
+                    <td>React, Swift</td>
+                    <td>OAuth 2.0, Biometrics</td>
+                </tr>
+                <tr>
+                    <td><strong>Data Warehouse</strong></td>
+                    <td>Аналітика, звітність</td>
+                    <td>Hadoop, Spark</td>
+                    <td>Encryption at rest</td>
+                </tr>
+                <tr>
+                    <td><strong>Integration Layer</strong></td>
+                    <td>ESB, API management</td>
+                    <td>MuleSoft, WSO2</td>
+                    <td>API keys, Rate limiting</td>
+                </tr>
+                <tr>
+                    <td><strong>Security Layer</strong></td>
+                    <td>Автентифікація, моніторинг</td>
+                    <td>SIEM, WAF</td>
+                    <td>Multi-factor auth</td>
+                </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section>
+            <h2>🔬 Хід роботи</h2>
+
+            <div class="task-box">
+                <h4>Частина 1: Вибір об'єкта дослідження (20 хв)</h4>
+
+                <h5>Завдання 1.1: Обрати український банк для аналізу</h5>
+
+                <p><strong>Рекомендовані варіанти:</strong></p>
+                <ul class="checklist">
+                    <li>ПриватБанк (найбільший, технологічно розвинений)</li>
+                    <li>Monobank (повністю digital, cloud-native)</li>
+                    <li>Ощадбанк (державний, legacy системи)</li>
+                    <li>ПУМБ (гібридна архітектура)</li>
+                    <li>А-Банк (інноваційні рішення)</li>
+                </ul>
+
+                <div class="info-box">
+                    <strong>💡 Порада:</strong> Оберіть банк з достатньою кількістю публічної інформації про технології та архітектуру.
+                </div>
+            </div>
+
+            <div class="task-box">
+                <h4>Частина 2: Моделювання архітектури (40 хв)</h4>
+
+                <h5>Завдання 2.1: Створення високорівневої діаграми</h5>
+
+                <p>Використовуючи draw.io або Mermaid, створіть діаграму архітектури обраного банку.</p>
+
+                <div class="info-box">
+                    <strong>🛠️ Інструменти:</strong>
+                    <ul>
+                        <li><a href="https://draw.io" target="_blank">draw.io</a> - онлайн редактор діаграм</li>
+                        <li><a href="https://mermaid.live" target="_blank">Mermaid Live Editor</a> - діаграми як код</li>
+                        <li>PlantUML - для UML діаграм</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="task-box">
+                <h4>Частина 3: Аналіз безпеки (60 хв)</h4>
+
+                <h5>Завдання 3.1: Threat Modeling (STRIDE)</h5>
+
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Категорія</th>
+                        <th>Загроза</th>
+                        <th>Компонент</th>
+                        <th>Ймовірність</th>
+                        <th>Вплив</th>
+                        <th>Мітигація</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td><strong>S</strong>poofing</td>
+                        <td>Підробка ідентифікації</td>
+                        <td>API Gateway</td>
+                        <td>Середня</td>
+                        <td>Високий</td>
+                        <td>MFA, сертифікати</td>
+                    </tr>
+                    <tr>
+                        <td><strong>T</strong>ampering</td>
+                        <td>Зміна даних транзакцій</td>
+                        <td>Payment Service</td>
+                        <td>Низька</td>
+                        <td>Критичний</td>
+                        <td>HMAC, цифровий підпис</td>
+                    </tr>
+                    <tr>
+                        <td><strong>R</strong>epudiation</td>
+                        <td>Відмова від транзакції</td>
+                        <td>Core Banking</td>
+                        <td>Низька</td>
+                        <td>Високий</td>
+                        <td>Audit logs, blockchain</td>
+                    </tr>
+                    <tr>
+                        <td><strong>I</strong>nformation Disclosure</td>
+                        <td>Витік даних клієнтів</td>
+                        <td>Database</td>
+                        <td>Середня</td>
+                        <td>Критичний</td>
+                        <td>TDE, access control</td>
+                    </tr>
+                    <tr>
+                        <td><strong>D</strong>enial of Service</td>
+                        <td>DDoS атака</td>
+                        <td>Web Banking</td>
+                        <td>Висока</td>
+                        <td>Високий</td>
+                        <td>CDN, rate limiting</td>
+                    </tr>
+                    <tr>
+                        <td><strong>E</strong>levation of Privilege</td>
+                        <td>Підвищення прав</td>
+                        <td>IAM System</td>
+                        <td>Низька</td>
+                        <td>Критичний</td>
+                        <td>RBAC, zero trust</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="task-box">
+                <h4>Частина 4: Виявлення вразливостей (40 хв)</h4>
+
+                <h5>Завдання 4.1: Аналіз OWASP Top 10</h5>
+
+                <div class="warning-box">
+                    <strong>⚠️ Важливо:</strong> Проводьте тільки теоретичний аналіз. НЕ здійснюйте реальне тестування на проникнення без письмового дозволу!
+                </div>
+
+                <p>Проаналізуйте потенційну присутність вразливостей OWASP Top 10 в архітектурі обраного банку.</p>
+            </div>
+        </section>
+
+        <section>
+            <h2>📊 Критерії оцінювання</h2>
+
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Розподіл балів (100 балів total)</h3>
+                </div>
+                <div class="card-body">
+                    <table>
+                        <thead>
+                        <tr>
+                            <th>Критерій</th>
+                            <th>Бали</th>
+                            <th>Опис</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td><strong>Повнота дослідження</strong></td>
+                            <td>20</td>
+                            <td>Охоплення всіх ключових компонентів</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Якість діаграм</strong></td>
+                            <td>15</td>
+                            <td>Точність, деталізація, читабельність</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Threat modeling</strong></td>
+                            <td>20</td>
+                            <td>Ідентифікація реальних загроз</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Аналіз безпеки</strong></td>
+                            <td>20</td>
+                            <td>Глибина аналізу механізмів захисту</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Рекомендації</strong></td>
+                            <td>15</td>
+                            <td>Практичність та обґрунтованість</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Оформлення звіту</strong></td>
+                            <td>10</td>
+                            <td>Структура, грамотність, візуалізація</td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                    <h4>Шкала оцінювання</h4>
+                    <ul>
+                        <li><strong>90-100 балів (A)</strong> - Відмінно: Комплексний аналіз з інноваційними рішеннями</li>
+                        <li><strong>75-89 балів (B)</strong> - Добре: Якісний аналіз з незначними недоліками</li>
+                        <li><strong>60-74 бали (C)</strong> - Задовільно: Базовий аналіз виконано правильно</li>
+                        <li><strong>&lt;60 балів (D)</strong> - Незадовільно: Суттєві прогалини в аналізі</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>✅ Чек-лист здачі роботи</h2>
+
+            <div class="success-box">
+                <h4>Перевірте перед здачею:</h4>
+                <ul class="checklist">
+                    <li>Обрано банк для дослідження</li>
+                    <li>Створено архітектурну діаграму</li>
+                    <li>Проведено threat modeling (STRIDE)</li>
+                    <li>Проаналізовано механізми безпеки</li>
+                    <li>Виявлено потенційні вразливості</li>
+                    <li>Розроблено рекомендації</li>
+                    <li>Оформлено звіт згідно з шаблоном</li>
+                    <li>Додано список використаних джерел</li>
+                    <li>Перевірено на плагіат (&lt;20%)</li>
+                    <li>Завантажено в систему до дедлайну</li>
+                </ul>
+            </div>
+
+            <div class="alert alert-error">
+                <div class="alert-title">⚠️ Дедлайн</div>
+                Здати роботу необхідно до <strong>[Дата] 23:59</strong> через систему дистанційного навчання.
+            </div>
+        </section>
+
+        <section>
+            <h2>📚 Рекомендована література</h2>
+
+            <div class="grid grid-cols-2 gap-4">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">📖 Книги</h4>
+                    </div>
+                    <div class="card-body">
+                        <ol>
+                            <li>"Bank 4.0" - Brett King</li>
+                            <li>"The Architecture of Banking" - Daniel Gozman</li>
+                            <li>"Cybersecurity in Finance" - Sylvain Bouyon</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">📑 Стандарти</h4>
+                    </div>
+                    <div class="card-body">
+                        <ol>
+                            <li><a href="https://www.pcisecuritystandards.org/" target="_blank">PCI DSS v4.0</a></li>
+                            <li><a href="https://owasp.org/" target="_blank">OWASP Banking Security</a></li>
+                            <li><a href="https://www.swift.com/csp" target="_blank">SWIFT CSP</a></li>
+                            <li><a href="https://bank.gov.ua/ua/legislation/Resolution_28062019_95" target="_blank">НБУ Постанова №95</a></li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Navigation -->
+    <div class="mt-8 flex justify-between">
+        <a href="../../index.html" class="btn btn-outline">
+            ← Назад до модуля
+        </a>
+        <a href="../lecture1.3/index.html" class="btn btn-primary">
+            Перейти до лекції 1.3 →
+        </a>
+    </div>
+</div>
+
+<script>
+    // Інтерактивний чек-лист
+    document.querySelectorAll('.checklist li').forEach(item => {
+        item.addEventListener('click', function() {
+            this.classList.toggle('done');
+        });
+    });
+</script>
+</body>
+</html>
