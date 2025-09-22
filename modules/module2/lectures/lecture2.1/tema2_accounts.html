@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тема 2: Управління рахунками та обробка транзакцій</title>
+    <link rel="stylesheet" href="../../../../assets/css/slides.css">
+</head>
+<body class="slides-page">
+<div class="slides-wrapper">
+    <!-- Navigation -->
+    <div class="slide-navigation">
+        <button class="slide-btn" onclick="previousSlide()">◀</button>
+        <span class="slide-counter" id="slideCounter">1 / 14</span>
+        <button class="slide-btn" onclick="nextSlide()">▶</button>
+        <button class="slide-btn" onclick="toggleFullscreen()">⛶</button>
+        <button class="slide-btn" onclick="exitPresentation()">✕</button>
+    </div>
+
+    <!-- Progress Bar -->
+    <div class="slide-progress">
+        <div class="slide-progress-bar" id="progressBar" style="width: 7.14%;"></div>
+    </div>
+
+    <!-- Slide 1: Title -->
+    <div class="slide active" id="slide1">
+        <div class="slide-container">
+            <div class="slide-title">
+                <h1>Управління рахунками та обробка транзакцій</h1>
+                <div class="subtitle">Account Management & Transaction Processing</div>
+                <div class="content">
+                    <p><strong>Модуль 2:</strong> Core Banking Systems</p>
+                    <p><strong>Лекція 2.1:</strong> Функціональність та компоненти CBS</p>
+                    <p><strong>Тема 2</strong></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 2: Система управління рахунками -->
+    <div class="slide" id="slide2">
+        <div class="slide-container">
+            <div class="slide-content">
+                <h2>Система управління рахунками</h2>
+                <h3>💳 Повний життєвий цикл банківського рахунку:</h3>
+                <div style="display: flex; align-items: center; justify-content: space-around; margin: 30px 0;">
+                    <div style="text-align: center; padding: 20px;">
+                        <div style="font-size: 48px;">📝</div>
+                        <h4>Відкриття</h4>
+                        <p>KYC, генерація IBAN</p>
+                    </div>
+                    <div style="font-size: 36px;">→</div>
+                    <div style="text-align: center; padding: 20px;">
+                        <div style="font-size: 48px;">⚙️</div>
+                        <h4>Обслуговування</h4>
+                        <p>Транзакції, ліміти</p>
+                    </div>
+                    <div style="font-size: 36px;">→</div>
+                    <div style="text-align: center; padding: 20px;">
+                        <div style="font-size: 48px;">🔒</div>
+                        <h4>Закриття</h4>
+                        <p>Архівація, звітність</p>
+                    </div>
+                </div>
+                <div class="alert alert-info">
+                    <strong>Ключовий принцип:</strong> Кожен рахунок має унікальний IBAN та підпорядковується плану рахунків НБУ
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 3: Типи банківських рахунків -->
+    <div class="slide" id="slide3">
+        <div class="slide-container">
+            <div class="slide-content">
+                <h2>Типологія банківських рахунків</h2>
+                <div class="slide-statistics">
+                    <div class="stat-item">
+                        <h4>💰 Поточні</h4>
+                        <ul>
+                            <li>Щоденні операції</li>
+                            <li>Овердрафт</li>
+                            <li>Картки</li>
+                            <li>Без обмежень</li>
+                        </ul>
+                    </div>
+                    <div class="stat-item">
+                        <h4>🏦 Ощадні</h4>
+                        <ul>
+                            <li>Накопичення</li>
+                            <li>Відсотки</li>
+                            <li>Обмеження зняття</li>
+                            <li>Автопоповнення</li>
+                        </ul>
+                    </div>
+                    <div class="stat-item">
+                        <h4>📈 Депозитні</h4>
+                        <ul>
+                            <li>Строкові вклади</li>
+                            <li>Фіксована ставка</li>
+                            <li>Штрафи за зняття</li>
+                            <li>Капіталізація</li>
+                        </ul>
+                    </div>
+                    <div class="stat-item">
+                        <h4>💳 Кредитні</h4>
+                        <ul>
+                            <li>Облік боргу</li>
+                            <li>Графік погашення</li>
+                            <li>Відсотки/тіло</li>
+                            <li>Прострочення</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 4: Процес відкриття рахунку -->
+    <div class="slide" id="slide4">
+        <div class="slide-container">
+            <div class="slide-banking-example">
+                <div class="banking-logo">🏦</div>
+                <div class="banking-title">Процес відкриття рахунку в CBS</div>
+                <ol class="slide-list">
+                    <li><strong>Ідентифікація клієнта</strong> - перевірка CIF або створення нового</li>
+                    <li><strong>Верифікація документів</strong> - інтеграція з державними реєстрами</li>
+                    <li><strong>KYC/AML скринінг</strong> - санкційні списки, PEP перевірка</li>
+                    <li><strong>Вибір продукту</strong> - тип рахунку та тарифний план</li>
+                    <li><strong>Генерація IBAN</strong> - унікальний номер з контрольною сумою</li>
+                    <li><strong>Налаштування параметрів</strong> - ліміти, послуги, канали</li>
+                    <li><strong>Випуск інструментів</strong> - картки, токени, доступи</li>
+                    <li><strong>Активація</strong> - фінальна авторизація</li>
+                </ol>
+                <div class="alert alert-success">
+                    <strong>Цифровий онбординг:</strong> В Monobank весь процес займає &lt;5 хвилин через додаток
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 5: Архітектура системи транзакцій -->
+    <div class="slide" id="slide5">
+        <div class="slide-container">
+            <div class="slide-content">
+                <h2>Архітектура обробки транзакцій</h2>
+                <h3>⚡ Transaction Processing Engine:</h3>
+                <div style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 10px;">
+                    <div class="slide-statistics">
+                        <div class="stat-item">
+                            <h4>🎯 Процесор</h4>
+                            <p>Координація виконання</p>
+                            <p>Черги з пріоритетами</p>
+                            <p>Load balancing</p>
+                        </div>
+                        <div class="stat-item">
+                            <h4>✅ Валідатор</h4>
+                            <p>Перевірка параметрів</p>
+                            <p>Контроль балансів</p>
+                            <p>Перевірка лімітів</p>
+                        </div>
+                        <div class="stat-item">
+                            <h4>🔒 Lock Manager</h4>
+                            <p>Блокування ресурсів</p>
+                            <p>Deadlock detection</p>
+                            <p>Timeout control</p>
+                        </div>
+                        <div class="stat-item">
+                            <h4>📝 Журнал</h4>
+                            <p>Write-Ahead Log</p>
+                            <p>Реплікація</p>
+                            <p>Recovery</p>
+                        </div>
+                    </div>
+                </div>
+                <p style="text-align: center; margin-top: 20px;">
+                    <strong>Принцип ACID:</strong> Atomicity • Consistency • Isolation • Durability
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 6: Типи транзакцій -->
+    <div class="slide" id="slide6">
+        <div class="slide-container">
+            <div class="slide-content">
+                <h2>Типи банківських транзакцій</h2>
+                <div class="slide-statistics">
+                    <div class="stat-item">
+                        <h4>💸 Грошові перекази</h4>
+                        <ul>
+                            <li>P2P (між клієнтами)</li>
+                            <li>Me2Me (свої рахунки)</li>
+                            <li>СЕП НБУ</li>
+                            <li>SWIFT</li>
+                        </ul>
+                    </div>
+                    <div class="stat-item">
+                        <h4>💳 Карткові операції</h4>
+                        <ul>
+                            <li>POS транзакції</li>
+                            <li>ATM зняття</li>
+                            <li>E-commerce</li>
+                            <li>NFC/QR платежі</li>
+                        </ul>
+                    </div>
+                    <div class="stat-item">
+                        <h4>📱 Платежі</h4>
+                        <ul>
+                            <li>Комунальні</li>
+                            <li>Податкові</li>
+                            <li>Мобільний зв'язок</li>
+                            <li>Послуги</li>
+                        </ul>
+                    </div>
+                    <div class="stat-item">
+                        <h4>💵 Готівка</h4>
+                        <ul>
+                            <li>Cash-in</li>
+                            <li>Cash-out</li>
+                            <li>Обмін валют</li>
+                            <li>Інкасація</li>
+                        </ul>
+                    </div>
+                </div>
+                <div style="margin-top: 20px; text-align: center;">
+                    <div class="stat-value">10,000+</div>
+                    <div class="stat-description">транзакцій на секунду в піковий час</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 7: Процес обробки транзакції -->
+    <div class="slide" id="slide7">
+        <div class="slide-container">
+            <div class="slide-content">
+                <h2>Процес обробки транзакції</h2>
+                <h3>🔄 4 фази виконання:</h3>
+                <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 15px; margin-top: 20px;">
+                    <div style="flex: 1; background: rgba(100,200,255,0.2); padding: 15px; border-radius: 8px;">
+                        <h4 style="color: #60a5fa;">Фаза 1: Ініціація</h4>
+                        <ul style="font-size: 14px;">
+                            <li>Прийом запиту</li>
+                            <li>Автентифікація</li>
+                            <li>Синтаксична валідація</li>
+                            <li>Семантична валідація</li>
+                        </ul>
+                    </div>
+                    <div style="flex: 1; background: rgba(251,191,36,0.2); padding: 15px; border-radius: 8px;">
+                        <h4 style="color: #fbbf24;">Фаза 2: Авторизація</h4>
+                        <ul style="font-size: 14px;">
+                            <li>Перевірка балансу</li>
+                            <li>Контроль лімітів</li>
+                            <li>Fraud screening</li>
+                            <li>Sanctions check</li>
+                        </ul>
+                    </div>
+                    <div style="flex: 1; background: rgba(74,222,128,0.2); padding: 15px; border-radius: 8px;">
+                        <h4 style="color: #4ade80;">Фаза 3: Виконання</h4>
+                        <ul style="font-size: 14px;">
+                            <li>Lock ресурсів</li>
+                            <li>Дебет платника</li>
+                            <li>Кредит отримувача</li>
+                            <li>Update балансів</li>
+                        </ul>
+                    </div>
+                    <div style="flex: 1; background: rgba(168,85,247,0.2); padding: 15px; border-radius: 8px;">
+                        <h4 style="color: #a855f7;">Фаза 4: Підтвердження</h4>
+                        <ul style="font-size: 14px;">
+                            <li>Commit в БД</li>
+                            <li>Генерація ID</li>
+                            <li>Нотифікації</li>
+                            <li>Логування</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="alert alert-warning" style="margin-top: 20px;">
+                    <strong>Атомарність:</strong> Якщо будь-яка фаза не виконується - вся транзакція відкочується (ROLLBACK)
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 8: Two-Phase Commit -->
+    <div class="slide" id="slide8">
+        <div class="slide-container">
+            <div class="slide-content">
+                <h2>Двофазна фіксація (2PC)</h2>
+                <h3>🔄 Забезпечення атомарності розподілених транзакцій:</h3>
+                <div class="slide-statistics" style="margin-top: 30px;">
+                    <div class="stat-item" style="background: rgba(255,200,0,0.1);">
+                        <h4>📋 Фаза 1: Підготовка</h4>
+                        <ol>
+                            <li>Координатор → PREPARE</li>
+                            <li>Учасники перевіряють</li>
+                            <li>Відповідь: READY/ABORT</li>
+                            <li>Блокування ресурсів</li>
+                        </ol>
+                    </div>
+                    <div class="stat-item" style="background: rgba(0,255,100,0.1);">
+                        <h4>✅ Фаза 2: Фіксація</h4>
+                        <ol>
+                            <li>Всі READY → COMMIT</li>
+                            <li>Хоча б 1 ABORT → ROLLBACK</li>
+                            <li>Розблокування ресурсів</li>
+                            <li>Запис в журнал</li>
+                        </ol>
+                    </div>
+                </div>
+                <div style="margin-top: 30px; padding: 20px; background: rgba(255,255,255,0.1); border-radius: 10px;">
+                    <h4>Приклад: Міжбанківський SWIFT переказ</h4>
+                    <p>🏦 Банк А (дебет) → 🏛️ Кореспондент 1 → 🌍 SWIFT → 🏛️ Кореспондент 2 → 🏦 Банк Б (кредит)</p>
+                    <p style="text-align: center; margin-top: 10px;"><strong>Всі учасники мають підтвердити або вся транзакція скасовується</strong></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 9: Інтеграція з платіжними системами -->
+    <div class="slide" id="slide9">
+        <div class="slide-container">
+            <div class="slide-banking-example">
+                <div class="banking-logo">🌐</div>
+                <div class="banking-title">Інтеграція з платіжними системами</div>
+                <div class="slide-statistics">
+                    <div class="stat-item">
+                        <h4>🇺🇦 Національні</h4>
+                        <ul>
+                            <li><strong>СЕП НБУ</strong> - міжбанк</li>
+                            <li><strong>ПРОСТІР</strong> - картки</li>
+                            <li><strong>BankID</strong> - ідентифікація</li>
+                            <li><strong>Дія</strong> - держпослуги</li>
+                        </ul>
+                    </div>
+                    <div class="stat-item">
+                        <h4>🌍 Міжнародні</h4>
+                        <ul>
+                            <li><strong>SWIFT</strong> - перекази</li>
+                            <li><strong>Visa</strong> - картки</li>
+                            <li><strong>Mastercard</strong> - картки</li>
+                            <li><strong>SEPA</strong> - євроzone</li>
+                        </ul>
+                    </div>
+                </div>
+                <h4 style="margin-top: 20px;">🔌 Open Banking API (PSD2):</h4>
+                <ul class="slide-list">
+                    <li><strong>AIS</strong> - Account Information Service (інформація про рахунки)</li>
+                    <li><strong>PIS</strong> - Payment Initiation Service (ініціація платежів)</li>
+                    <li><strong>COF</strong> - Confirmation of Funds (підтвердження коштів)</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 10: Загрози безпеці транзакцій -->
+    <div class="slide" id="slide10">
+        <div class="slide-container">
+            <div class="slide-cyber-security">
+                <h2>Загрози безпеці транзакцій</h2>
+                <div class="cyber-threat-level threat-high">⚠️ КРИТИЧНІ ВЕКТОРИ АТАК</div>
+                <div class="slide-statistics">
+                    <div class="stat-item">
+                        <h4>🎯 На цілісність</h4>
+                        <ul>
+                            <li>Man-in-the-Middle</li>
+                            <li>Replay атаки</li>
+                            <li>Race conditions</li>
+                            <li>TOCTOU</li>
+                        </ul>
+                    </div>
+                    <div class="stat-item">
+                        <h4>🚫 На доступність</h4>
+                        <ul>
+                            <li>DDoS атаки</li>
+                            <li>Deadlock атаки</li>
+                            <li>Resource exhaustion</li>
+                            <li>Slowloris</li>
+                        </ul>
+                    </div>
+                    <div class="stat-item">
+                        <h4>🔓 На конфіденційність</h4>
+                        <ul>
+                            <li>Side-channel</li>
+                            <li>SQL injection</li>
+                            <li>Memory scraping</li>
+                            <li>Log injection</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="alert alert-error" style="margin-top: 20px;">
+                    <strong>Статистика:</strong> 45% кібератак на банки націлені на транзакційні системи
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 11: Механізми захисту -->
+    <div class="slide" id="slide11">
+        <div class="slide-container">
+            <div class="slide-content">
+                <h2>Механізми захисту транзакцій</h2>
+                <h3>🛡️ Багаторівневий захист:</h3>
+                <div class="slide-statistics">
+                    <div class="stat-item">
+                        <h4>🔐 Криптографія</h4>
+                        <ul>
+                            <li>Цифровий підпис</li>
+                            <li>E2E шифрування</li>
+                            <li>Tokenization</li>
+                            <li>Homomorphic encryption</li>
+                        </ul>
+                    </div>
+                    <div class="stat-item">
+                        <h4>✅ Контроль цілісності</h4>
+                        <ul>
+                            <li>MAC коди</li>
+                            <li>Hash chains</li>
+                            <li>Merkle trees</li>
+                            <li>Blockchain audit</li>
+                        </ul>
+                    </div>
+                    <div class="stat-item">
+                        <h4>📊 Моніторинг</h4>
+                        <ul>
+                            <li>Anomaly detection</li>
+                            <li>ML models</li>
+                            <li>Behavioral analytics</li>
+                            <li>Real-time correlation</li>
+                        </ul>
+                    </div>
+                    <div class="stat-item">
+                        <h4>📋 Стандарти</h4>
+                        <ul>
+                            <li>PCI DSS</li>
+                            <li>ISO 20022</li>
+                            <li>EMV</li>
+                            <li>3D Secure</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 12: Оптимізація продуктивності -->
+    <div class="slide" id="slide12">
+        <div class="slide-container">
+            <div class="slide-content">
+                <h2>Оптимізація продуктивності</h2>
+                <h3>⚡ Техніки підвищення швидкості:</h3>
+                <table style="width: 100%; border-collapse: collapse; margin: 20px 0;">
+                    <tr style="background: var(--color-primary); color: white;">
+                        <th style="padding: 12px; border: 1px solid #ddd;">Техніка</th>
+                        <th style="padding: 12px; border: 1px solid #ddd;">Опис</th>
+                        <th style="padding: 12px; border: 1px solid #ddd;">Приріст</th>
+                    </tr>
+                    <tr>
+                        <td style="padding: 12px; border: 1px solid #ddd;"><strong>In-Memory Cache</strong></td>
+                        <td style="padding: 12px; border: 1px solid #ddd;">Redis/Hazelcast для hot data</td>
+                        <td style="padding: 12px; border: 1px solid #ddd;">10-100x</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 12px; border: 1px solid #ddd;"><strong>Batch Processing</strong></td>
+                        <td style="padding: 12px; border: 1px solid #ddd;">Групування однотипних операцій</td>
+                        <td style="padding: 12px; border: 1px solid #ddd;">5-20x</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 12px; border: 1px solid #ddd;"><strong>Load Balancing</strong></td>
+                        <td style="padding: 12px; border: 1px solid #ddd;">Розподіл між серверами</td>
+                        <td style="padding: 12px; border: 1px solid #ddd;">Linear</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 12px; border: 1px solid #ddd;"><strong>Database Sharding</strong></td>
+                        <td style="padding: 12px; border: 1px solid #ddd;">Горизонтальне партиціонування</td>
+                        <td style="padding: 12px; border: 1px solid #ddd;">2-10x</td>
+                    </tr>
+                </table>
+                <div class="alert alert-success">
+                    <strong>Результат:</strong> Сучасні CBS обробляють 50,000+ TPS з latency &lt;100ms
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 13: Кейс ПриватБанку -->
+    <div class="slide" id="slide13">
+        <div class="slide-container">
+            <div class="slide-banking-example">
+                <div class="banking-logo">🏦</div>
+                <div class="banking-title">Кейс: Транзакційна система ПриватБанку</div>
+                <div class="slide-statistics">
+                    <div class="stat-item">
+                        <div class="stat-value">16M+</div>
+                        <div class="stat-description">активних клієнтів</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">1B+</div>
+                        <div class="stat-description">транзакцій/рік</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">99.95%</div>
+                        <div class="stat-description">uptime системи</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">&lt;50ms</div>
+                        <div class="stat-description">середня latency</div>
+                    </div>
+                </div>
+                <h4>Технологічний стек:</h4>
+                <ul class="slide-list">
+                    <li><strong>Core:</strong> IBM z/OS mainframe для критичних транзакцій</li>
+                    <li><strong>Distribution:</strong> Kubernetes кластери для мікросервісів</li>
+                    <li><strong>Cache:</strong> Redis кластери для сесій та hot data</li>
+                    <li><strong>Queue:</strong> Apache Kafka для асинхронної обробки</li>
+                    <li><strong>Monitoring:</strong> Prometheus + Grafana + ELK stack</li>
+                </ul>
+                <div style="margin-top: 20px; padding: 10px; background: rgba(74,222,128,0.2); border-radius: 8px;">
+                    <strong>Безпека:</strong> Zero-downtime deployments • Blue-Green deployment • Chaos engineering
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 14: Підсумки -->
+    <div class="slide" id="slide14">
+        <div class="slide-container">
+            <div class="slide-content">
+                <h2>Підсумки: Account Management & Transaction Processing</h2>
+                <h3>🎯 Ключові висновки:</h3>
+                <ul class="slide-list">
+                    <li><strong>Управління рахунками</strong> - повний життєвий цикл від відкриття до закриття</li>
+                    <li><strong>ACID транзакції</strong> - атомарність, узгодженість, ізоляція, довговічність</li>
+                    <li><strong>Фази обробки</strong> - валідація → авторизація → виконання → підтвердження</li>
+                    <li><strong>2PC для розподілених систем</strong> - гарантія атомарності між учасниками</li>
+                    <li><strong>Інтеграція з платіжними системами</strong> - СЕП, SWIFT, Visa/MC, Open Banking</li>
+                    <li><strong>Критичні загрози</strong> - атаки на цілісність, доступність, конфіденційність</li>
+                    <li><strong>Багаторівневий захист</strong> - криптографія + моніторинг + стандарти</li>
+                    <li><strong>Оптимізація</strong> - кешування, батчінг, шардування для 50k+ TPS</li>
+                </ul>
+                <div class="alert alert-info">
+                    <h4>🔮 Тренди майбутнього:</h4>
+                    <p>• Instant payments 24/7/365 • Blockchain для критичних транзакцій • AI-driven fraud prevention • Quantum-resistant криптографія</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    let currentSlide = 1;
+    const totalSlides = 14;
+
+    function showSlide(n) {
+        const slides = document.querySelectorAll('.slide');
+        const progressBar = document.getElementById('progressBar');
+        const counter = document.getElementById('slideCounter');
+
+        if (n > totalSlides) currentSlide = 1;
+        if (n < 1) currentSlide = totalSlides;
+
+        slides.forEach(slide => slide.classList.remove('active'));
+        document.getElementById(`slide${currentSlide}`).classList.add('active');
+
+        progressBar.style.width = (currentSlide / totalSlides * 100) + '%';
+        counter.textContent = `${currentSlide} / ${totalSlides}`;
+    }
+
+    function nextSlide() {
+        currentSlide++;
+        showSlide(currentSlide);
+    }
+
+    function previousSlide() {
+        currentSlide--;
+        showSlide(currentSlide);
+    }
+
+    function toggleFullscreen() {
+        if (!document.fullscreenElement) {
+            document.documentElement.requestFullscreen();
+        } else {
+            document.exitFullscreen();
+        }
+    }
+
+    function exitPresentation() {
+        window.location.href = '../lecture2.1/index.html';
+    }
+
+    // Keyboard navigation
+    document.addEventListener('keydown', function(e) {
+        switch(e.key) {
+            case 'ArrowRight':
+            case ' ':
+                nextSlide();
+                break;
+            case 'ArrowLeft':
+                previousSlide();
+                break;
+            case 'Escape':
+                exitPresentation();
+                break;
+            case 'f':
+            case 'F':
+                toggleFullscreen();
+                break;
+            case 'Home':
+                currentSlide = 1;
+                showSlide(currentSlide);
+                break;
+            case 'End':
+                currentSlide = totalSlides;
+                showSlide(currentSlide);
+                break;
+        }
+    });
+
+    // Touch events for mobile
+    let startX = null;
+    document.addEventListener('touchstart', function(e) {
+        startX = e.touches[0].clientX;
+    });
+
+    document.addEventListener('touchend', function(e) {
+        if (!startX) return;
+
+        const endX = e.changedTouches[0].clientX;
+        const diffX = startX - endX;
+
+        if (Math.abs(diffX) > 50) {
+            if (diffX > 0) {
+                nextSlide();
+            } else {
+                previousSlide();
+            }
+        }
+        startX = null;
+    });
+
+    // Initialize
+    showSlide(1);
+
+    // Save progress
+    function saveProgress() {
+        try {
+            const progress = {
+                currentSlide: currentSlide,
+                totalSlides: totalSlides,
+                timestamp: new Date().toISOString(),
+                topic: 'Account Management & Transaction Processing'
+            };
+            localStorage.setItem('lecture_2_1_tema2_progress', JSON.stringify(progress));
+        } catch(e) {
+            console.log('Could not save progress');
+        }
+    }
+
+    // Load progress
+    function loadProgress() {
+        try {
+            const saved = localStorage.getItem('lecture_2_1_tema2_progress');
+            if (saved) {
+                const progress = JSON.parse(saved);
+                if (progress.currentSlide) {
+                    currentSlide = progress.currentSlide;
+                    showSlide(currentSlide);
+                }
+            }
+        } catch(e) {
+            console.log('Could not load progress');
+        }
+    }
+
+    // Auto-save on slide change
+    window.addEventListener('beforeunload', saveProgress);
+
+    // Load on start
+    loadProgress();
+</script>
+</body>
+</html>

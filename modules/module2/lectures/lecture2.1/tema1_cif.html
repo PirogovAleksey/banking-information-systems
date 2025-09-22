@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тема 1: Файл інформації про клієнта (CIF)</title>
+    <link rel="stylesheet" href="../../../../assets/css/slides.css">
+</head>
+<body class="slides-page">
+<div class="slides-wrapper">
+    <!-- Navigation -->
+    <div class="slide-navigation">
+        <button class="slide-btn" onclick="previousSlide()">◀</button>
+        <span class="slide-counter" id="slideCounter">1 / 12</span>
+        <button class="slide-btn" onclick="nextSlide()">▶</button>
+        <button class="slide-btn" onclick="toggleFullscreen()">⛶</button>
+        <button class="slide-btn" onclick="exitPresentation()">✕</button>
+    </div>
+
+    <!-- Progress Bar -->
+    <div class="slide-progress">
+        <div class="slide-progress-bar" id="progressBar" style="width: 8.33%;"></div>
+    </div>
+
+    <!-- Slide 1: Title -->
+    <div class="slide active" id="slide1">
+        <div class="slide-container">
+            <div class="slide-title">
+                <h1>Файл інформації про клієнта</h1>
+                <div class="subtitle">Customer Information File (CIF)</div>
+                <div class="content">
+                    <p><strong>Модуль 2:</strong> Core Banking Systems</p>
+                    <p><strong>Лекція 2.1:</strong> Функціональність та компоненти CBS</p>
+                    <p><strong>Тема 1</strong></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 2: Що таке CIF? -->
+    <div class="slide" id="slide2">
+        <div class="slide-container">
+            <div class="slide-content">
+                <h2>Що таке CIF?</h2>
+                <h3>📁 Визначення та призначення:</h3>
+                <ul class="slide-list">
+                    <li><strong>Централізоване сховище</strong> - вся інформація про клієнта в одному місці</li>
+                    <li><strong>Єдине джерело правди</strong> - single source of truth для всіх систем банку</li>
+                    <li><strong>Реальний час</strong> - миттєвий доступ до актуальних даних</li>
+                    <li><strong>Омніканальність</strong> - єдині дані для всіх каналів обслуговування</li>
+                    <li><strong>360° погляд</strong> - повна картина відносин клієнта з банком</li>
+                </ul>
+                <div class="alert alert-info">
+                    <strong>Критична роль:</strong> CIF забезпечує консистентність даних та якість обслуговування незалежно від точки контакту з клієнтом
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 3: Структура даних CIF -->
+    <div class="slide" id="slide3">
+        <div class="slide-container">
+            <div class="slide-content">
+                <h2>Структура даних CIF</h2>
+                <h3>🔑 Унікальний ідентифікатор клієнта (Customer ID)</h3>
+                <div class="slide-statistics">
+                    <div class="stat-item">
+                        <h4>👤 Базова інформація</h4>
+                        <ul>
+                            <li>ПІБ, дата народження</li>
+                            <li>Ідентифікаційні документи</li>
+                            <li>Громадянство</li>
+                        </ul>
+                    </div>
+                    <div class="stat-item">
+                        <h4>📱 Контакти</h4>
+                        <ul>
+                            <li>Адреси</li>
+                            <li>Телефони</li>
+                            <li>Email</li>
+                        </ul>
+                    </div>
+                    <div class="stat-item">
+                        <h4>💰 Фінансовий профіль</h4>
+                        <ul>
+                            <li>Доходи</li>
+                            <li>Кредитна історія</li>
+                            <li>Майновий стан</li>
+                        </ul>
+                    </div>
+                    <div class="stat-item">
+                        <h4>🎯 KYC/AML</h4>
+                        <ul>
+                            <li>Статус перевірки</li>
+                            <li>Оцінка ризику</li>
+                            <li>PEP статус</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 4: Ієрархічна організація -->
+    <div class="slide" id="slide4">
+        <div class="slide-container">
+            <div class="slide-content">
+                <h2>Ієрархічна організація даних</h2>
+                <div style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 10px; margin: 20px 0;">
+                    <h3 style="text-align: center; color: #4ade80;">🔝 Customer ID - первинний ключ</h3>
+                    <div style="margin: 20px 0; padding-left: 40px;">
+                        <h4>├─ 📋 Рівень 1: Персональні дані</h4>
+                        <h4>├─ 📍 Рівень 2: Контактна інформація</h4>
+                        <h4>├─ 💼 Рівень 3: Фінансовий профіль</h4>
+                        <h4>├─ 💳 Рівень 4: Продуктовий портфель</h4>
+                        <h4>├─ 📊 Рівень 5: Історія взаємодії</h4>
+                        <h4>└─ 🛡️ Рівень 6: Комплаєнс та ризики</h4>
+                    </div>
+                </div>
+                <p style="text-align: center; margin-top: 30px;">
+                    <strong>Принцип:</strong> Всі дані зв'язані через унікальний Customer ID, що забезпечує референційну цілісність
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 5: Продуктовий портфель -->
+    <div class="slide" id="slide5">
+        <div class="slide-container">
+            <div class="slide-banking-example">
+                <div class="banking-logo">💳</div>
+                <div class="banking-title">Продуктовий портфель клієнта в CIF</div>
+                <h3>Приклад: Клієнт українського банку</h3>
+                <div class="slide-statistics">
+                    <div class="stat-item">
+                        <h4>Рахунки</h4>
+                        <ul>
+                            <li>2 поточних (UAH, USD)</li>
+                            <li>1 ощадний</li>
+                            <li>1 карткових</li>
+                        </ul>
+                    </div>
+                    <div class="stat-item">
+                        <h4>Картки</h4>
+                        <ul>
+                            <li>Visa Classic</li>
+                            <li>Mastercard Gold</li>
+                            <li>Віртуальна картка</li>
+                        </ul>
+                    </div>
+                    <div class="stat-item">
+                        <h4>Кредити</h4>
+                        <ul>
+                            <li>Іпотека</li>
+                            <li>Автокредит</li>
+                            <li>Кредитна лінія</li>
+                        </ul>
+                    </div>
+                    <div class="stat-item">
+                        <h4>Інвестиції</h4>
+                        <ul>
+                            <li>Депозити</li>
+                            <li>ОВДП</li>
+                            <li>Страхування</li>
+                        </ul>
+                    </div>
+                </div>
+                <p style="text-align: center; margin-top: 20px;">
+                    <strong>Всі продукти зв'язані через єдиний CIF Number</strong>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 6: Безпека CIF - Загрози -->
+    <div class="slide" id="slide6">
+        <div class="slide-container">
+            <div class="slide-cyber-security">
+                <h2>Загрози безпеці CIF</h2>
+                <div class="cyber-threat-level threat-high">🚨 КРИТИЧНИЙ РІВЕНЬ ЗАГРОЗИ</div>
+                <h3>Основні вектори атак:</h3>
+                <ul class="slide-list">
+                    <li><strong>SQL-ін'єкції</strong> - спроби несанкціонованого доступу до бази даних CIF</li>
+                    <li><strong>API експлойти</strong> - атаки через вразливості в програмних інтерфейсах</li>
+                    <li><strong>Інсайдерські загрози</strong> - зловживання доступом співробітників</li>
+                    <li><strong>APT атаки</strong> - складні персистентні загрози від організованих груп</li>
+                    <li><strong>Соціальна інженерія</strong> - фішинг для отримання облікових даних</li>
+                    <li><strong>DDoS атаки</strong> - спроби порушити доступність системи</li>
+                </ul>
+                <div class="alert alert-error">
+                    <strong>Статистика:</strong> 73% витоків даних в банках пов'язані з компрометацією CIF систем
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 7: Багаторівневий захист -->
+    <div class="slide" id="slide7">
+        <div class="slide-container">
+            <div class="slide-content">
+                <h2>Багаторівневий захист CIF</h2>
+                <h3>🛡️ Defense in Depth стратегія:</h3>
+                <div style="display: flex; flex-direction: column; gap: 15px; margin-top: 20px;">
+                    <div style="background: rgba(255,0,0,0.2); padding: 15px; border-radius: 8px; border-left: 4px solid #ff4444;">
+                        <strong>Рівень 1: Фізична безпека</strong> - Біометричний доступ, відеоспостереження
+                    </div>
+                    <div style="background: rgba(255,100,0,0.2); padding: 15px; border-radius: 8px; border-left: 4px solid #ff8844;">
+                        <strong>Рівень 2: Мережева безпека</strong> - Firewalls, IDS/IPS, сегментація
+                    </div>
+                    <div style="background: rgba(255,200,0,0.2); padding: 15px; border-radius: 8px; border-left: 4px solid #ffcc44;">
+                        <strong>Рівень 3: Безпека додатків</strong> - WAF, OWASP, secure coding
+                    </div>
+                    <div style="background: rgba(100,255,0,0.2); padding: 15px; border-radius: 8px; border-left: 4px solid #88ff44;">
+                        <strong>Рівень 4: Безпека даних</strong> - Шифрування AES-256, токенізація
+                    </div>
+                    <div style="background: rgba(0,255,100,0.2); padding: 15px; border-radius: 8px; border-left: 4px solid #44ff88;">
+                        <strong>Рівень 5: Контроль доступу</strong> - RBAC, MFA, Zero Trust
+                    </div>
+                    <div style="background: rgba(0,100,255,0.2); padding: 15px; border-radius: 8px; border-left: 4px solid #4488ff;">
+                        <strong>Рівень 6: Моніторинг</strong> - SIEM, SOC 24/7, UEBA
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 8: Шифрування та захист даних -->
+    <div class="slide" id="slide8">
+        <div class="slide-container">
+            <div class="slide-content">
+                <h2>Шифрування та захист даних CIF</h2>
+                <div class="slide-statistics">
+                    <div class="stat-item">
+                        <h4>🔐 At-Rest Encryption</h4>
+                        <ul>
+                            <li>AES-256 для баз даних</li>
+                            <li>TDE (Transparent Data Encryption)</li>
+                            <li>Шифрування backup</li>
+                        </ul>
+                    </div>
+                    <div class="stat-item">
+                        <h4>🔒 In-Transit Encryption</h4>
+                        <ul>
+                            <li>TLS 1.3 для всіх з'єднань</li>
+                            <li>VPN для внутрішніх мереж</li>
+                            <li>End-to-end encryption</li>
+                        </ul>
+                    </div>
+                    <div class="stat-item">
+                        <h4>🎭 Токенізація</h4>
+                        <ul>
+                            <li>Заміна чутливих даних</li>
+                            <li>Secure token vault</li>
+                            <li>Format-preserving tokens</li>
+                        </ul>
+                    </div>
+                    <div class="stat-item">
+                        <h4>🔑 Key Management</h4>
+                        <ul>
+                            <li>Hardware Security Modules</li>
+                            <li>Key rotation кожні 90 днів</li>
+                            <li>Split-key custody</li>
+                        </ul>
+                    </div>
+                </div>
+                <p style="text-align: center; margin-top: 20px; padding: 15px; background: rgba(255,255,255,0.1); border-radius: 8px;">
+                    <strong>Принцип:</strong> Навіть при компрометації одного рівня, дані залишаються захищеними
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 9: Контроль доступу (RBAC/ABAC) -->
+    <div class="slide" id="slide9">
+        <div class="slide-container">
+            <div class="slide-content">
+                <h2>Контроль доступу до CIF</h2>
+                <h3>🔑 Моделі управління доступом:</h3>
+                <table style="width: 100%; border-collapse: collapse; margin: 20px 0;">
+                    <tr style="background: var(--color-primary); color: white;">
+                        <th style="padding: 12px; border: 1px solid #ddd;">Модель</th>
+                        <th style="padding: 12px; border: 1px solid #ddd;">Принцип</th>
+                        <th style="padding: 12px; border: 1px solid #ddd;">Приклад в CIF</th>
+                    </tr>
+                    <tr>
+                        <td style="padding: 12px; border: 1px solid #ddd;"><strong>RBAC</strong></td>
+                        <td style="padding: 12px; border: 1px solid #ddd;">Доступ на основі ролей</td>
+                        <td style="padding: 12px; border: 1px solid #ddd;">Касир, менеджер, аудитор</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 12px; border: 1px solid #ddd;"><strong>ABAC</strong></td>
+                        <td style="padding: 12px; border: 1px solid #ddd;">Доступ на основі атрибутів</td>
+                        <td style="padding: 12px; border: 1px solid #ddd;">Відділення, час, тип клієнта</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 12px; border: 1px solid #ddd;"><strong>MAC</strong></td>
+                        <td style="padding: 12px; border: 1px solid #ddd;">Обов'язковий контроль</td>
+                        <td style="padding: 12px; border: 1px solid #ddd;">VIP клієнти, PEP</td>
+                    </tr>
+                </table>
+                <div class="alert alert-warning">
+                    <h4>🔐 Принцип найменших привілеїв:</h4>
+                    <p>Кожен користувач отримує мінімально необхідний доступ для виконання своїх функцій</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 10: Аудит та моніторинг -->
+    <div class="slide" id="slide10">
+        <div class="slide-container">
+            <div class="slide-content">
+                <h2>Аудит та моніторинг CIF</h2>
+                <h3>📊 Комплексний моніторинг активності:</h3>
+                <ul class="slide-list">
+                    <li><strong>Логування всіх операцій</strong>
+                        <ul>
+                            <li>Хто, коли, що, звідки доступався до даних</li>
+                            <li>Незмінний аудит-трейл (blockchain/WORM)</li>
+                        </ul>
+                    </li>
+                    <li><strong>Real-time аналітика</strong>
+                        <ul>
+                            <li>SIEM системи (Splunk, QRadar)</li>
+                            <li>Виявлення аномалій через ML</li>
+                        </ul>
+                    </li>
+                    <li><strong>User Behavior Analytics</strong>
+                        <ul>
+                            <li>Базові лінії нормальної поведінки</li>
+                            <li>Детекція insider threats</li>
+                        </ul>
+                    </li>
+                    <li><strong>Compliance звітність</strong>
+                        <ul>
+                            <li>Автоматичні звіти для НБУ</li>
+                            <li>PCI DSS audit trails</li>
+                        </ul>
+                    </li>
+                </ul>
+                <div style="margin-top: 20px; padding: 15px; background: rgba(74,222,128,0.2); border-radius: 8px;">
+                    <strong>SOC 24/7:</strong> Цілодобовий моніторинг безпеки з часом реакції &lt;5 хвилин
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 11: Приклад впровадження -->
+    <div class="slide" id="slide11">
+        <div class="slide-container">
+            <div class="slide-banking-example">
+                <div class="banking-logo">🏦</div>
+                <div class="banking-title">Кейс: CIF в українському банку</div>
+                <h3>Monobank - повністю цифровий банк</h3>
+                <div class="slide-statistics">
+                    <div class="stat-item">
+                        <div class="stat-value">7M+</div>
+                        <div class="stat-description">Клієнтів в CIF</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">100%</div>
+                        <div class="stat-description">Цифровий онбординг</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">&lt;1 сек</div>
+                        <div class="stat-description">Час доступу до CIF</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">99.99%</div>
+                        <div class="stat-description">Доступність системи</div>
+                    </div>
+                </div>
+                <h4 style="margin-top: 20px;">Технології безпеки:</h4>
+                <ul class="slide-list">
+                    <li>Біометрична автентифікація (Face ID, Touch ID)</li>
+                    <li>Real-time fraud detection з ML</li>
+                    <li>Tokenization всіх карткових даних</li>
+                    <li>Zero-trust архітектура доступу</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 12: Підсумки -->
+    <div class="slide" id="slide12">
+        <div class="slide-container">
+            <div class="slide-content">
+                <h2>Підсумки: CIF в Core Banking</h2>
+                <h3>🎯 Ключові висновки:</h3>
+                <ul class="slide-list">
+                    <li><strong>CIF - серце банківської системи</strong> - централізоване управління всіма даними клієнтів</li>
+                    <li><strong>Єдине джерело правди</strong> - консистентність даних для всіх каналів та систем</li>
+                    <li><strong>Критична ціль для кіберзлочинців</strong> - концентрація чутливих даних</li>
+                    <li><strong>Багаторівневий захист обов'язковий</strong> - defense in depth стратегія</li>
+                    <li><strong>Контроль доступу та аудит</strong> - RBAC/ABAC + повний моніторинг</li>
+                    <li><strong>Compliance критичний</strong> - PCI DSS, GDPR, НБУ вимоги</li>
+                </ul>
+                <div class="alert alert-success">
+                    <h4>🔮 Майбутнє CIF:</h4>
+                    <p>• AI-driven персоналізація • Blockchain для аудиту • Quantum-resistant криптографія • Real-time everything</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    let currentSlide = 1;
+    const totalSlides = 12;
+
+    function showSlide(n) {
+        const slides = document.querySelectorAll('.slide');
+        const progressBar = document.getElementById('progressBar');
+        const counter = document.getElementById('slideCounter');
+
+        if (n > totalSlides) currentSlide = 1;
+        if (n < 1) currentSlide = totalSlides;
+
+        slides.forEach(slide => slide.classList.remove('active'));
+        document.getElementById(`slide${currentSlide}`).classList.add('active');
+
+        progressBar.style.width = (currentSlide / totalSlides * 100) + '%';
+        counter.textContent = `${currentSlide} / ${totalSlides}`;
+    }
+
+    function nextSlide() {
+        currentSlide++;
+        showSlide(currentSlide);
+    }
+
+    function previousSlide() {
+        currentSlide--;
+        showSlide(currentSlide);
+    }
+
+    function toggleFullscreen() {
+        if (!document.fullscreenElement) {
+            document.documentElement.requestFullscreen();
+        } else {
+            document.exitFullscreen();
+        }
+    }
+
+    function exitPresentation() {
+        window.location.href = '../lecture2.1/index.html';
+    }
+
+    // Keyboard navigation
+    document.addEventListener('keydown', function(e) {
+        switch(e.key) {
+            case 'ArrowRight':
+            case ' ':
+                nextSlide();
+                break;
+            case 'ArrowLeft':
+                previousSlide();
+                break;
+            case 'Escape':
+                exitPresentation();
+                break;
+            case 'f':
+            case 'F':
+                toggleFullscreen();
+                break;
+            case 'Home':
+                currentSlide = 1;
+                showSlide(currentSlide);
+                break;
+            case 'End':
+                currentSlide = totalSlides;
+                showSlide(currentSlide);
+                break;
+        }
+    });
+
+    // Touch events for mobile
+    let startX = null;
+    document.addEventListener('touchstart', function(e) {
+        startX = e.touches[0].clientX;
+    });
+
+    document.addEventListener('touchend', function(e) {
+        if (!startX) return;
+
+        const endX = e.changedTouches[0].clientX;
+        const diffX = startX - endX;
+
+        if (Math.abs(diffX) > 50) {
+            if (diffX > 0) {
+                nextSlide();
+            } else {
+                previousSlide();
+            }
+        }
+        startX = null;
+    });
+
+    // Initialize
+    showSlide(1);
+
+    // Save progress to localStorage
+    function saveProgress() {
+        try {
+            const progress = {
+                currentSlide: currentSlide,
+                totalSlides: totalSlides,
+                timestamp: new Date().toISOString(),
+                topic: 'CIF'
+            };
+            localStorage.setItem('lecture_2_1_tema1_progress', JSON.stringify(progress));
+        } catch(e) {
+            console.log('Could not save progress');
+        }
+    }
+
+    // Load progress from localStorage
+    function loadProgress() {
+        try {
+            const saved = localStorage.getItem('lecture_2_1_tema1_progress');
+            if (saved) {
+                const progress = JSON.parse(saved);
+                if (progress.currentSlide) {
+                    currentSlide = progress.currentSlide;
+                    showSlide(currentSlide);
+                }
+            }
+        } catch(e) {
+            console.log('Could not load progress');
+        }
+    }
+
+    // Auto-save progress when changing slides
+    window.addEventListener('beforeunload', saveProgress);
+
+    // Load saved progress on start
+    loadProgress();
+</script>
+</body>
+</html>
