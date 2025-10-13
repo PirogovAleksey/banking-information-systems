@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Лекція 2.1: Функціональність та компоненти CBS - Core Banking Systems для спеціальності Кібербезпека">
-    <title>Лекція 2.1: Функціональність та компоненти CBS | Модуль 2</title>
+    <meta name="description" content="Лекція 5: Інтеграція CBS з зовнішніми системами - Core Banking Systems для спеціальності Кібербезпека">
+    <title>Лекція 5: Інтеграція CBS з зовнішніми системами | Модуль 2</title>
 
     <!-- Використовуємо існуючі стилі проекту -->
     <link rel="stylesheet" href="../../../../assets/css/base.css">
@@ -21,18 +21,18 @@
             <span class="breadcrumb-separator">→</span>
             <a href="../index.html">Модуль 2</a>
             <span class="breadcrumb-separator">→</span>
-            <span>Лекція 2.1</span>
+            <span>Лекція 5</span>
         </nav>
     </div>
 </header>
 
 <!-- Lecture Header -->
-<section class="landing-hero" style="background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);">
+<section class="landing-hero" style="background: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);">
     <div class="container">
         <div class="landing-hero-content">
-            <h1 class="landing-title">Функціональність та компоненти CBS</h1>
+            <h1 class="landing-title">Інтеграція CBS з зовнішніми системами</h1>
             <p class="landing-subtitle">
-                Лекція 2.1 • Модуль 2: Core Banking Systems
+                Лекція 5 • Модуль 2: Core Banking Systems
             </p>
             <div class="landing-stats">
                 <div class="landing-stat">
@@ -44,11 +44,11 @@
                     <span class="landing-stat-label">теми</span>
                 </div>
                 <div class="landing-stat">
-                    <span class="landing-stat-number">10</span>
+                    <span class="landing-stat-number">8</span>
                     <span class="landing-stat-label">годин практики</span>
                 </div>
                 <div class="landing-stat">
-                    <span class="landing-stat-number">50%</span>
+                    <span class="landing-stat-number">70%</span>
                     <span class="landing-stat-label">кібербезпека</span>
                 </div>
             </div>
@@ -66,13 +66,13 @@
             </div>
             <div class="card-body">
                 <p class="text-large mb-4">
-                    Детальний аналіз компонентів Core Banking Systems, управління клієнтськими даними,
-                    обробка транзакцій та системи виявлення шахрайства в реальному часі.
+                    Вивчення сучасних підходів до інтеграції CBS з зовнішніми системами через APIs,
+                    event-driven архітектуру, message queues та забезпечення безпеки інтеграційних рішень.
                 </p>
                 <div class="alert alert-info">
                     <div class="alert-title">🎯 Мета лекції</div>
-                    Вивчити архітектуру CBS, принципи роботи CIF, механізми контролю доступу
-                    та сучасні системи виявлення шахрайства з фокусом на кібербезпеку банківських систем.
+                    Освоїти принципи побудови інтеграційних рішень для CBS, впровадження API security
+                    (OAuth 2.0, JWT), event-driven patterns та правильну сегментацію мережі.
                 </div>
             </div>
         </section>
@@ -85,7 +85,7 @@
             </p>
 
             <div class="modules-grid">
-                <!-- Тема 1: CIF -->
+                <!-- Тема 1: APIs -->
                 <div class="card card-module">
                     <div class="card-header">
                         <div class="flex justify-between items-center">
@@ -93,40 +93,41 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <div class="module-number">👤</div>
-                        <h3 class="card-title">Customer Information File (CIF)</h3>
+                        <div class="module-number">🔌</div>
+                        <h3 class="card-title">APIs та Web Services у банкінгу</h3>
                         <p class="card-subtitle mb-4">
-                            Архітектура та компоненти централізованої системи управління клієнтськими даними
+                            REST, SOAP, GraphQL APIs, Open Banking стандарти та API management platforms
                         </p>
 
                         <div class="module-items">
                             <div class="module-item">
-                                <span class="module-item-title">Структура CIF</span>
-                                <span class="module-item-meta">20 хв</span>
-                            </div>
-                            <div class="module-item">
-                                <span class="module-item-title">Інтеграція з каналами</span>
+                                <span class="module-item-title">REST vs SOAP</span>
                                 <span class="module-item-meta">15 хв</span>
                             </div>
                             <div class="module-item">
-                                <span class="module-item-title">Data governance</span>
+                                <span class="module-item-title">Open Banking APIs</span>
+                                <span class="module-item-meta">20 хв</span>
+                            </div>
+                            <div class="module-item">
+                                <span class="module-item-title">API Gateway patterns</span>
+                                <span class="module-item-meta">15 хв</span>
+                            </div>
+                            <div class="module-item">
+                                <span class="module-item-title">GraphQL для банків</span>
                                 <span class="module-item-meta">10 хв</span>
                             </div>
                         </div>
                     </div>
                     <div class="card-footer">
                         <div class="btn-group">
-                            <a href="tema1_cif.html" class="btn btn-primary">
+                            <a href="tema1_apis.html" class="btn btn-primary">
                                 🎨 Презентація
-                            </a>
-                            <a href="tema1_cif_konspekt.md" class="btn btn-outline">
-                                📖 Конспект
                             </a>
                         </div>
                     </div>
                 </div>
 
-                <!-- Тема 2: Account Management -->
+                <!-- Тема 2: Message Queues -->
                 <div class="card card-module">
                     <div class="card-header">
                         <div class="flex justify-between items-center">
@@ -134,41 +135,42 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <div class="module-number">💳</div>
-                        <h3 class="card-title">Account Management та Transaction Processing</h3>
+                        <div class="module-number">📨</div>
+                        <h3 class="card-title">Message Queues та Event-Driven Architecture</h3>
                         <p class="card-subtitle mb-4">
-                            Управління рахунками, типи транзакцій та механізми їх обробки в CBS
+                            Kafka, RabbitMQ, асинхронна обробка та event sourcing у банківських системах
                         </p>
 
                         <div class="module-items">
                             <div class="module-item">
-                                <span class="module-item-title">Типи рахунків</span>
-                                <span class="module-item-meta">15 хв</span>
-                            </div>
-                            <div class="module-item">
-                                <span class="module-item-title">Transaction lifecycle</span>
+                                <span class="module-item-title">Kafka у банкінгу</span>
                                 <span class="module-item-meta">20 хв</span>
                             </div>
                             <div class="module-item">
-                                <span class="module-item-title">ACID properties</span>
+                                <span class="module-item-title">Event-Driven patterns</span>
                                 <span class="module-item-meta">15 хв</span>
+                            </div>
+                            <div class="module-item">
+                                <span class="module-item-title">Event Sourcing</span>
+                                <span class="module-item-meta">15 хв</span>
+                            </div>
+                            <div class="module-item">
+                                <span class="module-item-title">CQRS pattern</span>
+                                <span class="module-item-meta">10 хв</span>
                             </div>
                         </div>
 
                     </div>
                     <div class="card-footer">
                         <div class="btn-group">
-                            <a href="tema2_accounts.html" class="btn btn-primary">
+                            <a href="tema2_messaging.html" class="btn btn-primary">
                                 🎨 Презентація
-                            </a>
-                            <a href="tema2_accounts_konspekt.md" class="btn btn-outline">
-                                📖 Конспект
                             </a>
                         </div>
                     </div>
                 </div>
 
-                <!-- Тема 3: Access Controls -->
+                <!-- Тема 3: API Security -->
                 <div class="card card-module">
                     <div class="card-header">
                         <div class="flex justify-between items-center">
@@ -176,40 +178,41 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <div class="module-number">🔐</div>
-                        <h3 class="card-title">Access Controls та Privilege Management</h3>
+                        <div class="module-number">🛡️</div>
+                        <h3 class="card-title">API Security: OAuth 2.0 та JWT</h3>
                         <p class="card-subtitle mb-4">
-                            Системи контролю доступу, RBAC/ABAC моделі та управління привілеями в CBS
+                            Автентифікація та авторизація для APIs, token management та OWASP API Security
                         </p>
 
                         <div class="module-items">
                             <div class="module-item">
-                                <span class="module-item-title">RBAC vs ABAC</span>
+                                <span class="module-item-title">OAuth 2.0 flows</span>
                                 <span class="module-item-meta">20 хв</span>
                             </div>
                             <div class="module-item">
-                                <span class="module-item-title">Zero Trust Architecture</span>
-                                <span class="module-item-meta">25 хв</span>
+                                <span class="module-item-title">JWT tokens</span>
+                                <span class="module-item-meta">15 хв</span>
                             </div>
                             <div class="module-item">
-                                <span class="module-item-title">PAM системи</span>
-                                <span class="module-item-meta">15 хв</span>
+                                <span class="module-item-title">OWASP API Top 10</span>
+                                <span class="module-item-meta">20 хв</span>
+                            </div>
+                            <div class="module-item">
+                                <span class="module-item-title">API rate limiting</span>
+                                <span class="module-item-meta">10 хв</span>
                             </div>
                         </div>
                     </div>
                     <div class="card-footer">
                         <div class="btn-group">
-                            <a href="tema3_access.html" class="btn btn-primary">
+                            <a href="tema3_apisecurity.html" class="btn btn-primary">
                                 🎨 Презентація
-                            </a>
-                            <a href="tema3_access_konspekt.md" class="btn btn-outline">
-                                📖 Конспект
                             </a>
                         </div>
                     </div>
                 </div>
 
-                <!-- Тема 4: Fraud Detection -->
+                <!-- Тема 4: Network Segmentation -->
                 <div class="card card-module">
                     <div class="card-header">
                         <div class="flex justify-between items-center">
@@ -217,34 +220,35 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <div class="module-number">🚨</div>
-                        <h3 class="card-title">Real-time Fraud Detection Systems</h3>
+                        <div class="module-number">🌐</div>
+                        <h3 class="card-title">Network Segmentation для CBS</h3>
                         <p class="card-subtitle mb-4">
-                            Системи виявлення шахрайства в реальному часі, ML/AI підходи та аналіз патернів
+                            Мережева архітектура, DMZ zones, micro-segmentation та zero trust networking
                         </p>
 
                         <div class="module-items">
                             <div class="module-item">
-                                <span class="module-item-title">Архітектура антифрод</span>
-                                <span class="module-item-meta">25 хв</span>
+                                <span class="module-item-title">Зони безпеки</span>
+                                <span class="module-item-meta">15 хв</span>
                             </div>
                             <div class="module-item">
-                                <span class="module-item-title">ML алгоритми</span>
+                                <span class="module-item-title">DMZ architecture</span>
+                                <span class="module-item-meta">15 хв</span>
+                            </div>
+                            <div class="module-item">
+                                <span class="module-item-title">Micro-segmentation</span>
                                 <span class="module-item-meta">20 хв</span>
                             </div>
                             <div class="module-item">
-                                <span class="module-item-title">Case Management</span>
+                                <span class="module-item-title">Zero Trust Network</span>
                                 <span class="module-item-meta">15 хв</span>
                             </div>
                         </div>
                     </div>
                     <div class="card-footer">
                         <div class="btn-group">
-                            <a href="tema4_fraud.html" class="btn btn-primary">
+                            <a href="tema4_network.html" class="btn btn-primary">
                                 🎨 Презентація
-                            </a>
-                            <a href="tema4_fraud_konspekt.md" class="btn btn-outline">
-                                📖 Конспект
                             </a>
                         </div>
                     </div>
@@ -262,15 +266,15 @@
                         <div class="practical-icon">🔬</div>
                         <div class="practical-meta">
                             <span class="practical-type">Лабораторна</span>
-                            <span class="practical-module">До лекції 2.1</span>
+                            <span class="practical-module">До лекції 5</span>
                         </div>
                     </div>
-                    <h3 class="practical-title">Налаштування CIF в тестовому CBS</h3>
+                    <h3 class="practical-title">Розробка захищеного Banking API</h3>
                     <p class="practical-description">
-                        Створення клієнтських профілів, налаштування зв'язків та інтеграція з каналами
+                        Створення REST API з OAuth 2.0 автентифікацією та впровадження OWASP security controls
                     </p>
                     <div class="practical-time">
-                        ⏱️ Приблизний час: 90 хв
+                        ⏱️ Приблизний час: 120 хв
                     </div>
                 </div>
 
@@ -279,15 +283,15 @@
                         <div class="practical-icon">💻</div>
                         <div class="practical-meta">
                             <span class="practical-type">Практична</span>
-                            <span class="practical-module">До лекції 2.1</span>
+                            <span class="practical-module">До лекції 5</span>
                         </div>
                     </div>
-                    <h3 class="practical-title">Аналіз fraud-кейсів</h3>
+                    <h3 class="practical-title">Event-Driven Architecture з Kafka</h3>
                     <p class="practical-description">
-                        Розбір реальних кейсів шахрайства та налаштування правил виявлення
+                        Побудова event-driven системи для обробки банківських транзакцій з використанням Kafka
                     </p>
                     <div class="practical-time">
-                        ⏱️ Приблизний час: 120 хв
+                        ⏱️ Приблизний час: 150 хв
                     </div>
                 </div>
             </div>
@@ -303,18 +307,21 @@
                     <div>
                         <h4 class="font-semibold mb-3">📖 Література</h4>
                         <ul class="text-secondary">
-                            <li>Core Banking Solution Fundamentals</li>
-                            <li>Banking System Architecture Guide</li>
-                            <li>Fraud Detection in Banking Systems</li>
-                            <li>Access Control Best Practices</li>
+                            <li>RESTful API Design for Banking Systems</li>
+                            <li>Event-Driven Architecture Patterns</li>
+                            <li>OAuth 2.0 Simplified</li>
+                            <li>OWASP API Security Project</li>
+                            <li>Zero Trust Networks (Evan Gilman)</li>
                         </ul>
                     </div>
                     <div>
                         <h4 class="font-semibold mb-3">🔗 Корисні посилання</h4>
                         <ul>
-                            <li><a href="https://www.temenos.com/community/learn/core-banking/" target="_blank" class="text-primary">Temenos Learning</a></li>
-                            <li><a href="https://www.fisglobal.com/en/insights/merchant-solutions-worldpay/article/what-is-core-banking" target="_blank" class="text-primary">FIS Core Banking</a></li>
-                            <li><a href="https://owasp.org/www-project-top-ten/" target="_blank" class="text-primary">OWASP Security</a></li>
+                            <li><a href="https://www.openbanking.org.uk/" target="_blank" class="text-primary">Open Banking UK</a></li>
+                            <li><a href="https://kafka.apache.org/" target="_blank" class="text-primary">Apache Kafka</a></li>
+                            <li><a href="https://oauth.net/2/" target="_blank" class="text-primary">OAuth 2.0</a></li>
+                            <li><a href="https://owasp.org/www-project-api-security/" target="_blank" class="text-primary">OWASP API Security</a></li>
+                            <li><a href="https://jwt.io/" target="_blank" class="text-primary">JWT.io</a></li>
                         </ul>
                     </div>
                 </div>
@@ -323,10 +330,10 @@
 
         <!-- Navigation Buttons -->
         <section class="flex justify-between items-center mt-12 mb-8">
-            <a href="../../index.html" class="btn btn-outline">
-                ← Повернутися до модуля
+            <a href="../lecture4/index.html" class="btn btn-outline">
+                ← Попередня лекція
             </a>
-            <a href="../lecture2.2/index.html" class="btn btn-primary">
+            <a href="../lecture6/index.html" class="btn btn-primary">
                 Наступна лекція →
             </a>
         </section>
@@ -340,8 +347,8 @@
             <div class="footer-links mt-4">
                 <a href="../../../../index.html">Головна</a>
                 <a href="../index.html">Модуль 2</a>
-                <a href="../lecture2.2/index.html">Лекція 2.2</a>
-                <a href="../lecture2.3/index.html">Лекція 2.3</a>
+                <a href="../lecture4/index.html">Лекція 4</a>
+                <a href="../lecture6/index.html">Лекція 6</a>
             </div>
         </div>
     </div>
@@ -354,20 +361,20 @@
         try {
             const progress = {
                 module: 2,
-                lecture: '2.1',
-                title: 'Функціональність та компоненти CBS',
+                lecture: '5',
+                title: 'Інтеграція CBS з зовнішніми системами',
                 lastVisit: new Date().toISOString(),
-                topics: ['CIF', 'Account Management', 'Access Controls', 'Fraud Detection']
+                topics: ['APIs and Web Services', 'Message Queues', 'API Security', 'Network Segmentation']
             };
-            localStorage.setItem('lecture_2_1_progress', JSON.stringify(progress));
+            localStorage.setItem('lecture_5_progress', JSON.stringify(progress));
 
             // Update module progress
             const moduleProgress = JSON.parse(localStorage.getItem('module2_progress') || '{}');
             if (!moduleProgress.completedLectures) {
                 moduleProgress.completedLectures = [];
             }
-            if (!moduleProgress.completedLectures.includes('2.1')) {
-                moduleProgress.completedLectures.push('2.1');
+            if (!moduleProgress.completedLectures.includes('5')) {
+                moduleProgress.completedLectures.push('5');
             }
             localStorage.setItem('module2_progress', JSON.stringify(moduleProgress));
         } catch(e) {

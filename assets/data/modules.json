@@ -26,7 +26,7 @@
       "estimatedHours": 9,
       "lectures": [
         {
-          "id": "1.1",
+          "id": "1",
           "title": "Архітектура банківських ІТ-систем",
           "description": "Еволюція банківських технологій та багаторівнева архітектура сучасних банківських систем",
           "duration": 80,
@@ -41,7 +41,7 @@
           "status": "planned"
         },
         {
-          "id": "1.2",
+          "id": "2",
           "title": "Центральні банківські системи (Core Banking)",
           "description": "Функціональність CBS, типи систем та підходи до захисту критичної інфраструктури",
           "duration": 80,
@@ -56,7 +56,7 @@
           "status": "planned"
         },
         {
-          "id": "1.3",
+          "id": "3",
           "title": "Банківські бази даних та їх захист",
           "description": "СУБД у банківському середовищі, транзакційна цілісність та методи захисту баз даних",
           "duration": 80,
@@ -87,12 +87,12 @@
       "title": "Core Banking Systems",
       "description": "Детальне вивчення центральних банківських систем, їх функціональності, інтеграції та безпекових аспектів.",
       "emoji": "⚙️",
-      "status": "planned",
+      "status": "active",
       "difficulty": "intermediate",
       "estimatedHours": 9,
       "lectures": [
         {
-          "id": "2.1",
+          "id": "4",
           "title": "Функціональність та компоненти CBS",
           "description": "Глибокий аналіз компонентів CBS, управління клієнтськими даними та системи виявлення шахрайств",
           "duration": 80,
@@ -107,7 +107,7 @@
           "status": "planned"
         },
         {
-          "id": "2.2",
+          "id": "5",
           "title": "Інтеграція CBS з зовнішніми системами",
           "description": "APIs у банкінгу, event-driven архітектура та безпека інтеграційних рішень",
           "duration": 80,
@@ -119,10 +119,10 @@
           ],
           "securityFocus": "API security, OAuth, JWT токени",
           "bankingExamples": ["Open Banking API", "SWIFT Integration", "PSD2 API"],
-          "status": "planned"
+          "status": "active"
         },
         {
-          "id": "2.3",
+          "id": "6",
           "title": "CBS провайдери та їх security frameworks",
           "description": "Огляд провайдерів CBS, хмарні рішення та оцінка ризиків постачальників",
           "duration": 80,
@@ -134,7 +134,7 @@
           ],
           "securityFocus": "Vendor risk assessment",
           "bankingExamples": ["Temenos на AWS", "FIS Cloud Solutions", "Oracle Banking Cloud"],
-          "status": "planned"
+          "status": "active"
         }
       ],
       "labs": [
@@ -158,7 +158,7 @@
       "estimatedHours": 9,
       "lectures": [
         {
-          "id": "3.1",
+          "id": "7",
           "title": "Картковий бізнес та платіжні мережі",
           "description": "Архітектура Visa/Mastercard, EMV стандарти та комплайнс PCI DSS",
           "duration": 80,
@@ -173,7 +173,7 @@
           "status": "planned"
         },
         {
-          "id": "3.2",
+          "id": "8",
           "title": "Електронні платежі та мобільний банкінг",
           "description": "Digital wallets, contactless платежі та безпека мобільних додатків",
           "duration": 80,
@@ -188,7 +188,7 @@
           "status": "planned"
         },
         {
-          "id": "3.3",
+          "id": "9",
           "title": "Криптовалюти та блокчейн у банкінгу",
           "description": "CBDC, DeFi інтеграція та регуляторні виклики криптовалютного банкінгу",
           "duration": 80,
@@ -233,7 +233,7 @@
       "estimatedHours": 9,
       "lectures": [
         {
-          "id": "4.1",
+          "id": "10",
           "title": "Кіберзагрози в банківській сфері",
           "description": "APT групи, banking trojans та комплексний аналіз векторів атак на банки",
           "duration": 80,
@@ -248,7 +248,7 @@
           "status": "planned"
         },
         {
-          "id": "4.2",
+          "id": "11",
           "title": "Системи захисту банківської інфраструктури",
           "description": "Zero trust архітектура, SIEM системи та операційні центри кібербезпеки",
           "duration": 80,
@@ -263,7 +263,7 @@
           "status": "planned"
         },
         {
-          "id": "4.3",
+          "id": "12",
           "title": "Пентестинг та vulnerability management",
           "description": "Red team операції, автоматизоване тестування безпеки та bug bounty програми",
           "duration": 80,
@@ -306,7 +306,7 @@
       "estimatedHours": 6,
       "lectures": [
         {
-          "id": "5.1",
+          "id": "13",
           "title": "AML/KYC автоматизація",
           "description": "Machine learning для виявлення шахрайств та системи моніторингу транзакцій",
           "duration": 80,
@@ -321,7 +321,7 @@
           "status": "planned"
         },
         {
-          "id": "5.2",
+          "id": "14",
           "title": "Regulatory reporting та compliance automation",
           "description": "Автоматизована регуляторна звітність та забезпечення цілісності даних",
           "duration": 80,
@@ -357,7 +357,7 @@
       "estimatedHours": 9,
       "lectures": [
         {
-          "id": "6.1",
+          "id": "15",
           "title": "Актуальні кіберінциденти у фінсекторі",
           "description": "Case studies найбільших кіберінцидентів та уроки, винесені з них",
           "duration": 80,
@@ -372,7 +372,7 @@
           "status": "planned"
         },
         {
-          "id": "6.2",
+          "id": "16",
           "title": "Emerging threats та майбутнє кібербезпеки",
           "description": "AI-powered атаки, квантові загрози та post-quantum криптографія",
           "duration": 80,
@@ -387,7 +387,7 @@
           "status": "planned"
         },
         {
-          "id": "6.3",
+          "id": "17",
           "title": "Міжнародна співпраця у кіберзахисті банків",
           "description": "Information sharing, міжнародне реагування та регуляторна співпраця",
           "duration": 80,
@@ -426,8 +426,8 @@
   "progressTracking": {
     "totalProgress": {
       "completed": 0,
-      "inProgress": 1,
-      "planned": 5
+      "inProgress": 2,
+      "planned": 4
     },
     "lectureProgress": {
       "completed": 0,

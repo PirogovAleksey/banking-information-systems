@@ -337,8 +337,11 @@ class LandingPage {
     openLecture(moduleId, lectureId) {
         console.log(`📖 Відкриття лекції ${moduleId}.${lectureId}`);
 
-        // Спеціальна обробка для існуючої лекції 1.3
-        if (moduleId == 1 && lectureId === '1.3') {
+        // Список доступних лекцій (за номерами)
+        const availableLectures = ['3', '4', '5', '6'];
+
+        // Перевіряємо чи лекція доступна
+        if (availableLectures.includes(lectureId)) {
             // Переходимо на реальну сторінку лекції
             window.location.href = `modules/module${moduleId}/lectures/lecture${lectureId}/index.html`;
             return;
@@ -356,8 +359,8 @@ class LandingPage {
     openPractical(moduleId, practicalId) {
         console.log(`💻 Відкриття практичної ${moduleId}.${practicalId}`);
 
-        // Спеціальна обробка для існуючої практичної 1.P1
-        if (moduleId == 1 && practicalId === '1.P1') {
+        // Спеціальна обробка для існуючих практичних робіт
+        if (moduleId == 1 && practicalId === 'P1') {
             // Переходимо на реальну сторінку практичної роботи
             window.location.href = `modules/module${moduleId}/practicals/practical_1_1.html`;
             return;

@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тема 3: API Security - OAuth 2.0 та JWT</title>
+    <link rel="stylesheet" href="../../../../assets/css/slides.css">
+</head>
+<body class="slides-page">
+<div class="slides-wrapper">
+    <!-- Navigation -->
+    <div class="slide-navigation">
+        <button class="slide-btn" onclick="previousSlide()">◀</button>
+        <span class="slide-counter" id="slideCounter">1 / 14</span>
+        <button class="slide-btn" onclick="nextSlide()">▶</button>
+        <button class="slide-btn" onclick="toggleFullscreen()">⛶</button>
+        <button class="slide-btn" onclick="exitPresentation()">✕</button>
+    </div>
+
+    <!-- Progress Bar -->
+    <div class="slide-progress">
+        <div class="slide-progress-bar" id="progressBar" style="width: 7.14%;"></div>
+    </div>
+
+    <!-- Slide 1: Title -->
+    <div class="slide active" id="slide1">
+        <div class="slide-container">
+            <div class="slide-title">
+                <h1>API Security: OAuth 2.0 та JWT</h1>
+                <div class="subtitle">Secure Authentication & Authorization for Banking APIs</div>
+                <div class="content">
+                    <p><strong>Модуль 2:</strong> Core Banking Systems</p>
+                    <p><strong>Лекція 2.2:</strong> Інтеграція CBS з зовнішніми системами</p>
+                    <p><strong>Тема 3</strong></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 2: OAuth 2.0 Overview -->
+    <div class="slide" id="slide2">
+        <div class="slide-container">
+            <div class="slide-content">
+                <h2>OAuth 2.0 - Огляд</h2>
+                <h3>Authorization Framework для делегованого доступу</h3>
+                <div style="margin: 20px 0;">
+                    <h4>Ключові ролі:</h4>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 20px 0;">
+                        <div style="background: rgba(100,255,218,0.2); padding: 15px; border-radius: 8px;">
+                            <h4>Resource Owner</h4>
+                            <p>Користувач, який володіє даними</p>
+                            <p><strong>Приклад:</strong> Клієнт банку</p>
+                        </div>
+                        <div style="background: rgba(255,100,100,0.2); padding: 15px; border-radius: 8px;">
+                            <h4>Resource Server</h4>
+                            <p>API, що зберігає захищені ресурси</p>
+                            <p><strong>Приклад:</strong> Banking API</p>
+                        </div>
+                        <div style="background: rgba(255,255,100,0.2); padding: 15px; border-radius: 8px;">
+                            <h4>Client</h4>
+                            <p>Додаток, який хоче доступ</p>
+                            <p><strong>Приклад:</strong> Budgeting app</p>
+                        </div>
+                        <div style="background: rgba(255,100,255,0.2); padding: 15px; border-radius: 8px;">
+                            <h4>Authorization Server</h4>
+                            <p>Видає access tokens</p>
+                            <p><strong>Приклад:</strong> Bank's OAuth server</p>
+                        </div>
+                    </div>
+                    <div class="alert alert-info">
+                        <strong>Важливо:</strong> OAuth 2.0 = authorization, НЕ authentication. Для authentication використовують OpenID Connect (OIDC)
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 3: OAuth 2.0 Flows -->
+    <div class="slide" id="slide3">
+        <div class="slide-container">
+            <div class="slide-content">
+                <h2>OAuth 2.0 Grant Types</h2>
+                <h3>4 основні flow для різних сценаріїв</h3>
+                <div style="margin: 20px 0;">
+                    <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 8px; margin-bottom: 15px;">
+                        <h4>1. Authorization Code Flow (найбезпечніший)</h4>
+                        <p><strong>Use case:</strong> Web applications з backend</p>
+                        <p><strong>Flow:</strong> User → Login → Authorization Code → Exchange for Token</p>
+                        <ul class="slide-list">
+                            <li>Client отримує код, обмінює на token через backend</li>
+                            <li>Token ніколи не експонується в browser</li>
+                            <li>Підтримує Refresh Tokens</li>
+                            <li><strong>Banking приклад:</strong> Open Banking apps</li>
+                        </ul>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 8px; margin-bottom: 15px;">
+                        <h4>2. Authorization Code with PKCE</h4>
+                        <p><strong>Use case:</strong> Mobile apps, SPA (Single Page Apps)</p>
+                        <ul class="slide-list">
+                            <li>PKCE = Proof Key for Code Exchange</li>
+                            <li>Захист від authorization code interception</li>
+                            <li>Code Verifier + Code Challenge</li>
+                            <li><strong>Banking приклад:</strong> Mobile banking apps</li>
+                        </ul>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 8px; margin-bottom: 15px;">
+                        <h4>3. Client Credentials Flow</h4>
+                        <p><strong>Use case:</strong> Server-to-server communication</p>
+                        <ul class="slide-list">
+                            <li>Client ID + Client Secret → Access Token</li>
+                            <li>Без участі користувача</li>
+                            <li><strong>Banking приклад:</strong> Merchant API, corporate integrations</li>
+                        </ul>
+                    </div>
+                    <div style="background: rgba(239,68,68,0.2); padding: 15px; border-radius: 8px; margin-bottom: 15px;">
+                        <h4>4. Implicit Flow (DEPRECATED)</h4>
+                        <p><strong>Status:</strong> Не рекомендується, використовуйте PKCE замість цього</p>
+                        <ul class="slide-list">
+                            <li>Token напряму в URL fragment</li>
+                            <li>Вразливий до token leakage</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 4: Authorization Code Flow Detail -->
+    <div class="slide" id="slide4">
+        <div class="slide-container">
+            <div class="slide-content">
+                <h2>Authorization Code Flow - Детально</h2>
+                <h3>Step-by-step процес</h3>
+                <div style="margin: 20px 0;">
+                    <div style="background: rgba(100,255,218,0.2); padding: 12px; border-radius: 8px; margin-bottom: 10px;">
+                        <strong>Step 1:</strong> User натискає "Connect with Bank" → Redirect to Authorization Server
+                        <p style="font-size: 0.9em; margin: 5px 0;"><code>https://bank.com/oauth/authorize?client_id=ABC&redirect_uri=https://app.com/callback&response_type=code&scope=accounts:read</code></p>
+                    </div>
+                    <div style="background: rgba(100,255,218,0.2); padding: 12px; border-radius: 8px; margin-bottom: 10px;">
+                        <strong>Step 2:</strong> User логінується та надає consent (дозвіл на доступ)
+                    </div>
+                    <div style="background: rgba(100,255,218,0.2); padding: 12px; border-radius: 8px; margin-bottom: 10px;">
+                        <strong>Step 3:</strong> Authorization Server → Redirect back з authorization code
+                        <p style="font-size: 0.9em; margin: 5px 0;"><code>https://app.com/callback?code=AUTH_CODE_123</code></p>
+                    </div>
+                    <div style="background: rgba(100,255,218,0.2); padding: 12px; border-radius: 8px; margin-bottom: 10px;">
+                        <strong>Step 4:</strong> App's backend обмінює code на access token (POST запит з client_secret)
+                        <p style="font-size: 0.9em; margin: 5px 0;"><code>POST /oauth/token { code, client_id, client_secret, redirect_uri }</code></p>
+                    </div>
+                    <div style="background: rgba(100,255,218,0.2); padding: 12px; border-radius: 8px; margin-bottom: 10px;">
+                        <strong>Step 5:</strong> Authorization Server повертає access_token + refresh_token
+                        <p style="font-size: 0.9em; margin: 5px 0;"><code>{ "access_token": "...", "refresh_token": "...", "expires_in": 3600 }</code></p>
+                    </div>
+                    <div style="background: rgba(100,255,218,0.2); padding: 12px; border-radius: 8px; margin-bottom: 10px;">
+                        <strong>Step 6:</strong> App використовує access_token для API calls
+                        <p style="font-size: 0.9em; margin: 5px 0;"><code>Authorization: Bearer ACCESS_TOKEN</code></p>
+                    </div>
+                </div>
+                <div class="alert alert-success">
+                    <strong>Security:</strong> Client Secret ніколи не експонується в browser, тільки на backend
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 5: JWT Structure -->
+    <div class="slide" id="slide5">
+        <div class="slide-container">
+            <div class="slide-content">
+                <h2>JWT (JSON Web Token) Structure</h2>
+                <h3>Stateless authentication token</h3>
+                <div style="margin: 20px 0;">
+                    <h4>JWT складається з 3 частин (розділених крапкою):</h4>
+                    <div style="background: rgba(255,100,100,0.2); padding: 15px; border-radius: 8px; margin: 10px 0;">
+                        <h4>Header (Base64 encoded)</h4>
+                        <pre style="background: rgba(0,0,0,0.3); padding: 10px; border-radius: 4px; overflow-x: auto;"><code>{
+  "alg": "RS256",
+  "typ": "JWT"
+}</code></pre>
+                        <p>Алгоритм підпису: RS256, HS256, ES256</p>
+                    </div>
+                    <div style="background: rgba(100,255,218,0.2); padding: 15px; border-radius: 8px; margin: 10px 0;">
+                        <h4>Payload (Base64 encoded)</h4>
+                        <pre style="background: rgba(0,0,0,0.3); padding: 10px; border-radius: 4px; overflow-x: auto;"><code>{
+  "sub": "user_123",
+  "iss": "https://bank.com",
+  "aud": "banking-api",
+  "exp": 1735689600,
+  "iat": 1735686000,
+  "scope": "accounts:read transactions:read"
+}</code></pre>
+                        <p><strong>Claims:</strong> sub (subject), iss (issuer), aud (audience), exp (expiration)</p>
+                    </div>
+                    <div style="background: rgba(255,255,100,0.2); padding: 15px; border-radius: 8px; margin: 10px 0;">
+                        <h4>Signature</h4>
+                        <p><code>HMACSHA256(base64(header) + "." + base64(payload), secret)</code></p>
+                        <p>Гарантує integrity - токен не може бути змінено без знання ключа</p>
+                    </div>
+                </div>
+                <div class="alert alert-warning">
+                    <strong>Важливо:</strong> JWT payload НЕ зашифрований, тільки підписаний. Не зберігайте sensitive data в payload!
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 6: JWT Validation -->
+    <div class="slide" id="slide6">
+        <div class="slide-container">
+            <div class="slide-content">
+                <h2>JWT Validation Process</h2>
+                <h3>Як Resource Server валідує JWT</h3>
+                <div style="margin: 20px 0;">
+                    <h4>Checklist для валідації:</h4>
+                    <div style="margin: 15px 0;">
+                        <div style="display: flex; align-items: center; padding: 10px; background: rgba(255,255,255,0.1); margin: 8px 0; border-radius: 8px;">
+                            <span style="font-size: 1.5em; margin-right: 15px;">1️⃣</span>
+                            <div>
+                                <strong>Signature verification</strong>
+                                <p style="font-size: 0.9em; margin: 5px 0;">Перевірити підпис за допомогою public key (RSA) або shared secret (HMAC)</p>
+                            </div>
+                        </div>
+                        <div style="display: flex; align-items: center; padding: 10px; background: rgba(255,255,255,0.1); margin: 8px 0; border-radius: 8px;">
+                            <span style="font-size: 1.5em; margin-right: 15px;">2️⃣</span>
+                            <div>
+                                <strong>Expiration check (exp claim)</strong>
+                                <p style="font-size: 0.9em; margin: 5px 0;">if (current_time &gt; exp) reject</p>
+                            </div>
+                        </div>
+                        <div style="display: flex; align-items: center; padding: 10px; background: rgba(255,255,255,0.1); margin: 8px 0; border-radius: 8px;">
+                            <span style="font-size: 1.5em; margin-right: 15px;">3️⃣</span>
+                            <div>
+                                <strong>Issuer validation (iss claim)</strong>
+                                <p style="font-size: 0.9em; margin: 5px 0;">Перевірити, що токен виданий довіреним Authorization Server</p>
+                            </div>
+                        </div>
+                        <div style="display: flex; align-items: center; padding: 10px; background: rgba(255,255,255,0.1); margin: 8px 0; border-radius: 8px;">
+                            <span style="font-size: 1.5em; margin-right: 15px;">4️⃣</span>
+                            <div>
+                                <strong>Audience validation (aud claim)</strong>
+                                <p style="font-size: 0.9em; margin: 5px 0;">Перевірити, що токен призначений для цього API</p>
+                            </div>
+                        </div>
+                        <div style="display: flex; align-items: center; padding: 10px; background: rgba(255,255,255,0.1); margin: 8px 0; border-radius: 8px;">
+                            <span style="font-size: 1.5em; margin-right: 15px;">5️⃣</span>
+                            <div>
+                                <strong>Scope validation</strong>
+                                <p style="font-size: 0.9em; margin: 5px 0;">Перевірити, що токен має необхідні permissions</p>
+                            </div>
+                        </div>
+                        <div style="display: flex; align-items: center; padding: 10px; background: rgba(255,255,255,0.1); margin: 8px 0; border-radius: 8px;">
+                            <span style="font-size: 1.5em; margin-right: 15px;">6️⃣</span>
+                            <div>
+                                <strong>Token revocation check (optional)</strong>
+                                <p style="font-size: 0.9em; margin: 5px 0;">Перевірити token blacklist або використати short-lived tokens</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="alert alert-info">
+                    <strong>Best Practice:</strong> Використовуйте бібліотеки (jsonwebtoken, jose) замість custom validation
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 7: OWASP API Security Top 10 -->
+    <div class="slide" id="slide7">
+        <div class="slide-container">
+            <div class="slide-cyber-security">
+                <h2>OWASP API Security Top 10 (2023)</h2>
+                <h3>Найпоширеніші API вразливості</h3>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin: 20px 0; font-size: 0.9em;">
+                    <div style="background: rgba(239,68,68,0.3); padding: 12px; border-radius: 8px;">
+                        <strong>API1: Broken Object Level Authorization</strong>
+                        <p>Доступ до чужих об'єктів через ID manipulation</p>
+                        <p><code>GET /api/account/123</code> → 456 ✗</p>
+                    </div>
+                    <div style="background: rgba(239,68,68,0.3); padding: 12px; border-radius: 8px;">
+                        <strong>API2: Broken Authentication</strong>
+                        <p>Слабка або відсутня authentication</p>
+                        <p>Weak passwords, no MFA, credential stuffing</p>
+                    </div>
+                    <div style="background: rgba(239,68,68,0.3); padding: 12px; border-radius: 8px;">
+                        <strong>API3: Broken Object Property Level Authorization</strong>
+                        <p>Mass assignment вразливості</p>
+                        <p>User може змінити is_admin=true</p>
+                    </div>
+                    <div style="background: rgba(239,68,68,0.3); padding: 12px; border-radius: 8px;">
+                        <strong>API4: Unrestricted Resource Consumption</strong>
+                        <p>Відсутність rate limiting</p>
+                        <p>DoS через необмежені requests</p>
+                    </div>
+                    <div style="background: rgba(239,68,68,0.3); padding: 12px; border-radius: 8px;">
+                        <strong>API5: Broken Function Level Authorization</strong>
+                        <p>Відсутність перевірки ролей</p>
+                        <p>User може викликати admin endpoints</p>
+                    </div>
+                    <div style="background: rgba(239,68,68,0.3); padding: 12px; border-radius: 8px;">
+                        <strong>API6: Unrestricted Access to Sensitive Business Flows</strong>
+                        <p>Автоматизація критичних операцій</p>
+                        <p>Bot abuse для bulk операцій</p>
+                    </div>
+                    <div style="background: rgba(239,68,68,0.3); padding: 12px; border-radius: 8px;">
+                        <strong>API7: Server Side Request Forgery</strong>
+                        <p>API робить requests на internal resources</p>
+                        <p>Metadata endpoint exploitation</p>
+                    </div>
+                    <div style="background: rgba(239,68,68,0.3); padding: 12px; border-radius: 8px;">
+                        <strong>API8: Security Misconfiguration</strong>
+                        <p>Default credentials, verbose errors</p>
+                        <p>CORS misconfiguration, TLS issues</p>
+                    </div>
+                    <div style="background: rgba(239,68,68,0.3); padding: 12px; border-radius: 8px;">
+                        <strong>API9: Improper Inventory Management</strong>
+                        <p>Undocumented/deprecated endpoints</p>
+                        <p>Старі versions без security patches</p>
+                    </div>
+                    <div style="background: rgba(239,68,68,0.3); padding: 12px; border-radius: 8px;">
+                        <strong>API10: Unsafe Consumption of APIs</strong>
+                        <p>Довіра до third-party APIs без validation</p>
+                        <p>Supply chain attacks</p>
+                    </div>
+                </div>
+                <div class="cyber-threat-level threat-high">🚨 API attacks зросли на 400% з 2022 по 2024</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 8: API Rate Limiting -->
+    <div class="slide" id="slide8">
+        <div class="slide-container">
+            <div class="slide-content">
+                <h2>API Rate Limiting</h2>
+                <h3>Захист від abuse та DoS атак</h3>
+                <div style="margin: 20px 0;">
+                    <h4>Стратегії Rate Limiting:</h4>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 20px 0;">
+                        <div style="background: rgba(100,255,218,0.2); padding: 15px; border-radius: 8px;">
+                            <h4>Fixed Window</h4>
+                            <p><strong>Логіка:</strong> N requests per time window (e.g., 100/hour)</p>
+                            <p><strong>Pros:</strong> Простий, легко implement</p>
+                            <p><strong>Cons:</strong> Burst traffic на межі window</p>
+                        </div>
+                        <div style="background: rgba(255,100,100,0.2); padding: 15px; border-radius: 8px;">
+                            <h4>Sliding Window</h4>
+                            <p><strong>Логіка:</strong> Rolling window, більш smooth</p>
+                            <p><strong>Pros:</strong> Немає burst issues</p>
+                            <p><strong>Cons:</strong> Складніший, більше memory</p>
+                        </div>
+                        <div style="background: rgba(255,255,100,0.2); padding: 15px; border-radius: 8px;">
+                            <h4>Token Bucket</h4>
+                            <p><strong>Логіка:</strong> Bucket наповнюється токенами, request = 1 token</p>
+                            <p><strong>Pros:</strong> Дозволяє короткі bursts</p>
+                            <p><strong>Cons:</strong> Складніше настроювати</p>
+                        </div>
+                        <div style="background: rgba(255,100,255,0.2); padding: 15px; border-radius: 8px;">
+                            <h4>Leaky Bucket</h4>
+                            <p><strong>Логіка:</strong> Requests обробляються з фіксованою швидкістю</p>
+                            <p><strong>Pros:</strong> Smooth output rate</p>
+                            <p><strong>Cons:</strong> Може додати latency</p>
+                        </div>
+                    </div>
+                    <h4 style="margin-top: 20px;">Типові Limits для Banking APIs:</h4>
+                    <ul class="slide-list">
+                        <li><strong>Public endpoints:</strong> 10 requests/sec per IP</li>
+                        <li><strong>Authenticated users:</strong> 100 requests/min per user</li>
+                        <li><strong>Premium/corporate:</strong> 1000 requests/min</li>
+                        <li><strong>Write operations:</strong> Окремі, нижчі limits (e.g., 10 transfers/min)</li>
+                    </ul>
+                </div>
+                <div class="alert alert-info">
+                    <strong>Tools:</strong> Redis для distributed rate limiting, NGINX rate limiting, Kong/Apigee built-in
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 9: API Throttling -->
+    <div class="slide" id="slide9">
+        <div class="slide-container">
+            <div class="slide-content">
+                <h2>Rate Limiting Headers</h2>
+                <h3>Інформування клієнтів про limits</h3>
+                <div style="margin: 20px 0;">
+                    <h4>Standard HTTP Headers:</h4>
+                    <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 8px; margin: 15px 0;">
+                        <pre style="background: rgba(0,0,0,0.3); padding: 15px; border-radius: 4px; overflow-x: auto;"><code>HTTP/1.1 200 OK
+X-RateLimit-Limit: 100
+X-RateLimit-Remaining: 42
+X-RateLimit-Reset: 1735689600
+Retry-After: 3600</code></pre>
+                    </div>
+                    <ul class="slide-list">
+                        <li><strong>X-RateLimit-Limit:</strong> Максимальна кількість requests в window</li>
+                        <li><strong>X-RateLimit-Remaining:</strong> Скільки requests залишилось</li>
+                        <li><strong>X-RateLimit-Reset:</strong> Unix timestamp, коли limit скинеться</li>
+                        <li><strong>Retry-After:</strong> Секунди до наступної спроби (при 429 статусі)</li>
+                    </ul>
+                    <h4 style="margin-top: 20px;">429 Too Many Requests Response:</h4>
+                    <div style="background: rgba(239,68,68,0.2); padding: 15px; border-radius: 8px; margin: 15px 0;">
+                        <pre style="background: rgba(0,0,0,0.3); padding: 15px; border-radius: 4px; overflow-x: auto;"><code>HTTP/1.1 429 Too Many Requests
+Retry-After: 3600
+Content-Type: application/json
+
+{
+  "error": "rate_limit_exceeded",
+  "message": "Too many requests. Please try again in 1 hour.",
+  "limit": 100,
+  "remaining": 0,
+  "reset_at": "2025-01-01T12:00:00Z"
+}</code></pre>
+                    </div>
+                </div>
+                <div class="alert alert-success">
+                    <strong>Best Practice:</strong> Завжди включайте rate limit headers для прозорості
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 10: Token Management Best Practices -->
+    <div class="slide" id="slide10">
+        <div class="slide-container">
+            <div class="slide-cyber-security">
+                <h2>Token Management Best Practices</h2>
+                <h3>Безпечне управління access та refresh tokens</h3>
+                <div style="margin: 20px 0;">
+                    <h4>Access Token Security:</h4>
+                    <ul class="slide-list">
+                        <li><strong>Short-lived:</strong> 15-60 хвилин максимум</li>
+                        <li><strong>Зберігання:</strong> Memory only (не в localStorage!)</li>
+                        <li><strong>Transmission:</strong> HTTPS only, Authorization header</li>
+                        <li><strong>Scope:</strong> Мінімальні необхідні permissions</li>
+                    </ul>
+                    <h4 style="margin-top: 20px;">Refresh Token Security:</h4>
+                    <ul class="slide-list">
+                        <li><strong>Long-lived:</strong> 7-90 днів (configurable)</li>
+                        <li><strong>Зберігання:</strong> HttpOnly secure cookies (web) або Keychain/Keystore (mobile)</li>
+                        <li><strong>Rotation:</strong> Новий refresh token при кожному refresh (token rotation)</li>
+                        <li><strong>Revocation:</strong> Можливість відкликати через blacklist</li>
+                        <li><strong>One-time use:</strong> Refresh token використовується один раз</li>
+                    </ul>
+                    <h4 style="margin-top: 20px;">Token Rotation Pattern:</h4>
+                    <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 8px; margin: 15px 0;">
+                        <p>1. Client відправляє refresh_token</p>
+                        <p>2. Server валідує і видає новий access_token + новий refresh_token</p>
+                        <p>3. Старий refresh_token інвалідується (one-time use)</p>
+                        <p>4. Якщо старий refresh_token використаний знову → revoke all tokens (можлива компрометація)</p>
+                    </div>
+                </div>
+                <div class="cyber-threat-level threat-medium">⚠️ Token theft = найпоширеніша атака на APIs</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 11: API Security Breach - Optus (2022) -->
+    <div class="slide" id="slide11">
+        <div class="slide-container">
+            <div class="slide-cyber-security">
+                <h2>Кейс: Optus API Breach (2022)</h2>
+                <h3>Найбільша витік даних в історії Австралії</h3>
+                <div style="margin: 20px 0;">
+                    <h4>Що сталося:</h4>
+                    <ul class="slide-list">
+                        <li>Компрометовано 10M+ клієнтів Optus (найбільший телеком оператор)</li>
+                        <li>Експоновано sensitive data: імена, дати народження, паспорти, ліцензії</li>
+                        <li>Атака через public-facing API без authentication</li>
+                        <li>API був test/staging endpoint, забутий у production</li>
+                    </ul>
+                    <h4 style="margin-top: 20px;">Root Causes:</h4>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin: 10px 0;">
+                        <div style="background: rgba(239,68,68,0.2); padding: 15px; border-radius: 8px;">
+                            <p><strong>1. No authentication</strong></p>
+                            <p>API endpoint доступний публічно без будь-якого auth</p>
+                        </div>
+                        <div style="background: rgba(239,68,68,0.2); padding: 15px; border-radius: 8px;">
+                            <p><strong>2. IDOR vulnerability</strong></p>
+                            <p>GET /customer/123 → 124, 125... sequential IDs</p>
+                        </div>
+                        <div style="background: rgba(239,68,68,0.2); padding: 15px; border-radius: 8px;">
+                            <p><strong>3. No rate limiting</strong></p>
+                            <p>Зловмисник міг скрапити всю базу за лічені години</p>
+                        </div>
+                        <div style="background: rgba(239,68,68,0.2); padding: 15px; border-radius: 8px;">
+                            <p><strong>4. Відсутність API inventory</strong></p>
+                            <p>Компанія не знала про існування цього endpoint</p>
+                        </div>
+                    </div>
+                    <h4 style="margin-top: 20px;">Наслідки:</h4>
+                    <div class="slide-statistics">
+                        <div class="stat-item">
+                            <div class="stat-value">$140M</div>
+                            <div class="stat-description">Штраф регулятора</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">10M+</div>
+                            <div class="stat-description">Постраждалих клієнтів</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">-30%</div>
+                            <div class="stat-description">Падіння акцій</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">CEO</div>
+                            <div class="stat-description">Звільнено</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="cyber-threat-level threat-high">🚨 LESSON: API inventory + authentication + authorization = MUST HAVE</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 12: API Security Breach - T-Mobile (2021) -->
+    <div class="slide" id="slide12">
+        <div class="slide-container">
+            <div class="slide-cyber-security">
+                <h2>Кейс: T-Mobile API Breach (2021)</h2>
+                <h3>Серія API breaches протягом 2018-2023</h3>
+                <div style="margin: 20px 0;">
+                    <h4>2021 Incident (найбільший):</h4>
+                    <ul class="slide-list">
+                        <li>54M клієнтів компрометовано</li>
+                        <li>Stolen credentials → API access → database dump</li>
+                        <li>Weak API authentication на internal endpoints</li>
+                    </ul>
+                    <h4 style="margin-top: 15px;">Recurring Pattern (2018-2023):</h4>
+                    <div style="background: rgba(239,68,68,0.2); padding: 15px; border-radius: 8px; margin: 15px 0;">
+                        <ul class="slide-list">
+                            <li><strong>2018:</strong> 2M клієнтів - API з default credentials</li>
+                            <li><strong>2019:</strong> Prepaid customers - API не перевіряв authorization</li>
+                            <li><strong>2020:</strong> Employee data breach - internal API misconfiguration</li>
+                            <li><strong>2021:</strong> 54M клієнтів - weak authentication</li>
+                            <li><strong>2023:</strong> 37M клієнтів - API abuse через stolen credentials</li>
+                        </ul>
+                    </div>
+                    <h4 style="margin-top: 20px;">Lessons Learned:</h4>
+                    <ul class="slide-list">
+                        <li><strong>MFA обов'язкове:</strong> Навіть для internal APIs</li>
+                        <li><strong>Zero Trust:</strong> Не довіряти internal network</li>
+                        <li><strong>API Monitoring:</strong> Anomaly detection для unusual patterns</li>
+                        <li><strong>Incident Response:</strong> Швидке виявлення та реагування</li>
+                    </ul>
+                    <div class="slide-statistics" style="margin-top: 20px;">
+                        <div class="stat-item">
+                            <div class="stat-value">$500M+</div>
+                            <div class="stat-description">Total settlements</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">6</div>
+                            <div class="stat-description">Breaches за 5 років</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">100M+</div>
+                            <div class="stat-description">Постраждалих клієнтів</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="cyber-threat-level threat-high">🚨 LESSON: API security = ongoing process, not one-time fix</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 13: API Security Checklist -->
+    <div class="slide" id="slide13">
+        <div class="slide-container">
+            <div class="slide-cyber-security">
+                <h2>API Security Checklist</h2>
+                <h3>Must-have для production banking APIs</h3>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 20px 0;">
+                    <div>
+                        <h4>Authentication & Authorization:</h4>
+                        <ul class="slide-list" style="font-size: 0.9em;">
+                            <li>OAuth 2.0 з PKCE для mobile/SPA</li>
+                            <li>JWT з RS256 (не HS256 для public APIs)</li>
+                            <li>Short-lived access tokens (15-60 min)</li>
+                            <li>Refresh token rotation</li>
+                            <li>MFA для sensitive operations</li>
+                            <li>RBAC (Role-Based Access Control)</li>
+                        </ul>
+                        <h4 style="margin-top: 15px;">Transport Security:</h4>
+                        <ul class="slide-list" style="font-size: 0.9em;">
+                            <li>TLS 1.3 only (disable 1.0, 1.1, 1.2)</li>
+                            <li>Certificate pinning для mobile</li>
+                            <li>HSTS headers (Strict-Transport-Security)</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4>Input Validation & Output:</h4>
+                        <ul class="slide-list" style="font-size: 0.9em;">
+                            <li>Schema validation (JSON Schema, OpenAPI)</li>
+                            <li>SQL injection prevention (prepared statements)</li>
+                            <li>XSS prevention (Content-Security-Policy)</li>
+                            <li>Error messages без sensitive info</li>
+                        </ul>
+                        <h4 style="margin-top: 15px;">Rate Limiting & Monitoring:</h4>
+                        <ul class="slide-list" style="font-size: 0.9em;">
+                            <li>Rate limiting per IP, per user, per endpoint</li>
+                            <li>Request throttling для write operations</li>
+                            <li>Real-time monitoring (Prometheus, Grafana)</li>
+                            <li>Anomaly detection (ML-based)</li>
+                            <li>Audit logging всіх операцій</li>
+                            <li>SIEM integration</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="alert alert-info">
+                    <strong>Automated Testing:</strong> OWASP ZAP, Burp Suite, APIClarity для continuous security scanning
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 14: Підсумки -->
+    <div class="slide" id="slide14">
+        <div class="slide-container">
+            <div class="slide-content">
+                <h2>Підсумки: API Security</h2>
+                <h3>Ключові висновки</h3>
+                <ul class="slide-list">
+                    <li><strong>OAuth 2.0 flows:</strong> Authorization Code з PKCE для mobile, Client Credentials для server-to-server</li>
+                    <li><strong>JWT structure:</strong> Header + Payload + Signature, stateless, але НЕ зашифрований</li>
+                    <li><strong>JWT validation:</strong> 6-step process - signature, expiration, issuer, audience, scope, revocation</li>
+                    <li><strong>OWASP API Top 10:</strong> Broken Object Level Authorization, Broken Authentication - найпоширеніші</li>
+                    <li><strong>Rate limiting:</strong> Token bucket або sliding window, обов'язковий для всіх endpoints</li>
+                    <li><strong>Token management:</strong> Short access tokens, refresh token rotation, HttpOnly cookies</li>
+                    <li><strong>Real breaches:</strong> Optus ($140M), T-Mobile ($500M+) - ціна API misconfiguration</li>
+                    <li><strong>Security checklist:</strong> OAuth 2.0, JWT, TLS 1.3, rate limiting, input validation, monitoring</li>
+                    <li><strong>Zero Trust принцип:</strong> Never trust, always verify - навіть для internal APIs</li>
+                </ul>
+                <div class="alert alert-success">
+                    <h4>Наступна тема:</h4>
+                    <p>Network Segmentation для CBS - security zones, DMZ, micro-segmentation</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    let currentSlide = 1;
+    const totalSlides = 14;
+
+    function showSlide(n) {
+        const slides = document.querySelectorAll('.slide');
+        const progressBar = document.getElementById('progressBar');
+        const counter = document.getElementById('slideCounter');
+
+        if (n > totalSlides) currentSlide = 1;
+        if (n < 1) currentSlide = totalSlides;
+
+        slides.forEach(slide => slide.classList.remove('active'));
+        document.getElementById(`slide${currentSlide}`).classList.add('active');
+
+        progressBar.style.width = (currentSlide / totalSlides * 100) + '%';
+        counter.textContent = `${currentSlide} / ${totalSlides}`;
+    }
+
+    function nextSlide() {
+        currentSlide++;
+        showSlide(currentSlide);
+    }
+
+    function previousSlide() {
+        currentSlide--;
+        showSlide(currentSlide);
+    }
+
+    function toggleFullscreen() {
+        if (!document.fullscreenElement) {
+            document.documentElement.requestFullscreen();
+        } else {
+            document.exitFullscreen();
+        }
+    }
+
+    function exitPresentation() {
+        window.location.href = 'index.html';
+    }
+
+    // Keyboard navigation
+    document.addEventListener('keydown', function(e) {
+        switch(e.key) {
+            case 'ArrowRight':
+            case ' ':
+                nextSlide();
+                break;
+            case 'ArrowLeft':
+                previousSlide();
+                break;
+            case 'Escape':
+                exitPresentation();
+                break;
+            case 'f':
+            case 'F':
+                toggleFullscreen();
+                break;
+            case 'Home':
+                currentSlide = 1;
+                showSlide(currentSlide);
+                break;
+            case 'End':
+                currentSlide = totalSlides;
+                showSlide(currentSlide);
+                break;
+        }
+    });
+
+    // Touch events for mobile
+    let startX = null;
+    document.addEventListener('touchstart', function(e) {
+        startX = e.touches[0].clientX;
+    });
+
+    document.addEventListener('touchend', function(e) {
+        if (!startX) return;
+
+        const endX = e.changedTouches[0].clientX;
+        const diffX = startX - endX;
+
+        if (Math.abs(diffX) > 50) {
+            if (diffX > 0) {
+                nextSlide();
+            } else {
+                previousSlide();
+            }
+        }
+        startX = null;
+    });
+
+    // Initialize
+    showSlide(1);
+
+    // Save progress
+    function saveProgress() {
+        try {
+            const progress = {
+                currentSlide: currentSlide,
+                totalSlides: totalSlides,
+                timestamp: new Date().toISOString(),
+                topic: 'API Security: OAuth 2.0 and JWT'
+            };
+            localStorage.setItem('lecture_2_2_tema3_progress', JSON.stringify(progress));
+        } catch(e) {
+            console.log('Could not save progress');
+        }
+    }
+
+    // Load progress
+    function loadProgress() {
+        try {
+            const saved = localStorage.getItem('lecture_2_2_tema3_progress');
+            if (saved) {
+                const progress = JSON.parse(saved);
+                if (progress.currentSlide) {
+                    currentSlide = progress.currentSlide;
+                    showSlide(currentSlide);
+                }
+            }
+        } catch(e) {
+            console.log('Could not load progress');
+        }
+    }
+
+    window.addEventListener('beforeunload', saveProgress);
+    loadProgress();
+</script>
+</body>
+</html>

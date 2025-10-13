@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тема 4: Network Segmentation для CBS</title>
+    <link rel="stylesheet" href="../../../../assets/css/slides.css">
+</head>
+<body class="slides-page">
+<div class="slides-wrapper">
+    <!-- Navigation -->
+    <div class="slide-navigation">
+        <button class="slide-btn" onclick="previousSlide()">◀</button>
+        <span class="slide-counter" id="slideCounter">1 / 12</span>
+        <button class="slide-btn" onclick="nextSlide()">▶</button>
+        <button class="slide-btn" onclick="toggleFullscreen()">⛶</button>
+        <button class="slide-btn" onclick="exitPresentation()">✕</button>
+    </div>
+
+    <!-- Progress Bar -->
+    <div class="slide-progress">
+        <div class="slide-progress-bar" id="progressBar" style="width: 8.33%;"></div>
+    </div>
+
+    <!-- Slide 1: Title -->
+    <div class="slide active" id="slide1">
+        <div class="slide-container">
+            <div class="slide-title">
+                <h1>Network Segmentation для CBS</h1>
+                <div class="subtitle">Defense in Depth for Core Banking Systems</div>
+                <div class="content">
+                    <p><strong>Модуль 2:</strong> Core Banking Systems</p>
+                    <p><strong>Лекція 2.2:</strong> Інтеграція CBS з зовнішніми системами</p>
+                    <p><strong>Тема 4</strong></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 2: Security Zones Overview -->
+    <div class="slide" id="slide2">
+        <div class="slide-container">
+            <div class="slide-cyber-security">
+                <h2>Security Zones в банківській архітектурі</h2>
+                <h3>Багаторівнева ізоляція критичних систем</h3>
+                <div style="margin: 20px 0;">
+                    <div style="background: rgba(239,68,68,0.3); padding: 15px; border-radius: 8px; margin-bottom: 12px;">
+                        <h4>Internet Zone (Untrusted)</h4>
+                        <p><strong>Рівень довіри:</strong> Немає | <strong>Доступ:</strong> Публічний</p>
+                        <ul class="slide-list">
+                            <li>Public websites, mobile apps</li>
+                            <li>Максимальна exposure, мінімальна довіра</li>
+                        </ul>
+                    </div>
+                    <div style="background: rgba(251,191,36,0.3); padding: 15px; border-radius: 8px; margin-bottom: 12px;">
+                        <h4>DMZ (Demilitarized Zone)</h4>
+                        <p><strong>Рівень довіри:</strong> Низький | <strong>Доступ:</strong> Controlled</p>
+                        <ul class="slide-list">
+                            <li>Web servers, API gateways, load balancers</li>
+                            <li>Firewall з обох сторін (Internet і Internal)</li>
+                        </ul>
+                    </div>
+                    <div style="background: rgba(59,130,246,0.3); padding: 15px; border-radius: 8px; margin-bottom: 12px;">
+                        <h4>Application Zone (Internal)</h4>
+                        <p><strong>Рівень довіри:</strong> Середній | <strong>Доступ:</strong> Authenticated</p>
+                        <ul class="slide-list">
+                            <li>Application servers, microservices, CBS core</li>
+                            <li>Доступ тільки з DMZ через firewall</li>
+                        </ul>
+                    </div>
+                    <div style="background: rgba(139,92,246,0.3); padding: 15px; border-radius: 8px; margin-bottom: 12px;">
+                        <h4>Data Zone (Highly Restricted)</h4>
+                        <p><strong>Рівень довіри:</strong> Високий | <strong>Доступ:</strong> Strictly controlled</p>
+                        <ul class="slide-list">
+                            <li>Database servers, data warehouses</li>
+                            <li>Доступ тільки з Application Zone</li>
+                            <li>Encryption at rest обов'язково</li>
+                        </ul>
+                    </div>
+                    <div style="background: rgba(74,222,128,0.3); padding: 15px; border-radius: 8px;">
+                        <h4>Management Zone (Admin)</h4>
+                        <p><strong>Рівень довіри:</strong> Максимальний | <strong>Доступ:</strong> Admin only</p>
+                        <ul class="slide-list">
+                            <li>Jump hosts, monitoring, backup systems</li>
+                            <li>VPN + MFA + privileged access management</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 3: DMZ Architecture -->
+    <div class="slide" id="slide3">
+        <div class="slide-container">
+            <div class="slide-content">
+                <h2>DMZ Design Patterns</h2>
+                <h3>Типова архітектура DMZ для банку</h3>
+                <div style="margin: 20px 0;">
+                    <h4>Three-Tier DMZ (найпопулярніша):</h4>
+                    <div style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 8px; margin: 20px 0;">
+                        <div style="text-align: center; font-family: monospace; font-size: 0.9em; line-height: 2;">
+                            <div style="background: rgba(239,68,68,0.3); padding: 10px; border-radius: 8px; margin: 5px 0;">
+                                Internet → Edge Firewall (WAF, DDoS protection)
+                            </div>
+                            <div style="margin: 10px 0;">↓</div>
+                            <div style="background: rgba(251,191,36,0.3); padding: 10px; border-radius: 8px; margin: 5px 0;">
+                                DMZ: Load Balancers, API Gateway, Web Servers
+                            </div>
+                            <div style="margin: 10px 0;">↓</div>
+                            <div style="background: rgba(59,130,246,0.3); padding: 10px; border-radius: 8px; margin: 5px 0;">
+                                Internal Firewall (stateful inspection, IPS)
+                            </div>
+                            <div style="margin: 10px 0;">↓</div>
+                            <div style="background: rgba(139,92,246,0.3); padding: 10px; border-radius: 8px; margin: 5px 0;">
+                                Internal Network: CBS, Application Servers
+                            </div>
+                            <div style="margin: 10px 0;">↓</div>
+                            <div style="background: rgba(74,222,128,0.3); padding: 10px; border-radius: 8px; margin: 5px 0;">
+                                Database Firewall → Database Zone
+                            </div>
+                        </div>
+                    </div>
+                    <h4>Компоненти DMZ:</h4>
+                    <ul class="slide-list">
+                        <li><strong>WAF (Web Application Firewall):</strong> F5, Imperva, Cloudflare - захист від OWASP Top 10</li>
+                        <li><strong>Load Balancers:</strong> NGINX, HAProxy, F5 BIG-IP - traffic distribution + SSL termination</li>
+                        <li><strong>API Gateway:</strong> Kong, Apigee - rate limiting, authentication, routing</li>
+                        <li><strong>IDS/IPS:</strong> Snort, Suricata, Palo Alto - threat detection</li>
+                    </ul>
+                </div>
+                <div class="alert alert-warning">
+                    <strong>Golden Rule:</strong> DMZ ніколи не повинна мати direct access до database zone
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 4: Firewall Rules -->
+    <div class="slide" id="slide4">
+        <div class="slide-container">
+            <div class="slide-content">
+                <h2>Firewall Rules та Policies</h2>
+                <h3>Принцип least privilege</h3>
+                <div style="margin: 20px 0;">
+                    <h4>Базові принципи:</h4>
+                    <ul class="slide-list">
+                        <li><strong>Default Deny:</strong> Блокувати все, дозволяти тільки необхідне</li>
+                        <li><strong>Least Privilege:</strong> Мінімальні необхідні permissions</li>
+                        <li><strong>Stateful Inspection:</strong> Tracking connection state</li>
+                        <li><strong>Application-Aware:</strong> Layer 7 inspection (не тільки ports)</li>
+                    </ul>
+                    <h4 style="margin-top: 20px;">Приклад Firewall Rules (Internet → DMZ):</h4>
+                    <table style="width: 100%; border-collapse: collapse; font-size: 0.85em; margin: 10px 0;">
+                        <tr style="background: var(--color-primary); color: white;">
+                            <th style="padding: 8px; border: 1px solid #ddd;">Source</th>
+                            <th style="padding: 8px; border: 1px solid #ddd;">Destination</th>
+                            <th style="padding: 8px; border: 1px solid #ddd;">Port</th>
+                            <th style="padding: 8px; border: 1px solid #ddd;">Action</th>
+                        </tr>
+                        <tr>
+                            <td style="padding: 8px; border: 1px solid #ddd;">Any</td>
+                            <td style="padding: 8px; border: 1px solid #ddd;">DMZ Web Servers</td>
+                            <td style="padding: 8px; border: 1px solid #ddd;">443 (HTTPS)</td>
+                            <td style="padding: 8px; border: 1px solid #ddd; background: rgba(74,222,128,0.2);">ALLOW</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 8px; border: 1px solid #ddd;">Any</td>
+                            <td style="padding: 8px; border: 1px solid #ddd;">DMZ API Gateway</td>
+                            <td style="padding: 8px; border: 1px solid #ddd;">443 (HTTPS)</td>
+                            <td style="padding: 8px; border: 1px solid #ddd; background: rgba(74,222,128,0.2);">ALLOW</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 8px; border: 1px solid #ddd;">Any</td>
+                            <td style="padding: 8px; border: 1px solid #ddd;">DMZ</td>
+                            <td style="padding: 8px; border: 1px solid #ddd;">22, 3389, etc</td>
+                            <td style="padding: 8px; border: 1px solid #ddd; background: rgba(239,68,68,0.2);">DENY</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 8px; border: 1px solid #ddd;">Any</td>
+                            <td style="padding: 8px; border: 1px solid #ddd;">Any</td>
+                            <td style="padding: 8px; border: 1px solid #ddd;">Any</td>
+                            <td style="padding: 8px; border: 1px solid #ddd; background: rgba(239,68,68,0.2);">DENY (default)</td>
+                        </tr>
+                    </table>
+                    <h4 style="margin-top: 20px;">Приклад Rules (DMZ → Internal):</h4>
+                    <table style="width: 100%; border-collapse: collapse; font-size: 0.85em; margin: 10px 0;">
+                        <tr style="background: var(--color-primary); color: white;">
+                            <th style="padding: 8px; border: 1px solid #ddd;">Source</th>
+                            <th style="padding: 8px; border: 1px solid #ddd;">Destination</th>
+                            <th style="padding: 8px; border: 1px solid #ddd;">Port</th>
+                            <th style="padding: 8px; border: 1px solid #ddd;">Action</th>
+                        </tr>
+                        <tr>
+                            <td style="padding: 8px; border: 1px solid #ddd;">DMZ Web Servers</td>
+                            <td style="padding: 8px; border: 1px solid #ddd;">App Servers</td>
+                            <td style="padding: 8px; border: 1px solid #ddd;">8080 (HTTP)</td>
+                            <td style="padding: 8px; border: 1px solid #ddd; background: rgba(74,222,128,0.2);">ALLOW</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 8px; border: 1px solid #ddd;">DMZ API Gateway</td>
+                            <td style="padding: 8px; border: 1px solid #ddd;">CBS API</td>
+                            <td style="padding: 8px; border: 1px solid #ddd;">8443 (HTTPS)</td>
+                            <td style="padding: 8px; border: 1px solid #ddd; background: rgba(74,222,128,0.2);">ALLOW</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 8px; border: 1px solid #ddd;">DMZ</td>
+                            <td style="padding: 8px; border: 1px solid #ddd;">Database Servers</td>
+                            <td style="padding: 8px; border: 1px solid #ddd;">Any</td>
+                            <td style="padding: 8px; border: 1px solid #ddd; background: rgba(239,68,68,0.2);">DENY</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 5: Micro-segmentation -->
+    <div class="slide" id="slide5">
+        <div class="slide-container">
+            <div class="slide-cyber-security">
+                <h2>Micro-segmentation</h2>
+                <h3>Granular security на рівні workload</h3>
+                <div style="margin: 20px 0;">
+                    <h4>Traditional Segmentation vs Micro-segmentation:</h4>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 20px 0;">
+                        <div style="background: rgba(239,68,68,0.2); padding: 15px; border-radius: 8px;">
+                            <h4>Traditional (Perimeter-based)</h4>
+                            <ul class="slide-list">
+                                <li>Network-level segmentation (VLANs, subnets)</li>
+                                <li>Firewall між zones</li>
+                                <li>East-West traffic не контролюється</li>
+                                <li>Lateral movement легкий після breach</li>
+                            </ul>
+                            <p style="margin-top: 10px; font-weight: bold; color: #ef4444;">Problem: "Flat" internal network</p>
+                        </div>
+                        <div style="background: rgba(74,222,128,0.2); padding: 15px; border-radius: 8px;">
+                            <h4>Micro-segmentation (Zero Trust)</h4>
+                            <ul class="slide-list">
+                                <li>Workload-level policies</li>
+                                <li>Every workload = isolated segment</li>
+                                <li>East-West traffic контролюється</li>
+                                <li>Lateral movement блокується</li>
+                            </ul>
+                            <p style="margin-top: 10px; font-weight: bold; color: #4ade80;">Solution: Zero Trust inside network</p>
+                        </div>
+                    </div>
+                    <h4>Micro-segmentation Technologies:</h4>
+                    <ul class="slide-list">
+                        <li><strong>VMware NSX:</strong> Software-Defined Networking для micro-segmentation</li>
+                        <li><strong>Cisco ACI:</strong> Application Centric Infrastructure</li>
+                        <li><strong>Kubernetes Network Policies:</strong> Pod-to-pod segmentation</li>
+                        <li><strong>Illumio:</strong> Adaptive segmentation platform</li>
+                        <li><strong>Service Mesh (Istio, Linkerd):</strong> Micro-segmentation для microservices</li>
+                    </ul>
+                </div>
+                <div class="cyber-threat-level threat-medium">⚠️ 80% breaches використовують lateral movement - micro-segmentation це блокує</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 6: SDN for Micro-segmentation -->
+    <div class="slide" id="slide6">
+        <div class="slide-container">
+            <div class="slide-content">
+                <h2>Software-Defined Networking (SDN)</h2>
+                <h3>Програмована мережа для динамічної segmentation</h3>
+                <div style="margin: 20px 0;">
+                    <h4>SDN Architecture:</h4>
+                    <div style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 8px; margin: 20px 0;">
+                        <div style="background: rgba(139,92,246,0.3); padding: 12px; border-radius: 8px; margin: 8px 0;">
+                            <strong>Application Layer:</strong> Network applications, security policies, analytics
+                        </div>
+                        <div style="text-align: center; margin: 10px 0;">↕️ Northbound API (RESTful)</div>
+                        <div style="background: rgba(59,130,246,0.3); padding: 12px; border-radius: 8px; margin: 8px 0;">
+                            <strong>Control Layer:</strong> SDN Controller (VMware NSX Manager, Cisco APIC)
+                        </div>
+                        <div style="text-align: center; margin: 10px 0;">↕️ Southbound API (OpenFlow, OVSDB)</div>
+                        <div style="background: rgba(74,222,128,0.3); padding: 12px; border-radius: 8px; margin: 8px 0;">
+                            <strong>Infrastructure Layer:</strong> Physical/Virtual switches, routers
+                        </div>
+                    </div>
+                    <h4>Переваги SDN для банків:</h4>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                        <div>
+                            <ul class="slide-list">
+                                <li><strong>Dynamic policies:</strong> Зміна правил без touching hardware</li>
+                                <li><strong>Automation:</strong> Policy as Code, CI/CD для network</li>
+                                <li><strong>Visibility:</strong> Повний traffic visibility</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <ul class="slide-list">
+                                <li><strong>Agility:</strong> Швидке створення segments</li>
+                                <li><strong>Cost:</strong> Менше hardware, більше software</li>
+                                <li><strong>Security:</strong> Micro-segmentation на рівні VM/Container</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="alert alert-info">
+                    <strong>Trend:</strong> 60% банків впроваджують SDN для micro-segmentation (Gartner 2024)
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 7: Zero Trust Network Access -->
+    <div class="slide" id="slide7">
+        <div class="slide-container">
+            <div class="slide-cyber-security">
+                <h2>Zero Trust Network Access (ZTNA)</h2>
+                <h3>"Never trust, always verify"</h3>
+                <div style="margin: 20px 0;">
+                    <h4>Принципи Zero Trust:</h4>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 15px; margin: 20px 0;">
+                        <div style="background: rgba(239,68,68,0.2); padding: 15px; border-radius: 8px;">
+                            <h4>1. Verify Explicitly</h4>
+                            <p>Автентифікація та авторизація на кожному запиті</p>
+                            <ul style="font-size: 0.9em;">
+                                <li>MFA обов'язково</li>
+                                <li>Device posture check</li>
+                                <li>Continuous verification</li>
+                            </ul>
+                        </div>
+                        <div style="background: rgba(251,191,36,0.2); padding: 15px; border-radius: 8px;">
+                            <h4>2. Least Privilege</h4>
+                            <p>Мінімальний необхідний доступ</p>
+                            <ul style="font-size: 0.9em;">
+                                <li>Just-in-time access</li>
+                                <li>Just-enough access</li>
+                                <li>Час-обмежені sessions</li>
+                            </ul>
+                        </div>
+                        <div style="background: rgba(74,222,128,0.2); padding: 15px; border-radius: 8px;">
+                            <h4>3. Assume Breach</h4>
+                            <p>Проектувати як би breach вже є</p>
+                            <ul style="font-size: 0.9em;">
+                                <li>Micro-segmentation</li>
+                                <li>Encryption everywhere</li>
+                                <li>Continuous monitoring</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <h4>ZTNA vs Traditional VPN:</h4>
+                    <table style="width: 100%; border-collapse: collapse; font-size: 0.85em; margin: 15px 0;">
+                        <tr style="background: var(--color-primary); color: white;">
+                            <th style="padding: 8px; border: 1px solid #ddd;">Критерій</th>
+                            <th style="padding: 8px; border: 1px solid #ddd;">Traditional VPN</th>
+                            <th style="padding: 8px; border: 1px solid #ddd;">ZTNA</th>
+                        </tr>
+                        <tr>
+                            <td style="padding: 8px; border: 1px solid #ddd;"><strong>Trust model</strong></td>
+                            <td style="padding: 8px; border: 1px solid #ddd;">Network-based (inside = trusted)</td>
+                            <td style="padding: 8px; border: 1px solid #ddd;">Identity-based (never trust)</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 8px; border: 1px solid #ddd;"><strong>Access</strong></td>
+                            <td style="padding: 8px; border: 1px solid #ddd;">Full network access</td>
+                            <td style="padding: 8px; border: 1px solid #ddd;">Application-specific</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 8px; border: 1px solid #ddd;"><strong>Lateral movement</strong></td>
+                            <td style="padding: 8px; border: 1px solid #ddd;">Easy</td>
+                            <td style="padding: 8px; border: 1px solid #ddd;">Blocked</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 8px; border: 1px solid #ddd;"><strong>Performance</strong></td>
+                            <td style="padding: 8px; border: 1px solid #ddd;">Backhauling через gateway</td>
+                            <td style="padding: 8px; border: 1px solid #ddd;">Direct connection</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="cyber-threat-level threat-low">✅ ZTNA знижує attack surface на 70-80%</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 8: ZTNA Implementation -->
+    <div class="slide" id="slide8">
+        <div class="slide-container">
+            <div class="slide-content">
+                <h2>ZTNA Implementation для CBS</h2>
+                <h3>Практичне впровадження Zero Trust</h3>
+                <div style="margin: 20px 0;">
+                    <h4>ZTNA Components:</h4>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 20px 0;">
+                        <div style="background: rgba(100,255,218,0.2); padding: 15px; border-radius: 8px;">
+                            <h4>Identity Provider (IdP)</h4>
+                            <ul class="slide-list">
+                                <li>Okta, Azure AD, Auth0</li>
+                                <li>Centralized authentication</li>
+                                <li>MFA enforcement</li>
+                                <li>SSO (Single Sign-On)</li>
+                            </ul>
+                        </div>
+                        <div style="background: rgba(255,100,100,0.2); padding: 15px; border-radius: 8px;">
+                            <h4>ZTNA Gateway</h4>
+                            <ul class="slide-list">
+                                <li>Zscaler, Cloudflare Access, Palo Alto Prisma</li>
+                                <li>Application connector</li>
+                                <li>Policy enforcement point</li>
+                                <li>Traffic inspection</li>
+                            </ul>
+                        </div>
+                        <div style="background: rgba(255,255,100,0.2); padding: 15px; border-radius: 8px;">
+                            <h4>Endpoint Agent</h4>
+                            <ul class="slide-list">
+                                <li>Device posture check</li>
+                                <li>OS версія, antivirus status</li>
+                                <li>Encryption status</li>
+                                <li>Compliance verification</li>
+                            </ul>
+                        </div>
+                        <div style="background: rgba(255,100,255,0.2); padding: 15px; border-radius: 8px;">
+                            <h4>Policy Engine</h4>
+                            <ul class="slide-list">
+                                <li>Centralized policy management</li>
+                                <li>Role-based access</li>
+                                <li>Context-aware decisions</li>
+                                <li>Continuous evaluation</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <h4>Access Flow:</h4>
+                    <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 8px; margin: 15px 0; font-family: monospace; font-size: 0.9em;">
+                        <p>1. User → Login (MFA) → IdP</p>
+                        <p>2. IdP → Issues identity token → User</p>
+                        <p>3. User → Request CBS access → ZTNA Gateway</p>
+                        <p>4. ZTNA Gateway → Check policy (identity, device, location, time) → Policy Engine</p>
+                        <p>5. Policy Engine → ALLOW/DENY → ZTNA Gateway</p>
+                        <p>6. ZTNA Gateway → Establish encrypted tunnel → CBS Application</p>
+                        <p>7. Continuous monitoring та re-evaluation</p>
+                    </div>
+                </div>
+                <div class="alert alert-success">
+                    <strong>Best Practice:</strong> Start with high-risk applications (CBS, payment systems) перед full rollout
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 9: Network Architecture Example -->
+    <div class="slide" id="slide9">
+        <div class="slide-container">
+            <div class="slide-banking-example">
+                <div class="banking-logo">🏦</div>
+                <div class="banking-title">Real Architecture: Tier-1 Bank Network</div>
+                <h3>Комплексна network segmentation</h3>
+                <div style="margin: 20px 0;">
+                    <div style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 8px; margin: 15px 0; font-size: 0.9em;">
+                        <div style="background: rgba(239,68,68,0.3); padding: 10px; border-radius: 6px; margin: 8px 0;">
+                            <strong>Internet Zone:</strong> Public traffic → Cloudflare DDoS protection → WAF
+                        </div>
+                        <div style="margin: 5px 0; text-align: center;">↓</div>
+                        <div style="background: rgba(251,191,36,0.3); padding: 10px; border-radius: 6px; margin: 8px 0;">
+                            <strong>DMZ Zone:</strong> F5 Load Balancers, Kong API Gateway, Web Servers (10.1.0.0/24)
+                        </div>
+                        <div style="margin: 5px 0; text-align: center;">↓ Palo Alto Firewall (Next-Gen)</div>
+                        <div style="background: rgba(59,130,246,0.3); padding: 10px; border-radius: 6px; margin: 8px 0;">
+                            <strong>App Zone:</strong> CBS (Temenos), Microservices (Kubernetes), Payment Gateway (10.2.0.0/16)
+                            <br/><em>VMware NSX micro-segmentation</em>
+                        </div>
+                        <div style="margin: 5px 0; text-align: center;">↓ Database Firewall</div>
+                        <div style="background: rgba(139,92,246,0.3); padding: 10px; border-radius: 6px; margin: 8px 0;">
+                            <strong>Data Zone:</strong> PostgreSQL cluster, Oracle DB, Redis cache (10.3.0.0/24)
+                            <br/><em>Encryption at rest: TDE, private subnets</em>
+                        </div>
+                        <div style="margin: 15px 0; text-align: center;">━━━━━━━━━━━━━━━━━━━━━</div>
+                        <div style="background: rgba(74,222,128,0.3); padding: 10px; border-radius: 6px; margin: 8px 0;">
+                            <strong>Management Zone:</strong> Jump hosts (Bastion), Monitoring (Prometheus, Grafana), Backup (10.4.0.0/24)
+                            <br/><em>Access: VPN + MFA + PAM (CyberArk)</em>
+                        </div>
+                    </div>
+                    <h4>Security Controls:</h4>
+                    <ul class="slide-list">
+                        <li><strong>5 firewalls:</strong> Edge, DMZ, Internal, Database, Management</li>
+                        <li><strong>IDS/IPS:</strong> Snort на всіх boundaries</li>
+                        <li><strong>SIEM:</strong> Splunk aggregates logs від всіх zones</li>
+                        <li><strong>Network TAPs:</strong> Traffic mirroring для security analytics</li>
+                    </ul>
+                </div>
+                <div class="alert alert-success">
+                    <strong>Result:</strong> Zero successful breaches протягом 5+ років operation
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 10: Network Monitoring -->
+    <div class="slide" id="slide10">
+        <div class="slide-container">
+            <div class="slide-cyber-security">
+                <h2>Network Security Monitoring</h2>
+                <h3>Continuous visibility та threat detection</h3>
+                <div style="margin: 20px 0;">
+                    <h4>Monitoring Stack:</h4>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 20px 0;">
+                        <div>
+                            <h4>Flow Analysis:</h4>
+                            <ul class="slide-list">
+                                <li><strong>NetFlow/sFlow:</strong> Traffic patterns</li>
+                                <li><strong>Tools:</strong> SolarWinds, Plixer Scrutinizer</li>
+                                <li><strong>Use case:</strong> Anomaly detection, bandwidth monitoring</li>
+                            </ul>
+                            <h4 style="margin-top: 15px;">Packet Capture:</h4>
+                            <ul class="slide-list">
+                                <li><strong>Full packet capture:</strong> Wireshark, tcpdump</li>
+                                <li><strong>Storage:</strong> 7-30 днів retention</li>
+                                <li><strong>Use case:</strong> Forensics, troubleshooting</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4>IDS/IPS:</h4>
+                            <ul class="slide-list">
+                                <li><strong>Signature-based:</strong> Known attack patterns</li>
+                                <li><strong>Anomaly-based:</strong> ML для unusual behavior</li>
+                                <li><strong>Tools:</strong> Snort, Suricata, Palo Alto Threat Prevention</li>
+                            </ul>
+                            <h4 style="margin-top: 15px;">SIEM Integration:</h4>
+                            <ul class="slide-list">
+                                <li><strong>Log aggregation:</strong> Firewall, IDS, servers</li>
+                                <li><strong>Correlation:</strong> Multi-source threat detection</li>
+                                <li><strong>Tools:</strong> Splunk, QRadar, Sentinel</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <h4>Key Metrics to Monitor:</h4>
+                    <ul class="slide-list">
+                        <li><strong>Firewall denies:</strong> Spike = potential scan/attack</li>
+                        <li><strong>Failed authentication attempts:</strong> Brute force detection</li>
+                        <li><strong>Unusual traffic patterns:</strong> Data exfiltration, C2 communication</li>
+                        <li><strong>Port scans:</strong> Reconnaissance activity</li>
+                        <li><strong>Geo-location anomalies:</strong> Access from unexpected countries</li>
+                    </ul>
+                </div>
+                <div class="cyber-threat-level threat-medium">⚠️ Average detection time: 207 днів. Network monitoring скорочує до &lt;24 годин</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 11: Compliance Requirements -->
+    <div class="slide" id="slide11">
+        <div class="slide-container">
+            <div class="slide-content">
+                <h2>Network Security Compliance</h2>
+                <h3>Регуляторні вимоги для банків</h3>
+                <div style="margin: 20px 0;">
+                    <h4>PCI DSS Requirements:</h4>
+                    <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 8px; margin: 15px 0;">
+                        <ul class="slide-list">
+                            <li><strong>Req 1:</strong> Install and maintain firewall configuration</li>
+                            <li><strong>Req 1.1:</strong> Network diagram документований та актуальний</li>
+                            <li><strong>Req 1.2:</strong> Firewall rules обмежують traffic між trusted/untrusted networks</li>
+                            <li><strong>Req 1.3:</strong> DMZ для public-facing systems</li>
+                            <li><strong>Req 1.4:</strong> Personal firewalls на mobile devices</li>
+                        </ul>
+                    </div>
+                    <h4>ISO 27001 Controls:</h4>
+                    <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 8px; margin: 15px 0;">
+                        <ul class="slide-list">
+                            <li><strong>A.13.1:</strong> Network security management</li>
+                            <li><strong>A.13.1.1:</strong> Network controls (firewalls, segmentation)</li>
+                            <li><strong>A.13.1.2:</strong> Security of network services</li>
+                            <li><strong>A.13.1.3:</strong> Segregation in networks (DMZ, zones)</li>
+                        </ul>
+                    </div>
+                    <h4>NIST Cybersecurity Framework:</h4>
+                    <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 8px; margin: 15px 0;">
+                        <ul class="slide-list">
+                            <li><strong>PR.AC-5:</strong> Network integrity захищений (segmentation, separation)</li>
+                            <li><strong>DE.CM-1:</strong> Network monitoring для anomalies</li>
+                            <li><strong>DE.AE-1:</strong> Network baseline встановлено для виявлення відхилень</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="alert alert-warning">
+                    <strong>Audit готовність:</strong> Network diagrams, firewall configs, change logs повинні бути актуальними
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 12: Підсумки -->
+    <div class="slide" id="slide12">
+        <div class="slide-container">
+            <div class="slide-content">
+                <h2>Підсумки: Network Segmentation</h2>
+                <h3>Ключові висновки</h3>
+                <ul class="slide-list">
+                    <li><strong>Security zones:</strong> Internet, DMZ, Application, Data, Management - 5 базових зон</li>
+                    <li><strong>DMZ критична:</strong> Three-tier DMZ з WAF, load balancers, API gateway</li>
+                    <li><strong>Firewall rules:</strong> Default Deny + Least Privilege + Stateful Inspection</li>
+                    <li><strong>Micro-segmentation:</strong> Workload-level ізоляція, блокує lateral movement (80% breaches)</li>
+                    <li><strong>SDN переваги:</strong> Dynamic policies, automation, visibility - 60% банків впроваджують</li>
+                    <li><strong>Zero Trust Network Access:</strong> "Never trust, always verify" - знижує attack surface на 70-80%</li>
+                    <li><strong>ZTNA components:</strong> IdP, ZTNA Gateway, Endpoint Agent, Policy Engine</li>
+                    <li><strong>Real architecture:</strong> 5+ firewalls, VMware NSX micro-segmentation, SIEM integration</li>
+                    <li><strong>Monitoring критичний:</strong> NetFlow, IDS/IPS, SIEM - скорочує detection time до &lt;24 годин</li>
+                    <li><strong>Compliance:</strong> PCI DSS, ISO 27001, NIST CSF вимагають proper segmentation</li>
+                </ul>
+                <div class="alert alert-success">
+                    <h4>Завершення Лекції 2.2:</h4>
+                    <p>Інтеграція CBS з зовнішніми системами - APIs, Messaging, Security, Network</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    let currentSlide = 1;
+    const totalSlides = 12;
+
+    function showSlide(n) {
+        const slides = document.querySelectorAll('.slide');
+        const progressBar = document.getElementById('progressBar');
+        const counter = document.getElementById('slideCounter');
+
+        if (n > totalSlides) currentSlide = 1;
+        if (n < 1) currentSlide = totalSlides;
+
+        slides.forEach(slide => slide.classList.remove('active'));
+        document.getElementById(`slide${currentSlide}`).classList.add('active');
+
+        progressBar.style.width = (currentSlide / totalSlides * 100) + '%';
+        counter.textContent = `${currentSlide} / ${totalSlides}`;
+    }
+
+    function nextSlide() {
+        currentSlide++;
+        showSlide(currentSlide);
+    }
+
+    function previousSlide() {
+        currentSlide--;
+        showSlide(currentSlide);
+    }
+
+    function toggleFullscreen() {
+        if (!document.fullscreenElement) {
+            document.documentElement.requestFullscreen();
+        } else {
+            document.exitFullscreen();
+        }
+    }
+
+    function exitPresentation() {
+        window.location.href = 'index.html';
+    }
+
+    // Keyboard navigation
+    document.addEventListener('keydown', function(e) {
+        switch(e.key) {
+            case 'ArrowRight':
+            case ' ':
+                nextSlide();
+                break;
+            case 'ArrowLeft':
+                previousSlide();
+                break;
+            case 'Escape':
+                exitPresentation();
+                break;
+            case 'f':
+            case 'F':
+                toggleFullscreen();
+                break;
+            case 'Home':
+                currentSlide = 1;
+                showSlide(currentSlide);
+                break;
+            case 'End':
+                currentSlide = totalSlides;
+                showSlide(currentSlide);
+                break;
+        }
+    });
+
+    // Touch events for mobile
+    let startX = null;
+    document.addEventListener('touchstart', function(e) {
+        startX = e.touches[0].clientX;
+    });
+
+    document.addEventListener('touchend', function(e) {
+        if (!startX) return;
+
+        const endX = e.changedTouches[0].clientX;
+        const diffX = startX - endX;
+
+        if (Math.abs(diffX) > 50) {
+            if (diffX > 0) {
+                nextSlide();
+            } else {
+                previousSlide();
+            }
+        }
+        startX = null;
+    });
+
+    // Initialize
+    showSlide(1);
+
+    // Save progress
+    function saveProgress() {
+        try {
+            const progress = {
+                currentSlide: currentSlide,
+                totalSlides: totalSlides,
+                timestamp: new Date().toISOString(),
+                topic: 'Network Segmentation for CBS'
+            };
+            localStorage.setItem('lecture_2_2_tema4_progress', JSON.stringify(progress));
+        } catch(e) {
+            console.log('Could not save progress');
+        }
+    }
+
+    // Load progress
+    function loadProgress() {
+        try {
+            const saved = localStorage.getItem('lecture_2_2_tema4_progress');
+            if (saved) {
+                const progress = JSON.parse(saved);
+                if (progress.currentSlide) {
+                    currentSlide = progress.currentSlide;
+                    showSlide(currentSlide);
+                }
+            }
+        } catch(e) {
+            console.log('Could not load progress');
+        }
+    }
+
+    window.addEventListener('beforeunload', saveProgress);
+    loadProgress();
+</script>
+</body>
+</html>
