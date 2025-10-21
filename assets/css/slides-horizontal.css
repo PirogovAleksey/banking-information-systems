@@ -1,0 +1,721 @@
+/* ================================================================
+   SLIDES-HORIZONTAL.CSS - Modern Horizontal Sliding Presentations
+   Banking Information Systems | GitHub Pages Compatible
+   Version: 2.0 | Based on modern best practices
+   ================================================================ */
+
+/* ----------------------------------------------------------------
+   BASE RESET
+   ---------------------------------------------------------------- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #1e3c72, #2a5298);
+    color: white;
+}
+
+/* ----------------------------------------------------------------
+   SLIDE CONTAINER - HORIZONTAL LAYOUT
+   ---------------------------------------------------------------- */
+.slide-container {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+    height: 100vh;
+    width: 100%;
+}
+
+.slide {
+    min-width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 60px;
+    position: relative;
+    background: linear-gradient(135deg, #1e3c72, #2a5298);
+    color: white;
+}
+
+/* ----------------------------------------------------------------
+   SLIDE COUNTER
+   ---------------------------------------------------------------- */
+.slide-counter-display {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    font-size: 20px;
+    opacity: 0.8;
+    font-weight: 300;
+}
+
+/* ----------------------------------------------------------------
+   TYPOGRAPHY
+   ---------------------------------------------------------------- */
+h1 {
+    font-size: 54px;
+    margin-bottom: 40px;
+    text-align: center;
+    font-weight: 600;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+h2 {
+    font-size: 36px;
+    margin-bottom: 30px;
+    text-align: center;
+    opacity: 0.95;
+    font-weight: 500;
+}
+
+h3 {
+    font-size: 28px;
+    margin-bottom: 20px;
+    color: #64b5f6;
+    font-weight: 500;
+}
+
+h4 {
+    font-size: 24px;
+    margin-bottom: 15px;
+    font-weight: 500;
+}
+
+/* ----------------------------------------------------------------
+   CONTENT LAYOUTS
+   ---------------------------------------------------------------- */
+.content-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+    width: 100%;
+    max-width: 1400px;
+    align-items: start;
+}
+
+.content-box {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    padding: 30px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.three-column {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    width: 100%;
+    max-width: 1400px;
+}
+
+.info-card {
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 15px;
+    padding: 25px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* ----------------------------------------------------------------
+   LISTS
+   ---------------------------------------------------------------- */
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+li {
+    margin: 15px 0;
+    padding-left: 35px;
+    position: relative;
+    font-size: 20px;
+    line-height: 1.6;
+}
+
+li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: #64b5f6;
+    font-weight: bold;
+    font-size: 22px;
+}
+
+.slide-list {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    margin: 15px 0;
+    padding-left: 20px;
+}
+
+.slide-list li {
+    margin: 8px 0;
+    color: white;
+}
+
+.slide-list li strong {
+    color: #64b5f6;
+}
+
+.slide-list ul {
+    margin: 8px 0 8px 20px;
+}
+
+.slide-list ul li {
+    font-size: 1rem;
+    margin: 5px 0;
+}
+
+/* ----------------------------------------------------------------
+   SPECIAL CONTENT BOXES
+   ---------------------------------------------------------------- */
+.security-feature {
+    background: linear-gradient(135deg, rgba(76, 175, 80, 0.2), rgba(76, 175, 80, 0.1));
+    border: 2px solid #4caf50;
+    border-radius: 12px;
+    padding: 25px;
+    margin: 15px 0;
+}
+
+.attack-vector {
+    background: linear-gradient(135deg, rgba(249, 115, 22, 0.2), rgba(249, 115, 22, 0.1));
+    border: 2px solid #f97316;
+    border-radius: 12px;
+    padding: 25px;
+    margin: 15px 0;
+}
+
+/* ----------------------------------------------------------------
+   DIAGRAMS AND FLOWS
+   ---------------------------------------------------------------- */
+.api-diagram {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    margin: 30px 0;
+}
+
+.api-layer {
+    background: rgba(255, 255, 255, 0.15);
+    padding: 20px 40px;
+    border-radius: 10px;
+    font-size: 22px;
+    font-weight: 500;
+    width: 400px;
+    text-align: center;
+    position: relative;
+}
+
+.api-layer::after {
+    content: '↓';
+    position: absolute;
+    bottom: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 30px;
+    opacity: 0.8;
+}
+
+.api-layer:last-child::after {
+    display: none;
+}
+
+.flow-diagram {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+    margin: 40px 0;
+}
+
+.flow-step {
+    background: rgba(255, 255, 255, 0.15);
+    padding: 20px 30px;
+    border-radius: 50px;
+    font-size: 20px;
+    font-weight: 500;
+    position: relative;
+}
+
+.flow-arrow {
+    font-size: 30px;
+    color: #ffd54f;
+}
+
+.event-flow {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 25px;
+    margin: 30px 0;
+}
+
+.event-block {
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+}
+
+.architecture-diagram {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    margin: 40px 0;
+    width: 100%;
+    max-width: 1200px;
+}
+
+.architecture-zone {
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 15px;
+    padding: 25px;
+    text-align: center;
+}
+
+.zone-title {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: #81c784;
+}
+
+/* ----------------------------------------------------------------
+   STATISTICS
+   ---------------------------------------------------------------- */
+.slide-statistics {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin: 20px 0;
+}
+
+.stat-item {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+    border-left: 4px solid #64b5f6;
+}
+
+.stat-value {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #64b5f6;
+    margin-bottom: 8px;
+}
+
+.stat-description {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 600;
+}
+
+/* ----------------------------------------------------------------
+   CODE BLOCKS
+   ---------------------------------------------------------------- */
+.code-block {
+    background: #0d1117;
+    border: 1px solid #30363d;
+    border-radius: 10px;
+    padding: 20px;
+    font-family: 'Courier New', monospace;
+    font-size: 16px;
+    color: #58a6ff;
+    margin: 20px 0;
+    overflow-x: auto;
+    text-align: left;
+}
+
+/* ----------------------------------------------------------------
+   TABLES
+   ---------------------------------------------------------------- */
+.comparison-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 30px 0;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.comparison-table th,
+.comparison-table td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.comparison-table th {
+    background: rgba(255, 255, 255, 0.1);
+    font-weight: 600;
+    font-size: 20px;
+}
+
+.comparison-table td {
+    font-size: 18px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 15px 0;
+    font-size: 0.95rem;
+}
+
+th {
+    background: #667eea;
+    color: white;
+    padding: 12px;
+    text-align: left;
+    font-weight: 600;
+}
+
+td {
+    padding: 10px 12px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+tr:nth-child(even) {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+/* ----------------------------------------------------------------
+   ALERTS
+   ---------------------------------------------------------------- */
+.alert {
+    padding: 15px;
+    border-radius: 6px;
+    margin: 15px 0;
+    font-size: 1rem;
+}
+
+.alert-info {
+    background: rgba(33, 150, 243, 0.2);
+    border-left: 4px solid #2196f3;
+    color: white;
+}
+
+.alert-success {
+    background: rgba(76, 175, 80, 0.2);
+    border-left: 4px solid #4caf50;
+    color: white;
+}
+
+.alert-warning {
+    background: rgba(255, 152, 0, 0.2);
+    border-left: 4px solid #ff9800;
+    color: white;
+}
+
+.alert-error {
+    background: rgba(245, 158, 11, 0.2);
+    border-left: 4px solid #f59e0b;
+    color: white;
+}
+
+/* ----------------------------------------------------------------
+   BANKING EXAMPLES
+   ---------------------------------------------------------------- */
+.slide-banking-example {
+    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+    color: white;
+    border-radius: 15px;
+    padding: 40px;
+    width: 100%;
+    text-align: center;
+    position: relative;
+}
+
+.slide-banking-example::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 15px;
+    z-index: 1;
+}
+
+.slide-banking-example > * {
+    position: relative;
+    z-index: 2;
+}
+
+.banking-logo {
+    font-size: 3rem;
+    margin-bottom: 15px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+.banking-title {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 25px;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+/* ----------------------------------------------------------------
+   CYBERSECURITY SLIDES
+   ---------------------------------------------------------------- */
+.slide-cyber-security {
+    background: linear-gradient(135deg, #1e40af 0%, #1e3a8a 100%);
+    color: white;
+    border-radius: 15px;
+    padding: 40px;
+    width: 100%;
+    position: relative;
+}
+
+.slide-cyber-security::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 15px;
+    z-index: 1;
+}
+
+.slide-cyber-security > * {
+    position: relative;
+    z-index: 2;
+}
+
+.slide-cyber-security h2 {
+    color: white;
+    border-bottom: 3px solid white;
+    text-align: center;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+.cyber-threat-level {
+    display: inline-block;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 1rem;
+    margin: 15px 0;
+    text-align: center;
+}
+
+.threat-high {
+    background: #7c3aed;
+    color: white;
+}
+
+.threat-medium {
+    background: #f57c00;
+    color: white;
+}
+
+.threat-low {
+    background: #388e3c;
+    color: white;
+}
+
+/* ----------------------------------------------------------------
+   NAVIGATION
+   ---------------------------------------------------------------- */
+.slide-navigation {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    background: rgba(0, 0, 0, 0.8);
+    border-radius: 25px;
+    padding: 10px 20px;
+    z-index: 1000;
+    backdrop-filter: blur(10px);
+}
+
+.slide-btn {
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 16px;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.slide-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.slide-counter {
+    color: white;
+    font-weight: bold;
+    font-size: 14px;
+    min-width: 60px;
+    text-align: center;
+}
+
+/* ----------------------------------------------------------------
+   PROGRESS BAR
+   ---------------------------------------------------------------- */
+.slide-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+}
+
+.slide-progress-bar {
+    height: 100%;
+    background: #4CAF50;
+    transition: width 0.3s ease;
+}
+
+/* ----------------------------------------------------------------
+   UTILITIES
+   ---------------------------------------------------------------- */
+.highlight {
+    color: #ffd54f;
+    font-weight: 600;
+}
+
+/* ----------------------------------------------------------------
+   FULLSCREEN MODE
+   ---------------------------------------------------------------- */
+/* Hide progress bar, slide counter, and navigation when in fullscreen */
+body.is-fullscreen .slide-progress,
+body.is-fullscreen .slide-counter-display,
+body.is-fullscreen .slide-navigation {
+    display: none !important;
+}
+
+/* ----------------------------------------------------------------
+   ANIMATIONS
+   ---------------------------------------------------------------- */
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+.pulse-animation {
+    animation: pulse 2s infinite;
+}
+
+/* ----------------------------------------------------------------
+   MOBILE RESPONSIVE
+   ---------------------------------------------------------------- */
+@media (max-width: 768px) {
+    .slide {
+        padding: 30px 20px;
+    }
+
+    h1 {
+        font-size: 2.5rem;
+    }
+
+    h2 {
+        font-size: 1.8rem;
+    }
+
+    h3 {
+        font-size: 1.5rem;
+    }
+
+    .content-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    .three-column {
+        grid-template-columns: 1fr;
+    }
+
+    .architecture-diagram {
+        grid-template-columns: 1fr;
+    }
+
+    .slide-navigation {
+        bottom: 10px;
+        padding: 8px 15px;
+    }
+
+    .slide-btn {
+        font-size: 14px;
+        padding: 6px 10px;
+    }
+
+    li {
+        font-size: 18px;
+    }
+
+    .code-block {
+        font-size: 14px;
+        padding: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 2rem;
+    }
+
+    h2 {
+        font-size: 1.6rem;
+    }
+
+    .slide {
+        padding: 20px 15px;
+    }
+
+    li {
+        font-size: 16px;
+    }
+
+    .stat-item {
+        padding: 15px;
+    }
+}
+
+/* ----------------------------------------------------------------
+   PRINT STYLES
+   ---------------------------------------------------------------- */
+@media print {
+    .slide-navigation,
+    .slide-progress {
+        display: none;
+    }
+
+    .slide-container {
+        display: block;
+    }
+
+    .slide {
+        position: relative;
+        display: block;
+        page-break-after: always;
+        min-width: 100%;
+        height: auto;
+    }
+}

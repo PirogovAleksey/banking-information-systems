@@ -281,9 +281,14 @@ class LandingPage {
             ` : ''}
         `;
 
-        card.addEventListener('click', () => {
-            this.openPractical(practical.moduleId, practical.id);
-        });
+        // Якщо є URL - робимо картку кліабельною
+        if (practical.url) {
+            card.style.cursor = 'pointer';
+            card.classList.add('card-clickable');
+            card.addEventListener('click', () => {
+                window.location.href = practical.url;
+            });
+        }
 
         return card;
     }
@@ -351,24 +356,6 @@ class LandingPage {
         alert(`📖 Лекція ${lectureId} модуля ${moduleId} буде доступна після створення структури`);
     }
 
-    /**
-     * Відкриття практичної роботи
-     * @param {number} moduleId - ID модуля
-     * @param {string} practicalId - ID практичної роботи
-     */
-    openPractical(moduleId, practicalId) {
-        console.log(`💻 Відкриття практичної ${moduleId}.${practicalId}`);
-
-        // Спеціальна обробка для існуючих практичних робіт
-        if (moduleId == 1 && practicalId === 'P1') {
-            // Переходимо на реальну сторінку практичної роботи
-            window.location.href = `modules/module${moduleId}/practicals/practical_1_1.html`;
-            return;
-        }
-
-        // TODO: Реальна навігація коли будуть створені практичні роботи
-        alert(`💻 Практична ${practicalId} модуля ${moduleId} буде доступна після створення структури`);
-    }
 
     /**
      * Відображення помилки завантаження
