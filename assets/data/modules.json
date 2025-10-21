@@ -26,7 +26,7 @@
       "estimatedHours": 9,
       "lectures": [
         {
-          "id": "1.1",
+          "id": "1",
           "title": "Архітектура банківських ІТ-систем",
           "description": "Еволюція банківських технологій та багаторівнева архітектура сучасних банківських систем",
           "duration": 80,
@@ -41,7 +41,7 @@
           "status": "planned"
         },
         {
-          "id": "1.2",
+          "id": "2",
           "title": "Центральні банківські системи (Core Banking)",
           "description": "Функціональність CBS, типи систем та підходи до захисту критичної інфраструктури",
           "duration": 80,
@@ -56,7 +56,7 @@
           "status": "planned"
         },
         {
-          "id": "1.3",
+          "id": "3",
           "title": "Банківські бази даних та їх захист",
           "description": "СУБД у банківському середовищі, транзакційна цілісність та методи захисту баз даних",
           "duration": 80,
@@ -73,11 +73,20 @@
       ],
       "practicalTasks": [
         {
-          "id": "1.P1",
-          "title": "Аналіз архітектури банківської системи",
+          "id": "P1",
+          "title": "Практична робота 1",
           "description": "Дослідження та документування архітектури реальної банківської системи з фокусом на безпеку",
           "estimatedTime": 160,
-          "type": "analysis"
+          "type": "analysis",
+          "url": "modules/module1/practicals/practical_1_1.html"
+        },
+        {
+          "id": "P2",
+          "title": "Практична робота 2",
+          "description": "Міграція даних між банківськими системами - планування та ризики міграції даних при заміні або модернізації Core Banking System",
+          "estimatedTime": 160,
+          "type": "planning",
+          "url": "modules/module1/practicals/practical_2.html"
         }
       ],
       "keywords": ["Banking Architecture", "Core Banking", "Database Security", "Threat Modeling"]
@@ -87,12 +96,12 @@
       "title": "Core Banking Systems",
       "description": "Детальне вивчення центральних банківських систем, їх функціональності, інтеграції та безпекових аспектів.",
       "emoji": "⚙️",
-      "status": "planned",
+      "status": "active",
       "difficulty": "intermediate",
       "estimatedHours": 9,
       "lectures": [
         {
-          "id": "2.1",
+          "id": "4",
           "title": "Функціональність та компоненти CBS",
           "description": "Глибокий аналіз компонентів CBS, управління клієнтськими даними та системи виявлення шахрайств",
           "duration": 80,
@@ -107,7 +116,7 @@
           "status": "planned"
         },
         {
-          "id": "2.2",
+          "id": "5",
           "title": "Інтеграція CBS з зовнішніми системами",
           "description": "APIs у банкінгу, event-driven архітектура та безпека інтеграційних рішень",
           "duration": 80,
@@ -119,10 +128,10 @@
           ],
           "securityFocus": "API security, OAuth, JWT токени",
           "bankingExamples": ["Open Banking API", "SWIFT Integration", "PSD2 API"],
-          "status": "planned"
+          "status": "active"
         },
         {
-          "id": "2.3",
+          "id": "6",
           "title": "CBS провайдери та їх security frameworks",
           "description": "Огляд провайдерів CBS, хмарні рішення та оцінка ризиків постачальників",
           "duration": 80,
@@ -134,16 +143,17 @@
           ],
           "securityFocus": "Vendor risk assessment",
           "bankingExamples": ["Temenos на AWS", "FIS Cloud Solutions", "Oracle Banking Cloud"],
-          "status": "planned"
+          "status": "active"
         }
       ],
-      "labs": [
+      "practicalTasks": [
         {
-          "id": "2.L1",
-          "title": "Налаштування безпеки CBS",
-          "description": "Практичне налаштування контролів доступу та моніторингу в симуляторі CBS",
+          "id": "P3",
+          "title": "Практична робота 3",
+          "description": "Розробка стратегії резервного копіювання та плану відновлення після катастроф для комерційного банку",
           "estimatedTime": 160,
-          "type": "hands-on"
+          "type": "planning",
+          "url": "modules/module2/practicals/practical_2.html"
         }
       ],
       "keywords": ["CBS", "API Security", "OAuth", "Vendor Risk", "Access Controls"]
@@ -158,7 +168,7 @@
       "estimatedHours": 9,
       "lectures": [
         {
-          "id": "3.1",
+          "id": "7",
           "title": "Картковий бізнес та платіжні мережі",
           "description": "Архітектура Visa/Mastercard, EMV стандарти та комплайнс PCI DSS",
           "duration": 80,
@@ -173,7 +183,7 @@
           "status": "planned"
         },
         {
-          "id": "3.2",
+          "id": "8",
           "title": "Електронні платежі та мобільний банкінг",
           "description": "Digital wallets, contactless платежі та безпека мобільних додатків",
           "duration": 80,
@@ -188,7 +198,7 @@
           "status": "planned"
         },
         {
-          "id": "3.3",
+          "id": "9",
           "title": "Криптовалюти та блокчейн у банкінгу",
           "description": "CBDC, DeFi інтеграція та регуляторні виклики криптовалютного банкінгу",
           "duration": 80,
@@ -203,22 +213,14 @@
           "status": "planned"
         }
       ],
-      "labs": [
-        {
-          "id": "3.L1",
-          "title": "PCI DSS Assessment",
-          "description": "Проведення оцінки відповідності PCI DSS для модельної платіжної системи",
-          "estimatedTime": 160,
-          "type": "assessment"
-        }
-      ],
       "practicalTasks": [
         {
-          "id": "3.P1",
-          "title": "Аналіз безпеки мобільного банкінгу",
+          "id": "P4",
+          "title": "Практична робота 4",
           "description": "Тестування безпеки мобільного додатка банку та аналіз виявлених вразливостей",
           "estimatedTime": 160,
-          "type": "security-analysis"
+          "type": "security-analysis",
+          "url": "modules/module3/practicals/practicat_3_1.html"
         }
       ],
       "keywords": ["Payment Systems", "PCI DSS", "Mobile Security", "Blockchain", "CBDC"]
@@ -233,7 +235,7 @@
       "estimatedHours": 9,
       "lectures": [
         {
-          "id": "4.1",
+          "id": "10",
           "title": "Кіберзагрози в банківській сфері",
           "description": "APT групи, banking trojans та комплексний аналіз векторів атак на банки",
           "duration": 80,
@@ -248,7 +250,7 @@
           "status": "planned"
         },
         {
-          "id": "4.2",
+          "id": "11",
           "title": "Системи захисту банківської інфраструктури",
           "description": "Zero trust архітектура, SIEM системи та операційні центри кібербезпеки",
           "duration": 80,
@@ -263,7 +265,7 @@
           "status": "planned"
         },
         {
-          "id": "4.3",
+          "id": "12",
           "title": "Пентестинг та vulnerability management",
           "description": "Red team операції, автоматизоване тестування безпеки та bug bounty програми",
           "duration": 80,
@@ -278,22 +280,6 @@
           "status": "planned"
         }
       ],
-      "labs": [
-        {
-          "id": "4.L1",
-          "title": "Incident Response Simulation",
-          "description": "Симуляція кіберінциденту в банку з повним циклом реагування",
-          "estimatedTime": 160,
-          "type": "simulation"
-        },
-        {
-          "id": "4.L2",
-          "title": "Penetration Testing Banking App",
-          "description": "Проведення пентесту банківського додатку в контрольованому середовищі",
-          "estimatedTime": 160,
-          "type": "penetration-testing"
-        }
-      ],
       "keywords": ["APT Groups", "Banking Trojans", "SOC", "Incident Response", "Penetration Testing"]
     },
     {
@@ -306,7 +292,7 @@
       "estimatedHours": 6,
       "lectures": [
         {
-          "id": "5.1",
+          "id": "13",
           "title": "AML/KYC автоматизація",
           "description": "Machine learning для виявлення шахрайств та системи моніторингу транзакцій",
           "duration": 80,
@@ -321,7 +307,7 @@
           "status": "planned"
         },
         {
-          "id": "5.2",
+          "id": "14",
           "title": "Regulatory reporting та compliance automation",
           "description": "Автоматизована регуляторна звітність та забезпечення цілісності даних",
           "duration": 80,
@@ -336,15 +322,6 @@
           "status": "planned"
         }
       ],
-      "practicalTasks": [
-        {
-          "id": "5.P1",
-          "title": "Розробка AML процедур",
-          "description": "Створення автоматизованих процедур протидії відмиванню коштів з використанням ML",
-          "estimatedTime": 160,
-          "type": "development"
-        }
-      ],
       "keywords": ["RegTech", "AML", "KYC", "GDPR", "Machine Learning", "Compliance Automation"]
     },
     {
@@ -357,7 +334,7 @@
       "estimatedHours": 9,
       "lectures": [
         {
-          "id": "6.1",
+          "id": "15",
           "title": "Актуальні кіберінциденти у фінсекторі",
           "description": "Case studies найбільших кіберінцидентів та уроки, винесені з них",
           "duration": 80,
@@ -372,7 +349,7 @@
           "status": "planned"
         },
         {
-          "id": "6.2",
+          "id": "16",
           "title": "Emerging threats та майбутнє кібербезпеки",
           "description": "AI-powered атаки, квантові загрози та post-quantum криптографія",
           "duration": 80,
@@ -387,7 +364,7 @@
           "status": "planned"
         },
         {
-          "id": "6.3",
+          "id": "17",
           "title": "Міжнародна співпраця у кіберзахисті банків",
           "description": "Information sharing, міжнародне реагування та регуляторна співпраця",
           "duration": 80,
@@ -402,51 +379,28 @@
           "status": "planned"
         }
       ],
-      "labs": [
-        {
-          "id": "6.L1",
-          "title": "Digital Forensics Investigation",
-          "description": "Розслідування симульованого кіберінциденту в банку з використанням forensics tools",
-          "estimatedTime": 160,
-          "type": "forensics"
-        }
-      ],
-      "practicalTasks": [
-        {
-          "id": "6.P1",
-          "title": "Cyber Resilience Assessment",
-          "description": "Оцінка кіберстійкості банку згідно міжнародних frameworks",
-          "estimatedTime": 160,
-          "type": "assessment"
-        }
-      ],
       "keywords": ["Cyber Incidents", "Digital Forensics", "Quantum Threats", "International Cooperation", "FS-ISAC"]
     }
   ],
   "progressTracking": {
     "totalProgress": {
       "completed": 0,
-      "inProgress": 1,
-      "planned": 5
+      "inProgress": 2,
+      "planned": 4
     },
     "lectureProgress": {
       "completed": 0,
       "total": 18
     },
-    "labProgress": {
-      "completed": 0,
-      "total": 6
-    },
     "practicalProgress": {
       "completed": 0,
-      "total": 6
+      "total": 4
     }
   },
   "assessment": {
     "weightings": {
       "lectures": 40,
-      "labs": 35,
-      "practicalTasks": 20,
+      "practicalTasks": 55,
       "participation": 5
     },
     "gradingScale": {

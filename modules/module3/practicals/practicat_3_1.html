@@ -1,0 +1,1743 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Практична робота 4: Аналіз безпеки мобільного банкінгу</title>
+
+    <!-- Основні стилі сайту -->
+    <link rel="stylesheet" href="../../../assets/css/main.css">
+
+    <style>
+        /* Додаткові стилі для практичної роботи */
+        .task-box {
+            background: #f8f9fa;
+            border-left: 4px solid #0066cc;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        .info-box {
+            background: #e8f4fd;
+            border: 1px solid #bee5eb;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 6px;
+        }
+
+        .warning-box {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 6px;
+            color: #856404;
+        }
+
+        .success-box {
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 6px;
+        }
+
+        .danger-box {
+            background: #f8d7da;
+            border: 1px solid #f5c6cb;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 6px;
+            color: #721c24;
+        }
+
+        .code-block {
+            background: #2d2d2d;
+            color: #10b981;
+            padding: 20px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            overflow-x: auto;
+            margin: 15px 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+
+        .badge {
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+
+        .badge-critical {
+            background-color: #dc3545;
+            color: #fff;
+        }
+
+        .badge-high {
+            background-color: #fd7e14;
+            color: #fff;
+        }
+
+        .badge-medium {
+            background-color: #ffc107;
+            color: #000;
+        }
+
+        .badge-low {
+            background-color: #28a745;
+            color: #fff;
+        }
+
+        .download-btn {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 10px 10px 10px 0;
+            background-color: #0066cc;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            transition: background-color 0.3s;
+        }
+
+        .download-btn:hover {
+            background-color: #0052a3;
+        }
+
+        .mobile-screen {
+            width: 320px;
+            height: 568px;
+            border: 16px solid #333;
+            border-radius: 36px;
+            margin: 20px auto;
+            overflow: hidden;
+            background: #fff;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+            position: relative;
+        }
+
+        .mobile-screen::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 150px;
+            height: 20px;
+            background: #333;
+            border-radius: 0 0 15px 15px;
+        }
+
+        .attack-flow {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin: 20px 0;
+            padding: 20px;
+            background: linear-gradient(to right, #f8f9fa, #e9ecef);
+            border-radius: 8px;
+        }
+
+        .attack-step {
+            text-align: center;
+            flex: 1;
+        }
+
+        .attack-arrow {
+            font-size: 24px;
+            color: #dc3545;
+            margin: 0 10px;
+        }
+    </style>
+</head>
+<body class="page practical-page">
+<div class="container">
+    <!-- Breadcrumb Navigation -->
+    <nav class="breadcrumb">
+        <a href="../../../index.html">🏠 Головна</a>
+        <span class="breadcrumb-separator">→</span>
+        <a href="../../index.html">Модуль 1</a>
+        <span class="breadcrumb-separator">→</span>
+        <span>Практична робота 4</span>
+    </nav>
+
+    <!-- Header -->
+    <header class="section-header text-center mb-8">
+        <h1 class="section-title">📱 Практична робота №4</h1>
+        <h2 class="section-subtitle">Аналіз безпеки мобільного банкінгу</h2>
+        <p class="text-secondary">Комплексне дослідження безпеки мобільних додатків українських банків з фокусом на виявлення вразливостей та розробку рекомендацій</p>
+    </header>
+
+    <!-- Main Content -->
+    <main class="practical-content">
+        <!-- Info Card -->
+        <div class="card mb-8">
+            <div class="card-header">
+                <h3 class="card-title">📋 Загальна інформація</h3>
+            </div>
+            <div class="card-body">
+                <div class="grid grid-cols-2 gap-4 mb-6">
+                    <div>
+                        <strong>Модуль:</strong> 1 - Основи банківських ІТ-систем
+                    </div>
+                    <div>
+                        <strong>Спеціальність:</strong> Кібербезпека, 3 курс
+                    </div>
+                </div>
+
+                <div class="alert alert-info">
+                    <div class="alert-title">🎯 Мета роботи</div>
+                    <ol>
+                        <li>Провести комплексний аналіз безпеки мобільного додатку українського банку</li>
+                        <li>Дослідити архітектуру та механізми захисту мобільного банкінгу</li>
+                        <li>Виявити потенційні вразливості згідно OWASP Mobile Top 10</li>
+                        <li>Проаналізувати методи автентифікації та захисту транзакцій</li>
+                        <li>Розробити рекомендації щодо підвищення рівня безпеки</li>
+                        <li>Створити threat model для мобільного банкінгу</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+
+        <!-- Download Section -->
+        <div class="download-section">
+            <h3>📥 Завантажити матеріали</h3>
+            <p>Отримайте повну версію практичної роботи з усіма шаблонами та інструментами</p>
+            <div>
+                <a href="practical_2_mobile_banking_security.md" class="download-btn" download>
+                    📄 Markdown версія
+                </a>
+                <a href="practical_2_mobile_banking_security.pdf" class="download-btn">
+                    📑 PDF версія
+                </a>
+                <a href="mobile_testing_tools.zip" class="download-btn">
+                    🔧 Інструменти аналізу
+                </a>
+            </div>
+        </div>
+
+        <!-- Content Sections -->
+        <section>
+            <h2>📚 Теоретична база</h2>
+
+            <div class="task-box">
+                <h4>Архітектура мобільного банкінгу</h4>
+
+                <h5>Типова архітектура мобільного додатку банку:</h5>
+                <pre class="code-block">
+┌─────────────────────────────────────┐
+│         Mobile Application          │
+│  ┌─────────────────────────────┐   │
+│  │     UI/UX Layer             │   │
+│  ├─────────────────────────────┤   │
+│  │     Business Logic          │   │
+│  ├─────────────────────────────┤   │
+│  │     Security Module         │   │
+│  │  • Biometric Auth           │   │
+│  │  • Certificate Pinning      │   │
+│  │  • Root Detection           │   │
+│  │  • Obfuscation              │   │
+│  ├─────────────────────────────┤   │
+│  │     Local Storage           │   │
+│  │  • Encrypted DB             │   │
+│  │  • Keychain/Keystore        │   │
+│  └─────────────────────────────┘   │
+└─────────────────────────────────────┘
+                    ↕
+            [TLS 1.3 / mTLS]
+                    ↕
+┌─────────────────────────────────────┐
+│          API Gateway                │
+│  • Authentication & Authorization   │
+│  • Rate Limiting                    │
+│  • Request Validation               │
+└─────────────────────────────────────┘
+                    ↕
+┌─────────────────────────────────────┐
+│         Backend Services            │
+│  • Account Management               │
+│  • Transaction Processing           │
+│  • Fraud Detection                  │
+│  • Notification Service             │
+└─────────────────────────────────────┘
+                </pre>
+
+                <h5>Ключові компоненти безпеки мобільного банкінгу:</h5>
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Компонент</th>
+                        <th>Призначення</th>
+                        <th>Технології</th>
+                        <th>Загрози</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td><strong>Автентифікація</strong></td>
+                        <td>Ідентифікація користувача</td>
+                        <td>• Biometrics (FaceID, TouchID)<br>• PIN/Pattern<br>• Push notifications<br>• SMS OTP</td>
+                        <td>• Brute force<br>• Biometric spoofing<br>• SIM swapping</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Шифрування даних</strong></td>
+                        <td>Захист конфіденційної інформації</td>
+                        <td>• AES-256<br>• RSA-2048<br>• iOS Keychain<br>• Android Keystore</td>
+                        <td>• Weak encryption<br>• Key exposure<br>• Side-channel attacks</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Захист від реверс-інжинірингу</strong></td>
+                        <td>Ускладнення аналізу коду</td>
+                        <td>• ProGuard/R8<br>• DexGuard<br>• Swift obfuscation<br>• Anti-debugging</td>
+                        <td>• Code analysis<br>• Runtime manipulation<br>• Memory dumps</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Безпека мережі</strong></td>
+                        <td>Захист даних під час передачі</td>
+                        <td>• Certificate pinning<br>• TLS 1.3<br>• Mutual TLS<br>• HPKP</td>
+                        <td>• MITM attacks<br>• SSL stripping<br>• Certificate bypass</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Детекція компрометації</strong></td>
+                        <td>Виявлення небезпечного середовища</td>
+                        <td>• Root/Jailbreak detection<br>• Emulator detection<br>• Debugger detection<br>• Hook detection</td>
+                        <td>• Rooted devices<br>• Runtime attacks<br>• Frida/Xposed</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Захист транзакцій</strong></td>
+                        <td>Підтвердження операцій</td>
+                        <td>• Transaction signing<br>• Dynamic linking<br>• QR codes<br>• Push confirmations</td>
+                        <td>• Transaction tampering<br>• Replay attacks<br>• Session hijacking</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="task-box">
+                <h4>OWASP Mobile Top 10 (2024)</h4>
+
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Rank</th>
+                        <th>Вразливість</th>
+                        <th>Опис</th>
+                        <th>Приклади в банкінгу</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>M1</td>
+                        <td><strong>Improper Credential Usage</strong></td>
+                        <td>Неправильне використання облікових даних</td>
+                        <td>• Hardcoded API keys<br>• Weak password policies<br>• Insecure token storage</td>
+                    </tr>
+                    <tr>
+                        <td>M2</td>
+                        <td><strong>Inadequate Supply Chain Security</strong></td>
+                        <td>Недостатня безпека ланцюга постачання</td>
+                        <td>• Vulnerable SDKs<br>• Malicious libraries<br>• Compromised dependencies</td>
+                    </tr>
+                    <tr>
+                        <td>M3</td>
+                        <td><strong>Insecure Authentication/Authorization</strong></td>
+                        <td>Слабка автентифікація та авторизація</td>
+                        <td>• Weak biometric implementation<br>• Session management flaws<br>• Missing MFA</td>
+                    </tr>
+                    <tr>
+                        <td>M4</td>
+                        <td><strong>Insufficient Input/Output Validation</strong></td>
+                        <td>Недостатня валідація вводу/виводу</td>
+                        <td>• SQL injection in search<br>• XSS in WebViews<br>• Path traversal</td>
+                    </tr>
+                    <tr>
+                        <td>M5</td>
+                        <td><strong>Insecure Communication</strong></td>
+                        <td>Незахищена комунікація</td>
+                        <td>• Missing certificate pinning<br>• Cleartext transmission<br>• Weak TLS configuration</td>
+                    </tr>
+                    <tr>
+                        <td>M6</td>
+                        <td><strong>Inadequate Privacy Controls</strong></td>
+                        <td>Недостатній контроль приватності</td>
+                        <td>• PII data leakage<br>• Excessive permissions<br>• Analytics tracking</td>
+                    </tr>
+                    <tr>
+                        <td>M7</td>
+                        <td><strong>Insufficient Binary Protections</strong></td>
+                        <td>Недостатній захист бінарного коду</td>
+                        <td>• No obfuscation<br>• Missing anti-tampering<br>• Easy reverse engineering</td>
+                    </tr>
+                    <tr>
+                        <td>M8</td>
+                        <td><strong>Security Misconfiguration</strong></td>
+                        <td>Помилки конфігурації безпеки</td>
+                        <td>• Debug mode enabled<br>• Backup allowed<br>• Exported components</td>
+                    </tr>
+                    <tr>
+                        <td>M9</td>
+                        <td><strong>Insecure Data Storage</strong></td>
+                        <td>Незахищене зберігання даних</td>
+                        <td>• Unencrypted databases<br>• Sensitive data in logs<br>• Insecure SharedPreferences</td>
+                    </tr>
+                    <tr>
+                        <td>M10</td>
+                        <td><strong>Insufficient Cryptography</strong></td>
+                        <td>Недостатня криптографія</td>
+                        <td>• Weak algorithms<br>• Hardcoded keys<br>• Predictable random numbers</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section>
+            <h2>🔬 Хід роботи</h2>
+
+            <div class="task-box">
+                <h4>Частина 1: Вибір та підготовка об'єкта дослідження</h4>
+
+                <h5>Завдання 1.1: Обрати мобільний додаток банку для аналізу</h5>
+
+                <p><strong>Що потрібно зробити:</strong></p>
+                <p>Оберіть мобільний додаток одного з українських банків для детального аналізу безпеки. Завантажте додаток та підготуйте середовище для дослідження.</p>
+
+                <p><strong>Рекомендовані додатки для аналізу:</strong></p>
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Банк</th>
+                        <th>Додаток</th>
+                        <th>Особливості</th>
+                        <th>Платформи</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td><strong>ПриватБанк</strong></td>
+                        <td>Privat24</td>
+                        <td>• Найбільша база користувачів<br>• Багато функцій<br>• QR-платежі<br>• Біометрична автентифікація</td>
+                        <td>iOS, Android</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Monobank</strong></td>
+                        <td>mono</td>
+                        <td>• Тільки мобільний банк<br>• Відкрите API<br>• Сучасний tech stack<br>• Активна спільнота</td>
+                        <td>iOS, Android</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Ощадбанк</strong></td>
+                        <td>Ощад 24/7</td>
+                        <td>• Державний банк<br>• Інтеграція з Дія<br>• Масштабна інфраструктура</td>
+                        <td>iOS, Android</td>
+                    </tr>
+                    <tr>
+                        <td><strong>ПУМБ</strong></td>
+                        <td>ПУМБ Online</td>
+                        <td>• Touch/Face ID<br>• Міжнародні перекази<br>• Cashback система</td>
+                        <td>iOS, Android</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Райффайзен</strong></td>
+                        <td>Raiffeisen Online</td>
+                        <td>• Міжнародний банк<br>• Високі стандарти безпеки<br>• Push-підтвердження</td>
+                        <td>iOS, Android</td>
+                    </tr>
+                    </tbody>
+                </table>
+
+                <div class="warning-box">
+                    <strong>⚠️ ВАЖЛИВО:</strong> Всі дослідження проводяться ВИКЛЮЧНО в навчальних цілях на власних тестових акаунтах. Заборонено:
+                    <ul>
+                        <li>Намагатися отримати доступ до чужих акаунтів</li>
+                        <li>Проводити атаки на інфраструктуру банку</li>
+                        <li>Використовувати виявлені вразливості в злочинних цілях</li>
+                        <li>Порушувати Terms of Service додатку</li>
+                    </ul>
+                    Порушення цих правил тягне за собою кримінальну відповідальність згідно ст. 361 КК України!
+                </div>
+
+                <h5>Завдання 1.2: Підготовка середовища для аналізу</h5>
+
+                <p><strong>Необхідні інструменти та налаштування:</strong></p>
+
+                <div class="info-box">
+                    <h6>Для статичного аналізу:</h6>
+                    <ul>
+                        <li><strong>APKTool</strong> - декомпіляція Android додатків
+                            <pre class="code-block">apktool d app.apk -o output_folder</pre>
+                        </li>
+                        <li><strong>jadx</strong> - декомпілятор Java/Kotlin коду
+                            <pre class="code-block">jadx -d output app.apk</pre>
+                        </li>
+                        <li><strong>MobSF (Mobile Security Framework)</strong> - автоматизований аналіз
+                            <pre class="code-block">docker run -it -p 8000:8000 opensecurity/mobile-security-framework-mobsf</pre>
+                        </li>
+                        <li><strong>Hopper/IDA Pro</strong> - для iOS додатків (опціонально)</li>
+                    </ul>
+                </div>
+
+                <div class="info-box">
+                    <h6>Для динамічного аналізу:</h6>
+                    <ul>
+                        <li><strong>Android Studio з емулятором</strong> - тестове середовище</li>
+                        <li><strong>Burp Suite / OWASP ZAP</strong> - перехоплення трафіку
+                            <pre class="code-block"># Налаштування проксі в емуляторі
+adb shell settings put global http_proxy 192.168.1.100:8080</pre>
+                        </li>
+                        <li><strong>Frida</strong> - runtime instrumentation (для досвідчених)
+                            <pre class="code-block">frida -U -f com.bank.app -l script.js --no-pause</pre>
+                        </li>
+                        <li><strong>adb (Android Debug Bridge)</strong> - взаємодія з пристроєм
+                            <pre class="code-block"># Основні команди
+adb devices
+adb install app.apk
+adb logcat | grep "BankApp"
+adb shell pm list packages</pre>
+                        </li>
+                    </ul>
+                </div>
+
+                <p><strong>Налаштування безпечного тестового середовища:</strong></p>
+                <ol>
+                    <li><strong>Використовуйте ізольоване середовище:</strong>
+                        <ul>
+                            <li>Окрема віртуальна машина або емулятор</li>
+                            <li>Тестовий Google/Apple акаунт</li>
+                            <li>Тестовий банківський акаунт (якщо можливо)</li>
+                        </ul>
+                    </li>
+                    <li><strong>Налаштуйте мережеву ізоляцію:</strong>
+                        <ul>
+                            <li>Використовуйте VPN або окрему мережу</li>
+                            <li>Налаштуйте проксі для перехоплення трафіку</li>
+                            <li>Встановіть CA сертифікат для HTTPS interception</li>
+                        </ul>
+                    </li>
+                    <li><strong>Документуйте всі дії:</strong>
+                        <ul>
+                            <li>Робіть скріншоти кожного кроку</li>
+                            <li>Зберігайте логи та network traces</li>
+                            <li>Фіксуйте версії додатку та ОС</li>
+                        </ul>
+                    </li>
+                </ol>
+
+                <p><strong>Результат виконання:</strong></p>
+                <ul>
+                    <li>Обраний додаток з обґрунтуванням вибору</li>
+                    <li>Налаштоване тестове середовище</li>
+                    <li>Встановлені та налаштовані інструменти аналізу</li>
+                    <li>Створений тестовий акаунт (якщо можливо)</li>
+                </ul>
+            </div>
+
+            <div class="task-box">
+                <h4>Частина 2: Статичний аналіз додатку</h4>
+
+                <h5>Завдання 2.1: Аналіз структури та компонентів додатку</h5>
+
+                <p><strong>Що потрібно зробити:</strong></p>
+                <p>Провести декомпіляцію додатку та проаналізувати його структуру, компоненти, permissions та потенційні вразливості в коді.</p>
+
+                <p><strong>Покрокова інструкція для Android:</strong></p>
+                <ol>
+                    <li><strong>Отримання APK файлу:</strong>
+                        <pre class="code-block"># Спосіб 1: З пристрою
+adb shell pm list packages | grep bank
+adb shell pm path com.bank.app
+adb pull /data/app/com.bank.app/base.apk
+
+# Спосіб 2: З онлайн сервісів (APKPure, APKMirror)</pre>
+                    </li>
+
+                    <li><strong>Декомпіляція з APKTool:</strong>
+                        <pre class="code-block">apktool d banking_app.apk -o decompiled_app/
+cd decompiled_app/
+ls -la  # Огляд структури</pre>
+                    </li>
+
+                    <li><strong>Аналіз AndroidManifest.xml:</strong>
+                        <div class="info-box">
+                            <h6>Що шукати в маніфесті:</h6>
+                            <ul>
+                                <li><strong>Permissions:</strong> Які дозволи запитує додаток?
+                                    <pre class="code-block">&lt;uses-permission android:name="android.permission.CAMERA"/&gt;
+&lt;uses-permission android:name="android.permission.READ_PHONE_STATE"/&gt;
+&lt;uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/&gt;</pre>
+                                </li>
+                                <li><strong>Exported components:</strong> Чи є відкриті активності/сервіси?
+                                    <pre class="code-block">&lt;activity android:name=".MainActivity" android:exported="true"&gt;</pre>
+                                </li>
+                                <li><strong>Backup settings:</strong> Чи дозволено резервне копіювання?
+                                    <pre class="code-block">android:allowBackup="false"
+android:fullBackupContent="false"</pre>
+                                </li>
+                                <li><strong>Debug mode:</strong> Чи вимкнено debug режим?
+                                    <pre class="code-block">android:debuggable="false"</pre>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <li><strong>Аналіз коду з jadx:</strong>
+                        <pre class="code-block">jadx -d jadx_output banking_app.apk
+# Відкрийте jadx-gui для візуального аналізу</pre>
+                    </li>
+                </ol>
+
+                <p><strong>Чек-лист для статичного аналізу:</strong></p>
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Категорія</th>
+                        <th>Що перевірити</th>
+                        <th>Інструменти</th>
+                        <th>Red Flags</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td><strong>Hardcoded Secrets</strong></td>
+                        <td>API ключі, паролі, токени</td>
+                        <td>grep, jadx search</td>
+                        <td>• API_KEY = "sk_live_..."<br>• password = "admin123"<br>• secret_key в коді</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Криптографія</strong></td>
+                        <td>Алгоритми, режими, ключі</td>
+                        <td>jadx, CryptoGuard</td>
+                        <td>• ECB mode<br>• MD5/SHA1<br>• Hardcoded keys<br>• Custom crypto</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Обфускація</strong></td>
+                        <td>Захист коду від аналізу</td>
+                        <td>jadx, ProGuard mapping</td>
+                        <td>• Читабельні імена класів<br>• Відсутність обфускації<br>• Debug symbols</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Логування</strong></td>
+                        <td>Витік чутливих даних</td>
+                        <td>grep "Log."</td>
+                        <td>• Log.d з паролями<br>• printStackTrace()<br>• Verbose logging</td>
+                    </tr>
+                    <tr>
+                        <td><strong>WebView</strong></td>
+                        <td>Налаштування безпеки</td>
+                        <td>grep "WebView"</td>
+                        <td>• setJavaScriptEnabled(true)<br>• addJavascriptInterface<br>• No SSL error handling</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Certificate Pinning</strong></td>
+                        <td>Захист від MITM</td>
+                        <td>Network Security Config</td>
+                        <td>• Відсутність pinning<br>• Trust all certificates<br>• No hostname verification</td>
+                    </tr>
+                    </tbody>
+                </table>
+
+                <h5>Завдання 2.2: Пошук чутливої інформації</h5>
+
+                <p><strong>Що шукати в декомпільованому коді:</strong></p>
+
+                <div class="code-block">
+                    # Пошук потенційних секретів
+                    grep -r "api_key\|apikey\|secret\|password\|pwd\|token" decompiled_app/
+                    grep -r "http://\|https://" decompiled_app/ | grep -v "schemas"
+
+                    # Пошук криптографічних ключів
+                    grep -r "AES\|DES\|RSA\|KEY\|IV" decompiled_app/
+
+                    # Пошук чутливих URL
+                    grep -r "amazonaws\|firebase\|api\." decompiled_app/
+
+                    # Пошук SQL запитів
+                    grep -r "SELECT\|INSERT\|UPDATE\|DELETE" decompiled_app/
+
+                    # Пошук небезпечних функцій
+                    grep -r "exec\|Runtime\|ProcessBuilder" jadx_output/</div>
+
+                <p><strong>Аналіз ресурсів та assets:</strong></p>
+                <ul>
+                    <li>Перевірте <code>res/values/strings.xml</code> на наявність секретів</li>
+                    <li>Проаналізуйте <code>assets/</code> на наявність конфігураційних файлів</li>
+                    <li>Перевірте <code>res/raw/</code> на сертифікати та ключі</li>
+                    <li>Пошукайте Firebase конфігурації (<code>google-services.json</code>)</li>
+                </ul>
+
+                <h5>Завдання 2.3: Використання MobSF для автоматизованого аналізу</h5>
+
+                <p><strong>Запуск та використання Mobile Security Framework:</strong></p>
+                <ol>
+                    <li>Запустіть MobSF в Docker:
+                        <pre class="code-block">docker run -it -p 8000:8000 opensecurity/mobile-security-framework-mobsf</pre>
+                    </li>
+                    <li>Відкрийте http://localhost:8000 в браузері</li>
+                    <li>Завантажте APK файл додатку</li>
+                    <li>Дочекайтеся завершення аналізу</li>
+                    <li>Вивчіть згенерований звіт</li>
+                </ol>
+
+                <p><strong>Інтерпретація результатів MobSF:</strong></p>
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Розділ звіту</th>
+                        <th>Що аналізувати</th>
+                        <th>Критичні знахідки</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>Security Score</td>
+                        <td>Загальна оцінка безпеки</td>
+                        <td>Score < 50/100 вказує на серйозні проблеми</td>
+                    </tr>
+                    <tr>
+                        <td>Permissions</td>
+                        <td>Надмірні дозволи</td>
+                        <td>READ_SMS, READ_CONTACTS без обґрунтування</td>
+                    </tr>
+                    <tr>
+                        <td>Manifest Analysis</td>
+                        <td>Проблеми конфігурації</td>
+                        <td>allowBackup=true, debuggable=true</td>
+                    </tr>
+                    <tr>
+                        <td>Code Analysis</td>
+                        <td>Вразливості в коді</td>
+                        <td>SQL Injection, Weak Crypto, Hardcoded Secrets</td>
+                    </tr>
+                    <tr>
+                        <td>Binary Analysis</td>
+                        <td>Захист бінарного файлу</td>
+                        <td>No obfuscation, No anti-debugging</td>
+                    </tr>
+                    </tbody>
+                </table>
+
+                <p><strong>Результат виконання:</strong></p>
+                <ul>
+                    <li>Декомпільований код додатку</li>
+                    <li>Аналіз AndroidManifest.xml з висновками</li>
+                    <li>Список виявлених hardcoded secrets (якщо є)</li>
+                    <li>Оцінка рівня обфускації коду</li>
+                    <li>Звіт MobSF з коментарями</li>
+                    <li>Таблиця виявлених вразливостей за OWASP Mobile Top 10</li>
+                </ul>
+            </div>
+
+            <div class="task-box">
+                <h4>Частина 3: Динамічний аналіз додатку</h4>
+
+                <h5>Завдання 3.1: Аналіз мережевого трафіку</h5>
+
+                <p><strong>Що потрібно зробити:</strong></p>
+                <p>Налаштувати перехоплення HTTPS трафіку між мобільним додатком та сервером для аналізу API запитів, автентифікації та передачі даних.</p>
+
+                <div class="danger-box">
+                    <strong>🔴 КРИТИЧНО ВАЖЛИВО:</strong> Перехоплення трафіку проводиться ТІЛЬКИ для власного тестового акаунту в навчальних цілях. Перехоплення чужого трафіку є кримінальним злочином!
+                </div>
+
+                <p><strong>Налаштування Burp Suite для Android:</strong></p>
+                <ol>
+                    <li><strong>Налаштування Burp Proxy:</strong>
+                        <ul>
+                            <li>Proxy → Options → Add: Bind to address: All interfaces, Port: 8080</li>
+                            <li>Отримайте IP адресу вашого комп'ютера: <code>ipconfig</code> (Windows) або <code>ifconfig</code> (Linux/Mac)</li>
+                        </ul>
+                    </li>
+
+                    <li><strong>Встановлення CA сертифікату на Android:</strong>
+                        <pre class="code-block"># Експорт сертифікату з Burp
+Proxy → Options → Import/Export CA Certificate → Export → DER format
+
+# Конвертація для Android
+openssl x509 -inform DER -in burp.der -out burp.pem
+openssl x509 -inform PEM -subject_hash_old -in burp.pem | head -1
+mv burp.pem 9a5ba575.0  # Використайте отриманий хеш
+
+# Встановлення на емулятор (root required)
+adb push 9a5ba575.0 /sdcard/
+adb shell
+su
+mount -o rw,remount /system
+cp /sdcard/9a5ba575.0 /system/etc/security/cacerts/
+chmod 644 /system/etc/security/cacerts/9a5ba575.0</pre>
+                    </li>
+
+                    <li><strong>Налаштування проксі на пристрої:</strong>
+                        <pre class="code-block"># Для емулятора
+Settings → Network → Advanced → Manual proxy
+Host: [IP вашого комп'ютера]
+Port: 8080
+
+# Або через adb
+adb shell settings put global http_proxy 192.168.1.100:8080</pre>
+                    </li>
+                </ol>
+
+                <p><strong>Обхід Certificate Pinning (навчальні цілі):</strong></p>
+                <div class="info-box">
+                    <h6>Методи обходу pinning:</h6>
+                    <ul>
+                        <li><strong>Для Android 7.0+ (Network Security Config):</strong>
+                            <pre class="code-block"># Декомпілюйте APK
+# Додайте в res/xml/network_security_config.xml:
+&lt;network-security-config&gt;
+    &lt;base-config&gt;
+        &lt;trust-anchors&gt;
+            &lt;certificates src="user" /&gt;
+            &lt;certificates src="system" /&gt;
+        &lt;/trust-anchors&gt;
+    &lt;/base-config&gt;
+&lt;/network-security-config&gt;
+
+# Перекомпілюйте та підпишіть APK</pre>
+                        </li>
+                        <li><strong>Використання Frida (потребує root):</strong>
+                            <pre class="code-block"># JavaScript скрипт для Frida
+Java.perform(function() {
+    var CertificatePinner = Java.use('okhttp3.CertificatePinner');
+    CertificatePinner.check.overload('java.lang.String', 'java.util.List').implementation = function() {
+        console.log('Certificate Pinning bypassed');
+    };
+});</pre>
+                        </li>
+                        <li><strong>Objection Framework:</strong>
+                            <pre class="code-block">objection -g com.bank.app explore
+android sslpinning disable</pre>
+                        </li>
+                    </ul>
+                </div>
+
+                <p><strong>Що аналізувати в перехопленому трафіку:</strong></p>
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Аспект</th>
+                        <th>Що перевірити</th>
+                        <th>Потенційні проблеми</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td><strong>Автентифікація</strong></td>
+                        <td>• Процес логіну<br>• Формат токенів<br>• Session management</td>
+                        <td>• Weak passwords allowed<br>• Tokens в GET запитах<br>• No token expiration</td>
+                    </tr>
+                    <tr>
+                        <td><strong>API Security</strong></td>
+                        <td>• Структура endpoints<br>• Методи авторизації<br>• Rate limiting</td>
+                        <td>• Predictable IDs<br>• Missing authorization<br>• Information disclosure</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Data Transmission</strong></td>
+                        <td>• Шифрування даних<br>• Чутлива інформація<br>• Headers</td>
+                        <td>• PII in URLs<br>• Sensitive data in logs<br>• Missing encryption</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Error Handling</strong></td>
+                        <td>• Повідомлення про помилки<br>• Stack traces<br>• Debug info</td>
+                        <td>• Verbose errors<br>• Internal paths<br>• Technology disclosure</td>
+                    </tr>
+                    </tbody>
+                </table>
+
+                <h5>Завдання 3.2: Runtime аналіз та тестування безпеки</h5>
+
+                <p><strong>Тестування механізмів захисту:</strong></p>
+
+                <div class="info-box">
+                    <h6>1. Root/Jailbreak Detection:</h6>
+                    <pre class="code-block"># Перевірка реакції на root
+# Встановіть додаток на rooted емулятор
+# Спостерігайте за поведінкою:
+adb logcat | grep -i "root\|detect\|security"
+
+# Типові методи детекції:
+# - Перевірка su binary
+# - Перевірка build.prop
+# - Перевірка встановлених root apps
+# - Перевірка mount points</pre>
+                </div>
+
+                <div class="info-box">
+                    <h6>2. Screen Recording Protection:</h6>
+                    <pre class="code-block"># Спробуйте записати екран під час роботи з додатком
+adb shell screenrecord /sdcard/demo.mp4
+# Чи блокується запис чутливих екранів?</pre>
+                </div>
+
+                <div class="info-box">
+                    <h6>3. Copy/Paste Protection:</h6>
+                    <p>Перевірте чи можна копіювати:</p>
+                    <ul>
+                        <li>Номери карток</li>
+                        <li>Паролі</li>
+                        <li>CVV коди</li>
+                        <li>Суми транзакцій</li>
+                    </ul>
+                </div>
+
+                <div class="info-box">
+                    <h6>4. Session Management:</h6>
+                    <ul>
+                        <li>Як довго діє сесія?</li>
+                        <li>Чи є автоматичний logout?</li>
+                        <li>Чи можна використати токен на іншому пристрої?</li>
+                        <li>Що відбувається при зміні мережі?</li>
+                    </ul>
+                </div>
+
+                <h5>Завдання 3.3: Аналіз локального сховища даних</h5>
+
+                <p><strong>Дослідження збережених даних:</strong></p>
+
+                <pre class="code-block"># Отримання даних додатку (потребує root або debuggable app)
+adb shell
+su
+cd /data/data/com.bank.app/
+
+# Перегляд структури
+ls -la
+# Типові директорії:
+# - databases/ - SQLite бази даних
+# - shared_prefs/ - SharedPreferences XML файли
+# - files/ - внутрішні файли додатку
+# - cache/ - кеш
+
+# Копіювання для аналізу
+adb pull /data/data/com.bank.app/ app_data/</pre>
+
+                <p><strong>Що шукати в локальному сховищі:</strong></p>
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Тип даних</th>
+                        <th>Локація</th>
+                        <th>Інструменти</th>
+                        <th>Red Flags</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td><strong>Databases</strong></td>
+                        <td>/databases/</td>
+                        <td>SQLite Browser</td>
+                        <td>• Unencrypted PII<br>• Card numbers<br>• Transaction history<br>• Passwords</td>
+                    </tr>
+                    <tr>
+                        <td><strong>SharedPreferences</strong></td>
+                        <td>/shared_prefs/</td>
+                        <td>Text editor</td>
+                        <td>• Tokens in plaintext<br>• User credentials<br>• API keys<br>• PIN codes</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Cache</strong></td>
+                        <td>/cache/</td>
+                        <td>File manager</td>
+                        <td>• Sensitive images<br>• Cached responses<br>• Temporary files</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Logs</strong></td>
+                        <td>logcat</td>
+                        <td>adb logcat</td>
+                        <td>• Passwords in logs<br>• API responses<br>• Stack traces<br>• Debug info</td>
+                    </tr>
+                    </tbody>
+                </table>
+
+                <p><strong>Перевірка Keystore/Keychain:</strong></p>
+                <pre class="code-block"># Android Keystore
+# Перевірте чи використовується Android Keystore для зберігання ключів
+grep -r "KeyStore\|KeyGenerator" jadx_output/
+
+# iOS Keychain (для iOS додатків)
+# Використовуйте Keychain Dumper або objection</pre>
+
+                <p><strong>Результат виконання:</strong></p>
+                <ul>
+                    <li>Налаштоване середовище для перехоплення трафіку</li>
+                    <li>Аналіз 10+ API запитів з описом</li>
+                    <li>Виявлені проблеми в передачі даних</li>
+                    <li>Результати тестування захисних механізмів</li>
+                    <li>Аналіз локального сховища даних</li>
+                    <li>Скріншоти ключових знахідок</li>
+                </ul>
+            </div>
+
+            <div class="task-box">
+                <h4>Частина 4: Threat Modeling для мобільного банкінгу</h4>
+
+                <h5>Завдання 4.1: Створення моделі загроз</h5>
+
+                <p><strong>Що потрібно зробити:</strong></p>
+                <p>Розробити комплексну модель загроз для мобільного банкінгу, враховуючи всі вектори атак та акторів загроз.</p>
+
+                <p><strong>Актори загроз (Threat Actors):</strong></p>
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Актор</th>
+                        <th>Мотивація</th>
+                        <th>Можливості</th>
+                        <th>Типові атаки</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td><strong>Script Kiddies</strong></td>
+                        <td>Розвага, навчання</td>
+                        <td>Низькі</td>
+                        <td>• Використання готових експлойтів<br>• Брутфорс паролів<br>• Фішинг</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Кіберзлочинці</strong></td>
+                        <td>Фінансова вигода</td>
+                        <td>Середні-Високі</td>
+                        <td>• Banking trojans<br>• SIM swapping<br>• Account takeover<br>• Money mules</td>
+                    </tr>
+                    <tr>
+                        <td><strong>APT групи</strong></td>
+                        <td>Шпигунство, саботаж</td>
+                        <td>Дуже високі</td>
+                        <td>• Supply chain attacks<br>• Zero-days<br>• Persistent malware<br>• Targeted phishing</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Інсайдери</strong></td>
+                        <td>Помста, корупція</td>
+                        <td>Високі (доступ)</td>
+                        <td>• Data theft<br>• Sabotage<br>• Privilege abuse<br>• Information leakage</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Конкуренти</strong></td>
+                        <td>Конкурентна перевага</td>
+                        <td>Середні</td>
+                        <td>• Corporate espionage<br>• DDoS атаки<br>• Reputation damage</td>
+                    </tr>
+                    </tbody>
+                </table>
+
+                <p><strong>Дерево атак (Attack Tree) для мобільного банкінгу:</strong></p>
+                <pre class="code-block">
+Мета: Крадіжка коштів з рахунку
+│
+├── [1] Компрометація облікового запису
+│   ├── [1.1] Крадіжка credentials
+│   │   ├── [1.1.1] Фішинг
+│   │   ├── [1.1.2] Keylogger/Malware
+│   │   ├── [1.1.3] Соціальна інженерія
+│   │   └── [1.1.4] Data breach
+│   ├── [1.2] Session hijacking
+│   │   ├── [1.2.1] Token theft
+│   │   ├── [1.2.2] MITM атака
+│   │   └── [1.2.3] XSS (in WebView)
+│   └── [1.3] Обхід автентифікації
+│       ├── [1.3.1] Biometric spoofing
+│       ├── [1.3.2] SMS OTP interception
+│       └── [1.3.3] Brute force
+│
+├── [2] Маніпуляція транзакціями
+│   ├── [2.1] Transaction tampering
+│   │   ├── [2.1.1] Parameter manipulation
+│   │   └── [2.1.2] Replay attack
+│   ├── [2.2] Malware on device
+│   │   ├── [2.2.1] Banking trojan
+│   │   ├── [2.2.2] Overlay attack
+│   │   └── [2.2.3] Accessibility abuse
+│   └── [2.3] API exploitation
+│       ├── [2.3.1] IDOR
+│       └── [2.3.2] Race condition
+│
+└── [3] Соціальна інженерія
+    ├── [3.1] Vishing (голосовий фішинг)
+    ├── [3.2] Smishing (SMS фішинг)
+    └── [3.3] Pretexting
+                </pre>
+
+                <h5>Завдання 4.2: STRIDE аналіз для мобільного додатку</h5>
+
+                <p><strong>Застосування STRIDE до компонентів мобільного банкінгу:</strong></p>
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Компонент</th>
+                        <th>S</th>
+                        <th>T</th>
+                        <th>R</th>
+                        <th>I</th>
+                        <th>D</th>
+                        <th>E</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td><strong>Login Screen</strong></td>
+                        <td class="badge badge-high">✓</td>
+                        <td class="badge badge-medium">✓</td>
+                        <td class="badge badge-low">✓</td>
+                        <td class="badge badge-medium">✓</td>
+                        <td class="badge badge-high">✓</td>
+                        <td class="badge badge-low">-</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Biometric Auth</strong></td>
+                        <td class="badge badge-high">✓</td>
+                        <td class="badge badge-low">-</td>
+                        <td class="badge badge-medium">✓</td>
+                        <td class="badge badge-low">-</td>
+                        <td class="badge badge-medium">✓</td>
+                        <td class="badge badge-medium">✓</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Transaction Module</strong></td>
+                        <td class="badge badge-medium">✓</td>
+                        <td class="badge badge-critical">✓</td>
+                        <td class="badge badge-critical">✓</td>
+                        <td class="badge badge-high">✓</td>
+                        <td class="badge badge-medium">✓</td>
+                        <td class="badge badge-high">✓</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Local Storage</strong></td>
+                        <td class="badge badge-low">-</td>
+                        <td class="badge badge-high">✓</td>
+                        <td class="badge badge-low">-</td>
+                        <td class="badge badge-critical">✓</td>
+                        <td class="badge badge-low">-</td>
+                        <td class="badge badge-medium">✓</td>
+                    </tr>
+                    <tr>
+                        <td><strong>API Communication</strong></td>
+                        <td class="badge badge-high">✓</td>
+                        <td class="badge badge-high">✓</td>
+                        <td class="badge badge-medium">✓</td>
+                        <td class="badge badge-high">✓</td>
+                        <td class="badge badge-high">✓</td>
+                        <td class="badge badge-low">-</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Push Notifications</strong></td>
+                        <td class="badge badge-medium">✓</td>
+                        <td class="badge badge-medium">✓</td>
+                        <td class="badge badge-low">-</td>
+                        <td class="badge badge-medium">✓</td>
+                        <td class="badge badge-low">-</td>
+                        <td class="badge badge-low">-</td>
+                    </tr>
+                    </tbody>
+                </table>
+
+                <p>Легенда: ✓ - загроза релевантна, - - загроза не застосовна</p>
+
+                <h5>Завдання 4.3: Сценарії атак (Attack Scenarios)</h5>
+
+                <p><strong>Детальний опис топ-5 сценаріїв атак:</strong></p>
+
+                <div class="attack-flow">
+                    <div class="attack-step">
+                        <strong>1. Фішинг</strong><br>
+                        Підроблений email/SMS
+                    </div>
+                    <span class="attack-arrow">→</span>
+                    <div class="attack-step">
+                        <strong>2. Fake App</strong><br>
+                        Користувач встановлює
+                    </div>
+                    <span class="attack-arrow">→</span>
+                    <div class="attack-step">
+                        <strong>3. Credentials</strong><br>
+                        Введення даних
+                    </div>
+                    <span class="attack-arrow">→</span>
+                    <div class="attack-step">
+                        <strong>4. Account Takeover</strong><br>
+                        Доступ до рахунку
+                    </div>
+                </div>
+
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Сценарій</th>
+                        <th>Опис атаки</th>
+                        <th>Ймовірність</th>
+                        <th>Вплив</th>
+                        <th>Контрзаходи</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td><strong>Banking Trojan</strong></td>
+                        <td>Malware перехоплює дані входу через overlay screens</td>
+                        <td class="badge badge-high">Висока</td>
+                        <td class="badge badge-critical">Критичний</td>
+                        <td>• Overlay detection<br>• App authenticity checks<br>• User education</td>
+                    </tr>
+                    <tr>
+                        <td><strong>SIM Swapping</strong></td>
+                        <td>Перенесення номера для перехоплення SMS OTP</td>
+                        <td class="badge badge-medium">Середня</td>
+                        <td class="badge badge-critical">Критичний</td>
+                        <td>• Push-based OTP<br>• Additional verification<br>• Carrier security</td>
+                    </tr>
+                    <tr>
+                        <td><strong>MITM Attack</strong></td>
+                        <td>Перехоплення трафіку через fake WiFi або proxy</td>
+                        <td class="badge badge-medium">Середня</td>
+                        <td class="badge badge-high">Високий</td>
+                        <td>• Certificate pinning<br>• Mutual TLS<br>• VPN usage</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Reverse Engineering</strong></td>
+                        <td>Аналіз коду для пошуку вразливостей</td>
+                        <td class="badge badge-high">Висока</td>
+                        <td class="badge badge-medium">Середній</td>
+                        <td>• Code obfuscation<br>• Anti-tampering<br>• White-box crypto</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Device Compromise</strong></td>
+                        <td>Root/Jailbreak для обходу захисту</td>
+                        <td class="badge badge-medium">Середня</td>
+                        <td class="badge badge-high">Високий</td>
+                        <td>• Root detection<br>• Attestation API<br>• Runtime protection</td>
+                    </tr>
+                    </tbody>
+                </table>
+
+                <p><strong>Результат виконання:</strong></p>
+                <ul>
+                    <li>Діаграма архітектури загроз</li>
+                    <li>Таблиця акторів загроз з оцінкою ризиків</li>
+                    <li>Attack Tree для основних цілей атакуючих</li>
+                    <li>STRIDE матриця для всіх компонентів</li>
+                    <li>Детальний опис 5+ сценаріїв атак</li>
+                    <li>Карта контрзаходів для кожної загрози</li>
+                </ul>
+            </div>
+
+            <div class="task-box">
+                <h4>Частина 5: Розробка рекомендацій з безпеки</h4>
+
+                <h5>Завдання 5.1: Технічні рекомендації</h5>
+
+                <p><strong>Що потрібно зробити:</strong></p>
+                <p>На основі проведеного аналізу розробити конкретні технічні рекомендації для підвищення безпеки мобільного додатку банку.</p>
+
+                <p><strong>Структура рекомендацій за категоріями:</strong></p>
+
+                <div class="info-box">
+                    <h6>1. Захист на рівні додатку (Application Security)</h6>
+
+                    <table>
+                        <thead>
+                        <tr>
+                            <th>Рекомендація</th>
+                            <th>Реалізація</th>
+                            <th>Пріоритет</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td><strong>Обфускація коду</strong></td>
+                            <td>• ProGuard/R8 для Android<br>• SwiftShield для iOS<br>• String encryption<br>• Control flow obfuscation</td>
+                            <td class="badge badge-critical">Критичний</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Anti-tampering</strong></td>
+                            <td>• Checksum validation<br>• Signature verification<br>• Anti-debugging protection<br>• Runtime Application Self-Protection (RASP)</td>
+                            <td class="badge badge-high">Високий</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Secure coding</strong></td>
+                            <td>• Input validation<br>• Output encoding<br>• Parameterized queries<br>• Error handling</td>
+                            <td class="badge badge-critical">Критичний</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="info-box">
+                    <h6>2. Криптографічний захист (Cryptographic Protection)</h6>
+
+                    <pre class="code-block">// Рекомендовані алгоритми та параметри:
+
+// Симетричне шифрування
+AES-256-GCM (з автентифікацією)
+ChaCha20-Poly1305 (альтернатива)
+
+// Асиметричне шифрування
+RSA-2048 minimum (краще RSA-3072)
+ECC P-256 або вище
+
+// Хешування
+SHA-256 або SHA-3
+PBKDF2 (100,000+ iterations)
+Argon2id для паролів
+
+// Key Management
+- Android Keystore API
+- iOS Keychain Services
+- Hardware Security Module (HSM)
+- Key rotation кожні 90 днів</pre>
+                </div>
+
+                <div class="info-box">
+                    <h6>3. Мережева безпека (Network Security)</h6>
+
+                    <ul>
+                        <li><strong>Certificate Pinning:</strong>
+                            <pre class="code-block">// Android (Network Security Config)
+&lt;pin-set expiration="2025-01-01"&gt;
+    &lt;pin digest="SHA-256"&gt;AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=&lt;/pin&gt;
+    &lt;pin digest="SHA-256"&gt;BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB=&lt;/pin&gt;
+&lt;/pin-set&gt;
+
+// iOS (TrustKit)
+let trustKitConfig = [
+    kTSKPinnedDomains: [
+        "api.bank.com": [
+            kTSKPublicKeyHashes: [
+                "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=",
+                "BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB="
+            ]
+        ]
+    ]
+]</pre>
+                        </li>
+                        <li><strong>Mutual TLS (mTLS)</strong> для критичних операцій</li>
+                        <li><strong>TLS 1.3</strong> only, відключити старіші версії</li>
+                        <li><strong>Perfect Forward Secrecy (PFS)</strong> cipher suites</li>
+                    </ul>
+                </div>
+
+                <div class="info-box">
+                    <h6>4. Автентифікація та авторизація</h6>
+
+                    <table>
+                        <thead>
+                        <tr>
+                            <th>Метод</th>
+                            <th>Рекомендації</th>
+                            <th>Додаткові заходи</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td><strong>Біометрія</strong></td>
+                            <td>• BiometricPrompt API<br>• CryptoObject binding<br>• Liveness detection</td>
+                            <td>• Fallback на PIN<br>• Re-authentication для критичних операцій</td>
+                        </tr>
+                        <tr>
+                            <td><strong>MFA/2FA</strong></td>
+                            <td>• TOTP (RFC 6238)<br>• Push notifications<br>• FIDO2/WebAuthn</td>
+                            <td>• Backup codes<br>• Risk-based authentication</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Session Management</strong></td>
+                            <td>• Short-lived tokens (15 min)<br>• Refresh token rotation<br>• Device binding</td>
+                            <td>• Idle timeout (5 min)<br>• Concurrent session control</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="info-box">
+                    <h6>5. Захист даних (Data Protection)</h6>
+
+                    <ul>
+                        <li><strong>Data at Rest:</strong>
+                            <ul>
+                                <li>SQLCipher для баз даних</li>
+                                <li>EncryptedSharedPreferences (Android)</li>
+                                <li>iOS Data Protection API (Complete Protection)</li>
+                                <li>File-based encryption з унікальними ключами</li>
+                            </ul>
+                        </li>
+                        <li><strong>Data in Transit:</strong>
+                            <ul>
+                                <li>End-to-end encryption для чутливих даних</li>
+                                <li>Message-level encryption поверх TLS</li>
+                                <li>Signed requests для цілісності</li>
+                            </ul>
+                        </li>
+                        <li><strong>Data in Use:</strong>
+                            <ul>
+                                <li>Memory protection (guard pages)</li>
+                                <li>Clear sensitive data після використання</li>
+                                <li>Disable screenshots для чутливих екранів</li>
+                                <li>Clipboard protection</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+
+                <h5>Завдання 5.2: Організаційні рекомендації</h5>
+
+                <p><strong>Security Development Lifecycle (SDL):</strong></p>
+
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Фаза</th>
+                        <th>Активності</th>
+                        <th>Інструменти</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td><strong>Design</strong></td>
+                        <td>• Threat modeling<br>• Security requirements<br>• Architecture review</td>
+                        <td>• Microsoft Threat Modeling Tool<br>• OWASP Threat Dragon</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Development</strong></td>
+                        <td>• Secure coding standards<br>• Code reviews<br>• Static analysis</td>
+                        <td>• SonarQube<br>• Checkmarx<br>• Fortify</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Testing</strong></td>
+                        <td>• SAST/DAST<br>• Penetration testing<br>• Security regression</td>
+                        <td>• MobSF<br>• Burp Suite<br>• OWASP ZAP</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Deployment</strong></td>
+                        <td>• Security configuration<br>• Certificate management<br>• Monitoring setup</td>
+                        <td>• Ansible<br>• HashiCorp Vault</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Maintenance</strong></td>
+                        <td>• Incident response<br>• Patch management<br>• Security updates</td>
+                        <td>• SIEM<br>• Vulnerability scanners</td>
+                    </tr>
+                    </tbody>
+                </table>
+
+                <h5>Завдання 5.3: Compliance та стандарти</h5>
+
+                <p><strong>Відповідність регуляторним вимогам:</strong></p>
+
+                <div class="info-box">
+                    <h6>Обов'язкові стандарти для мобільного банкінгу в Україні:</h6>
+                    <ul>
+                        <li><strong>НБУ Постанова №95</strong> - Кібербезпека в банківській системі
+                            <ul>
+                                <li>Обов'язкова двофакторна автентифікація</li>
+                                <li>Шифрування чутливих даних</li>
+                                <li>Логування всіх операцій</li>
+                                <li>Incident response процедури</li>
+                            </ul>
+                        </li>
+                        <li><strong>PCI DSS</strong> - для карткових операцій
+                            <ul>
+                                <li>Не зберігати CVV2/CVC2</li>
+                                <li>Маскування PAN (показувати тільки останні 4 цифри)</li>
+                                <li>Tokenization для карткових даних</li>
+                            </ul>
+                        </li>
+                        <li><strong>PSD2 Strong Customer Authentication (SCA)</strong>
+                            <ul>
+                                <li>Два з трьох факторів: knowledge, possession, inherence</li>
+                                <li>Dynamic linking для транзакцій</li>
+                                <li>Exemptions для low-risk операцій</li>
+                            </ul>
+                        </li>
+                        <li><strong>GDPR</strong> - захист персональних даних
+                            <ul>
+                                <li>Privacy by Design</li>
+                                <li>Data minimization</li>
+                                <li>Right to erasure</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+
+                <p><strong>Security Checklist для релізу:</strong></p>
+                <table>
+                    <thead>
+                    <tr>
+                        <th>☐</th>
+                        <th>Категорія</th>
+                        <th>Перевірка</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>☐</td>
+                        <td>Code Security</td>
+                        <td>Пройдено SAST без критичних вразливостей</td>
+                    </tr>
+                    <tr>
+                        <td>☐</td>
+                        <td>Binary Protection</td>
+                        <td>Включена обфускація та anti-tampering</td>
+                    </tr>
+                    <tr>
+                        <td>☐</td>
+                        <td>Network Security</td>
+                        <td>Certificate pinning налаштовано та протестовано</td>
+                    </tr>
+                    <tr>
+                        <td>☐</td>
+                        <td>Data Protection</td>
+                        <td>Всі чутливі дані зашифровані</td>
+                    </tr>
+                    <tr>
+                        <td>☐</td>
+                        <td>Authentication</td>
+                        <td>MFA працює для всіх критичних операцій</td>
+                    </tr>
+                    <tr>
+                        <td>☐</td>
+                        <td>Logging</td>
+                        <td>Відсутні чутливі дані в логах</td>
+                    </tr>
+                    <tr>
+                        <td>☐</td>
+                        <td>Configuration</td>
+                        <td>Debug mode вимкнено, backup заборонено</td>
+                    </tr>
+                    <tr>
+                        <td>☐</td>
+                        <td>Testing</td>
+                        <td>Проведено penetration testing</td>
+                    </tr>
+                    <tr>
+                        <td>☐</td>
+                        <td>Compliance</td>
+                        <td>Відповідність НБУ/PCI DSS підтверджена</td>
+                    </tr>
+                    </tbody>
+                </table>
+
+                <p><strong>Результат виконання:</strong></p>
+                <ul>
+                    <li>15+ конкретних технічних рекомендацій з прикладами реалізації</li>
+                    <li>План впровадження SDL для мобільної розробки</li>
+                    <li>Матриця відповідності стандартам</li>
+                    <li>Security checklist для QA команди</li>
+                    <li>Оцінка вартості впровадження рекомендацій</li>
+                    <li>Пріоритизація заходів (Quick Wins vs Long-term)</li>
+                </ul>
+            </div>
+        </section>
+
+        <section>
+            <h2>📊 Вимоги до звіту</h2>
+
+            <div class="task-box">
+                <h3>Структура звіту</h3>
+
+                <h4>1. Executive Summary (1 сторінка)</h4>
+                <ul>
+                    <li>Ключові знахідки</li>
+                    <li>Критичні вразливості</li>
+                    <li>Основні рекомендації</li>
+                </ul>
+
+                <h4>2. Методологія аналізу (2-3 сторінки)</h4>
+                <ul>
+                    <li>Об'єкт дослідження</li>
+                    <li>Використані інструменти</li>
+                    <li>Обмеження аналізу</li>
+                </ul>
+
+                <h4>3. Результати статичного аналізу (5-6 сторінок)</h4>
+                <ul>
+                    <li>Структура додатку</li>
+                    <li>Аналіз permissions</li>
+                    <li>Виявлені вразливості в коді</li>
+                    <li>Оцінка захищеності</li>
+                </ul>
+
+                <h4>4. Результати динамічного аналізу (5-6 сторінок)</h4>
+                <ul>
+                    <li>Аналіз мережевого трафіку</li>
+                    <li>Runtime поведінка</li>
+                    <li>Локальне сховище даних</li>
+                </ul>
+
+                <h4>5. Threat Modeling (4-5 сторінок)</h4>
+                <ul>
+                    <li>Модель загроз</li>
+                    <li>STRIDE аналіз</li>
+                    <li>Сценарії атак</li>
+                </ul>
+
+                <h4>6. Рекомендації (4-5 сторінок)</h4>
+                <ul>
+                    <li>Технічні заходи</li>
+                    <li>Організаційні заходи</li>
+                    <li>План впровадження</li>
+                </ul>
+
+                <h4>7. Висновки (1 сторінка)</h4>
+
+                <h4>8. Додатки</h4>
+                <ul>
+                    <li>Скріншоти</li>
+                    <li>Фрагменти коду</li>
+                    <li>Детальні логи</li>
+                </ul>
+            </div>
+
+            <div class="warning-box">
+                <h4>Важливі вимоги:</h4>
+                <ul>
+                    <li>Обсяг: 20-30 сторінок основного тексту</li>
+                    <li>Обов'язкові скріншоти всіх знахідок</li>
+                    <li>Приховати чутливу інформацію (токени, ключі)</li>
+                    <li>Дотримуватись етичних норм</li>
+                    <li>Не публікувати звіт у відкритому доступі</li>
+                </ul>
+            </div>
+        </section>
+
+        <section>
+            <h2>✅ Критерії оцінювання</h2>
+
+            <div class="success-box">
+                <h4>Розподіл балів (максимум 100):</h4>
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Критерій</th>
+                        <th>Макс. бали</th>
+                        <th>Опис</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>Статичний аналіз</td>
+                        <td>20</td>
+                        <td>Повнота декомпіляції та аналізу коду</td>
+                    </tr>
+                    <tr>
+                        <td>Динамічний аналіз</td>
+                        <td>20</td>
+                        <td>Глибина runtime тестування</td>
+                    </tr>
+                    <tr>
+                        <td>Threat Modeling</td>
+                        <td>15</td>
+                        <td>Якість моделі загроз</td>
+                    </tr>
+                    <tr>
+                        <td>Виявлені вразливості</td>
+                        <td>20</td>
+                        <td>Кількість та критичність знахідок</td>
+                    </tr>
+                    <tr>
+                        <td>Рекомендації</td>
+                        <td>15</td>
+                        <td>Практичність та обґрунтованість</td>
+                    </tr>
+                    <tr>
+                        <td>Оформлення звіту</td>
+                        <td>10</td>
+                        <td>Структура, читабельність, візуалізація</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="info-box">
+                <h4>Бонусні бали (+10):</h4>
+                <ul>
+                    <li>Використання advanced техн (Frida, IDA Pro)</li>
+                    <li>Аналіз iOS додатку додатково до Android</li>
+                    <li>Створення PoC експлойту (етично!)</li>
+                    <li>Автоматизація тестування</li>
+                </ul>
+            </div>
+        </section>
+
+        <section>
+            <h2>📚 Рекомендовані ресурси</h2>
+
+            <div class="grid grid-cols-2 gap-4">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">📖 Література</h4>
+                    </div>
+                    <div class="card-body">
+                        <ol>
+                            <li>"Mobile Application Security" - Himanshu Dwivedi</li>
+                            <li>"Android Security Internals" - Nikolay Elenkov</li>
+                            <li>"iOS Application Security" - David Thiel</li>
+                            <li>"The Mobile Application Hacker's Handbook" - Dominic Chell</li>
+                            <li>"OWASP Mobile Security Testing Guide"</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">🔗 Онлайн ресурси</h4>
+                    </div>
+                    <div class="card-body">
+                        <ul>
+                            <li><a href="https://owasp.org/www-project-mobile-top-10/" target="_blank">OWASP Mobile Top 10</a></li>
+                            <li><a href="https://mobile-security.gitbook.io/mobile-security-testing-guide/" target="_blank">MSTG - Mobile Security Testing Guide</a></li>
+                            <li><a href="https://github.com/OWASP/owasp-mastg" target="_blank">OWASP MASTG GitHub</a></li>
+                            <li><a href="https://frida.re/" target="_blank">Frida Documentation</a></li>
+                            <li><a href="https://mobsf.github.io/docs/" target="_blank">MobSF Documentation</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section>
+            <h2>❓ Часті запитання</h2>
+
+            <div class="task-box">
+                <h4>1. Чи можна аналізувати закордонний банківський додаток?</h4>
+                <p>Так, але рекомендується обрати український для кращого розуміння локального контексту та вимог НБУ.</p>
+
+                <h4>2. Що робити якщо додаток має сильний захист від аналізу?</h4>
+                <p>Документуйте всі спроби обходу, опишіть захисні механізми - це теж важлива частина аналізу.</p>
+
+                <h4>3. Чи обов'язково використовувати root/jailbreak?</h4>
+                <p>Ні, багато аналізу можна провести без root. Але з root доступом аналіз буде глибшим.</p>
+
+                <h4>4. Як довго зберігати дані аналізу?</h4>
+                <p>Видаліть всі чутливі дані одразу після здачі роботи. Не зберігайте токени, паролі, персональні дані.</p>
+
+                <h4>5. Що робити якщо знайшли критичну вразливість?</h4>
+                <p>НЕ експлуатуйте її! Опишіть в звіті та повідомте викладача. За responsible disclosure можна повідомити банк.</p>
+            </div>
+        </section>
+    </main>
+
+    <!-- Navigation -->
+    <div class="practical-nav">
+        <a href="../practical1.1/index.html" class="nav-btn nav-btn-back">
+            ← Практична робота 1.1
+        </a>
+        <a href="../practical1.3/index.html" class="nav-btn nav-btn-next">
+            Практична робота 1.3 →
+        </a>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тема 1: Огляд світових CBS провайдерів</title>
+    <link rel="stylesheet" href="../../../../assets/css/slides-horizontal.css">
+</head>
+<body>
+<!-- Navigation -->
+<div class="slide-navigation">
+    <button class="slide-btn" onclick="previousSlide()">◀</button>
+    <span class="slide-counter" id="slideCounter">1 / 15</span>
+    <button class="slide-btn" onclick="nextSlide()">▶</button>
+    <button class="slide-btn" onclick="toggleFullscreen()">⛶</button>
+    <button class="slide-btn" onclick="exitPresentation()">✕</button>
+</div>
+
+<!-- Progress Bar -->
+<div class="slide-progress">
+    <div class="slide-progress-bar" id="progressBar"></div>
+</div>
+
+<!-- Slide Container -->
+<div class="slide-container" id="slideContainer">
+    <!-- Slide 1: Title -->
+    <div class="slide">
+        <div class="slide-counter-display">1 / 15</div>
+        <h1>Огляд світових CBS провайдерів</h1>
+        <div style="font-size: 1.5rem; opacity: 0.9; margin-bottom: 40px;">Global Core Banking Solution Vendors</div>
+        <div style="font-size: 1.2rem; opacity: 0.8;">
+            <p><strong>Модуль 2:</strong> Core Banking Systems</p>
+            <p style="margin-top: 10px;"><strong>Лекція 6:</strong> CBS провайдери та їх security frameworks</p>
+            <p style="margin-top: 10px;"><strong>Тема 1</strong></p>
+        </div>
+    </div>
+
+    <!-- Slide 2: Ринок CBS -->
+    <div class="slide">
+        <div class="slide-counter-display">2 / 15</div>
+        <div class="content-box" style="max-width: 1200px;">
+            <h2>Глобальний ринок CBS</h2>
+            <h3>📊 Ключові цифри та тренди:</h3>
+            <div class="slide-statistics">
+                <div class="stat-item">
+                    <div class="stat-value">$12.4B</div>
+                    <div class="stat-description">Розмір ринку у 2024</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">8.9%</div>
+                    <div class="stat-description">CAGR до 2030</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">Понад 3000</div>
+                    <div class="stat-description">Банків використовують топ-3</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">75%</div>
+                    <div class="stat-description">Міграція в хмару до 2026</div>
+                </div>
+            </div>
+            <div class="alert alert-info">
+                <strong>Тренд:</strong> Масова міграція від застарілих систем до хмарних CBS платформ
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 3: Топ-3 провайдери -->
+    <div class="slide">
+        <div class="slide-counter-display">3 / 15</div>
+        <div class="content-box" style="max-width: 1200px;">
+            <h2>Топ-3 CBS провайдери світу</h2>
+            <div style="display: flex; flex-direction: column; gap: 20px; margin-top: 30px;">
+                <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 20px; border-radius: 10px;">
+                    <h3>🥇 #1 Temenos</h3>
+                    <p><strong>Частка ринку:</strong> 31% • <strong>Клієнтів:</strong> понад 3000 банків у 150 країнах</p>
+                    <p><strong>Флагманський продукт:</strong> Temenos Transact (колишній T24)</p>
+                </div>
+                <div style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); padding: 20px; border-radius: 10px;">
+                    <h3>🥈 #2 FIS (Fidelity National Information Services)</h3>
+                    <p><strong>Частка ринку:</strong> 24% • <strong>Клієнтів:</strong> понад 2000 фінустанов</p>
+                    <p><strong>Флагманський продукт:</strong> FIS Modern Banking Platform</p>
+                </div>
+                <div style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); padding: 20px; border-radius: 10px;">
+                    <h3>🥉 #3 Oracle Financial Services</h3>
+                    <p><strong>Частка ринку:</strong> 18% • <strong>Клієнтів:</strong> понад 1500 банків</p>
+                    <p><strong>Флагманський продукт:</strong> Oracle FLEXCUBE</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 4: Temenos Transact - Огляд -->
+    <div class="slide">
+        <div class="slide-counter-display">4 / 15</div>
+        <div class="content-box" style="max-width: 1200px;">
+            <h2>Temenos Transact (T24)</h2>
+            <h3>🏆 Лідер ринку CBS</h3>
+            <div class="content-grid">
+                <div>
+                    <h4>💪 Переваги:</h4>
+                    <ul class="slide-list">
+                        <li><strong>Model Bank</strong> - попередньо налаштовані шаблони</li>
+                        <li><strong>API-first</strong> - понад 1200 готових API</li>
+                        <li><strong>Хмарна архітектура</strong> - оптимізація для AWS/Azure</li>
+                        <li><strong>Real-time</strong> - миттєві платежі та баланси</li>
+                        <li><strong>Multi-entity</strong> - підтримка банківських груп</li>
+                        <li><strong>Відкритий код</strong> - базується на Java, легко налаштовувати</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>⚠️ Виклики:</h4>
+                    <ul class="slide-list">
+                        <li>Висока вартість ліцензування</li>
+                        <li>Складність імплементації (12-24 місяці)</li>
+                        <li>Вимагає висококваліфікованих спеціалістів</li>
+                        <li>Ризики прив'язки до постачальника</li>
+                        <li>Потребує потужних ресурсів</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="alert alert-success">
+                <strong>Використовують:</strong> Standard Chartered, JPMorgan Chase, Lloyds Banking Group
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 5: Temenos Security -->
+    <div class="slide">
+        <div class="slide-counter-display">5 / 15</div>
+        <div class="slide-cyber-security">
+            <h2>Temenos Security Framework</h2>
+            <h3>🛡️ Багаторівневий підхід до безпеки:</h3>
+            <ul class="slide-list">
+                <li><strong>Identity & Access Management</strong>
+                    <ul>
+                        <li>Інтеграція з Active Directory, LDAP, SAML 2.0</li>
+                        <li>Multi-factor authentication (MFA)</li>
+                        <li>Role-Based Access Control з granular permissions</li>
+                    </ul>
+                </li>
+                <li><strong>Data Security</strong>
+                    <ul>
+                        <li>AES-256 encryption at rest та TLS 1.3 in transit</li>
+                        <li>Tokenization для чутливих даних (PAN, CVV)</li>
+                        <li>Data masking в non-production середовищах</li>
+                    </ul>
+                </li>
+                <li><strong>Audit & Compliance</strong>
+                    <ul>
+                        <li>Повний audit trail усіх транзакцій</li>
+                        <li>PCI DSS, SOX, GDPR compliance out-of-the-box</li>
+                        <li>Real-time monitoring та alerting</li>
+                    </ul>
+                </li>
+            </ul>
+            <div class="cyber-threat-level threat-low">✅ CERTIFIED: ISO 27001, SOC 2 Type II</div>
+        </div>
+    </div>
+
+    <!-- Slide 6: FIS Modern Banking -->
+    <div class="slide">
+        <div class="slide-counter-display">6 / 15</div>
+        <div class="content-box" style="max-width: 1200px;">
+            <h2>FIS Modern Banking Platform</h2>
+            <h3>🏢 Комплексне enterprise рішення</h3>
+            <div class="content-grid">
+                <div>
+                    <h4>💪 Переваги:</h4>
+                    <ul class="slide-list">
+                        <li><strong>Комплексне рішення</strong> - повний банківський стек</li>
+                        <li><strong>Перевірена надійність</strong> - понад 20 років на ринку</li>
+                        <li><strong>Масштабованість</strong> - від локальних до найбільших банків</li>
+                        <li><strong>US compliance</strong> - готовність до вимог FFIEC, FDIC</li>
+                        <li><strong>Сильна підтримка</strong> - підтримка 24/7</li>
+                        <li><strong>Екосистема</strong> - інтеграція з продуктами FIS</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>⚠️ Виклики:</h4>
+                    <ul class="slide-list">
+                        <li>Застаріла архітектура (монолітна база)</li>
+                        <li>Менш гнучке налаштування</li>
+                        <li>Повільніша адаптація до хмарних технологій</li>
+                        <li>Вища загальна вартість володіння порівняно з новими гравцями</li>
+                        <li>Застарілі компоненти UI/UX</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="alert alert-info">
+                <strong>Фокус:</strong> Середні та великі банки США з консервативним підходом
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 7: FIS Security -->
+    <div class="slide">
+        <div class="slide-counter-display">7 / 15</div>
+        <div class="slide-cyber-security">
+            <h2>FIS Security Architecture</h2>
+            <h3>🔐 Enterprise-grade захист:</h3>
+            <div class="slide-statistics">
+                <div class="stat-item">
+                    <h4>🏰 Perimeter Defense</h4>
+                    <ul style="text-align: left; font-size: 0.9rem;">
+                        <li>Next-gen Firewalls</li>
+                        <li>DDoS protection</li>
+                        <li>IDS/IPS системи</li>
+                    </ul>
+                </div>
+                <div class="stat-item">
+                    <h4>🔍 Threat Detection</h4>
+                    <ul style="text-align: left; font-size: 0.9rem;">
+                        <li>24/7 SOC моніторинг</li>
+                        <li>SIEM (Splunk)</li>
+                        <li>Threat intelligence feeds</li>
+                    </ul>
+                </div>
+                <div class="stat-item">
+                    <h4>📊 Compliance</h4>
+                    <ul style="text-align: left; font-size: 0.9rem;">
+                        <li>PCI DSS Level 1</li>
+                        <li>SOC 1/2/3 certified</li>
+                        <li>FFIEC aligned</li>
+                    </ul>
+                </div>
+                <div class="stat-item">
+                    <h4>💾 Data Protection</h4>
+                    <ul style="text-align: left; font-size: 0.9rem;">
+                        <li>Encryption at rest/transit</li>
+                        <li>HSM key management</li>
+                        <li>Automated backups</li>
+                    </ul>
+                </div>
+            </div>
+            <p style="text-align: center; margin-top: 20px; padding: 15px; background: rgba(74,222,128,0.2); border-radius: 8px;">
+                <strong>Гарантія:</strong> 99.99% доступність згідно SLA з фінансовими штрафами за простої
+            </p>
+        </div>
+    </div>
+
+    <!-- Slide 8: Oracle FLEXCUBE -->
+    <div class="slide">
+        <div class="slide-counter-display">8 / 15</div>
+        <div class="content-box" style="max-width: 1200px;">
+            <h2>Oracle FLEXCUBE</h2>
+            <h3>🌏 Глобальна банківська платформа</h3>
+            <div class="content-grid">
+                <div>
+                    <h4>💪 Переваги:</h4>
+                    <ul class="slide-list">
+                        <li><strong>Глобальна присутність</strong> - особливо сильна в Азії/EMEA</li>
+                        <li><strong>Oracle екосистема</strong> - інтеграція з Oracle DB, Cloud</li>
+                        <li><strong>Модульна архітектура</strong> - вибіркове впровадження</li>
+                        <li><strong>Regulatory agility</strong> - швидка адаптація до змін</li>
+                        <li><strong>Corporate banking</strong> - сильні B2B можливості</li>
+                        <li><strong>Multi-currency</strong> - підтримка 150+ валют</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>⚠️ Виклики:</h4>
+                    <ul class="slide-list">
+                        <li>Прив'язка до екосистеми Oracle</li>
+                        <li>Висока вартість інфраструктури Oracle</li>
+                        <li>Складна архітектура</li>
+                        <li>Менш сучасний UI/UX</li>
+                        <li>Повільніші інновації порівняно з конкурентами</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="alert alert-warning">
+                <strong>Ideal для:</strong> Великі корпоративні банки з комплексними міжнародними операціями
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 9: Oracle Security -->
+    <div class="slide">
+        <div class="slide-counter-display">9 / 15</div>
+        <div class="slide-cyber-security">
+            <h2>Oracle FLEXCUBE Security</h2>
+            <h3>🔒 Інтеграція з Oracle Security Stack:</h3>
+            <ul class="slide-list">
+                <li><strong>Database Security</strong>
+                    <ul>
+                        <li>Oracle Advanced Security (TDE, Data Redaction)</li>
+                        <li>Database Vault для separation of duties</li>
+                        <li>Label Security для multi-level data classification</li>
+                    </ul>
+                </li>
+                <li><strong>Application Security</strong>
+                    <ul>
+                        <li>Oracle Identity Management (OIM)</li>
+                        <li>Oracle Access Manager (OAM) для SSO</li>
+                        <li>Privileged Account Management</li>
+                    </ul>
+                </li>
+                <li><strong>Infrastructure Security</strong>
+                    <ul>
+                        <li>Oracle Cloud Infrastructure (OCI) security</li>
+                        <li>Virtual Cloud Network isolation</li>
+                        <li>Web Application Firewall</li>
+                    </ul>
+                </li>
+            </ul>
+            <div class="cyber-threat-level threat-low">✅ CERTIFIED: ISO 27001, SOC 2, PCI DSS</div>
+        </div>
+    </div>
+
+    <!-- Slide 10: Порівняльна таблиця -->
+    <div class="slide">
+        <div class="slide-counter-display">10 / 15</div>
+        <div class="content-box" style="max-width: 1200px;">
+            <h2>Порівняння топ-3 CBS провайдерів</h2>
+            <table class="comparison-table">
+                <tr>
+                    <th>Критерій</th>
+                    <th>Temenos</th>
+                    <th>FIS</th>
+                    <th>Oracle</th>
+                </tr>
+                <tr>
+                    <td><strong>Частка ринку</strong></td>
+                    <td>31% 🥇</td>
+                    <td>24% 🥈</td>
+                    <td>18% 🥉</td>
+                </tr>
+                <tr>
+                    <td><strong>Готовність до хмари</strong></td>
+                    <td>⭐⭐⭐⭐⭐</td>
+                    <td>⭐⭐⭐</td>
+                    <td>⭐⭐⭐⭐</td>
+                </tr>
+                <tr>
+                    <td><strong>Час впровадження</strong></td>
+                    <td>12-24 міс</td>
+                    <td>18-36 міс</td>
+                    <td>18-30 міс</td>
+                </tr>
+                <tr>
+                    <td><strong>Загальна вартість володіння (5 років)</strong></td>
+                    <td>$$$$</td>
+                    <td>$$$$$</td>
+                    <td>$$$$$</td>
+                </tr>
+                <tr>
+                    <td><strong>API-first підхід</strong></td>
+                    <td>✅ Так</td>
+                    <td>⚠️ Частково</td>
+                    <td>✅ Так</td>
+                </tr>
+                <tr>
+                    <td><strong>Сертифікати безпеки</strong></td>
+                    <td>ISO 27001, SOC 2</td>
+                    <td>PCI DSS L1, SOC 1/2/3</td>
+                    <td>ISO 27001, SOC 2</td>
+                </tr>
+                <tr>
+                    <td><strong>Кращий для</strong></td>
+                    <td>Інноваційні банки</td>
+                    <td>US regional banks</td>
+                    <td>Global corporates</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <!-- Slide 11: Інші гравці ринку -->
+    <div class="slide">
+        <div class="slide-counter-display">11 / 15</div>
+        <div class="content-box" style="max-width: 1200px;">
+            <h2>Інші помітні CBS провайдери</h2>
+            <div class="content-grid">
+                <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 8px;">
+                    <h3>💡 Нові гравці ринку:</h3>
+                    <ul class="slide-list">
+                        <li><strong>Mambu</strong> - тільки SaaS, хмарна архітектура, швидке впровадження</li>
+                        <li><strong>Thought Machine (Vault)</strong> - партнерство з Google Cloud, сучасний стек</li>
+                        <li><strong>Finastra (Fusion)</strong> - підхід відкритої платформи</li>
+                        <li><strong>nCino</strong> - базується на Salesforce, пріоритет CRM</li>
+                    </ul>
+                </div>
+                <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 8px;">
+                    <h3>🌍 Регіональні лідери:</h3>
+                    <ul class="slide-list">
+                        <li><strong>TCS BaNCS</strong> (Індія) - insurance + banking</li>
+                        <li><strong>SAP Banking Services</strong> (Європа)</li>
+                        <li><strong>Infosys Finacle</strong> (Азія, Африка)</li>
+                        <li><strong>Avaloq</strong> (Швейцарія) - wealth management focus</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="alert alert-info">
+                <strong>Тренд:</strong> Нові гравці забирають 15-20% нових проектів у традиційних постачальників
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 12: Критерії вибору CBS -->
+    <div class="slide">
+        <div class="slide-counter-display">12 / 15</div>
+        <div class="content-box" style="max-width: 1200px;">
+            <h2>Критерії вибору CBS платформи</h2>
+            <h3>🎯 Ключові фактори рішення:</h3>
+            <div class="three-column">
+                <div style="background: rgba(100,255,218,0.2); padding: 15px; border-radius: 8px;">
+                    <h4>💼 Бізнес фактори</h4>
+                    <ul style="font-size: 0.9em;">
+                        <li>Business model fit</li>
+                        <li>Географія операцій</li>
+                        <li>Регуляторні вимоги</li>
+                        <li>Розмір банку</li>
+                        <li>Time-to-market</li>
+                    </ul>
+                </div>
+                <div style="background: rgba(255,100,100,0.2); padding: 15px; border-radius: 8px;">
+                    <h4>💻 Технічні фактори</h4>
+                    <ul style="font-size: 0.9em;">
+                        <li>Cloud vs on-premise</li>
+                        <li>API capabilities</li>
+                        <li>Інтеграційна гнучкість</li>
+                        <li>Масштабованість</li>
+                        <li>Tech stack сумісність</li>
+                    </ul>
+                </div>
+                <div style="background: rgba(255,255,100,0.2); padding: 15px; border-radius: 8px;">
+                    <h4>🛡️ Security фактори</h4>
+                    <ul style="font-size: 0.9em;">
+                        <li>Certifications (ISO, SOC)</li>
+                        <li>Data residency</li>
+                        <li>Incident response</li>
+                        <li>Vendor security posture</li>
+                        <li>Compliance capabilities</li>
+                    </ul>
+                </div>
+            </div>
+            <p style="text-align: center; margin-top: 20px; font-weight: bold; font-size: 1.1em;">
+                Рішення має базуватися на комплексному vendor risk assessment →
+            </p>
+        </div>
+    </div>
+
+    <!-- Slide 13: Кейс - ПриватБанк -->
+    <div class="slide">
+        <div class="slide-counter-display">13 / 15</div>
+        <div class="slide-banking-example">
+            <div class="banking-logo">🏦</div>
+            <div class="banking-title">Кейс: Міграція ПриватБанку</div>
+            <h3>2019-2021: Перехід з legacy на сучасну платформу</h3>
+            <div style="margin: 20px 0;">
+                <h4>📊 Параметри проекту:</h4>
+                <ul class="slide-list" style="text-align: left; max-width: 800px; margin: 0 auto;">
+                    <li><strong>Обрана платформа:</strong> Власна розробка на базі мікросервісів (React + Java + Kubernetes)</li>
+                    <li><strong>Причина:</strong> Унікальні бізнес-вимоги, масштаб (25 млн клієнтів)</li>
+                    <li><strong>Бюджет:</strong> понад $500 млн за 3 роки</li>
+                    <li><strong>Команда:</strong> понад 500 розробників</li>
+                </ul>
+                <h4 style="margin-top: 20px;">🎯 Результати:</h4>
+                <div class="slide-statistics">
+                    <div class="stat-item">
+                        <div class="stat-value">3x</div>
+                        <div class="stat-description">Швидкість розробки</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">50%</div>
+                        <div class="stat-description">Зниження загальної вартості володіння</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">99.99%</div>
+                        <div class="stat-description">Доступність</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">Нуль</div>
+                        <div class="stat-description">Прив'язки до постачальника</div>
+                    </div>
+                </div>
+            </div>
+            <div class="alert alert-success">
+                <strong>Висновок:</strong> Великі банки можуть обирати між готовими CBS та власною розробкою
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 14: Тренди майбутнього -->
+    <div class="slide">
+        <div class="slide-counter-display">14 / 15</div>
+        <div class="content-box" style="max-width: 1200px;">
+            <h2>Майбутнє CBS платформ</h2>
+            <h3>🔮 Ключові тренди 2025-2030:</h3>
+            <ul class="slide-list">
+                <li><strong>AI-Native Banking</strong>
+                    <ul>
+                        <li>Вбудований AI для fraud detection, персоналізації, автоматизації</li>
+                        <li>Predictive analytics в real-time</li>
+                    </ul>
+                </li>
+                <li><strong>Модульний банкінг</strong>
+                    <ul>
+                        <li>Модульні компоненти замість монолітних платформ</li>
+                        <li>Можливість комбінувати рішення від різних постачальників</li>
+                    </ul>
+                </li>
+                <li><strong>Blockchain Integration</strong>
+                    <ul>
+                        <li>DLT для cross-border payments, trade finance</li>
+                        <li>Smart contracts для автоматизації</li>
+                    </ul>
+                </li>
+                <li><strong>Quantum-Ready Security</strong>
+                    <ul>
+                        <li>Post-quantum cryptography adoption</li>
+                        <li>Підготовка до квантових загроз</li>
+                    </ul>
+                </li>
+                <li><strong>Sustainability Features</strong>
+                    <ul>
+                        <li>Green banking функціональність</li>
+                        <li>ESG reporting вбудований</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Slide 15: Підсумки -->
+    <div class="slide">
+        <div class="slide-counter-display">15 / 15</div>
+        <div class="content-box" style="max-width: 1200px;">
+            <h2>Підсумки: CBS провайдери</h2>
+            <h3>🎯 Ключові висновки:</h3>
+            <ul class="slide-list">
+                <li><strong>Топ-3 домінують</strong> - Temenos, FIS, Oracle контролюють 73% ринку</li>
+                <li><strong>Різні стратегії</strong> - інновації (Temenos) vs надійність (FIS) vs корпоративність (Oracle)</li>
+                <li><strong>Нові гравці наступають</strong> - Mambu, Thought Machine забирають частку нових проектів</li>
+                <li><strong>Безпека - пріоритет №1</strong> - всі мають сертифікати ISO 27001, SOC 2, PCI DSS</li>
+                <li><strong>Хмара - неминучість</strong> - 75% нових впроваджень вже хмарні</li>
+                <li><strong>Вибір постачальника критичний</strong> - детальна оцінка ризиків обов'язкова</li>
+                <li><strong>Майбутнє - модульність</strong> - від монолітних платформ до модульних екосистем</li>
+            </ul>
+            <div class="alert alert-info">
+                <h4>💡 Наступна тема:</h4>
+                <p>Детальне порівняння Cloud vs On-Premise CBS deployment моделей</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    let currentSlide = 0;
+    const totalSlides = 15;
+    const slideContainer = document.getElementById('slideContainer');
+    const progressBar = document.getElementById('progressBar');
+    const counter = document.getElementById('slideCounter');
+
+    function updateSlide() {
+        // Horizontal transform
+        slideContainer.style.transform = `translateX(-${currentSlide * 100}vw)`;
+
+        // Update counter
+        counter.textContent = `${currentSlide + 1} / ${totalSlides}`;
+
+        // Update progress bar
+        progressBar.style.width = ((currentSlide + 1) / totalSlides * 100) + '%';
+    }
+
+    function nextSlide() {
+        if (currentSlide < totalSlides - 1) {
+            currentSlide++;
+            updateSlide();
+        }
+    }
+
+    function previousSlide() {
+        if (currentSlide > 0) {
+            currentSlide--;
+            updateSlide();
+        }
+    }
+
+    function toggleFullscreen() {
+        if (!document.fullscreenElement) {
+            document.documentElement.requestFullscreen();
+        } else {
+            document.exitFullscreen();
+        }
+    }
+
+    // Listen for fullscreen changes to toggle class
+    document.addEventListener('fullscreenchange', function() {
+        if (document.fullscreenElement) {
+            document.body.classList.add('is-fullscreen');
+        } else {
+            document.body.classList.remove('is-fullscreen');
+        }
+    });
+
+    function exitPresentation() {
+        window.location.href = 'index.html';
+    }
+
+    // Keyboard navigation
+    document.addEventListener('keydown', function(e) {
+        switch(e.key) {
+            case 'ArrowRight':
+            case ' ':
+                nextSlide();
+                break;
+            case 'ArrowLeft':
+                previousSlide();
+                break;
+            case 'Escape':
+                exitPresentation();
+                break;
+            case 'f':
+            case 'F':
+                toggleFullscreen();
+                break;
+            case 'Home':
+                currentSlide = 0;
+                updateSlide();
+                break;
+            case 'End':
+                currentSlide = totalSlides - 1;
+                updateSlide();
+                break;
+        }
+    });
+
+    // Touch events for mobile
+    let startX = null;
+    document.addEventListener('touchstart', function(e) {
+        startX = e.touches[0].clientX;
+    });
+
+    document.addEventListener('touchend', function(e) {
+        if (!startX) return;
+
+        const endX = e.changedTouches[0].clientX;
+        const diffX = startX - endX;
+
+        if (Math.abs(diffX) > 50) {
+            if (diffX > 0) {
+                nextSlide();
+            } else {
+                previousSlide();
+            }
+        }
+        startX = null;
+    });
+
+    // Initialize
+    updateSlide();
+
+    // Save progress
+    function saveProgress() {
+        try {
+            const progress = {
+                currentSlide: currentSlide,
+                totalSlides: totalSlides,
+                timestamp: new Date().toISOString(),
+                topic: 'CBS Providers'
+            };
+            localStorage.setItem('lecture_6_tema1_progress', JSON.stringify(progress));
+        } catch(e) {
+            console.log('Could not save progress');
+        }
+    }
+
+    // Load progress
+    function loadProgress() {
+        try {
+            const saved = localStorage.getItem('lecture_6_tema1_progress');
+            if (saved) {
+                const progress = JSON.parse(saved);
+                if (progress.currentSlide) {
+                    currentSlide = progress.currentSlide;
+                    updateSlide();
+                }
+            }
+        } catch(e) {
+            console.log('Could not load progress');
+        }
+    }
+
+    window.addEventListener('beforeunload', saveProgress);
+    loadProgress();
+</script>
+</body>
+</html>
