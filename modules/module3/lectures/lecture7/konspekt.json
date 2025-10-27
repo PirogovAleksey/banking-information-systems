@@ -1,0 +1,236 @@
+{
+  "lecture": {
+    "id": "lecture_7",
+    "module": 3,
+    "number": 7,
+    "title": "Картковий бізнес та платіжні мережі",
+    "titleEn": "Payment Card Industry and Payment Networks",
+    "subtitle": "Детальний конспект для спеціальності 'Кібербезпека'",
+    "language": "uk",
+    "version": "1.0",
+    "lastUpdated": "2025-01-27",
+    "authors": [
+      {
+        "name": "Claude",
+        "role": "Content Developer"
+      }
+    ]
+  },
+  "metadata": {
+    "keywords": [
+      "платіжні картки",
+      "Visa",
+      "Mastercard",
+      "EMV",
+      "токенізація",
+      "fraud prevention",
+      "PCI DSS",
+      "кібербезпека",
+      "платіжні системи",
+      "ISO 8583"
+    ],
+    "level": "university",
+    "specialty": "Кібербезпека",
+    "prerequisites": [
+      "Основи криптографії",
+      "Банківські інформаційні системи",
+      "Мережева безпека"
+    ]
+  },
+  "structure": {
+    "topics": [
+      {
+        "id": "tema1",
+        "number": 1,
+        "title": "Visa та Mastercard: Архітектура і протоколи",
+        "sections": [
+          {
+            "id": "ecosystem",
+            "title": "Екосистема платіжних карток"
+          },
+          {
+            "id": "transaction-flow",
+            "title": "Життєвий цикл карткової транзакції"
+          },
+          {
+            "id": "visa-mastercard",
+            "title": "Visa vs Mastercard: Порівняльний аналіз"
+          },
+          {
+            "id": "iso8583",
+            "title": "ISO 8583 Message Format"
+          },
+          {
+            "id": "threats",
+            "title": "Загрози платіжним мережам"
+          },
+          {
+            "id": "statistics",
+            "title": "Глобальна статистика платіжних мереж"
+          }
+        ]
+      },
+      {
+        "id": "tema2",
+        "number": 2,
+        "title": "EMV стандарти та токенізація",
+        "sections": [
+          {
+            "id": "emv-intro",
+            "title": "Що таке EMV?"
+          },
+          {
+            "id": "emv-flow",
+            "title": "EMV Transaction Flow"
+          },
+          {
+            "id": "contactless",
+            "title": "Contactless EMV (NFC)"
+          },
+          {
+            "id": "tokenization",
+            "title": "Apple Pay та токенізація"
+          },
+          {
+            "id": "3ds",
+            "title": "3D Secure 2.0"
+          },
+          {
+            "id": "emv-attacks",
+            "title": "Атаки на EMV систему"
+          }
+        ]
+      },
+      {
+        "id": "tema3",
+        "number": 3,
+        "title": "Card Fraud Prevention та 3D Secure",
+        "sections": [
+          {
+            "id": "fraud-types",
+            "title": "Типи card fraud"
+          },
+          {
+            "id": "fraud-schemes",
+            "title": "Популярні методи шахрайства"
+          },
+          {
+            "id": "fraud-detection",
+            "title": "Fraud Detection системи"
+          },
+          {
+            "id": "ml-algorithms",
+            "title": "Machine Learning алгоритми"
+          },
+          {
+            "id": "fraud-cases",
+            "title": "Реальні кейси fraud"
+          }
+        ]
+      },
+      {
+        "id": "tema4",
+        "number": 4,
+        "title": "PCI DSS Compliance",
+        "sections": [
+          {
+            "id": "pci-intro",
+            "title": "Що таке PCI DSS?"
+          },
+          {
+            "id": "requirements",
+            "title": "12 вимог PCI DSS"
+          },
+          {
+            "id": "requirement3",
+            "title": "Requirement 3: Захист даних (детально)"
+          },
+          {
+            "id": "ukrainian-bank",
+            "title": "PCI DSS в українському банку"
+          },
+          {
+            "id": "compliance-process",
+            "title": "Compliance процес та аудит"
+          },
+          {
+            "id": "penalties",
+            "title": "Penalties за non-compliance"
+          },
+          {
+            "id": "heartland-case",
+            "title": "Кейс: Heartland Payment Systems Breach"
+          },
+          {
+            "id": "pci-v4",
+            "title": "PCI DSS v4.0 - що нового?"
+          }
+        ]
+      }
+    ]
+  },
+  "resources": {
+    "presentations": [
+      "tema1_visa_mastercard.html",
+      "tema2_emv_tokenization.html",
+      "tema3_fraud_prevention.html",
+      "tema4_pci_dss.html"
+    ],
+    "documentation": [
+      {
+        "title": "EMV Integrated Circuit Card Specifications",
+        "url": "https://www.emvco.com/",
+        "type": "specification"
+      },
+      {
+        "title": "PCI DSS v4.0 Requirements and Testing Procedures",
+        "url": "https://www.pcisecuritystandards.org/",
+        "type": "standard"
+      },
+      {
+        "title": "Visa Core Rules and Visa Product Regulations",
+        "url": "https://usa.visa.com/support/small-business/security-compliance.html",
+        "type": "documentation"
+      },
+      {
+        "title": "Mastercard Rules Manual",
+        "url": "https://www.mastercard.us/en-us/business/overview/safety-and-security.html",
+        "type": "documentation"
+      },
+      {
+        "title": "3D Secure 2.0 Protocol Specification",
+        "url": "https://www.emvco.com/emv-technologies/3d-secure/",
+        "type": "specification"
+      }
+    ]
+  },
+  "practicals": [
+    {
+      "type": "laboratory",
+      "title": "Fraud Detection System Analysis",
+      "description": "Аналіз існуючої системи fraud detection банку, оцінка ефективності та рекомендації щодо покращення"
+    },
+    {
+      "type": "practical",
+      "title": "PCI DSS Gap Analysis",
+      "description": "Проведення gap analysis відповідності payment системи вимогам PCI DSS та складання remediation плану"
+    }
+  ],
+  "assessment": {
+    "learningOutcomes": [
+      "Розуміння архітектури глобальних платіжних мереж Visa та Mastercard",
+      "Знання протоколу ISO 8583 та його структури",
+      "Розуміння криптографічних механізмів EMV (ARQC/ARPC)",
+      "Знання процесу токенізації (Apple Pay, Google Pay)",
+      "Вміння аналізувати методи fraud detection та ML алгоритми",
+      "Глибоке розуміння всіх 12 вимог PCI DSS v4.0",
+      "Вміння проводити PCI DSS compliance audit"
+    ],
+    "assessmentTypes": [
+      "Тестування знань протоколів",
+      "Практична робота з fraud detection",
+      "Gap analysis проект",
+      "Аналіз кейсів (Heartland breach)"
+    ]
+  }
+}

@@ -1,0 +1,607 @@
+/* Konspekt (Lecture Notes) Styles */
+
+html {
+    scroll-behavior: smooth;
+}
+
+/* Main Container */
+.konspekt-container {
+    display: flex;
+    max-width: 1400px;
+    margin: 0 auto;
+    gap: 2rem;
+    padding: 2rem;
+}
+
+.konspekt-page {
+    flex: 1;
+    max-width: 900px;
+    background: white;
+    line-height: 1.9;
+}
+
+/* Right Sidebar Navigation */
+.sidebar-nav {
+    position: sticky;
+    top: 100px;
+    width: 280px;
+    max-height: calc(100vh - 120px);
+    background: #f8fafc;
+    border: 2px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 1.5rem;
+    align-self: flex-start;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+/* Custom scrollbar for sidebar */
+.sidebar-nav::-webkit-scrollbar {
+    width: 6px;
+}
+
+.sidebar-nav::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.sidebar-nav::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 3px;
+}
+
+.sidebar-nav::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
+}
+
+/* Firefox scrollbar */
+.sidebar-nav {
+    scrollbar-width: thin;
+    scrollbar-color: #cbd5e1 transparent;
+    scroll-behavior: smooth;
+}
+
+/* Fade indicator at bottom when content is scrollable */
+.sidebar-nav::after {
+    content: '';
+    position: sticky;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 30px;
+    background: linear-gradient(to bottom, transparent, #f8fafc);
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.sidebar-nav.has-scroll::after {
+    opacity: 1;
+}
+
+.sidebar-nav h3 {
+    font-size: 1.1rem;
+    color: #475569;
+    margin: 0 0 1rem 0;
+    padding-bottom: 0.8rem;
+    border-bottom: 2px solid #cbd5e1;
+}
+
+.sidebar-nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar-nav li {
+    margin-bottom: 0.5rem;
+}
+
+.sidebar-nav a {
+    display: block;
+    color: #64748b;
+    text-decoration: none;
+    padding: 0.6rem 0.8rem;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    transition: all 0.2s ease;
+    border-left: 3px solid transparent;
+}
+
+.sidebar-nav a:hover {
+    background: #e0e7ff;
+    color: #667eea;
+    border-left-color: #667eea;
+}
+
+.sidebar-nav a.active {
+    background: #e0e7ff;
+    color: #667eea;
+    font-weight: 600;
+    border-left-color: #667eea;
+}
+
+.sidebar-nav .nav-subsection {
+    padding-left: 1rem;
+    font-size: 0.85rem;
+}
+
+/* Reading Progress Bar */
+.reading-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: #e2e8f0;
+    z-index: 9999;
+}
+
+.reading-progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+    width: 0%;
+    transition: width 0.1s ease;
+}
+
+/* Back to Top Button */
+.back-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background: #667eea;
+    color: white;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+    transition: all 0.3s ease;
+    z-index: 1000;
+    border: none;
+    font-size: 1.5rem;
+}
+
+.back-to-top:hover {
+    background: #5568d3;
+    transform: translateY(-5px);
+}
+
+.back-to-top.show {
+    display: flex;
+}
+
+/* Konspekt Header */
+.konspekt-header {
+    text-align: center;
+    margin-bottom: 3rem;
+    padding-bottom: 2rem;
+    border-bottom: 3px solid #667eea;
+}
+
+.konspekt-title {
+    font-size: 2.5rem;
+    color: #1e293b;
+    margin-bottom: 1rem;
+}
+
+.konspekt-meta {
+    color: #64748b;
+    font-size: 1.1rem;
+}
+
+/* Konspekt Content Typography */
+.konspekt-content h2 {
+    color: #667eea;
+    font-size: 2rem;
+    margin-top: 3rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.8rem;
+    border-bottom: 3px solid #e2e8f0;
+}
+
+.konspekt-content h3 {
+    color: #475569;
+    font-size: 1.5rem;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+}
+
+.konspekt-content h4 {
+    color: #64748b;
+    font-size: 1.2rem;
+    margin-top: 1.5rem;
+    margin-bottom: 0.8rem;
+}
+
+.konspekt-content h5 {
+    color: #64748b;
+    font-size: 1.1rem;
+    margin-top: 1rem;
+    margin-bottom: 0.6rem;
+}
+
+.konspekt-content p {
+    font-size: 1.1rem;
+    margin-bottom: 1.2rem;
+    text-align: justify;
+}
+
+.konspekt-content ul,
+.konspekt-content ol {
+    font-size: 1.05rem;
+    margin-bottom: 1.5rem;
+    padding-left: 2rem;
+}
+
+.konspekt-content li {
+    margin-bottom: 0.7rem;
+    line-height: 1.7;
+}
+
+/* Content Boxes */
+.info-box {
+    background: #f0f9ff;
+    border-left: 5px solid #0284c7;
+    padding: 1.5rem;
+    margin: 2rem 0;
+    border-radius: 8px;
+}
+
+.info-box h4 {
+    color: #0369a1;
+    margin-top: 0;
+}
+
+.example-box {
+    background: #f0fdf4;
+    border-left: 5px solid #10b981;
+    padding: 1.5rem;
+    margin: 2rem 0;
+    border-radius: 8px;
+}
+
+.example-box h4 {
+    color: #065f46;
+    margin-top: 0;
+}
+
+.warning-box {
+    background: #fef3c7;
+    border-left: 5px solid #f59e0b;
+    padding: 1.5rem;
+    margin: 2rem 0;
+    border-radius: 8px;
+}
+
+.warning-box h4 {
+    color: #92400e;
+    margin-top: 0;
+}
+
+.important-box {
+    background: #fef2f2;
+    border-left: 5px solid #ef4444;
+    padding: 1.5rem;
+    margin: 2rem 0;
+    border-radius: 8px;
+}
+
+.important-box h4 {
+    color: #991b1b;
+    margin-top: 0;
+}
+
+/* Comparison Table */
+.comparison-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 2rem 0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.comparison-table th {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 15px;
+    text-align: left;
+    font-weight: 600;
+}
+
+.comparison-table td {
+    padding: 12px 15px;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.comparison-table tr:nth-child(even) {
+    background: #f8fafc;
+}
+
+.comparison-table tr:hover {
+    background: #f1f5f9;
+}
+
+/* Code Block */
+.code-block {
+    font-family: 'Courier New', Courier, monospace;
+    background: #1e293b;
+    color: #10b981;
+    padding: 15px;
+    border-radius: 8px;
+    overflow-x: auto;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+.code-block strong {
+    color: #60a5fa;
+    font-weight: 600;
+}
+
+/* Crypto Details Box */
+.crypto-details {
+    background: rgba(0, 255, 0, 0.05);
+    border: 1px solid rgba(16, 185, 129, 0.2);
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 15px;
+}
+
+.crypto-details h5 {
+    margin-top: 0;
+    color: #065f46;
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+}
+
+.crypto-details ol {
+    margin: 0;
+    padding-left: 1.5rem;
+}
+
+.crypto-details p {
+    margin-bottom: 0;
+    margin-top: 10px;
+}
+
+.crypto-details ul {
+    margin: 0.5rem 0;
+}
+
+/* Technical Details Box */
+.technical-details {
+    background: rgba(59, 130, 246, 0.05);
+    border: 1px solid rgba(59, 130, 246, 0.2);
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 15px;
+}
+
+.technical-details h5 {
+    margin-top: 0;
+    color: #1e40af;
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+}
+
+.technical-details ol {
+    margin: 0;
+    padding-left: 1.5rem;
+}
+
+.technical-details p {
+    margin-bottom: 0;
+    margin-top: 10px;
+}
+
+/* Print Styles */
+@media print {
+    .sidebar-nav,
+    .reading-progress,
+    .back-to-top,
+    .header,
+    .footer {
+        display: none !important;
+    }
+
+    .konspekt-container {
+        display: block;
+        max-width: 100%;
+        padding: 0;
+    }
+
+    .konspekt-page {
+        max-width: 100%;
+    }
+
+    .konspekt-content h2 {
+        page-break-before: always;
+    }
+
+    .konspekt-content h2:first-of-type {
+        page-break-before: avoid;
+    }
+
+    .info-box,
+    .example-box,
+    .warning-box,
+    .important-box,
+    .crypto-details,
+    .technical-details {
+        page-break-inside: avoid;
+        border: 1px solid #e2e8f0;
+    }
+
+    .comparison-table {
+        page-break-inside: avoid;
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+    .konspekt-container {
+        flex-direction: column;
+    }
+
+    .sidebar-nav {
+        position: relative;
+        top: 0;
+        width: 100%;
+        max-height: 400px;
+        margin-bottom: 2rem;
+    }
+
+    .konspekt-page {
+        max-width: 100%;
+    }
+
+    .comparison-table {
+        font-size: 0.9rem;
+    }
+
+    .comparison-table th,
+    .comparison-table td {
+        padding: 10px;
+    }
+}
+
+@media (max-width: 768px) {
+    .konspekt-container {
+        padding: 1rem;
+        gap: 1rem;
+    }
+
+    .konspekt-header {
+        margin-bottom: 2rem;
+        padding-bottom: 1.5rem;
+    }
+
+    .konspekt-title {
+        font-size: 2rem;
+    }
+
+    .konspekt-meta {
+        font-size: 1rem;
+    }
+
+    .konspekt-content h2 {
+        font-size: 1.5rem;
+        margin-top: 2rem;
+    }
+
+    .konspekt-content h3 {
+        font-size: 1.3rem;
+    }
+
+    .konspekt-content h4 {
+        font-size: 1.1rem;
+    }
+
+    .konspekt-content h5 {
+        font-size: 1rem;
+    }
+
+    .konspekt-content p,
+    .konspekt-content ul,
+    .konspekt-content ol {
+        font-size: 1rem;
+    }
+
+    .sidebar-nav {
+        padding: 1rem;
+        max-height: 300px;
+    }
+
+    .sidebar-nav h3 {
+        font-size: 1rem;
+    }
+
+    .sidebar-nav a {
+        font-size: 0.9rem;
+        padding: 0.5rem 0.6rem;
+    }
+
+    .back-to-top {
+        width: 40px;
+        height: 40px;
+        font-size: 1.2rem;
+        bottom: 20px;
+        right: 20px;
+    }
+
+    .info-box,
+    .example-box,
+    .warning-box,
+    .important-box,
+    .crypto-details,
+    .technical-details {
+        padding: 1rem;
+        margin: 1.5rem 0;
+    }
+
+    .comparison-table {
+        font-size: 0.85rem;
+    }
+
+    .comparison-table th,
+    .comparison-table td {
+        padding: 8px;
+    }
+
+    .code-block {
+        font-size: 0.85rem;
+        padding: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .konspekt-container {
+        padding: 0.5rem;
+    }
+
+    .konspekt-title {
+        font-size: 1.5rem;
+    }
+
+    .konspekt-content h2 {
+        font-size: 1.3rem;
+    }
+
+    .konspekt-content h3 {
+        font-size: 1.1rem;
+    }
+
+    .konspekt-content h4 {
+        font-size: 1rem;
+    }
+
+    .sidebar-nav .nav-subsection {
+        font-size: 0.8rem;
+    }
+
+    .comparison-table {
+        display: block;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+}
+
+/* Accessibility Improvements */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* Dark mode support (optional) */
+@media (prefers-color-scheme: dark) {
+    /* Users can enable dark mode if desired - currently using light theme */
+}

@@ -138,28 +138,28 @@
             </div>
             <h3>Real-time scoring system:</h3>
             <ul class="slide-list">
-                <li><strong>Transaction analysis:</strong>
+                <li><strong>Аналіз транзакції:</strong>
                     <ul>
-                        <li>Amount deviation from history</li>
-                        <li>Unusual merchant category</li>
-                        <li>Geographic anomalies</li>
-                        <li>Time of day patterns</li>
-                        <li>Velocity checks (N transactions in M minutes)</li>
+                        <li>Відхилення суми від історії покупок</li>
+                        <li>Незвичайна категорія торговця</li>
+                        <li>Географічні аномалії</li>
+                        <li>Паттерни часу дня</li>
+                        <li>Перевірки швидкості (N транзакцій за M хвилин)</li>
                     </ul>
                 </li>
-                <li><strong>Device intelligence:</strong>
+                <li><strong>Аналіз пристрою:</strong>
                     <ul>
-                        <li>Known device vs new device</li>
-                        <li>Jailbroken/rooted detection</li>
-                        <li>Emulator/VM detection</li>
-                        <li>VPN/proxy usage</li>
+                        <li>Відомий пристрій проти нового</li>
+                        <li>Виявлення Jailbreak/Root</li>
+                        <li>Виявлення емулятора/VM</li>
+                        <li>Використання VPN/проксі</li>
                     </ul>
                 </li>
-                <li><strong>Behavioral biometrics:</strong>
+                <li><strong>Поведінкова біометрія:</strong>
                     <ul>
-                        <li>Typing patterns</li>
-                        <li>Swipe dynamics</li>
-                        <li>Device position sensors</li>
+                        <li>Паттерни набору тексту</li>
+                        <li>Динаміка свайпів</li>
+                        <li>Сенсори положення пристрою</li>
                     </ul>
                 </li>
             </ul>
@@ -169,55 +169,35 @@
     <!-- Slide 5: Machine Learning для Fraud Detection -->
     <div class="slide">
         <div class="slide-counter-display">5 / 8</div>
-        <div class="content-box" style="max-width: 1200px;">
-            <h2>🧠 ML алгоритми боротьби з фродом</h2>
-            <div class="content-grid">
+        <div class="content-box" style="max-width: 1400px; padding: 18px;">
+            <h2 style="font-size: 1.9rem; margin-bottom: 10px;">🧠 ML алгоритми боротьби з фродом</h2>
+            <div class="content-grid" style="gap: 15px; font-size: 0.75rem;">
                 <div>
-                    <h3>Supervised Learning:</h3>
-                    <ul class="slide-list">
-                        <li><strong>Random Forest</strong>
-                            <ul>
-                                <li>Ensemble decision trees</li>
-                                <li>Feature importance</li>
-                            </ul>
-                        </li>
-                        <li><strong>Gradient Boosting (XGBoost)</strong>
-                            <ul>
-                                <li>Highest accuracy</li>
-                                <li>Використовують Visa, Mastercard</li>
-                            </ul>
-                        </li>
-                        <li><strong>Neural Networks</strong>
-                            <ul>
-                                <li>Deep learning для складних паттернів</li>
-                                <li>LSTM для sequence analysis</li>
-                            </ul>
-                        </li>
+                    <h3 style="font-size: 1.05rem; margin-bottom: 6px;">Supervised Learning:</h3>
+                    <ul class="slide-list" style="font-size: 0.74rem; line-height: 1.25;">
+                        <li><strong>Random Forest:</strong> 100-500 trees, majority vote | Accuracy: 92-95%, FP: 2-3%</li>
+                        <li><strong>XGBoost:</strong> Iterative boosting, 96-98% accuracy | Visa/MC використовують</li>
+                        <li><strong>Neural Networks:</strong> 3-5 layers, LSTM для sequences | 150+ features → fraud_prob</li>
+                    </ul>
+                    <h3 style="font-size: 1.05rem; margin-bottom: 6px; margin-top: 10px;">Unsupervised:</h3>
+                    <ul class="slide-list" style="font-size: 0.74rem; line-height: 1.25;">
+                        <li><strong>Anomaly Detection:</strong> Isolation Forest | One-class SVM | Autoencoder</li>
+                        <li><strong>Clustering:</strong> DBSCAN, K-means для fraud rings</li>
                     </ul>
                 </div>
                 <div>
-                    <h3>Unsupervised Learning:</h3>
-                    <ul class="slide-list">
-                        <li><strong>Anomaly Detection</strong>
-                            <ul>
-                                <li>Isolation Forest</li>
-                                <li>One-class SVM</li>
-                                <li>Autoencoder reconstruction</li>
-                            </ul>
-                        </li>
-                        <li><strong>Clustering</strong>
-                            <ul>
-                                <li>Виявлення fraud rings</li>
-                                <li>Групування attack patterns</li>
-                            </ul>
-                        </li>
+                    <h3 style="font-size: 1.05rem; margin-bottom: 6px;">Features (150+):</h3>
+                    <ul class="slide-list" style="font-size: 0.72rem; line-height: 1.2;">
+                        <li><strong>Transaction:</strong> amount, merchant_id, MCC, time, location, currency</li>
+                        <li><strong>Aggregated 24h:</strong> count, sum, avg, std_dev, max</li>
+                        <li><strong>Velocity:</strong> txn_last_1h, merchants_last_day, countries</li>
+                        <li><strong>Historical:</strong> avg_30d, category_spending, weekend_ratio</li>
+                        <li><strong>Device:</strong> IP score, device_age, VPN, geo_mismatch</li>
+                        <li><strong>Merchant:</strong> fraud_rate, risk_category, chargeback_ratio</li>
                     </ul>
-                    <h3>Features (100+):</h3>
-                    <ul class="slide-list">
-                        <li>Transaction: amount, merchant, MCC, time, location</li>
-                        <li>Historical: patterns, average, frequency</li>
-                        <li>Network: IP, device fingerprint</li>
-                    </ul>
+                    <div style="margin-top: 8px; background: rgba(0,255,0,0.1); padding: 8px; border-radius: 5px; font-size: 0.7rem;">
+                        <strong>Top 5 features:</strong> 1) amount_deviation (35%) 2) velocity_1h (22%) 3) merchant_fraud (18%) 4) geo_mismatch (12%) 5) device_score (8%)
+                    </div>
                 </div>
             </div>
         </div>
@@ -260,36 +240,32 @@
     <!-- Slide 7: Кейс BIN Attack -->
     <div class="slide">
         <div class="slide-counter-display">7 / 8</div>
-        <div class="slide-cyber-security">
-            <h2>💥 Кейс: BIN Attack на ПриватБанк</h2>
-            <div style="background: rgba(255,0,0,0.1); padding: 20px; border-radius: 10px; margin-bottom: 20px;">
-                <h3>Масова атака в 2019 році</h3>
-                <p><strong>Атака:</strong> Automated carding на 50,000 карт</p>
+        <div class="slide-cyber-security" style="padding: 20px;">
+            <h2 style="font-size: 1.9rem; margin-bottom: 10px;">💥 Кейс: BIN Attack на ПриватБанк (2019)</h2>
+            <div style="background: rgba(255,0,0,0.08); padding: 12px; border-radius: 8px; margin-bottom: 12px;">
+                <p style="font-size: 0.9rem; margin: 0;"><strong>Атака:</strong> Automated carding на 50,000 карт</p>
             </div>
-            <h3>Що сталося:</h3>
-            <ol class="slide-list">
-                <li>Зловмисники отримали BIN ПриватБанку (516xxx)</li>
-                <li>Generated можливі номери карт (Luhn algorithm)</li>
-                <li>Automated bots тестували на малих e-commerce сайтах</li>
-                <li>Small amounts (₴1-10) для ухилення від detection</li>
-                <li>Validated cards продавались на dark web</li>
+
+            <h3 style="font-size: 1.05rem; margin-bottom: 6px;">Що сталося:</h3>
+            <ol class="slide-list" style="font-size: 0.78rem; line-height: 1.3; margin-bottom: 12px;">
+                <li>BIN ПриватБанку (516xxx) → Generated номери (Luhn algorithm)</li>
+                <li>Bots тестували на малих e-commerce (₴1-10 amounts)</li>
+                <li>Validated cards → dark web</li>
             </ol>
-            <h3 style="margin-top: 30px;">Як виявили:</h3>
-            <ul class="slide-list">
-                <li>Spike в declined transactions від одного мерчанта</li>
-                <li>Unusual pattern: sequential PANs</li>
-                <li>Geographic clustering (bot IPs)</li>
-                <li>Velocity anomaly</li>
+
+            <h3 style="font-size: 1.05rem; margin-bottom: 6px;">Як виявили:</h3>
+            <ul class="slide-list" style="font-size: 0.78rem; line-height: 1.3; margin-bottom: 12px;">
+                <li>Spike declined txn | Sequential PANs | Bot IPs clustering | Velocity anomaly</li>
             </ul>
-            <h3 style="margin-top: 30px;">Відповідь ПриватБанку:</h3>
-            <ul class="slide-list">
-                <li>✅ Temp block BIN на конкретного мерчанта</li>
-                <li>✅ Rate limiting посилено (3 failures = 1hr ban)</li>
-                <li>✅ CAPTCHA for failed attempts</li>
-                <li>✅ BIN rotation для нових карт</li>
+
+            <h3 style="font-size: 1.05rem; margin-bottom: 6px;">Відповідь ПриватБанку:</h3>
+            <ul class="slide-list" style="font-size: 0.78rem; line-height: 1.3; margin-bottom: 12px;">
+                <li>✅ Temp block BIN на merchant | ✅ Rate limiting (3 fails = 1hr ban)</li>
+                <li>✅ CAPTCHA для failed attempts | ✅ BIN rotation для нових карт</li>
             </ul>
-            <div class="alert alert-success" style="margin-top: 20px;">
-                <strong>Результат:</strong> Атака зупинена за 4 години, 0 успішних fraud транзакцій
+
+            <div style="background: rgba(16, 185, 129, 0.1); padding: 10px; border-radius: 6px; font-size: 0.8rem;">
+                <strong>📊 Результат:</strong> Атака зупинена за 4 години | 0 успішних fraud транзакцій
             </div>
         </div>
     </div>
@@ -361,6 +337,40 @@ function toggleFullscreen() {
         }
     }
 }
+
+// Handle fullscreen state changes
+document.addEventListener('fullscreenchange', function() {
+    if (document.fullscreenElement) {
+        document.body.classList.add('is-fullscreen');
+    } else {
+        document.body.classList.remove('is-fullscreen');
+    }
+});
+
+// Handle different browser prefixes
+document.addEventListener('webkitfullscreenchange', function() {
+    if (document.webkitFullscreenElement) {
+        document.body.classList.add('is-fullscreen');
+    } else {
+        document.body.classList.remove('is-fullscreen');
+    }
+});
+
+document.addEventListener('mozfullscreenchange', function() {
+    if (document.mozFullScreenElement) {
+        document.body.classList.add('is-fullscreen');
+    } else {
+        document.body.classList.remove('is-fullscreen');
+    }
+});
+
+document.addEventListener('msfullscreenchange', function() {
+    if (document.msFullscreenElement) {
+        document.body.classList.add('is-fullscreen');
+    } else {
+        document.body.classList.remove('is-fullscreen');
+    }
+});
 
 function exitPresentation() {
     if (document.fullscreenElement) {

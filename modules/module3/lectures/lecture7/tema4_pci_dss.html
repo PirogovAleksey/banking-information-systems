@@ -35,7 +35,7 @@
         <div class="slide-counter-display">2 / 10</div>
         <div class="content-box" style="max-width: 1200px;">
             <h2>🏛️ Що таке PCI DSS?</h2>
-            <h3>История та структура стандарту:</h3>
+            <h3>Історія та структура стандарту:</h3>
             <ul class="slide-list">
                 <li><strong>Створено:</strong> 2004 року Visa, Mastercard, AmEx, Discover, JCB</li>
                 <li><strong>Керується:</strong> PCI Security Standards Council</li>
@@ -87,12 +87,12 @@
                     <h4 style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); padding: 10px; border-radius: 5px;">🔒 Goal 4: Access Control</h4>
                     <ul class="slide-list">
                         <li><strong>Req 7:</strong> Need-to-know access</li>
-                        <li><strong>Req 8:</strong> ID and authenticate</li>
+                        <li><strong>Req 8:</strong> Ідентифікація та автентифікація</li>
                         <li><strong>Req 9:</strong> Physical access</li>
                     </ul>
                     <h4 style="background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%); padding: 10px; border-radius: 5px; margin-top: 20px;">📊 Goal 5: Monitor & Test</h4>
                     <ul class="slide-list">
-                        <li><strong>Req 10:</strong> Track and monitor</li>
+                        <li><strong>Req 10:</strong> Трекінг та моніторинг</li>
                         <li><strong>Req 11:</strong> Test security</li>
                     </ul>
                     <h4 style="background: linear-gradient(135deg, #fbc2eb 0%, #a6c1ee 100%); padding: 10px; border-radius: 5px; margin-top: 20px;">📚 Goal 6: Info Security Policy</h4>
@@ -107,40 +107,30 @@
     <!-- Slide 4: Requirement 3 - Захист даних -->
     <div class="slide">
         <div class="slide-counter-display">4 / 10</div>
-        <div class="content-box" style="max-width: 1200px;">
-            <h2>🔐 Requirement 3: Захист даних</h2>
-            <h3>Детально про найважливішу вимогу</h3>
-            <div class="content-grid">
-                <div style="background: rgba(0,255,0,0.1); padding: 20px; border-radius: 10px;">
-                    <h4>✅ Що МОЖНА зберігати:</h4>
-                    <ul class="slide-list">
-                        <li><strong>PAN</strong> (Primary Account Number) - але тільки encrypted</li>
-                        <li><strong>Cardholder Name</strong></li>
-                        <li><strong>Expiration Date</strong></li>
-                        <li><strong>Service Code</strong></li>
-                    </ul>
+        <div class="content-box" style="max-width: 1400px; padding: 18px;">
+            <h2 style="font-size: 1.9rem; margin-bottom: 8px;">🔐 Requirement 3: Захист даних</h2>
+            <div class="content-grid" style="gap: 12px; font-size: 0.75rem; margin-bottom: 10px;">
+                <div style="background: rgba(0,255,0,0.08); padding: 12px; border-radius: 8px;">
+                    <h4 style="font-size: 0.95rem;">✅ МОЖНА:</h4>
+                    <ul class="slide-list" style="font-size: 0.74rem;"><li>PAN (encrypted only) | Name | Expiry | Service Code</li></ul>
                 </div>
-                <div style="background: rgba(255,0,0,0.1); padding: 20px; border-radius: 10px;">
-                    <h4>❌ Що ЗАБОРОНЕНО зберігати:</h4>
-                    <ul class="slide-list">
-                        <li><strong>Full magnetic stripe data</strong></li>
-                        <li><strong>CAV2/CVC2/CVV2/CID</strong> (3-digit code)</li>
-                        <li><strong>PIN or PIN block</strong></li>
-                    </ul>
+                <div style="background: rgba(255,0,0,0.08); padding: 12px; border-radius: 8px;">
+                    <h4 style="font-size: 0.95rem;">❌ ЗАБОРОНЕНО:</h4>
+                    <ul class="slide-list" style="font-size: 0.74rem;"><li>Magnetic stripe | CVV2/CVC2 | PIN block</li></ul>
                 </div>
             </div>
-            <h3 style="margin-top: 30px;">Вимоги до шифрування PAN:</h3>
-            <ul class="slide-list">
-                <li><strong>Strong cryptography:</strong> AES-256, RSA-2048+</li>
-                <li><strong>Key management:</strong> Proper generation, distribution, storage, rotation, destruction</li>
-                <li><strong>Encryption at rest:</strong> Database TDE, file-level, disk-level</li>
-                <li><strong>Encryption in transit:</strong> TLS 1.2+ for all cardholder data</li>
+            <h3 style="font-size: 1.05rem; margin-bottom: 6px;">Вимоги до шифрування:</h3>
+            <ul class="slide-list" style="font-size: 0.74rem; line-height: 1.25;">
+                <li><strong>Cryptography (3.5.1):</strong> AES-256, RSA-2048+, SHA-256 | ❌ DES, MD5, SHA-1</li>
+                <li><strong>Key mgmt (3.6):</strong> HSM generation | Encrypted distribution | Annual rotation | 7+ overwrites destruction</li>
+                <li><strong>At rest (3.5):</strong> DB TDE (Oracle/SQL) | File: BitLocker/VeraCrypt | Keys окремо від data</li>
+                <li><strong>In transit (4.1-4.2):</strong> TLS 1.2+ (1.3 preferred) | AES-GCM cipher | ❌ SSL/TLS 1.0/1.1</li>
             </ul>
-            <h3 style="margin-top: 30px;">Альтернатива: Tokenization</h3>
-            <ul class="slide-list">
-                <li>Replace PAN with token</li>
-                <li>Reduces PCI scope significantly</li>
-                <li>Token vault must still be PCI compliant</li>
+            <h3 style="font-size: 1.05rem; margin-bottom: 6px; margin-top: 10px;">⚡ Tokenization (знижує PCI scope 80%):</h3>
+            <ul class="slide-list" style="font-size: 0.74rem; line-height: 1.25;">
+                <li>PAN → random token (same format, irreversible) | Token vault: token ↔ PAN mapping</li>
+                <li>App працює з tokens, PAN never stored | CDE = vault only</li>
+                <li><strong>Vendors:</strong> Visa Token Service, Mastercard MDES, Stripe, Adyen</li>
             </ul>
         </div>
     </div>
@@ -155,11 +145,31 @@
             </div>
             <h3>Архітектура compliance:</h3>
             <ul class="slide-list">
-                <li><strong>Network segmentation:</strong>
+                <li><strong>Network segmentation (Requirement 1):</strong>
                     <ul>
-                        <li>CDE (Cardholder Data Environment) isolated</li>
-                        <li>DMZ для card processing systems</li>
-                        <li>Firewall rules strictly controlled</li>
+                        <li><strong>CDE (Cardholder Data Environment) ізольовано:</strong>
+                            <ul>
+                                <li>Окрема VLAN для card processing systems</li>
+                                <li>Layer 3 firewall з whitelist rules (deny all by default)</li>
+                                <li>Ingress: тільки authorized endpoints</li>
+                                <li>Egress: контрольовані connections (database, HSM, external gateways)</li>
+                            </ul>
+                        </li>
+                        <li><strong>DMZ architecture:</strong>
+                            <ul>
+                                <li>External DMZ: internet-facing web servers, APIs</li>
+                                <li>Internal DMZ: payment gateways, tokenization service</li>
+                                <li>CDE Core: databases з PAN, HSMs, processing servers</li>
+                            </ul>
+                        </li>
+                        <li><strong>Firewall rules (Req 1.2-1.3):</strong>
+                            <ul>
+                                <li>Stateful inspection, no direct connections CDE ↔ Internet</li>
+                                <li>Rules reviewed quarterly + change management</li>
+                                <li>Inbound: block all except approved (port 443, 8443 до payment gateway)</li>
+                                <li>Outbound from CDE: тільки до approved IPs (issuer connections, networks)</li>
+                            </ul>
+                        </li>
                     </ul>
                 </li>
                 <li><strong>Encryption everywhere:</strong>
@@ -319,17 +329,55 @@
                 <li>🌐 <strong>Multi-factor authentication expanded</strong></li>
                 <li>🔐 <strong>Encryption requirements strengthened</strong></li>
             </ul>
-            <h3 style="margin-top: 30px;">New/enhanced requirements:</h3>
+            <h3 style="margin-top: 30px;">New/enhanced requirements (детально):</h3>
             <ul class="slide-list">
-                <li><strong>Req 6.4.3:</strong> Scripts on payment pages managed</li>
-                <li><strong>Req 8.3:</strong> MFA for all access to CDE</li>
-                <li><strong>Req 8.6:</strong> Inventory of authentication credentials</li>
-                <li><strong>Req 11.3.2:</strong> Internal penetration testing</li>
-                <li><strong>Req 11.6:</strong> Detect unauthorized changes</li>
-                <li><strong>Req 12.3:</strong> Targeted risk analysis</li>
+                <li><strong>Req 6.4.3:</strong> Scripts на payment pages managed to prevent web skimming (Magecart attacks)
+                    <ul>
+                        <li>Inventory всіх JavaScript на checkout</li>
+                        <li>CSP (Content Security Policy) headers обов'язкові</li>
+                        <li>SRI (Subresource Integrity) для external scripts</li>
+                        <li>Monitoring змін scripts real-time</li>
+                    </ul>
+                </li>
+                <li><strong>Req 8.3:</strong> MFA (Multi-Factor Authentication) розширено
+                    <ul>
+                        <li>Обов'язково для ALL access до CDE (було: тільки remote)</li>
+                        <li>Covers: admins, developers, vendors, support</li>
+                        <li>MFA factors: something you know (password) + something you have (token/phone) + something you are (biometric)</li>
+                        <li>Examples: Google Authenticator, YubiKey, Duo Security</li>
+                    </ul>
+                </li>
+                <li><strong>Req 8.6 (NEW):</strong> Inventory of authentication credentials
+                    <ul>
+                        <li>Tracking всіх application/system accounts</li>
+                        <li>Service accounts, API keys, certificates inventory</li>
+                        <li>Rotation policy і automated expiration</li>
+                    </ul>
+                </li>
+                <li><strong>Req 11.3.2 (Enhanced):</strong> Internal penetration testing annually + after significant changes
+                    <ul>
+                        <li>Must include: network segmentation testing</li>
+                        <li>CDE isolation validation</li>
+                        <li>Lateral movement prevention testing</li>
+                    </ul>
+                </li>
+                <li><strong>Req 11.6 (NEW):</strong> Change detection mechanism на critical systems
+                    <ul>
+                        <li>File Integrity Monitoring (FIM): Tripwire, OSSEC</li>
+                        <li>Alert на unauthorized file changes</li>
+                        <li>Weekly comparison baseline</li>
+                    </ul>
+                </li>
+                <li><strong>Req 12.3 (Enhanced):</strong> Targeted risk analysis methodology
+                    <ul>
+                        <li>Document risk assessment process</li>
+                        <li>Identify threats, vulnerabilities, impact</li>
+                        <li>Annual reviews + after significant changes</li>
+                    </ul>
+                </li>
             </ul>
             <div class="alert alert-info" style="margin-top: 20px;">
-                v4.0 фокусується на continuous security та cloud environments
+                <strong>v4.0 ключові фокуси:</strong> Continuous security monitoring, cloud environments flexibility, automated controls, zero trust principles, securing payment pages від web skimming
             </div>
         </div>
     </div>
@@ -404,6 +452,40 @@ function toggleFullscreen() {
         }
     }
 }
+
+// Handle fullscreen state changes
+document.addEventListener('fullscreenchange', function() {
+    if (document.fullscreenElement) {
+        document.body.classList.add('is-fullscreen');
+    } else {
+        document.body.classList.remove('is-fullscreen');
+    }
+});
+
+// Handle different browser prefixes
+document.addEventListener('webkitfullscreenchange', function() {
+    if (document.webkitFullscreenElement) {
+        document.body.classList.add('is-fullscreen');
+    } else {
+        document.body.classList.remove('is-fullscreen');
+    }
+});
+
+document.addEventListener('mozfullscreenchange', function() {
+    if (document.mozFullScreenElement) {
+        document.body.classList.add('is-fullscreen');
+    } else {
+        document.body.classList.remove('is-fullscreen');
+    }
+});
+
+document.addEventListener('msfullscreenchange', function() {
+    if (document.msFullscreenElement) {
+        document.body.classList.add('is-fullscreen');
+    } else {
+        document.body.classList.remove('is-fullscreen');
+    }
+});
 
 function exitPresentation() {
     if (document.fullscreenElement) {

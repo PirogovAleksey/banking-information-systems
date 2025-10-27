@@ -6,303 +6,10 @@
     <title>Картковий бізнес та платіжні мережі - Детальний конспект | Лекція 7</title>
 
     <!-- CSS -->
-    <link rel="stylesheet" href="../../../assets/css/base.css">
-    <link rel="stylesheet" href="../../../assets/css/layout.css">
-    <link rel="stylesheet" href="../../../assets/css/components.css">
-    <link rel="stylesheet" href="../../../assets/css/lectures.css">
-
-    <style>
-        html {
-            scroll-behavior: smooth;
-        }
-
-        .konspekt-container {
-            display: flex;
-            max-width: 1400px;
-            margin: 0 auto;
-            gap: 2rem;
-            padding: 2rem;
-        }
-
-        .konspekt-page {
-            flex: 1;
-            max-width: 900px;
-            background: white;
-            line-height: 1.9;
-        }
-
-        /* Right Sidebar Navigation */
-        .sidebar-nav {
-            position: sticky;
-            top: 100px;
-            width: 280px;
-            height: fit-content;
-            background: #f8fafc;
-            border: 2px solid #e2e8f0;
-            border-radius: 12px;
-            padding: 1.5rem;
-            align-self: flex-start;
-        }
-
-        .sidebar-nav h3 {
-            font-size: 1.1rem;
-            color: #475569;
-            margin: 0 0 1rem 0;
-            padding-bottom: 0.8rem;
-            border-bottom: 2px solid #cbd5e1;
-        }
-
-        .sidebar-nav ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        .sidebar-nav li {
-            margin-bottom: 0.5rem;
-        }
-
-        .sidebar-nav a {
-            display: block;
-            color: #64748b;
-            text-decoration: none;
-            padding: 0.6rem 0.8rem;
-            border-radius: 6px;
-            font-size: 0.95rem;
-            transition: all 0.2s ease;
-            border-left: 3px solid transparent;
-        }
-
-        .sidebar-nav a:hover {
-            background: #e0e7ff;
-            color: #667eea;
-            border-left-color: #667eea;
-        }
-
-        .sidebar-nav a.active {
-            background: #e0e7ff;
-            color: #667eea;
-            font-weight: 600;
-            border-left-color: #667eea;
-        }
-
-        .sidebar-nav .nav-subsection {
-            padding-left: 1rem;
-            font-size: 0.85rem;
-        }
-
-        /* Reading Progress Bar */
-        .reading-progress {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: #e2e8f0;
-            z-index: 9999;
-        }
-
-        .reading-progress-bar {
-            height: 100%;
-            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
-            width: 0%;
-            transition: width 0.1s ease;
-        }
-
-        /* Back to top button */
-        .back-to-top {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            background: #667eea;
-            color: white;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
-            transition: all 0.3s ease;
-            z-index: 1000;
-            border: none;
-            font-size: 1.5rem;
-        }
-
-        .back-to-top:hover {
-            background: #5568d3;
-            transform: translateY(-5px);
-        }
-
-        .back-to-top.show {
-            display: flex;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 1200px) {
-            .konspekt-container {
-                flex-direction: column;
-            }
-
-            .sidebar-nav {
-                position: relative;
-                top: 0;
-                width: 100%;
-                margin-bottom: 2rem;
-            }
-
-            .konspekt-page {
-                max-width: 100%;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .konspekt-container {
-                padding: 1rem;
-            }
-        }
-
-        .konspekt-header {
-            text-align: center;
-            margin-bottom: 3rem;
-            padding-bottom: 2rem;
-            border-bottom: 3px solid #667eea;
-        }
-
-        .konspekt-title {
-            font-size: 2.5rem;
-            color: #1e293b;
-            margin-bottom: 1rem;
-        }
-
-        .konspekt-meta {
-            color: #64748b;
-            font-size: 1.1rem;
-        }
-
-        .konspekt-content h2 {
-            color: #667eea;
-            font-size: 2rem;
-            margin-top: 3rem;
-            margin-bottom: 1.5rem;
-            padding-bottom: 0.8rem;
-            border-bottom: 3px solid #e2e8f0;
-        }
-
-        .konspekt-content h3 {
-            color: #475569;
-            font-size: 1.5rem;
-            margin-top: 2rem;
-            margin-bottom: 1rem;
-        }
-
-        .konspekt-content h4 {
-            color: #64748b;
-            font-size: 1.2rem;
-            margin-top: 1.5rem;
-            margin-bottom: 0.8rem;
-        }
-
-        .konspekt-content p {
-            font-size: 1.1rem;
-            margin-bottom: 1.2rem;
-            text-align: justify;
-        }
-
-        .konspekt-content ul, .konspekt-content ol {
-            font-size: 1.05rem;
-            margin-bottom: 1.5rem;
-            padding-left: 2rem;
-        }
-
-        .konspekt-content li {
-            margin-bottom: 0.7rem;
-            line-height: 1.7;
-        }
-
-        .info-box {
-            background: #f0f9ff;
-            border-left: 5px solid #0284c7;
-            padding: 1.5rem;
-            margin: 2rem 0;
-            border-radius: 8px;
-        }
-
-        .info-box h4 {
-            color: #0369a1;
-            margin-top: 0;
-        }
-
-        .example-box {
-            background: #f0fdf4;
-            border-left: 5px solid #10b981;
-            padding: 1.5rem;
-            margin: 2rem 0;
-            border-radius: 8px;
-        }
-
-        .example-box h4 {
-            color: #065f46;
-            margin-top: 0;
-        }
-
-        .warning-box {
-            background: #fef3c7;
-            border-left: 5px solid #f59e0b;
-            padding: 1.5rem;
-            margin: 2rem 0;
-            border-radius: 8px;
-        }
-
-        .warning-box h4 {
-            color: #92400e;
-            margin-top: 0;
-        }
-
-        .important-box {
-            background: #fef2f2;
-            border-left: 5px solid #ef4444;
-            padding: 1.5rem;
-            margin: 2rem 0;
-            border-radius: 8px;
-        }
-
-        .important-box h4 {
-            color: #991b1b;
-            margin-top: 0;
-        }
-
-        .comparison-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 2rem 0;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-            border-radius: 8px;
-            overflow: hidden;
-        }
-
-        .comparison-table th {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 15px;
-            text-align: left;
-            font-weight: 600;
-        }
-
-        .comparison-table td {
-            padding: 12px 15px;
-            border-bottom: 1px solid #e2e8f0;
-        }
-
-        .comparison-table tr:nth-child(even) {
-            background: #f8fafc;
-        }
-
-        .comparison-table tr:hover {
-            background: #f1f5f9;
-        }
-    </style>
+    <link rel="stylesheet" href="../../../../assets/css/base.css">
+    <link rel="stylesheet" href="../../../../assets/css/layout.css">
+    <link rel="stylesheet" href="../../../../assets/css/components.css">
+    <link rel="stylesheet" href="../../../../assets/css/konspekt.css">
 </head>
 <body>
 
@@ -315,7 +22,7 @@
 <header class="header">
     <div class="container">
         <nav class="breadcrumb">
-            <a href="../../../index.html">🏠 Головна</a>
+            <a href="../../../../index.html">🏠 Головна</a>
             <span class="breadcrumb-separator">→</span>
             <a href="../../index.html">Модуль 3</a>
             <span class="breadcrumb-separator">→</span>
@@ -372,7 +79,7 @@
                     <li>Дані транзакції (PAN, сума, merchant ID) передаються до банку-еквайєра</li>
                     <li>Платіжна мережа (Visa/Mastercard) маршрутизує запит до банку-емітента</li>
                     <li>Емітент перевіряє баланс, ліміти, fraud indicators та блокує суму</li>
-                    <li>Відповідь (Approved/Declined) повертається тим же шляхом назад</li>
+                    <li>Відповідь: Схвалено (Approved) або Відхилено (Declined) повертається тим же шляхом назад</li>
                     <li>Торговець отримує результат авторизації на екрані терміналу</li>
                 </ol>
             </div>
@@ -383,7 +90,7 @@
                 <ul>
                     <li>Торговці передають batch файли з усіма денними транзакціями до еквайєрів</li>
                     <li>Платіжні мережі обчислюють взаємні зобов'язання між банками</li>
-                    <li>Розраховуються interchange fees та network fees для кожної транзакції</li>
+                    <li>Розраховуються міжбанківські комісії (interchange fees) та мережеві збори (network fees) для кожної транзакції</li>
                     <li>Формуються clearing files для розрахункового процесу</li>
                 </ul>
             </div>
@@ -412,7 +119,7 @@
                         <ul>
                             <li>Баланс рахунку: ₴2,450 ✓</li>
                             <li>Денний ліміт: в межах норми ✓</li>
-                            <li>Fraud detection system: No alerts ✓</li>
+                            <li>Fraud detection система: Аномалій не виявлено ✓</li>
                             <li>Блокує ₴150 на рахунку</li>
                         </ul>
                     </li>
@@ -492,17 +199,53 @@
                 <li><strong>Data Elements</strong> — до 128 полів з різноманітними даними транзакції</li>
             </ul>
 
-            <h4>Ключові Data Elements:</h4>
+            <h4>Ключові Data Elements (детально):</h4>
             <ul>
-                <li><strong>Field 2:</strong> PAN (Primary Account Number) — номер платіжної картки</li>
-                <li><strong>Field 3:</strong> Processing Code — тип транзакції (purchase, withdrawal, refund)</li>
-                <li><strong>Field 4:</strong> Transaction Amount — сума транзакції в мінімальних одиницях валюти</li>
-                <li><strong>Field 7:</strong> Transmission Date and Time — timestamp транзакції</li>
-                <li><strong>Field 11:</strong> STAN (Systems Trace Audit Number) — унікальний номер для трекінгу</li>
-                <li><strong>Field 39:</strong> Response Code — результат авторизації (00=approved, 51=insufficient funds, 05=do not honor)</li>
-                <li><strong>Field 49:</strong> Currency Code — валюта транзакції (UAH=980, USD=840, EUR=978)</li>
-                <li><strong>Field 55:</strong> EMV ICC Data — дані з чіпу EMV картки (криптограми, ATC)</li>
+                <li><strong>Field 2:</strong> PAN (Primary Account Number, LLVAR до 19 цифр) — номер платіжної картки</li>
+                <li><strong>Field 3:</strong> Processing Code (6 digits) — тип транзакції:
+                    <ul>
+                        <li>00xxxx = purchase (покупка)</li>
+                        <li>01xxxx = cash withdrawal (зняття готівки)</li>
+                        <li>20xxxx = refund (повернення)</li>
+                        <li>30xxxx = balance inquiry (запит балансу)</li>
+                    </ul>
+                </li>
+                <li><strong>Field 4:</strong> Transaction Amount (12 digits) — сума транзакції в мінімальних одиницях валюти (коп., центи)</li>
+                <li><strong>Field 7:</strong> Transmission Date and Time (MMDDhhmmss) — timestamp транзакції</li>
+                <li><strong>Field 11:</strong> STAN (Systems Trace Audit Number, 6 digits) — унікальний номер для трекінгу та запобігання replay attacks</li>
+                <li><strong>Field 39:</strong> Response Code — результат авторизації:
+                    <ul>
+                        <li>00 = approved (схвалено)</li>
+                        <li>05 = do not honor (відмова)</li>
+                        <li>51 = insufficient funds (недостатньо коштів)</li>
+                        <li>54 = expired card (термін дії закінчився)</li>
+                        <li>91 = issuer unavailable (емітент недоступний)</li>
+                    </ul>
+                </li>
+                <li><strong>Field 49:</strong> Currency Code (ISO 4217, 3 digits) — валюта транзакції:
+                    <ul>
+                        <li>980 = UAH (українська гривня)</li>
+                        <li>840 = USD (долар США)</li>
+                        <li>978 = EUR (євро)</li>
+                    </ul>
+                </li>
+                <li><strong>Field 55:</strong> EMV ICC Data (LLVAR) — дані з чіпу EMV картки, включаючи криптограми (ARQC/ARPC), ATC, CVM results</li>
             </ul>
+
+            <div class="example-box">
+                <h4>📋 Приклад ISO 8583 Authorization Request (0100):</h4>
+                <p class="code-block">
+                    <strong>MTI:</strong> 0100 (Authorization Request)<br>
+                    <strong>Bitmap:</strong> F23C46D129E09180 (вказує, що присутні fields 2,3,4,7,11,39,49,55...)<br>
+                    <strong>Field 2:</strong> 5168123456789012 (PAN Visa)<br>
+                    <strong>Field 3:</strong> 000000 (Purchase)<br>
+                    <strong>Field 4:</strong> 000000015000 (150.00 UAH у копійках)<br>
+                    <strong>Field 7:</strong> 0127142530 (January 27, 14:25:30)<br>
+                    <strong>Field 11:</strong> 123456 (STAN для трекінгу)<br>
+                    <strong>Field 49:</strong> 980 (UAH)<br>
+                    <strong>Field 55:</strong> [EMV TLV data: ARQC cryptogram, ATC counter, Terminal capabilities...]
+                </p>
+            </div>
 
             <div class="info-box">
                 <h4>🔒 Security considerations для ISO 8583:</h4>
@@ -517,50 +260,83 @@
             <h3 id="threats">1.5. Загрози платіжним мережам</h3>
 
             <div class="warning-box">
-                <h4>⚠️ Man-in-the-Middle (MITM) атаки</h4>
-                <p><strong>Опис:</strong> Перехоплення та модифікація трафіку між учасниками платіжної мережі</p>
-                <p><strong>Вектори:</strong></p>
+                <h4>⚠️ Man-in-the-Middle (MITM) атаки — Атака "Людина посередині"</h4>
+                <p><strong>Опис:</strong> Перехоплення та модифікація трафіку між учасниками платіжної мережі. Зловмисник розміщується між двома легітимними сторонами комунікації та може читати, змінювати або підмінювати дані.</p>
+                <p><strong>Вектори атаки:</strong></p>
                 <ul>
-                    <li>Компрометація мережевого обладнання (routers, switches)</li>
-                    <li>BGP hijacking для редіректу трафіку</li>
-                    <li>Модифікація критичних полів ISO 8583 (Field 4 - amount, Field 39 - response code)</li>
+                    <li><strong>Компрометація мережевого обладнання:</strong> Злом маршрутизаторів (routers) та комутаторів (switches) для перехоплення трафіку</li>
+                    <li><strong>BGP hijacking (Викрадення BGP маршрутів):</strong> Маніпуляція протоколом Border Gateway Protocol для перенаправлення інтернет-трафіку через контрольовані зловмисником вузли. BGP — протокол маршрутизації між автономними системами в Інтернеті.</li>
+                    <li><strong>Модифікація ISO 8583 повідомлень:</strong> Зміна критичних полів (Field 4 - сума транзакції, Field 39 - код відповіді) для маніпуляції результатом</li>
                 </ul>
-                <p><strong>Захист:</strong> TLS 1.3 з mutual authentication, HSM для key management, network segmentation</p>
+                <p><strong>Методи захисту:</strong></p>
+                <ul>
+                    <li><strong>TLS 1.3 з mutual authentication (Взаємна автентифікація):</strong>
+                        <ul>
+                            <li><strong>TLS (Transport Layer Security):</strong> Криптографічний протокол для шифрування каналу зв'язку між двома системами через Інтернет. Версія 1.3 — найновіша, найбезпечніша, з швидшим handshake</li>
+                            <li><strong>Mutual authentication (Двостороння автентифікація):</strong> Обидві сторони комунікації перевіряють цифрові сертифікати одна одної (на відміну від звичайного TLS, де тільки сервер надає сертифікат). Клієнт перевіряє сертифікат сервера + Сервер перевіряє сертифікат клієнта = взаємна довіра</li>
+                            <li>Захищає від MITM атак, оскільки зловмисник не зможе надати валідний сертифікат</li>
+                        </ul>
+                    </li>
+                    <li><strong>HSM (Hardware Security Module — Апаратний модуль безпеки):</strong> Фізичний пристрій для безпечного зберігання та управління криптографічними ключами, виконання шифрування/дешифрування. Має tamper-resistant design — фізичні захисти від несанкціонованого доступу, при спробі злому автоматично знищує ключі</li>
+                    <li><strong>Network segmentation (Сегментація мережі):</strong> Розділення мережі на ізольовані сегменти за допомогою firewalls та VLANs для обмеження lateral movement (бокового переміщення) зловмисника у разі компрометації одного сегменту</li>
+                </ul>
             </div>
 
             <div class="warning-box">
-                <h4>⚠️ Message Replay Attacks</h4>
-                <p><strong>Опис:</strong> Повторна передача перехоплених authorization messages</p>
-                <p><strong>Вектори:</strong></p>
+                <h4>⚠️ Message Replay Attacks — Атаки з повторним відтворенням</h4>
+                <p><strong>Опис:</strong> Повторна передача перехоплених повідомлень авторизації (authorization messages). Зловмисник записує легітимну транзакцію та відтворює її пізніше для дублювання платежу.</p>
+                <p><strong>Вектори атаки:</strong></p>
                 <ul>
-                    <li>Capture і replay легітимних транзакцій для дублювання платежів</li>
-                    <li>Обхід систем одноразових кодів</li>
+                    <li><strong>Capture and replay (Перехоплення та повтор):</strong> Запис легітимних транзакцій та їх повторна передача для дублювання платежів</li>
+                    <li><strong>Обхід систем одноразових кодів:</strong> Спроба повторно використати OTP або session tokens</li>
+                    <li><strong>Time-window exploitation:</strong> Використання транзакцій у проміжку між авторизацією та клірінгом</li>
                 </ul>
-                <p><strong>Захист:</strong> STAN перевірка, timestamps validation, cryptographic nonces, transaction sequencing</p>
+                <p><strong>Методи захисту:</strong></p>
+                <ul>
+                    <li><strong>STAN (System Trace Audit Number) перевірка:</strong> Унікальний номер кожної транзакції для виявлення дублікатів</li>
+                    <li><strong>Timestamps validation (Перевірка часових міток):</strong> Відхилення застарілих повідомлень</li>
+                    <li><strong>Cryptographic nonces (Криптографічні одноразові числа):</strong> Випадкові значення, валідні тільки для однієї транзакції</li>
+                    <li><strong>Transaction sequencing (Послідовність транзакцій):</strong> Контроль порядку та унікальності транзакцій</li>
+                </ul>
             </div>
 
             <div class="warning-box">
-                <h4>⚠️ BIN Attack (Bank Identification Number)</h4>
-                <p><strong>Опис:</strong> Brute force генерація валідних номерів карток</p>
-                <p><strong>Вектори:</strong></p>
+                <h4>⚠️ BIN Attack — Атака на банківський ідентифікаційний номер</h4>
+                <p><strong>Опис:</strong> Brute force (грубої сили) генерація валідних номерів платіжних карток. Зловмисники систематично перебирають можливі комбінації номерів карток для знаходження дійсних.</p>
+                <p><strong>Що таке BIN:</strong> Bank Identification Number — перші 6 цифр номера картки, які ідентифікують банк-емітент та тип картки.</p>
+                <p><strong>Вектори атаки:</strong></p>
                 <ul>
-                    <li>Використання відомих BIN баз даних банків</li>
-                    <li>Luhn algorithm для валідації згенерованих номерів</li>
-                    <li>Automated testing на малих merchant сайтах</li>
+                    <li><strong>Використання BIN баз даних:</strong> Відомі BIN коди банків для генерації правдоподібних номерів (наприклад, 516815 = ПриватБанк Visa)</li>
+                    <li><strong>Luhn algorithm (Алгоритм Луна):</strong> Математичний алгоритм перевірки контрольної цифри для валідації згенерованих номерів. Останя цифра картки розраховується за формулою з перших 15 цифр.</li>
+                    <li><strong>Automated testing (Автоматизоване тестування):</strong> Масова перевірка згенерованих номерів на малих merchant сайтах з слабким захистом</li>
+                    <li><strong>CVV brute force:</strong> Перебір CVV коду (000-999 для 3-значного)</li>
                 </ul>
-                <p><strong>Захист:</strong> Rate limiting, CAPTCHA after failed attempts, velocity checks, BIN rotation policies</p>
+                <p><strong>Методи захисту:</strong></p>
+                <ul>
+                    <li><strong>Rate limiting (Обмеження швидкості):</strong> Максимум N спроб з одного IP за період часу</li>
+                    <li><strong>CAPTCHA після невдалих спроб:</strong> Підтвердження, що це людина, а не бот</li>
+                    <li><strong>Velocity checks (Перевірки швидкості):</strong> Виявлення аномально частих спроб оплати</li>
+                    <li><strong>BIN rotation policies:</strong> Регулярна зміна BIN діапазонів банками</li>
+                </ul>
             </div>
 
             <div class="warning-box">
-                <h4>⚠️ Network Downtime Attacks</h4>
-                <p><strong>Опис:</strong> DDoS атаки на процесингові центри</p>
-                <p><strong>Наслідки:</strong></p>
+                <h4>⚠️ Network Downtime Attacks — Атаки на доступність мережі</h4>
+                <p><strong>Опис:</strong> DDoS (Distributed Denial of Service — розподілена атака відмови в обслуговуванні) атаки на процесингові центри. Мета — зробити платіжну систему недоступною шляхом перевантаження серверів величезною кількістю запитів.</p>
+                <p><strong>Наслідки атаки:</strong></p>
                 <ul>
-                    <li>Fallback to stand-in processing (локальна авторизація з ризиками)</li>
-                    <li>Втрата revenue для merchants</li>
-                    <li>Reputational damage для банків та мереж</li>
+                    <li><strong>Fallback to stand-in processing (Перехід на локальну авторизацію):</strong> Термінали переходять в автономний режим та схвалюють транзакції локально без зв'язку з емітентом. Високий ризик шахрайства, оскільки баланс та ліміти не перевіряються.</li>
+                    <li><strong>Втрата revenue (доходу) для merchants:</strong> Неможливість приймати платежі = втрата продажів</li>
+                    <li><strong>Reputational damage (Репутаційні збитки):</strong> Втрата довіри клієнтів до банків та платіжних мереж</li>
+                    <li><strong>Фінансові втрати:</strong> Штрафи за SLA порушення, компенсації клієнтам</li>
                 </ul>
-                <p><strong>Захист:</strong> Geographic redundancy, load balancing, DDoS mitigation services, backup processing centers</p>
+                <p><strong>Методи захисту:</strong></p>
+                <ul>
+                    <li><strong>Geographic redundancy (Географічне резервування):</strong> Дата-центри в різних країнах/континентах</li>
+                    <li><strong>Load balancing (Балансування навантаження):</strong> Розподіл трафіку між кількома серверами</li>
+                    <li><strong>DDoS mitigation services:</strong> Спеціалізовані сервіси фільтрації шкідливого трафіку (Cloudflare, Akamai)</li>
+                    <li><strong>Backup processing centers (Резервні процесингові центри):</strong> Автоматичне перемикання на backup при збої основного</li>
+                </ul>
             </div>
 
             <h3 id="statistics">1.6. Глобальна статистика платіжних мереж</h3>
@@ -659,6 +435,27 @@
                     <li>Card перевіряє ARPC та завершує транзакцію</li>
                 </ol>
                 <p><strong>Ключовий момент:</strong> ARQC — це одноразовий криптографічний код, який неможливо підробити без знання secret keys</p>
+
+                <div class="crypto-details">
+                    <h5>🔐 Детальний процес генерації ARQC:</h5>
+                    <ol>
+                        <li><strong>Terminal generates:</strong> Unpredictable Number (UN) — випадкове 4-байтове число</li>
+                        <li><strong>Chip збирає дані:</strong>
+                            <ul>
+                                <li>PAN (номер картки)</li>
+                                <li>Transaction Amount (сума)</li>
+                                <li>Currency Code (валюта)</li>
+                                <li>Transaction Date (дата)</li>
+                                <li>Unpredictable Number (UN від терміналу)</li>
+                                <li>ATC (Application Transaction Counter — лічильник використань чіпа)</li>
+                            </ul>
+                        </li>
+                        <li><strong>Key derivation:</strong> Session key формується з Master Key використовуючи diversification (унікальний для кожної картки)</li>
+                        <li><strong>Encryption:</strong> Застосовується Triple DES (3DES) або AES шифрування до зібраних даних з session key</li>
+                        <li><strong>Output:</strong> 8-байтний криптографічний код (ARQC), унікальний для цієї транзакції</li>
+                    </ol>
+                    <p><strong>Чому це безпечно:</strong> Без знання Master Key (який зберігається тільки в банку-емітенті та на чіпі картки в захищеній пам'яті) неможливо згенерувати валідний ARQC. Навіть якщо перехопити ARQC — він валідний тільки для однієї конкретної транзакції через UN та ATC.</p>
+                </div>
             </div>
 
             <h3 id="contactless">2.3. Contactless EMV (NFC)</h3>
@@ -691,12 +488,32 @@
             </ul>
 
             <div class="warning-box">
-                <h4>⚠️ Relay Attacks на NFC</h4>
+                <h4>⚠️ Relay Attacks на NFC (Атаки з ретрансляцією)</h4>
+                <p><strong>Опис атаки:</strong></p>
                 <p>
-                    <strong>Вразливість:</strong> Зловмисники можуть створити "міст" між справжньою карткою жертви (в кишені) та терміналом,
-                    збільшуючи ефективну дальність NFC до 50+ метрів.
+                    <strong>Relay attack (Атака з ретрансляцією):</strong> Зловмисники використовують два пристрої для створення "мосту" між справжньою безконтактною карткою жертви (в кишені або сумці) та терміналом, збільшуючи ефективну дальність NFC з 4 см до 50+ метрів.
                 </p>
-                <p><strong>Захист:</strong> Distance bounding protocols, time-based checks, EMV terminals з anti-relay механізмами</p>
+                <p><strong>Як працює:</strong></p>
+                <ol>
+                    <li><strong>Пристрій 1 (Reader proxy):</strong> Розміщується близько до жертви (в натовпі, метро) та зчитує сигнал з NFC картки</li>
+                    <li><strong>Пристрій 2 (Card proxy):</strong> Розміщується біля POS терміналу та емулює картку жертви</li>
+                    <li>Сигнал миттєво ретранслюється між двома пристроями через Bluetooth або Wi-Fi</li>
+                    <li>Термінал "думає" що картка поруч, а картка "думає" що комунікує з легітимним терміналом</li>
+                    <li>Транзакція проходить авторизацію без відома жертви</li>
+                </ol>
+                <p><strong>Обмеження атаки:</strong></p>
+                <ul>
+                    <li>Працює тільки для сум до ліміту без PIN (₴500 в Україні)</li>
+                    <li>Потребує фізичної близькості до жертви та терміналу одночасно</li>
+                    <li>Жертва отримає push notification про транзакцію (якщо увімкнені)</li>
+                </ul>
+                <p><strong>Захист:</strong></p>
+                <ul>
+                    <li><strong>Distance bounding protocols (Протоколи обмеження відстані):</strong> Вимірювання часу відповіді картки — relay додає латентність (затримку), що може бути виявлена</li>
+                    <li><strong>Time-based checks:</strong> EMV чіп перевіряє чи транзакція відбулася занадто швидко для дійсної відстані</li>
+                    <li><strong>EMV terminals з anti-relay механізмами:</strong> Сучасні термінали з вбудованими алгоритмами виявлення relay атак</li>
+                    <li><strong>RFID-blocking wallets:</strong> Гаманці з екрануванням для блокування несанкціонованого зчитування</li>
+                </ul>
             </div>
 
             <h3 id="tokenization">2.4. Apple Pay та токенізація</h3>
@@ -829,9 +646,13 @@
 
             <div class="warning-box">
                 <h4>1. Counterfeit Fraud (Підробка карток)</h4>
-                <p><strong>Метод:</strong> Клонування магнітної смуги за допомогою skimming пристроїв</p>
+                <p><strong>Метод:</strong> Клонування магнітної смуги за допомогою skimming пристроїв (скімінгу)</p>
                 <p><strong>Статус:</strong> ❌ EMV зменшив counterfeit fraud на 75% у країнах з high EMV adoption</p>
-                <p><strong>Сучасні варіанти:</strong> Shimmer attacks — тонкі пристрої між чіпом та рідером для capture EMV data</p>
+                <p><strong>Сучасні варіанти:</strong></p>
+                <ul>
+                    <li><strong>Shimmer attacks (Шиммер атаки):</strong> Тонкі електронні пристрої товщиною з папір, що вставляються між EMV чіпом картки та рідером терміналу для перехоплення даних під час комунікації. На відміну від звичайних скімерів, шиммери працюють з чіповими картками та можуть захоплювати дані з EMV транзакцій, хоча не можуть клонувати сам чіп.</li>
+                    <li><strong>Card skimming (Скімінг карток):</strong> Незаконне копіювання даних з магнітної смуги картки за допомогою спеціальних пристроїв-скімерів, встановлених на банкомати або POS-термінали</li>
+                </ul>
             </div>
 
             <div class="warning-box">
@@ -842,76 +663,126 @@
             </div>
 
             <div class="warning-box">
-                <h4>3. Card-Not-Present (CNP) Fraud</h4>
-                <p><strong>Метод:</strong> Онлайн-покупки використовуючи викрадені PAN + CVV + expiry</p>
+                <h4>3. Card-Not-Present (CNP) Fraud — Шахрайство без фізичної картки</h4>
+                <p><strong>Метод:</strong> Онлайн-покупки використовуючи викрадені PAN + CVV + expiry date без фізичної присутності картки</p>
                 <p><strong>Статус:</strong> 📈 60% всього card fraud — найбільша проблема сьогодні</p>
-                <p><strong>Джерела PAN:</strong> Data breaches, phishing, malware, dark web databases</p>
-                <p><strong>Захист:</strong> 3D Secure 2.0, ML fraud detection, velocity limits, device fingerprinting</p>
-            </div>
-
-            <div class="warning-box">
-                <h4>4. Account Takeover (ATO)</h4>
-                <p><strong>Метод:</strong> Компрометація облікового запису через credential stuffing, phishing, malware</p>
-                <p><strong>Дії зловмисника:</strong></p>
+                <p><strong>Джерела PAN:</strong></p>
                 <ul>
-                    <li>Змінює email/телефон у профілі</li>
-                    <li>Замовляє нову картку на свою адресу</li>
-                    <li>Робить unauthorized transactions</li>
+                    <li><strong>Data breaches (Витоки даних):</strong> Компрометація баз даних merchants або payment processors</li>
+                    <li><strong>Phishing (Фішинг):</strong> Шахрайські email або SMS повідомлення з підробленими посиланнями на фальшиві сайти банків</li>
+                    <li><strong>Malware (Зловмисне ПЗ):</strong> Віруси, троянці, кейлогери для крадіжки даних з комп'ютерів</li>
+                    <li><strong>Dark web databases:</strong> Продаж викрадених даних карток на нелегальних ринках</li>
                 </ul>
-                <p><strong>Захист:</strong> Multi-factor authentication, behavioral biometrics, anomaly detection при зміні контактів</p>
+                <p><strong>Захист:</strong></p>
+                <ul>
+                    <li>3D Secure 2.0 — додаткова автентифікація для онлайн-транзакцій</li>
+                    <li>ML fraud detection — машинне навчання для виявлення підозрілих patterns</li>
+                    <li>Velocity limits — обмеження кількості транзакцій за період часу</li>
+                    <li><strong>Device fingerprinting (Цифровий відбиток пристрою):</strong> Унікальна ідентифікація пристрою на основі характеристик браузера, операційної системи, часового поясу, встановлених шрифтів, розширень, розміру екрану та інших параметрів. Кожен пристрій має унікальний "fingerprint" що дозволяє виявити підозрілі пристрої або емулятори.</li>
+                </ul>
             </div>
 
             <div class="warning-box">
-                <h4>5. Friendly Fraud (Chargeback Abuse)</h4>
-                <p><strong>Метод:</strong> Клієнт робить легітимну покупку, а потім оспорює транзакцію</p>
-                <p><strong>Claim:</strong> "I didn't authorize this transaction" або "I didn't receive the goods"</p>
-                <p><strong>Проблема для merchants:</strong> Chargeback fees ($20-100) + втрата товару + reputation damage</p>
-                <p><strong>Захист:</strong> Детальна документація доставки, delivery confirmations, чіткі return policies</p>
+                <h4>4. Account Takeover (ATO) — Захоплення облікового запису</h4>
+                <p><strong>Метод:</strong> Компрометація облікового запису користувача через різні техніки:</p>
+                <ul>
+                    <li><strong>Credential stuffing (Підстановка облікових даних):</strong> Автоматизована атака з використанням викрадених комбінацій email/пароль з інших витоків даних. Зловмисники використовують ботів для масового тестування мільйонів комбінацій логін/пароль на різних сервісах, сподіваючись що користувачі використовують однакові паролі на багатьох сайтах.</li>
+                    <li><strong>Phishing (Фішинг):</strong> Обман користувача для введення облікових даних на підробленому сайті</li>
+                    <li><strong>Malware (Зловмисне ПЗ):</strong> Кейлогери, троянці для перехоплення паролів</li>
+                </ul>
+                <p><strong>Дії зловмисника після захоплення:</strong></p>
+                <ul>
+                    <li>Змінює email/телефон у профілі для блокування доступу власника</li>
+                    <li>Замовляє нову картку на свою адресу</li>
+                    <li>Робить unauthorized transactions (несанкціоновані транзакції)</li>
+                    <li>Змінює паролі та security questions</li>
+                </ul>
+                <p><strong>Захист:</strong></p>
+                <ul>
+                    <li><strong>Multi-factor authentication (MFA):</strong> Багатофакторна автентифікація (щось що знаєте + щось що маєте + щось чим є)</li>
+                    <li><strong>Behavioral biometrics (Поведінкова біометрія):</strong> Аналіз унікальних поведінкових патернів користувача — швидкість друку, ритм натискання клавіш, динаміка рухів миші, паттерни свайпів на мобільному пристрої, час між діями. Система навчається на нормальній поведінці користувача та виявляє аномалії, що можуть вказувати на зловмисника.</li>
+                    <li><strong>Anomaly detection (Виявлення аномалій):</strong> при зміні контактів, незвичних входах, змінах у patterns поведінки</li>
+                </ul>
+            </div>
+
+            <div class="warning-box">
+                <h4>5. Friendly Fraud (Chargeback Abuse) — "Дружнє" шахрайство</h4>
+                <p><strong>Метод:</strong> Клієнт робить легітимну покупку, отримує товар/послугу, але потім оспорює транзакцію в банку</p>
+                <p><strong>Типові претензії (Claims):</strong></p>
+                <ul>
+                    <li>"I didn't authorize this transaction" — "Я не авторизував цю транзакцію"</li>
+                    <li>"I didn't receive the goods" — "Я не отримав товар"</li>
+                    <li>"The product was defective" — "Товар був дефектним"</li>
+                    <li>"My card was stolen" — "Мою картку вкрали" (хоча насправді клієнт сам зробив покупку)</li>
+                </ul>
+                <p><strong>Проблема для merchants:</strong></p>
+                <ul>
+                    <li><strong>Chargeback fees (Збори за повернення платежу):</strong> $20-100 за кожен chargeback, незалежно від результату</li>
+                    <li>Втрата товару (клієнт зберігає товар + отримує гроші назад)</li>
+                    <li><strong>Reputation damage (Репутаційні збитки):</strong> Високий chargeback rate може призвести до підвищених processing fees або втрати можливості приймати платежі</li>
+                    <li>Час та ресурси на оскарження кожного chargeback</li>
+                </ul>
+                <p><strong>Захист для merchants:</strong></p>
+                <ul>
+                    <li>Детальна документація доставки з signature confirmation</li>
+                    <li>Tracking numbers та delivery confirmations з фото</li>
+                    <li>Чіткі return policies та terms of service</li>
+                    <li>Email/SMS підтвердження від клієнта про отримання товару</li>
+                    <li>3D Secure для переносу відповідальності (liability shift) на банк</li>
+                </ul>
             </div>
 
             <h3 id="fraud-methods">3.2. Популярні методи шахрайства</h3>
 
             <h4>Технічні атаки:</h4>
             <ul>
-                <li><strong>Card Skimming:</strong>
+                <li><strong>Card Skimming (Скімінг карток):</strong>
                     <ul>
-                        <li>Пристрої на ATM або POS для копіювання магнітної смуги</li>
-                        <li>Hidden cameras для capture PIN коду</li>
-                        <li>Bluetooth-enabled skimmers для remote data exfiltration</li>
+                        <li>Пристрої-скімери на ATM або POS терміналах для копіювання магнітної смуги картки</li>
+                        <li>Hidden cameras (приховані камери) для запису введення PIN коду</li>
+                        <li>Bluetooth-enabled skimmers для віддаленого витягання даних (remote data exfiltration)</li>
+                        <li>Fake card readers (фальшиві картрідери) встановлені поверх легітимних терміналів</li>
                     </ul>
                 </li>
-                <li><strong>Carding (BIN attacks):</strong>
+                <li><strong>Carding / BIN attacks (Кардінг / BIN атаки):</strong>
                     <ul>
-                        <li>Автоматизоване тестування згенерованих номерів карт</li>
-                        <li>Brute force CVV (000-999 для 3-значного коду)</li>
-                        <li>Продаж validated cards на dark web ($5-50 за картку)</li>
+                        <li>Автоматизоване тестування згенерованих номерів карт на основі BIN баз даних</li>
+                        <li><strong>Brute force CVV:</strong> Перебір CVV кодів (000-999 для 3-значного коду) на слабо захищених сайтах</li>
+                        <li>Продаж validated cards (перевірених карток) на dark web ($5-50 за картку з працюючим PAN+CVV+Expiry)</li>
+                        <li>Використання ботів для одночасного тестування тисяч комбінацій</li>
                     </ul>
                 </li>
-                <li><strong>E-commerce bot attacks:</strong>
+                <li><strong>E-commerce bot attacks (Атаки ботів на e-commerce):</strong>
                     <ul>
-                        <li>Automated checkout bots для швидкої купівлі</li>
-                        <li>Використання stolen cards для gift cards або cryptocurrency</li>
-                        <li>Cash-out перед виявленням fraud</li>
+                        <li>Automated checkout bots для швидкої купівлі високоліквідних товарів</li>
+                        <li>Використання stolen cards для покупки gift cards або cryptocurrency (легко конвертувати в готівку)</li>
+                        <li>Cash-out (обналічування) перед виявленням fraud банком</li>
+                        <li>Розподілені атаки з багатьох IP адрес для обходу rate limiting</li>
                     </ul>
                 </li>
             </ul>
 
-            <h4>Social Engineering:</h4>
+            <h4>Social Engineering (Соціальна інженерія):</h4>
             <ul>
-                <li><strong>Phishing/Vishing:</strong>
+                <li><strong>Phishing / Vishing (Фішинг / Вішинг):</strong>
                     <ul>
-                        <li>Fake bank websites з SSL сертифікатами</li>
-                        <li>Телефонні дзвінки від "bank security department"</li>
-                        <li>SMS з посиланням: "Your card is blocked, click to reactivate"</li>
-                        <li>Social engineering для отримання SMS OTP</li>
+                        <li><strong>Phishing (Фішинг):</strong> Email або SMS атаки з фальшивими посиланнями на підроблені сайти банків для крадіжки облікових даних. Назва походить від "fishing" (рибалка) — зловмисники "ловлять" жертв на "приманку".</li>
+                        <li><strong>Vishing (Вішинг):</strong> Voice phishing — телефонні дзвінки від зловмисників, що видають себе за співробітників банку ("bank security department") для витягання конфіденційної інформації</li>
+                        <li>Fake bank websites (фальшиві сайти банків) з валідними SSL сертифікатами та domains схожими на оригінальні (наприклад, privat-bank.com замість privatbank.ua)</li>
+                        <li>SMS з посиланням: "Your card is blocked, click to reactivate" — "Ваша картка заблокована, натисніть для розблокування"</li>
+                        <li>Social engineering (соціальна інженерія) для отримання SMS OTP кодів шляхом маніпуляції жертвою</li>
+                        <li>Spear phishing — цільовий фішинг на конкретну людину з персоналізованою інформацією</li>
                     </ul>
                 </li>
-                <li><strong>SIM Swap Fraud:</strong>
+                <li><strong>SIM Swap Fraud (Шахрайство з підміною SIM-карти):</strong>
                     <ul>
-                        <li>Зловмисник переконує mobile operator перевидати SIM на свій пристрій</li>
-                        <li>Перехоплює SMS OTP коди</li>
-                        <li>Отримує доступ до mobile banking та email</li>
-                        <li>Проводить account takeover та unauthorized transactions</li>
+                        <li><strong>Крок 1:</strong> Зловмисник збирає персональну інформацію про жертву (ім'я, дата народження, адреса, паспортні дані) через витоки даних або social engineering</li>
+                        <li><strong>Крок 2:</strong> Зловмисник видає себе за жертву та переконує співробітника mobile operator перевидати SIM-карту на свій пристрій, стверджуючи що втратив телефон</li>
+                        <li><strong>Крок 3:</strong> Після активації нової SIM, номер телефону жертви переходить під контроль зловмисника</li>
+                        <li><strong>Крок 4:</strong> Зловмисник перехоплює всі SMS OTP коди, що надходять на цей номер</li>
+                        <li><strong>Крок 5:</strong> Отримує доступ до mobile banking, email, social media через функцію "Забули пароль?"</li>
+                        <li><strong>Крок 6:</strong> Проводить account takeover (захоплення облікового запису) та unauthorized transactions (несанкціоновані транзакції)</li>
+                        <li><strong>Захист:</strong> PIN код на SIM-карту, двофакторна автентифікація через app (не SMS), контрольне слово в мобільного оператора</li>
                     </ul>
                 </li>
             </ul>
@@ -979,18 +850,20 @@
 
             <p><strong>Unsupervised Learning (виявлення невідомих patterns):</strong></p>
             <ul>
-                <li><strong>Anomaly Detection:</strong>
+                <li><strong>Anomaly Detection (Виявлення аномалій):</strong>
+                    <p>Методи для виявлення транзакцій, що відхиляються від нормальної поведінки клієнта, навіть якщо ці паттерни не були в навчальних даних:</p>
                     <ul>
-                        <li>Isolation Forest — швидко ідентифікує outliers</li>
-                        <li>One-class SVM — виявляє девіації від "normal" behavior</li>
-                        <li>Autoencoder reconstruction error — deep learning підхід</li>
+                        <li><strong>Isolation Forest (Ліс ізоляції):</strong> Алгоритм машинного навчання, що швидко ідентифікує outliers (викиди). Базується на принципі, що аномалії легше ізолювати (відокремити) від решти даних, ніж нормальні точки. Будує випадкові дерева рішень та рахує, скільки розбиттів потрібно для ізоляції кожної точки — аномалії ізолюються швидше (за менше кроків).</li>
+                        <li><strong>One-class SVM (Однокласовий метод опорних векторів):</strong> Навчається тільки на "нормальних" транзакціях та будує гіперплощину, що описує нормальну поведінку. Будь-які нові транзакції, що виходять за межі цієї гіперплощини, вважаються аномаліями. Ефективний для виявлення нових типів fraud, що не були в historical data.</li>
+                        <li><strong>Autoencoder reconstruction error (Помилка реконструкції автоенкодера):</strong> Deep learning підхід з нейронними мережами. Autoencoder навчається стискати (encode) нормальні транзакції в компактне представлення та потім розпаковувати (decode) назад. Для нормальних транзакцій помилка реконструкції мала, але для fraud транзакцій (яких не було в навчанні) помилка велика — це сигналізує про аномалію.</li>
                     </ul>
                 </li>
-                <li><strong>Clustering:</strong>
+                <li><strong>Clustering (Кластеризація):</strong>
                     <ul>
-                        <li>Виявлення fraud rings (групи зловмисників)</li>
-                        <li>Групування attack patterns</li>
-                        <li>Network analysis для виявлення organized crime</li>
+                        <li><strong>Виявлення fraud rings (Групи зловмисників):</strong> Групування транзакцій за схожими ознаками для виявлення організованих груп шахраїв</li>
+                        <li>Групування attack patterns (паттернів атак) для ідентифікації координованих атак</li>
+                        <li><strong>Network analysis (Мережевий аналіз):</strong> Аналіз зв'язків між картками, merchants, IP адресами для виявлення organized crime (організованої злочинності)</li>
+                        <li>Виявлення мереж мулів (money mules) — осіб, що обналічують кошти для зловмисників</li>
                     </ul>
                 </li>
             </ul>
@@ -1430,13 +1303,23 @@
                 <p><strong>Дата:</strong> 2008 рік</p>
                 <p><strong>Масштаб:</strong> 130 мільйонів номерів карток скомпрометовано</p>
 
-                <p><strong>Як сталася breach:</strong></p>
+                <p><strong>Як сталася breach (порушення):</strong></p>
                 <ol>
-                    <li><strong>Initial compromise:</strong> SQL injection на corporate web application</li>
-                    <li><strong>Malware installation:</strong> Зловмисники встановили custom malware на internal network</li>
-                    <li><strong>Lateral movement:</strong> Malware поширився на payment processing systems</li>
-                    <li><strong>Memory scraping:</strong> Sniffer software захоплював unencrypted PANs у RAM під час processing</li>
-                    <li><strong>Data exfiltration:</strong> Щоденна передача stolen data протягом 6 місяців</li>
+                    <li><strong>Initial compromise (Початкова компрометація):</strong>
+                        <ul>
+                            <li><strong>SQL injection (SQL ін'єкція):</strong> Атака на corporate web application через вразливість в коді. Зловмисники вставили шкідливий SQL код в поля форми (наприклад, поле логіну), який виконався на сервері бази даних та надав їм доступ до системи. SQL ін'єкція дозволяє обійти автентифікацію, читати/змінювати дані, виконувати команди операційної системи.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Malware installation (Встановлення зловмисного ПЗ):</strong> Зловмисники встановили custom malware (спеціально створене зловмисне програмне забезпечення) на internal network для прихованого моніторингу</li>
+                    <li><strong>Lateral movement (Бокове переміщення):</strong> Malware поширився на інші системи мережі, включаючи payment processing systems (системи обробки платежів)</li>
+                    <li><strong>Memory scraping (RAM scraping — Витягання даних з пам'яті):</strong>
+                        <ul>
+                            <li>Sniffer software захоплював unencrypted PANs безпосередньо з оперативної пам'яті (RAM) під час processing транзакцій</li>
+                            <li>Проблема: навіть якщо PAN шифрується для зберігання, він повинен бути в plaintext (незашифрованому вигляді) в RAM під час обробки — саме в цей момент memory scraper його перехоплює</li>
+                            <li>Malware сканує процеси в пам'яті, шукаючи patterns схожі на номери карток (16 цифр, що проходять Luhn validation)</li>
+                        </ul>
+                    </li>
+                    <li><strong>Data exfiltration (Витягання даних):</strong> Щоденна передача stolen data (викрадених даних) через зашифровані канали на сервери зловмисників протягом 6 місяців без виявлення</li>
                 </ol>
 
                 <p><strong>Статус PCI compliance:</strong></p>
@@ -1522,12 +1405,17 @@
 
             <h4>New/Enhanced Requirements у v4.0:</h4>
             <ul>
-                <li><strong>Req 6.4.3:</strong> Scripts на payment pages повинні бути managed для запобігання e-skimming (Magecart attacks)</li>
-                <li><strong>Req 8.3:</strong> MFA для всіх типів доступу до CDE (не тільки remote)</li>
-                <li><strong>Req 8.6:</strong> Inventory усіх authentication credentials та mechanisms</li>
-                <li><strong>Req 11.3.2:</strong> Internal penetration testing як окрема вимога (раніше було частиною Req 11.3)</li>
-                <li><strong>Req 11.6:</strong> Detect і alert на unauthorized changes до payment pages</li>
-                <li><strong>Req 12.3:</strong> Targeted risk analysis для кожного PCI DSS requirement</li>
+                <li><strong>Req 6.4.3:</strong> Scripts на payment pages повинні бути managed для запобігання e-skimming attacks:
+                    <ul>
+                        <li><strong>E-skimming / Magecart attacks (Електронний скімінг):</strong> Ін'єкція шкідливого JavaScript коду на payment pages e-commerce сайтів для крадіжки даних карток в реальному часі під час введення клієнтом. Зловмисники компрометують third-party scripts (бібліотеки аналітики, чат-боти, payment widgets) та додають код для перехоплення PAN, CVV, expiry date прямо з форми до того як дані будуть зашифровані. Назва "Magecart" походить від груп хакерів, що спеціалізуються на атаках на Magento e-commerce платформу.</li>
+                        <li>Захист: Content Security Policy (CSP), Subresource Integrity (SRI), постійний моніторинг змін у scripts</li>
+                    </ul>
+                </li>
+                <li><strong>Req 8.3:</strong> MFA (Multi-Factor Authentication) для всіх типів доступу до CDE (Cardholder Data Environment), не тільки remote access</li>
+                <li><strong>Req 8.6:</strong> Inventory (інвентаризація) усіх authentication credentials та mechanisms — повний список всіх облікових даних та методів автентифікації</li>
+                <li><strong>Req 11.3.2:</strong> Internal penetration testing як окрема обов'язкова вимога (раніше було частиною Req 11.3)</li>
+                <li><strong>Req 11.6:</strong> Detect і alert на unauthorized changes до payment pages — виявлення несанкціонованих змін коду на сторінках оплати в реальному часі</li>
+                <li><strong>Req 12.3:</strong> Targeted risk analysis (Цільовий аналіз ризиків) для кожного PCI DSS requirement з документацією специфічних загроз для організації</li>
             </ul>
 
             <div class="info-box">
@@ -1659,7 +1547,7 @@
         <div class="text-center">
             <p>&copy; 2024 Інформаційні банківські технології</p>
             <div class="footer-links mt-4">
-                <a href="../../../index.html">Головна</a>
+                <a href="../../../../index.html">Головна</a>
                 <a href="../../index.html">Модуль 3</a>
                 <a href="index.html">Лекція 7</a>
             </div>
@@ -1728,6 +1616,31 @@
             }
         });
     });
+
+    // Sidebar scroll indicator
+    function checkSidebarScroll() {
+        const sidebar = document.querySelector('.sidebar-nav');
+        if (sidebar) {
+            const isScrollable = sidebar.scrollHeight > sidebar.clientHeight;
+            const isScrolledToBottom = sidebar.scrollHeight - sidebar.scrollTop <= sidebar.clientHeight + 5;
+
+            if (isScrollable && !isScrolledToBottom) {
+                sidebar.classList.add('has-scroll');
+            } else {
+                sidebar.classList.remove('has-scroll');
+            }
+        }
+    }
+
+    // Check on load and resize
+    window.addEventListener('load', checkSidebarScroll);
+    window.addEventListener('resize', checkSidebarScroll);
+
+    // Check when sidebar is scrolled
+    const sidebar = document.querySelector('.sidebar-nav');
+    if (sidebar) {
+        sidebar.addEventListener('scroll', checkSidebarScroll);
+    }
 </script>
 
 </body>
