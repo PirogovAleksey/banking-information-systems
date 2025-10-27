@@ -180,7 +180,7 @@
           ],
           "securityFocus": "Card fraud prevention, 3D Secure, PCI DSS",
           "bankingExamples": ["Visa Token Service", "Mastercard Digital Enablement", "3D Secure 2.0"],
-          "status": "planned"
+          "status": "active"
         },
         {
           "id": "8",

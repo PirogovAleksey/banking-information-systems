@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тема 4: PCI DSS Compliance</title>
+    <link rel="stylesheet" href="../../../../assets/css/slides-horizontal.css">
+</head>
+<body>
+<div class="slide-navigation">
+    <button class="slide-btn" onclick="previousSlide()">◀</button>
+    <span class="slide-counter" id="slideCounter">1 / 10</span>
+    <button class="slide-btn" onclick="nextSlide()">▶</button>
+    <button class="slide-btn" onclick="toggleFullscreen()">⛶</button>
+    <button class="slide-btn" onclick="exitPresentation()">✕</button>
+</div>
+<div class="slide-progress">
+    <div class="slide-progress-bar" id="progressBar"></div>
+</div>
+<div class="slide-container" id="slideContainer">
+    <!-- Slide 1: Title -->
+    <div class="slide">
+        <div class="slide-counter-display">1 / 10</div>
+        <h1>PCI DSS Compliance</h1>
+        <div style="font-size: 1.5rem; opacity: 0.9; margin-bottom: 40px;">Payment Card Industry Data Security Standard</div>
+        <div style="font-size: 1.2rem; opacity: 0.8;">
+            <p><strong>Модуль 3:</strong> Платіжні системи та технології</p>
+            <p style="margin-top: 10px;"><strong>Лекція 7:</strong> Картковий бізнес та платіжні мережі</p>
+            <p style="margin-top: 10px;"><strong>Тема 4</strong></p>
+        </div>
+    </div>
+
+    <!-- Slide 2: Що таке PCI DSS -->
+    <div class="slide">
+        <div class="slide-counter-display">2 / 10</div>
+        <div class="content-box" style="max-width: 1200px;">
+            <h2>🏛️ Що таке PCI DSS?</h2>
+            <h3>История та структура стандарту:</h3>
+            <ul class="slide-list">
+                <li><strong>Створено:</strong> 2004 року Visa, Mastercard, AmEx, Discover, JCB</li>
+                <li><strong>Керується:</strong> PCI Security Standards Council</li>
+                <li><strong>Поточна версія:</strong> PCI DSS v4.0 (March 2024)</li>
+                <li><strong>Застосовується до:</strong> Будь-яка організація, що обробляє, зберігає або передає cardholder data</li>
+            </ul>
+            <h3 style="margin-top: 30px;">Хто повинен дотримуватись:</h3>
+            <ul class="slide-list">
+                <li>🏦 <strong>Банки-емітенти</strong> - видають картки</li>
+                <li>🏧 <strong>Банки-еквайєри</strong> - обслуговують merchants</li>
+                <li>🏪 <strong>Мерчанти</strong> - приймають картки (всі, від супермаркетів до інтернет-магазинів)</li>
+                <li>⚙️ <strong>Сервіс-провайдери</strong> - payment gateways, processors, hosting</li>
+            </ul>
+            <h3 style="margin-top: 30px;">Рівні сертифікації merchants:</h3>
+            <ul class="slide-list">
+                <li><strong>Level 1:</strong> &gt;6M транзакцій/рік - Annual on-site audit</li>
+                <li><strong>Level 2:</strong> 1-6M транзакцій/рік - Annual SAQ + quarterly scans</li>
+                <li><strong>Level 3:</strong> 20K-1M e-commerce - Annual SAQ</li>
+                <li><strong>Level 4:</strong> &lt;20K - Annual SAQ</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Slide 3: 12 Вимог PCI DSS -->
+    <div class="slide">
+        <div class="slide-counter-display">3 / 10</div>
+        <div class="content-box" style="max-width: 1200px;">
+            <h2>📋 12 Вимог PCI DSS</h2>
+            <h3>Шість цілей та 12 вимог:</h3>
+            <div class="content-grid">
+                <div>
+                    <h4 style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 10px; border-radius: 5px;">🏗️ Goal 1: Secure Network</h4>
+                    <ul class="slide-list">
+                        <li><strong>Req 1:</strong> Firewall configuration</li>
+                        <li><strong>Req 2:</strong> No vendor defaults</li>
+                    </ul>
+                    <h4 style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); padding: 10px; border-radius: 5px; margin-top: 20px;">🔐 Goal 2: Protect Data</h4>
+                    <ul class="slide-list">
+                        <li><strong>Req 3:</strong> Protect stored data</li>
+                        <li><strong>Req 4:</strong> Encrypt transmission</li>
+                    </ul>
+                    <h4 style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); padding: 10px; border-radius: 5px; margin-top: 20px;">🛡️ Goal 3: Vulnerability Mgmt</h4>
+                    <ul class="slide-list">
+                        <li><strong>Req 5:</strong> Protect against malware</li>
+                        <li><strong>Req 6:</strong> Secure systems</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); padding: 10px; border-radius: 5px;">🔒 Goal 4: Access Control</h4>
+                    <ul class="slide-list">
+                        <li><strong>Req 7:</strong> Need-to-know access</li>
+                        <li><strong>Req 8:</strong> ID and authenticate</li>
+                        <li><strong>Req 9:</strong> Physical access</li>
+                    </ul>
+                    <h4 style="background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%); padding: 10px; border-radius: 5px; margin-top: 20px;">📊 Goal 5: Monitor & Test</h4>
+                    <ul class="slide-list">
+                        <li><strong>Req 10:</strong> Track and monitor</li>
+                        <li><strong>Req 11:</strong> Test security</li>
+                    </ul>
+                    <h4 style="background: linear-gradient(135deg, #fbc2eb 0%, #a6c1ee 100%); padding: 10px; border-radius: 5px; margin-top: 20px;">📚 Goal 6: Info Security Policy</h4>
+                    <ul class="slide-list">
+                        <li><strong>Req 12:</strong> Maintain policy</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 4: Requirement 3 - Захист даних -->
+    <div class="slide">
+        <div class="slide-counter-display">4 / 10</div>
+        <div class="content-box" style="max-width: 1200px;">
+            <h2>🔐 Requirement 3: Захист даних</h2>
+            <h3>Детально про найважливішу вимогу</h3>
+            <div class="content-grid">
+                <div style="background: rgba(0,255,0,0.1); padding: 20px; border-radius: 10px;">
+                    <h4>✅ Що МОЖНА зберігати:</h4>
+                    <ul class="slide-list">
+                        <li><strong>PAN</strong> (Primary Account Number) - але тільки encrypted</li>
+                        <li><strong>Cardholder Name</strong></li>
+                        <li><strong>Expiration Date</strong></li>
+                        <li><strong>Service Code</strong></li>
+                    </ul>
+                </div>
+                <div style="background: rgba(255,0,0,0.1); padding: 20px; border-radius: 10px;">
+                    <h4>❌ Що ЗАБОРОНЕНО зберігати:</h4>
+                    <ul class="slide-list">
+                        <li><strong>Full magnetic stripe data</strong></li>
+                        <li><strong>CAV2/CVC2/CVV2/CID</strong> (3-digit code)</li>
+                        <li><strong>PIN or PIN block</strong></li>
+                    </ul>
+                </div>
+            </div>
+            <h3 style="margin-top: 30px;">Вимоги до шифрування PAN:</h3>
+            <ul class="slide-list">
+                <li><strong>Strong cryptography:</strong> AES-256, RSA-2048+</li>
+                <li><strong>Key management:</strong> Proper generation, distribution, storage, rotation, destruction</li>
+                <li><strong>Encryption at rest:</strong> Database TDE, file-level, disk-level</li>
+                <li><strong>Encryption in transit:</strong> TLS 1.2+ for all cardholder data</li>
+            </ul>
+            <h3 style="margin-top: 30px;">Альтернатива: Tokenization</h3>
+            <ul class="slide-list">
+                <li>Replace PAN with token</li>
+                <li>Reduces PCI scope significantly</li>
+                <li>Token vault must still be PCI compliant</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Slide 5: PCI DSS в українському банку -->
+    <div class="slide">
+        <div class="slide-counter-display">5 / 10</div>
+        <div class="content-box" style="max-width: 1200px;">
+            <h2>🏦 PCI DSS в Ощадбанку</h2>
+            <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 25px; border-radius: 15px; margin-bottom: 20px;">
+                <h3 style="margin: 0;">Compliance infrastructure</h3>
+            </div>
+            <h3>Архітектура compliance:</h3>
+            <ul class="slide-list">
+                <li><strong>Network segmentation:</strong>
+                    <ul>
+                        <li>CDE (Cardholder Data Environment) isolated</li>
+                        <li>DMZ для card processing systems</li>
+                        <li>Firewall rules strictly controlled</li>
+                    </ul>
+                </li>
+                <li><strong>Encryption everywhere:</strong>
+                    <ul>
+                        <li>TLS 1.3 для всіх external connections</li>
+                        <li>TDE для Oracle databases</li>
+                        <li>HSM для PIN blocks</li>
+                        <li>E2E encryption для ATM network</li>
+                    </ul>
+                </li>
+                <li><strong>Access controls:</strong>
+                    <ul>
+                        <li>MFA для всіх адміністраторів</li>
+                        <li>Role-based access (RBAC)</li>
+                        <li>Quarterly access reviews</li>
+                        <li>Privileged access management (PAM)</li>
+                    </ul>
+                </li>
+                <li><strong>Monitoring:</strong>
+                    <ul>
+                        <li>24/7 SOC monitoring</li>
+                        <li>SIEM correlation rules</li>
+                        <li>File integrity monitoring (FIM)</li>
+                        <li>Quarterly vulnerability scans</li>
+                        <li>Annual penetration testing</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Slide 6: Compliance процес -->
+    <div class="slide">
+        <div class="slide-counter-display">6 / 10</div>
+        <div class="content-box" style="max-width: 1200px;">
+            <h2>📊 Compliance процес</h2>
+            <h3>Для банку (Level 1):</h3>
+            <div class="slide-statistics">
+                <div class="stat-item">
+                    <div class="stat-value">Annual</div>
+                    <div class="stat-description">Onsite audit від QSA</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">Quarterly</div>
+                    <div class="stat-description">ASV vulnerability scans</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">~$150K</div>
+                    <div class="stat-description">Cost annually</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">5 FTE</div>
+                    <div class="stat-description">Dedicated team</div>
+                </div>
+            </div>
+            <h3 style="margin-top: 40px;">Етапи audit:</h3>
+            <ol class="slide-list">
+                <li><strong>Scoping:</strong> Визначення CDE boundary</li>
+                <li><strong>Documentation review:</strong> Policies, procedures, diagrams</li>
+                <li><strong>Onsite assessment:</strong> Interview, observe, test</li>
+                <li><strong>Technical testing:</strong> Vulnerability scans, penetration tests</li>
+                <li><strong>Reporting:</strong> Report on Compliance (ROC)</li>
+                <li><strong>Attestation:</strong> Certificate of Compliance</li>
+            </ol>
+            <div class="alert alert-info" style="margin-top: 20px;">
+                <strong>QSA</strong> - Qualified Security Assessor, сертифікований PCI SSC аудитор
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 7: Penalties за non-compliance -->
+    <div class="slide">
+        <div class="slide-counter-display">7 / 10</div>
+        <div class="slide-cyber-security">
+            <h2>💰 Penalties за порушення PCI DSS</h2>
+            <h3>Щомісячні штрафи від card networks:</h3>
+            <ul class="slide-list">
+                <li><strong>$5,000 - $100,000 per month</strong></li>
+                <li>Залежить від severity та тривалості</li>
+                <li>Платить еквайєр, але перекладає на мерчанта</li>
+            </ul>
+            <h3 style="margin-top: 30px;">Додаткові costs після breach:</h3>
+            <ul class="slide-list">
+                <li><strong>Forensic investigation:</strong> $50K-500K</li>
+                <li><strong>Card reissuance:</strong> $3-5 per card</li>
+                <li><strong>Legal fees</strong> та litigation</li>
+                <li><strong>Reputation damage</strong></li>
+                <li><strong>Підвищені processing fees</strong> (1-2 роки)</li>
+            </ul>
+            <h3 style="margin-top: 30px;">Приклади реальних штрафів:</h3>
+            <ul class="slide-list">
+                <li><strong>Target (2013):</strong> $202M settlements</li>
+                <li><strong>Home Depot (2014):</strong> $179M total costs</li>
+                <li><strong>British Airways (2018):</strong> £183M GDPR fine</li>
+            </ul>
+            <h3 style="margin-top: 30px;">Extreme cases:</h3>
+            <ul class="slide-list">
+                <li>Revocation of card acceptance rights</li>
+                <li>Bank може втратити можливість issuing/acquiring</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Slide 8: Heartland Payment breach -->
+    <div class="slide">
+        <div class="slide-counter-display">8 / 10</div>
+        <div class="content-box" style="max-width: 1200px;">
+            <h2>💔 Кейс: Heartland Payment breach</h2>
+            <div style="background: rgba(255,0,0,0.1); padding: 20px; border-radius: 10px; margin-bottom: 20px;">
+                <h3>Найбільший payment processor breach</h3>
+                <p><strong>Компанія:</strong> Heartland Payment Systems (5th largest US processor)</p>
+                <p><strong>Рік:</strong> 2008</p>
+                <p><strong>Втрачено:</strong> 130 млн card numbers</p>
+            </div>
+            <h3>Як сталася breach:</h3>
+            <ol class="slide-list">
+                <li>SQL injection на corporate web application</li>
+                <li>Malware installation на internal network</li>
+                <li>Lateral movement до payment processing systems</li>
+                <li>Sniffer software captured unencrypted PANs в memory</li>
+                <li>Data exfiltration протягом 6 місяців</li>
+            </ol>
+            <h3 style="margin-top: 30px;">PCI compliance status:</h3>
+            <ul class="slide-list">
+                <li>✅ Heartland був PCI certified на момент breach</li>
+                <li>❌ Але malware обходив controls</li>
+                <li>❌ Недостатній monitoring виявлення</li>
+            </ul>
+            <h3 style="margin-top: 30px;">Changes після:</h3>
+            <ul class="slide-list">
+                <li>Heartland pioneers end-to-end encryption (E3)</li>
+                <li>PCI DSS updated з requirements для memory scraping</li>
+                <li>Industry focus на P2PE (Point-to-Point Encryption)</li>
+            </ul>
+            <div class="alert alert-danger" style="margin-top: 20px;">
+                <strong>Урок:</strong> PCI compliance ≠ immune to breaches
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 9: PCI DSS v4.0 -->
+    <div class="slide">
+        <div class="slide-counter-display">9 / 10</div>
+        <div class="content-box" style="max-width: 1200px;">
+            <h2>🆕 PCI DSS v4.0 - Що нового?</h2>
+            <h3>Effective dates:</h3>
+            <ul class="slide-list">
+                <li><strong>March 2024</strong> - v4.0 active</li>
+                <li><strong>March 2025</strong> - v3.2.1 retired</li>
+                <li>Future-dated requirements до March 2025</li>
+            </ul>
+            <h3 style="margin-top: 30px;">Ключові нововведення:</h3>
+            <ul class="slide-list">
+                <li>🔒 <strong>Customized approach</strong> - flexibility в implementation</li>
+                <li>🤖 <strong>Automated compliance monitoring</strong></li>
+                <li>☁️ <strong>Cloud environment guidance</strong></li>
+                <li>🌐 <strong>Multi-factor authentication expanded</strong></li>
+                <li>🔐 <strong>Encryption requirements strengthened</strong></li>
+            </ul>
+            <h3 style="margin-top: 30px;">New/enhanced requirements:</h3>
+            <ul class="slide-list">
+                <li><strong>Req 6.4.3:</strong> Scripts on payment pages managed</li>
+                <li><strong>Req 8.3:</strong> MFA for all access to CDE</li>
+                <li><strong>Req 8.6:</strong> Inventory of authentication credentials</li>
+                <li><strong>Req 11.3.2:</strong> Internal penetration testing</li>
+                <li><strong>Req 11.6:</strong> Detect unauthorized changes</li>
+                <li><strong>Req 12.3:</strong> Targeted risk analysis</li>
+            </ul>
+            <div class="alert alert-info" style="margin-top: 20px;">
+                v4.0 фокусується на continuous security та cloud environments
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 10: Підсумок -->
+    <div class="slide">
+        <div class="slide-counter-display">10 / 10</div>
+        <div class="content-box" style="max-width: 1200px;">
+            <h2>🎯 Підсумок теми</h2>
+            <h3>Ключові висновки:</h3>
+            <ul class="slide-list">
+                <li><strong>PCI DSS</strong> - обов'язковий стандарт для всіх, хто обробляє cardholder data</li>
+                <li><strong>12 вимог, 6 цілей</strong> - comprehensive framework від network security до policies</li>
+                <li><strong>Requirement 3</strong> - найкритичніший: захист stored data, що можна/не можна зберігати</li>
+                <li><strong>Compliance ≠ security</strong> - Heartland case показав, що потрібен defense in depth</li>
+                <li><strong>High costs</strong> - non-compliance може коштувати мільйони: штрафи, remediation, reputation</li>
+                <li><strong>v4.0 updates</strong> - фокус на automation, cloud, continuous monitoring</li>
+            </ul>
+            <h3 style="margin-top: 30px;">Best Practices для compliance:</h3>
+            <ul class="slide-list">
+                <li>✅ Scope reduction через tokenization</li>
+                <li>✅ Automated compliance monitoring</li>
+                <li>✅ Regular penetration testing</li>
+                <li>✅ Strong encryption (AES-256, TLS 1.3)</li>
+                <li>✅ 24/7 SOC monitoring</li>
+                <li>✅ Employee training програми</li>
+            </ul>
+            <div class="alert alert-success" style="margin-top: 30px;">
+                <strong>Завершення лекції 7:</strong> Ви вивчили повну екосистему платіжних карток від архітектури Visa/Mastercard до обов'язкових стандартів compliance!
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+let currentSlide = 0;
+const totalSlides = 10;
+
+function showSlide(n) {
+    const slides = document.getElementsByClassName('slide');
+    if (n >= totalSlides) currentSlide = totalSlides - 1;
+    if (n < 0) currentSlide = 0;
+
+    for (let i = 0; i < slides.length; i++) {
+        slides[i].style.display = 'none';
+    }
+
+    slides[currentSlide].style.display = 'flex';
+    document.getElementById('slideCounter').textContent = `${currentSlide + 1} / ${totalSlides}`;
+    const progress = ((currentSlide + 1) / totalSlides) * 100;
+    document.getElementById('progressBar').style.width = progress + '%';
+}
+
+function nextSlide() {
+    currentSlide++;
+    if (currentSlide >= totalSlides) currentSlide = totalSlides - 1;
+    showSlide(currentSlide);
+}
+
+function previousSlide() {
+    currentSlide--;
+    if (currentSlide < 0) currentSlide = 0;
+    showSlide(currentSlide);
+}
+
+function toggleFullscreen() {
+    if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen();
+    } else {
+        if (document.exitFullscreen) {
+            document.exitFullscreen();
+        }
+    }
+}
+
+function exitPresentation() {
+    if (document.fullscreenElement) {
+        document.exitFullscreen();
+    }
+    window.location.href = 'index.html';
+}
+
+document.addEventListener('keydown', function(event) {
+    if (event.key === 'ArrowRight' || event.key === ' ') {
+        event.preventDefault();
+        nextSlide();
+    } else if (event.key === 'ArrowLeft') {
+        event.preventDefault();
+        previousSlide();
+    } else if (event.key === 'Escape') {
+        exitPresentation();
+    } else if (event.key === 'f' || event.key === 'F') {
+        event.preventDefault();
+        toggleFullscreen();
+    }
+});
+
+showSlide(currentSlide);
+</script>
+</body>
+</html>

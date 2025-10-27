@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тема 3: Card Fraud Prevention та 3D Secure</title>
+    <link rel="stylesheet" href="../../../../assets/css/slides-horizontal.css">
+</head>
+<body>
+<div class="slide-navigation">
+    <button class="slide-btn" onclick="previousSlide()">◀</button>
+    <span class="slide-counter" id="slideCounter">1 / 8</span>
+    <button class="slide-btn" onclick="nextSlide()">▶</button>
+    <button class="slide-btn" onclick="toggleFullscreen()">⛶</button>
+    <button class="slide-btn" onclick="exitPresentation()">✕</button>
+</div>
+<div class="slide-progress">
+    <div class="slide-progress-bar" id="progressBar"></div>
+</div>
+<div class="slide-container" id="slideContainer">
+    <!-- Slide 1: Title -->
+    <div class="slide">
+        <div class="slide-counter-display">1 / 8</div>
+        <h1>Card Fraud Prevention</h1>
+        <div style="font-size: 1.5rem; opacity: 0.9; margin-bottom: 40px;">Боротьба з шахрайством платіжних карток</div>
+        <div style="font-size: 1.2rem; opacity: 0.8;">
+            <p><strong>Модуль 3:</strong> Платіжні системи та технології</p>
+            <p style="margin-top: 10px;"><strong>Лекція 7:</strong> Картковий бізнес та платіжні мережі</p>
+            <p style="margin-top: 10px;"><strong>Тема 3 - Security Focus</strong></p>
+        </div>
+    </div>
+
+    <!-- Slide 2: Типи card fraud -->
+    <div class="slide">
+        <div class="slide-counter-display">2 / 8</div>
+        <div class="slide-cyber-security">
+            <h2>💳 Типи card fraud</h2>
+            <h3>Класифікація шахрайських схем:</h3>
+            <ul class="slide-list">
+                <li><strong>Counterfeit (Підробка)</strong>
+                    <ul>
+                        <li>Клонування магнітної смуги</li>
+                        <li>Shimmer attacks на EMV</li>
+                        <li>❌ EMV зменшив на 75%</li>
+                    </ul>
+                </li>
+                <li><strong>Lost/Stolen (Втрачена/Вкрадена)</strong>
+                    <ul>
+                        <li>Використання фізичної картки без відома власника</li>
+                        <li>🔒 PIN + fraud monitoring</li>
+                    </ul>
+                </li>
+                <li><strong>Card-Not-Present (CNP)</strong>
+                    <ul>
+                        <li>Online shopping без фізичної картки</li>
+                        <li>PAN + CVV + expiry достатньо</li>
+                        <li>📈 60% всього card fraud</li>
+                    </ul>
+                </li>
+                <li><strong>Account Takeover</strong>
+                    <ul>
+                        <li>Compromised credentials</li>
+                        <li>Phishing, malware, data breaches</li>
+                        <li>Зміна контактів та замовлення нової картки</li>
+                    </ul>
+                </li>
+                <li><strong>Friendly Fraud (Chargeback Abuse)</strong>
+                    <ul>
+                        <li>Legitimate purchase + false dispute</li>
+                        <li>"I didn't authorize this transaction"</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Slide 3: Схеми card fraud -->
+    <div class="slide">
+        <div class="slide-counter-display">3 / 8</div>
+        <div class="content-box" style="max-width: 1200px;">
+            <h2>🕵️ Популярні методи шахрайства</h2>
+            <div class="content-grid">
+                <div>
+                    <h3>Технічні атаки:</h3>
+                    <ul class="slide-list">
+                        <li><strong>Card Skimming</strong>
+                            <ul>
+                                <li>Пристрої на ATM/POS</li>
+                                <li>Копіювання магнітної смуги</li>
+                                <li>PIN camera</li>
+                            </ul>
+                        </li>
+                        <li><strong>Carding (BIN attacks)</strong>
+                            <ul>
+                                <li>Automated testing валідності</li>
+                                <li>Brute force CVV (000-999)</li>
+                                <li>Продаж на dark web</li>
+                            </ul>
+                        </li>
+                        <li><strong>E-commerce bot attacks</strong>
+                            <ul>
+                                <li>Automated checkout</li>
+                                <li>Купівля gift cards, crypto</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>Social Engineering:</h3>
+                    <ul class="slide-list">
+                        <li><strong>Phishing/Vishing</strong>
+                            <ul>
+                                <li>Fake bank websites/calls</li>
+                                <li>Social engineering для OTP</li>
+                                <li>"Your card is blocked"</li>
+                            </ul>
+                        </li>
+                        <li><strong>SIM Swap fraud</strong>
+                            <ul>
+                                <li>Перереєстрація SIM</li>
+                                <li>Перехоплення SMS OTP</li>
+                                <li>Account takeover</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 4: Fraud Detection в Monobank -->
+    <div class="slide">
+        <div class="slide-counter-display">4 / 8</div>
+        <div class="content-box" style="max-width: 1200px;">
+            <h2>🤖 Fraud Detection в Monobank</h2>
+            <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 25px; border-radius: 15px; margin-bottom: 20px;">
+                <h3 style="margin: 0;">AI-powered fraud prevention</h3>
+            </div>
+            <h3>Real-time scoring system:</h3>
+            <ul class="slide-list">
+                <li><strong>Transaction analysis:</strong>
+                    <ul>
+                        <li>Amount deviation from history</li>
+                        <li>Unusual merchant category</li>
+                        <li>Geographic anomalies</li>
+                        <li>Time of day patterns</li>
+                        <li>Velocity checks (N transactions in M minutes)</li>
+                    </ul>
+                </li>
+                <li><strong>Device intelligence:</strong>
+                    <ul>
+                        <li>Known device vs new device</li>
+                        <li>Jailbroken/rooted detection</li>
+                        <li>Emulator/VM detection</li>
+                        <li>VPN/proxy usage</li>
+                    </ul>
+                </li>
+                <li><strong>Behavioral biometrics:</strong>
+                    <ul>
+                        <li>Typing patterns</li>
+                        <li>Swipe dynamics</li>
+                        <li>Device position sensors</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Slide 5: Machine Learning для Fraud Detection -->
+    <div class="slide">
+        <div class="slide-counter-display">5 / 8</div>
+        <div class="content-box" style="max-width: 1200px;">
+            <h2>🧠 ML алгоритми боротьби з фродом</h2>
+            <div class="content-grid">
+                <div>
+                    <h3>Supervised Learning:</h3>
+                    <ul class="slide-list">
+                        <li><strong>Random Forest</strong>
+                            <ul>
+                                <li>Ensemble decision trees</li>
+                                <li>Feature importance</li>
+                            </ul>
+                        </li>
+                        <li><strong>Gradient Boosting (XGBoost)</strong>
+                            <ul>
+                                <li>Highest accuracy</li>
+                                <li>Використовують Visa, Mastercard</li>
+                            </ul>
+                        </li>
+                        <li><strong>Neural Networks</strong>
+                            <ul>
+                                <li>Deep learning для складних паттернів</li>
+                                <li>LSTM для sequence analysis</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>Unsupervised Learning:</h3>
+                    <ul class="slide-list">
+                        <li><strong>Anomaly Detection</strong>
+                            <ul>
+                                <li>Isolation Forest</li>
+                                <li>One-class SVM</li>
+                                <li>Autoencoder reconstruction</li>
+                            </ul>
+                        </li>
+                        <li><strong>Clustering</strong>
+                            <ul>
+                                <li>Виявлення fraud rings</li>
+                                <li>Групування attack patterns</li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <h3>Features (100+):</h3>
+                    <ul class="slide-list">
+                        <li>Transaction: amount, merchant, MCC, time, location</li>
+                        <li>Historical: patterns, average, frequency</li>
+                        <li>Network: IP, device fingerprint</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 6: Response actions -->
+    <div class="slide">
+        <div class="slide-counter-display">6 / 8</div>
+        <div class="content-box" style="max-width: 1200px;">
+            <h2>⚡ Response actions за risk level</h2>
+            <div class="slide-statistics">
+                <div class="stat-item" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+                    <div class="stat-value">Low</div>
+                    <div class="stat-description">Approve seamlessly</div>
+                    <div style="margin-top: 10px; font-size: 0.9rem;">85% транзакцій</div>
+                </div>
+                <div class="stat-item" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                    <div class="stat-value">Medium</div>
+                    <div class="stat-description">Step-up authentication</div>
+                    <div style="margin-top: 10px; font-size: 0.9rem;">Push notification</div>
+                </div>
+                <div class="stat-item" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);">
+                    <div class="stat-value">High</div>
+                    <div class="stat-description">Decline + SMS alert</div>
+                    <div style="margin-top: 10px; font-size: 0.9rem;">Card block</div>
+                </div>
+            </div>
+            <h3 style="margin-top: 40px;">📊 Results Monobank:</h3>
+            <ul class="slide-list">
+                <li><strong>False positive rate:</strong> &lt;0.5%</li>
+                <li><strong>Fraud catch rate:</strong> 99.2%</li>
+                <li><strong>Average decision time:</strong> 87ms</li>
+            </ul>
+            <div class="alert alert-success" style="margin-top: 20px;">
+                <strong>Key success factors:</strong> Real-time processing, ML models retraining, 100+ features
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 7: Кейс BIN Attack -->
+    <div class="slide">
+        <div class="slide-counter-display">7 / 8</div>
+        <div class="slide-cyber-security">
+            <h2>💥 Кейс: BIN Attack на ПриватБанк</h2>
+            <div style="background: rgba(255,0,0,0.1); padding: 20px; border-radius: 10px; margin-bottom: 20px;">
+                <h3>Масова атака в 2019 році</h3>
+                <p><strong>Атака:</strong> Automated carding на 50,000 карт</p>
+            </div>
+            <h3>Що сталося:</h3>
+            <ol class="slide-list">
+                <li>Зловмисники отримали BIN ПриватБанку (516xxx)</li>
+                <li>Generated можливі номери карт (Luhn algorithm)</li>
+                <li>Automated bots тестували на малих e-commerce сайтах</li>
+                <li>Small amounts (₴1-10) для ухилення від detection</li>
+                <li>Validated cards продавались на dark web</li>
+            </ol>
+            <h3 style="margin-top: 30px;">Як виявили:</h3>
+            <ul class="slide-list">
+                <li>Spike в declined transactions від одного мерчанта</li>
+                <li>Unusual pattern: sequential PANs</li>
+                <li>Geographic clustering (bot IPs)</li>
+                <li>Velocity anomaly</li>
+            </ul>
+            <h3 style="margin-top: 30px;">Відповідь ПриватБанку:</h3>
+            <ul class="slide-list">
+                <li>✅ Temp block BIN на конкретного мерчанта</li>
+                <li>✅ Rate limiting посилено (3 failures = 1hr ban)</li>
+                <li>✅ CAPTCHA for failed attempts</li>
+                <li>✅ BIN rotation для нових карт</li>
+            </ul>
+            <div class="alert alert-success" style="margin-top: 20px;">
+                <strong>Результат:</strong> Атака зупинена за 4 години, 0 успішних fraud транзакцій
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 8: Підсумок -->
+    <div class="slide">
+        <div class="slide-counter-display">8 / 8</div>
+        <div class="content-box" style="max-width: 1200px;">
+            <h2>🎯 Підсумок теми</h2>
+            <h3>Ключові висновки:</h3>
+            <ul class="slide-list">
+                <li><strong>CNP fraud</strong> - 60% всього card fraud, основна проблема після EMV adoption</li>
+                <li><strong>ML-based detection</strong> - сучасний стандарт з XGBoost, Neural Networks, 100+ features</li>
+                <li><strong>Real-time scoring</strong> - decision за &lt;100ms з multi-layered approach</li>
+                <li><strong>Risk-based actions</strong> - seamless для low risk, step-up для medium, block для high</li>
+                <li><strong>Continuous improvement</strong> - retraining моделей, analysis false positives, emerging threats</li>
+            </ul>
+            <h3 style="margin-top: 30px;">Best Practices:</h3>
+            <ul class="slide-list">
+                <li>✅ Multi-layered defense: EMV + 3DS + ML + Rules</li>
+                <li>✅ Real-time monitoring &lt;200ms</li>
+                <li>✅ Customer education про phishing</li>
+                <li>✅ Industry collaboration та threat intelligence sharing</li>
+            </ul>
+            <div class="alert alert-success" style="margin-top: 30px;">
+                <strong>Наступна тема:</strong> PCI DSS Compliance - обов'язковий стандарт безпеки для всіх учасників card ecosystem
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+let currentSlide = 0;
+const totalSlides = 8;
+
+function showSlide(n) {
+    const slides = document.getElementsByClassName('slide');
+    if (n >= totalSlides) currentSlide = totalSlides - 1;
+    if (n < 0) currentSlide = 0;
+
+    for (let i = 0; i < slides.length; i++) {
+        slides[i].style.display = 'none';
+    }
+
+    slides[currentSlide].style.display = 'flex';
+    document.getElementById('slideCounter').textContent = `${currentSlide + 1} / ${totalSlides}`;
+    const progress = ((currentSlide + 1) / totalSlides) * 100;
+    document.getElementById('progressBar').style.width = progress + '%';
+}
+
+function nextSlide() {
+    currentSlide++;
+    if (currentSlide >= totalSlides) currentSlide = totalSlides - 1;
+    showSlide(currentSlide);
+}
+
+function previousSlide() {
+    currentSlide--;
+    if (currentSlide < 0) currentSlide = 0;
+    showSlide(currentSlide);
+}
+
+function toggleFullscreen() {
+    if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen();
+    } else {
+        if (document.exitFullscreen) {
+            document.exitFullscreen();
+        }
+    }
+}
+
+function exitPresentation() {
+    if (document.fullscreenElement) {
+        document.exitFullscreen();
+    }
+    window.location.href = 'index.html';
+}
+
+document.addEventListener('keydown', function(event) {
+    if (event.key === 'ArrowRight' || event.key === ' ') {
+        event.preventDefault();
+        nextSlide();
+    } else if (event.key === 'ArrowLeft') {
+        event.preventDefault();
+        previousSlide();
+    } else if (event.key === 'Escape') {
+        exitPresentation();
+    } else if (event.key === 'f' || event.key === 'F') {
+        event.preventDefault();
+        toggleFullscreen();
+    }
+});
+
+showSlide(currentSlide);
+</script>
+</body>
+</html>

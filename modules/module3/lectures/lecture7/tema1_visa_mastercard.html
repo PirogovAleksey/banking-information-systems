@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тема 1: Visa та Mastercard - Архітектура і протоколи</title>
+    <link rel="stylesheet" href="../../../../assets/css/slides-horizontal.css">
+</head>
+<body>
+<!-- Navigation -->
+<div class="slide-navigation">
+    <button class="slide-btn" onclick="previousSlide()">◀</button>
+    <span class="slide-counter" id="slideCounter">1 / 9</span>
+    <button class="slide-btn" onclick="nextSlide()">▶</button>
+    <button class="slide-btn" onclick="toggleFullscreen()">⛶</button>
+    <button class="slide-btn" onclick="exitPresentation()">✕</button>
+</div>
+
+<!-- Progress Bar -->
+<div class="slide-progress">
+    <div class="slide-progress-bar" id="progressBar"></div>
+</div>
+
+<!-- Slide Container -->
+<div class="slide-container" id="slideContainer">
+    <!-- Slide 1: Title -->
+    <div class="slide">
+        <div class="slide-counter-display">1 / 9</div>
+        <h1>Visa та Mastercard</h1>
+        <div style="font-size: 1.5rem; opacity: 0.9; margin-bottom: 40px;">Архітектура глобальних платіжних мереж</div>
+        <div style="font-size: 1.2rem; opacity: 0.8;">
+            <p><strong>Модуль 3:</strong> Платіжні системи та технології</p>
+            <p style="margin-top: 10px;"><strong>Лекція 7:</strong> Картковий бізнес та платіжні мережі</p>
+            <p style="margin-top: 10px;"><strong>Тема 1</strong></p>
+        </div>
+    </div>
+
+    <!-- Slide 2: Екосистема платіжних карток -->
+    <div class="slide">
+        <div class="slide-counter-display">2 / 9</div>
+        <div class="content-box" style="max-width: 1200px;">
+            <h2>Екосистема платіжних карток</h2>
+            <h3>🏗️ Основні учасники:</h3>
+            <div class="content-grid">
+                <div>
+                    <ul class="slide-list">
+                        <li><strong>💳 Держатель картки (Cardholder)</strong>
+                            <ul><li>Кінцевий користувач</li></ul>
+                        </li>
+                        <li><strong>🏦 Банк-емітент (Issuing Bank)</strong>
+                            <ul><li>Видає картки клієнтам</li></ul>
+                        </li>
+                        <li><strong>🏪 Торговець (Merchant)</strong>
+                            <ul><li>Приймає платежі</li></ul>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <ul class="slide-list">
+                        <li><strong>🏧 Банк-еквайєр (Acquiring Bank)</strong>
+                            <ul><li>Обслуговує торговців</li></ul>
+                        </li>
+                        <li><strong>🌐 Платіжна мережа</strong>
+                            <ul><li>Visa, Mastercard</li></ul>
+                        </li>
+                        <li><strong>⚙️ Процесинговий центр</strong>
+                            <ul><li>Обробляє транзакції</li></ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 3: Потік авторизації транзакції -->
+    <div class="slide">
+        <div class="slide-counter-display">3 / 9</div>
+        <div class="content-box" style="max-width: 1200px;">
+            <h2>Життєвий цикл card transaction</h2>
+            <h3>🔄 Фаза 1: Авторизація (Authorization)</h3>
+            <ol class="slide-list">
+                <li>Картка вставляється/проводиться в POS-терміналі</li>
+                <li>Еквайєр отримує дані транзакції</li>
+                <li>Платіжна мережа маршрутизує запит до емітента</li>
+                <li>Емітент перевіряє баланс та ліміти</li>
+                <li>Відповідь (Approved/Declined) повертається назад</li>
+                <li><strong>Час: 2-3 секунди</strong></li>
+            </ol>
+            <h3 style="margin-top: 30px;">📊 Фаза 2: Клірінг (Clearing)</h3>
+            <ul class="slide-list">
+                <li>Денне накопичення транзакцій</li>
+                <li>Розрахунок позицій банків</li>
+                <li>Interchange fees обчислення</li>
+            </ul>
+            <h3 style="margin-top: 30px;">💰 Фаза 3: Розрахунок (Settlement)</h3>
+            <ul class="slide-list">
+                <li>Фактичне переміщення коштів між банками</li>
+                <li>T+1 або T+2 settlement period</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Slide 4: Приклад - Оплата у McDonald's -->
+    <div class="slide">
+        <div class="slide-counter-display">4 / 9</div>
+        <div class="content-box" style="max-width: 1200px;">
+            <h2>🍔 Приклад: Оплата у McDonald's</h2>
+            <div style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); padding: 20px; border-radius: 10px; margin-bottom: 20px;">
+                <h3>Транзакція на 150 грн</h3>
+            </div>
+            <h3>Крок за кроком:</h3>
+            <ol class="slide-list">
+                <li><strong>Клієнт ПриватБанку</strong> оплачує картою Visa в McDonald's</li>
+                <li><strong>POS-термінал</strong> (еквайєр - Monobank Business) відправляє запит</li>
+                <li><strong>Visa network</strong> маршрутизує до ПриватБанку</li>
+                <li><strong>ПриватБанк перевіряє:</strong>
+                    <ul>
+                        <li>Баланс ₴2,450 ✓</li>
+                        <li>Ліміт: OK ✓</li>
+                        <li>Fraud check: No alerts ✓</li>
+                        <li>Блокує ₴150</li>
+                        <li>Відповідає: <strong>APPROVED</strong></li>
+                    </ul>
+                </li>
+                <li><strong>Затримка:</strong> 2.1 секунди</li>
+            </ol>
+            <div class="alert alert-info" style="margin-top: 20px;">
+                <strong>Комісії:</strong> Interchange fee 1.2% (₴1.80), Network fee 0.1% (₴0.15), Merchant fee 2.5% (₴3.75)
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 5: Visa vs Mastercard -->
+    <div class="slide">
+        <div class="slide-counter-display">5 / 9</div>
+        <div class="content-box" style="max-width: 1400px;">
+            <h2>Visa vs Mastercard: Порівняння</h2>
+            <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
+                <thead>
+                    <tr style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
+                        <th style="padding: 15px; text-align: left;">Характеристика</th>
+                        <th style="padding: 15px; text-align: left;">Visa</th>
+                        <th style="padding: 15px; text-align: left;">Mastercard</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr style="background: rgba(255,255,255,0.05);">
+                        <td style="padding: 12px;"><strong>Частка ринку</strong></td>
+                        <td style="padding: 12px;">~40% глобально</td>
+                        <td style="padding: 12px;">~25% глобально</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 12px;"><strong>Транзакцій/рік</strong></td>
+                        <td style="padding: 12px;">193 млрд</td>
+                        <td style="padding: 12px;">118 млрд</td>
+                    </tr>
+                    <tr style="background: rgba(255,255,255,0.05);">
+                        <td style="padding: 12px;"><strong>Interchange fees</strong></td>
+                        <td style="padding: 12px;">1.15% - 2.40%</td>
+                        <td style="padding: 12px;">1.15% - 2.50%</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 12px;"><strong>Технології</strong></td>
+                        <td style="padding: 12px;">Visa Token Service</td>
+                        <td style="padding: 12px;">Digital Enablement</td>
+                    </tr>
+                    <tr style="background: rgba(255,255,255,0.05);">
+                        <td style="padding: 12px;"><strong>Security</strong></td>
+                        <td style="padding: 12px;">Advanced Authorization</td>
+                        <td style="padding: 12px;">Decision Intelligence</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 12px;"><strong>3D Secure</strong></td>
+                        <td style="padding: 12px;">Verified by Visa</td>
+                        <td style="padding: 12px;">Mastercard SecureCode</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Slide 6: ISO 8583 Message Format -->
+    <div class="slide">
+        <div class="slide-counter-display">6 / 9</div>
+        <div class="content-box" style="max-width: 1200px;">
+            <h2>ISO 8583 Message Format</h2>
+            <h3>📡 Протокол обміну даними</h3>
+            <div class="content-grid">
+                <div>
+                    <h4>Структура повідомлення:</h4>
+                    <ul class="slide-list">
+                        <li><strong>MTI</strong> - Message Type Indicator
+                            <ul><li>0100 = auth request</li></ul>
+                        </li>
+                        <li><strong>Bitmap</strong> - які поля присутні
+                            <ul><li>64 або 128 біт</li></ul>
+                        </li>
+                        <li><strong>Data Elements</strong>
+                            <ul><li>До 128 полів даних</li></ul>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Ключові поля:</h4>
+                    <ul class="slide-list">
+                        <li><strong>Field 2:</strong> PAN (номер картки)</li>
+                        <li><strong>Field 3:</strong> Processing Code</li>
+                        <li><strong>Field 4:</strong> Transaction Amount</li>
+                        <li><strong>Field 7:</strong> Transmission Date/Time</li>
+                        <li><strong>Field 11:</strong> STAN (Audit Number)</li>
+                        <li><strong>Field 39:</strong> Response Code
+                            <ul><li>00=approved, 51=insufficient funds</li></ul>
+                        </li>
+                        <li><strong>Field 49:</strong> Currency (UAH=980)</li>
+                        <li><strong>Field 55:</strong> EMV chip data (ICC)</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="alert alert-info" style="margin-top: 20px;">
+                <strong>ISO 8583</strong> - стандарт для всіх card transactions з 1987 року
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 7: Загрози в платіжній мережі -->
+    <div class="slide">
+        <div class="slide-counter-display">7 / 9</div>
+        <div class="slide-cyber-security">
+            <h2>⚠️ Загрози в платіжній мережі</h2>
+            <h3>Вектори атак:</h3>
+            <ul class="slide-list">
+                <li><strong>Man-in-the-Middle (MITM)</strong>
+                    <ul>
+                        <li>Перехоплення трафіку між учасниками</li>
+                        <li>Модифікація полів ISO 8583</li>
+                        <li><strong>Захист:</strong> TLS 1.3, mutual authentication</li>
+                    </ul>
+                </li>
+                <li><strong>Message replay attacks</strong>
+                    <ul>
+                        <li>Повтор законних транзакцій</li>
+                        <li>Обхід одноразових кодів</li>
+                        <li><strong>Захист:</strong> STAN, timestamps, crypto nonces</li>
+                    </ul>
+                </li>
+                <li><strong>BIN attacks</strong>
+                    <ul>
+                        <li>Brute force валідних номерів карт</li>
+                        <li>Використання BIN databases</li>
+                        <li><strong>Захист:</strong> rate limiting, CAPTCHA</li>
+                    </ul>
+                </li>
+                <li><strong>Network downtime attacks</strong>
+                    <ul>
+                        <li>DDoS на processing centers</li>
+                        <li>Fallback to stand-in processing</li>
+                        <li><strong>Захист:</strong> redundancy, geo-distribution</li>
+                    </ul>
+                </li>
+            </ul>
+            <div class="alert alert-danger" style="margin-top: 20px;">
+                <strong>Статистика:</strong> Платіжні мережі - високоцінна мета для кіберзлочинців
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 8: Network Statistics -->
+    <div class="slide">
+        <div class="slide-counter-display">8 / 9</div>
+        <div class="content-box" style="max-width: 1200px;">
+            <h2>📊 Глобальна статистика</h2>
+            <div class="slide-statistics">
+                <div class="stat-item">
+                    <div class="stat-value">$40T</div>
+                    <div class="stat-description">Card payments щорічно</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">70%</div>
+                    <div class="stat-description">Безготівкові платежі в Україні (2024)</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">193млрд</div>
+                    <div class="stat-description">Транзакцій Visa per year</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">2-3 сек</div>
+                    <div class="stat-description">Середній час авторизації</div>
+                </div>
+            </div>
+            <h3 style="margin-top: 40px;">🇺🇦 Український ринок:</h3>
+            <ul class="slide-list">
+                <li>ПриватБанк: >40 млн клієнтів, >1 млрд транзакцій/місяць</li>
+                <li>Monobank: >8 млн клієнтів, 100% digital</li>
+                <li>Contactless growth: 60% всіх транзакцій</li>
+                <li>Mobile payments (Apple Pay, Google Pay): 35% adoption</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Slide 9: Підсумок -->
+    <div class="slide">
+        <div class="slide-counter-display">9 / 9</div>
+        <div class="content-box" style="max-width: 1200px;">
+            <h2>🎯 Підсумок теми</h2>
+            <h3>Ключові висновки:</h3>
+            <ul class="slide-list">
+                <li><strong>Глобальна екосистема</strong> - 6 ключових учасників: cardholder, issuer, acquirer, merchant, network, processor</li>
+                <li><strong>Три фази транзакції</strong> - Authorization (real-time), Clearing (daily), Settlement (T+1/T+2)</li>
+                <li><strong>ISO 8583 протокол</strong> - стандарт обміну даними між всіма учасниками мережі</li>
+                <li><strong>Visa та Mastercard</strong> - дуополія з 65% глобального ринку платежів</li>
+                <li><strong>Interchange fees</strong> - бізнес-модель платіжних мереж (1-2.5%)</li>
+                <li><strong>Security challenges</strong> - MITM, replay, BIN attacks потребують багаторівневого захисту</li>
+            </ul>
+            <div class="alert alert-success" style="margin-top: 30px;">
+                <strong>Наступна тема:</strong> EMV стандарти та токенізація - як чіпові картки революціонізували безпеку платежів
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- JavaScript -->
+<script>
+let currentSlide = 0;
+const totalSlides = 9;
+
+function showSlide(n) {
+    const slides = document.getElementsByClassName('slide');
+    if (n >= totalSlides) currentSlide = totalSlides - 1;
+    if (n < 0) currentSlide = 0;
+
+    for (let i = 0; i < slides.length; i++) {
+        slides[i].style.display = 'none';
+    }
+
+    slides[currentSlide].style.display = 'flex';
+
+    // Update counter
+    document.getElementById('slideCounter').textContent = `${currentSlide + 1} / ${totalSlides}`;
+
+    // Update progress bar
+    const progress = ((currentSlide + 1) / totalSlides) * 100;
+    document.getElementById('progressBar').style.width = progress + '%';
+}
+
+function nextSlide() {
+    currentSlide++;
+    if (currentSlide >= totalSlides) currentSlide = totalSlides - 1;
+    showSlide(currentSlide);
+}
+
+function previousSlide() {
+    currentSlide--;
+    if (currentSlide < 0) currentSlide = 0;
+    showSlide(currentSlide);
+}
+
+function toggleFullscreen() {
+    if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen();
+    } else {
+        if (document.exitFullscreen) {
+            document.exitFullscreen();
+        }
+    }
+}
+
+function exitPresentation() {
+    if (document.fullscreenElement) {
+        document.exitFullscreen();
+    }
+    window.location.href = 'index.html';
+}
+
+// Keyboard navigation
+document.addEventListener('keydown', function(event) {
+    if (event.key === 'ArrowRight' || event.key === ' ') {
+        event.preventDefault();
+        nextSlide();
+    } else if (event.key === 'ArrowLeft') {
+        event.preventDefault();
+        previousSlide();
+    } else if (event.key === 'Escape') {
+        exitPresentation();
+    } else if (event.key === 'f' || event.key === 'F') {
+        event.preventDefault();
+        toggleFullscreen();
+    }
+});
+
+// Initialize
+showSlide(currentSlide);
+</script>
+</body>
+</html>

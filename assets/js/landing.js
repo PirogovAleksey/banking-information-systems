@@ -343,7 +343,7 @@ class LandingPage {
         console.log(`📖 Відкриття лекції ${moduleId}.${lectureId}`);
 
         // Список доступних лекцій (за номерами)
-        const availableLectures = ['3', '4', '5', '6'];
+        const availableLectures = ['3', '4', '5', '6', '7'];
 
         // Перевіряємо чи лекція доступна
         if (availableLectures.includes(lectureId)) {

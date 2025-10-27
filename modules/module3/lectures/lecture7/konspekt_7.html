@@ -1,0 +1,1734 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Картковий бізнес та платіжні мережі - Детальний конспект | Лекція 7</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="../../../assets/css/base.css">
+    <link rel="stylesheet" href="../../../assets/css/layout.css">
+    <link rel="stylesheet" href="../../../assets/css/components.css">
+    <link rel="stylesheet" href="../../../assets/css/lectures.css">
+
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+
+        .konspekt-container {
+            display: flex;
+            max-width: 1400px;
+            margin: 0 auto;
+            gap: 2rem;
+            padding: 2rem;
+        }
+
+        .konspekt-page {
+            flex: 1;
+            max-width: 900px;
+            background: white;
+            line-height: 1.9;
+        }
+
+        /* Right Sidebar Navigation */
+        .sidebar-nav {
+            position: sticky;
+            top: 100px;
+            width: 280px;
+            height: fit-content;
+            background: #f8fafc;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 1.5rem;
+            align-self: flex-start;
+        }
+
+        .sidebar-nav h3 {
+            font-size: 1.1rem;
+            color: #475569;
+            margin: 0 0 1rem 0;
+            padding-bottom: 0.8rem;
+            border-bottom: 2px solid #cbd5e1;
+        }
+
+        .sidebar-nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .sidebar-nav li {
+            margin-bottom: 0.5rem;
+        }
+
+        .sidebar-nav a {
+            display: block;
+            color: #64748b;
+            text-decoration: none;
+            padding: 0.6rem 0.8rem;
+            border-radius: 6px;
+            font-size: 0.95rem;
+            transition: all 0.2s ease;
+            border-left: 3px solid transparent;
+        }
+
+        .sidebar-nav a:hover {
+            background: #e0e7ff;
+            color: #667eea;
+            border-left-color: #667eea;
+        }
+
+        .sidebar-nav a.active {
+            background: #e0e7ff;
+            color: #667eea;
+            font-weight: 600;
+            border-left-color: #667eea;
+        }
+
+        .sidebar-nav .nav-subsection {
+            padding-left: 1rem;
+            font-size: 0.85rem;
+        }
+
+        /* Reading Progress Bar */
+        .reading-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: #e2e8f0;
+            z-index: 9999;
+        }
+
+        .reading-progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            width: 0%;
+            transition: width 0.1s ease;
+        }
+
+        /* Back to top button */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #667eea;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            border: none;
+            font-size: 1.5rem;
+        }
+
+        .back-to-top:hover {
+            background: #5568d3;
+            transform: translateY(-5px);
+        }
+
+        .back-to-top.show {
+            display: flex;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .konspekt-container {
+                flex-direction: column;
+            }
+
+            .sidebar-nav {
+                position: relative;
+                top: 0;
+                width: 100%;
+                margin-bottom: 2rem;
+            }
+
+            .konspekt-page {
+                max-width: 100%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .konspekt-container {
+                padding: 1rem;
+            }
+        }
+
+        .konspekt-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 3px solid #667eea;
+        }
+
+        .konspekt-title {
+            font-size: 2.5rem;
+            color: #1e293b;
+            margin-bottom: 1rem;
+        }
+
+        .konspekt-meta {
+            color: #64748b;
+            font-size: 1.1rem;
+        }
+
+        .konspekt-content h2 {
+            color: #667eea;
+            font-size: 2rem;
+            margin-top: 3rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 3px solid #e2e8f0;
+        }
+
+        .konspekt-content h3 {
+            color: #475569;
+            font-size: 1.5rem;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .konspekt-content h4 {
+            color: #64748b;
+            font-size: 1.2rem;
+            margin-top: 1.5rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .konspekt-content p {
+            font-size: 1.1rem;
+            margin-bottom: 1.2rem;
+            text-align: justify;
+        }
+
+        .konspekt-content ul, .konspekt-content ol {
+            font-size: 1.05rem;
+            margin-bottom: 1.5rem;
+            padding-left: 2rem;
+        }
+
+        .konspekt-content li {
+            margin-bottom: 0.7rem;
+            line-height: 1.7;
+        }
+
+        .info-box {
+            background: #f0f9ff;
+            border-left: 5px solid #0284c7;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 8px;
+        }
+
+        .info-box h4 {
+            color: #0369a1;
+            margin-top: 0;
+        }
+
+        .example-box {
+            background: #f0fdf4;
+            border-left: 5px solid #10b981;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 8px;
+        }
+
+        .example-box h4 {
+            color: #065f46;
+            margin-top: 0;
+        }
+
+        .warning-box {
+            background: #fef3c7;
+            border-left: 5px solid #f59e0b;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 8px;
+        }
+
+        .warning-box h4 {
+            color: #92400e;
+            margin-top: 0;
+        }
+
+        .important-box {
+            background: #fef2f2;
+            border-left: 5px solid #ef4444;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 8px;
+        }
+
+        .important-box h4 {
+            color: #991b1b;
+            margin-top: 0;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .comparison-table th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .comparison-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .comparison-table tr:nth-child(even) {
+            background: #f8fafc;
+        }
+
+        .comparison-table tr:hover {
+            background: #f1f5f9;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Reading Progress Bar -->
+<div class="reading-progress">
+    <div class="reading-progress-bar" id="progressBar"></div>
+</div>
+
+<!-- Header with Breadcrumbs -->
+<header class="header">
+    <div class="container">
+        <nav class="breadcrumb">
+            <a href="../../../index.html">🏠 Головна</a>
+            <span class="breadcrumb-separator">→</span>
+            <a href="../../index.html">Модуль 3</a>
+            <span class="breadcrumb-separator">→</span>
+            <a href="index.html">Лекція 7</a>
+            <span class="breadcrumb-separator">→</span>
+            <span>Конспект</span>
+        </nav>
+    </div>
+</header>
+
+<!-- Main Container -->
+<div class="konspekt-container">
+    <!-- Main Content -->
+    <main class="konspekt-page">
+        <div class="konspekt-header">
+            <h1 class="konspekt-title">Картковий бізнес та платіжні мережі</h1>
+            <div class="konspekt-meta">
+                Лекція 7 • Модуль 3: Платіжні системи та технології<br>
+                Детальний конспект для спеціальності "Кібербезпека"
+            </div>
+        </div>
+
+        <div class="konspekt-content">
+            <!-- ТЕМА 1: VISA ТА MASTERCARD -->
+            <h2 id="tema1">Тема 1: Visa та Mastercard — Архітектура глобальних платіжних мереж</h2>
+
+            <h3 id="ecosystem">1.1. Екосистема платіжних карток</h3>
+            <p>
+                Глобальна платіжна екосистема складається з шести ключових учасників, кожен з яких виконує критично важливу роль у
+                забезпеченні безпечної та швидкої обробки карткових транзакцій по всьому світу.
+            </p>
+
+            <h4>Основні учасники екосистеми:</h4>
+            <ul>
+                <li><strong>💳 Держатель картки (Cardholder)</strong> — кінцевий користувач, який здійснює платіж картою у фізичних або онлайн-магазинах</li>
+                <li><strong>🏦 Банк-емітент (Issuing Bank)</strong> — фінансова установа, що видає платіжні картки своїм клієнтам та забезпечує їх обслуговування</li>
+                <li><strong>🏪 Торговець (Merchant)</strong> — підприємство або фізична особа, що приймає платежі платіжними картками за товари чи послуги</li>
+                <li><strong>🏧 Банк-еквайєр (Acquiring Bank)</strong> — банк, що обслуговує торговців та забезпечує їм можливість приймати карткові платежі</li>
+                <li><strong>🌐 Платіжна мережа (Payment Network)</strong> — глобальна інфраструктура (Visa, Mastercard), що з'єднує емітентів та еквайєрів</li>
+                <li><strong>⚙️ Процесинговий центр (Processing Center)</strong> — технічна система, що обробляє транзакції в реальному часі</li>
+            </ul>
+
+            <h3 id="transaction-flow">1.2. Життєвий цикл карткової транзакції</h3>
+            <p>
+                Кожна карткова транзакція проходить через три основні фази: авторизацію, клірінг та розрахунок. Розуміння цих процесів
+                критично важливе для фахівців з кібербезпеки, оскільки кожна фаза має свої унікальні вразливості та вимоги до захисту.
+            </p>
+
+            <div class="info-box">
+                <h4>🔄 Фаза 1: Авторизація (Authorization)</h4>
+                <p>Відбувається в реальному часі протягом 2-3 секунд:</p>
+                <ol>
+                    <li>Картка вставляється або проводиться в POS-терміналі торговця</li>
+                    <li>Дані транзакції (PAN, сума, merchant ID) передаються до банку-еквайєра</li>
+                    <li>Платіжна мережа (Visa/Mastercard) маршрутизує запит до банку-емітента</li>
+                    <li>Емітент перевіряє баланс, ліміти, fraud indicators та блокує суму</li>
+                    <li>Відповідь (Approved/Declined) повертається тим же шляхом назад</li>
+                    <li>Торговець отримує результат авторизації на екрані терміналу</li>
+                </ol>
+            </div>
+
+            <div class="info-box">
+                <h4>📊 Фаза 2: Клірінг (Clearing)</h4>
+                <p>Відбувається наприкінці робочого дня:</p>
+                <ul>
+                    <li>Торговці передають batch файли з усіма денними транзакціями до еквайєрів</li>
+                    <li>Платіжні мережі обчислюють взаємні зобов'язання між банками</li>
+                    <li>Розраховуються interchange fees та network fees для кожної транзакції</li>
+                    <li>Формуються clearing files для розрахункового процесу</li>
+                </ul>
+            </div>
+
+            <div class="info-box">
+                <h4>💰 Фаза 3: Розрахунок (Settlement)</h4>
+                <p>Фактичне переміщення коштів між банками:</p>
+                <ul>
+                    <li>Відбувається протягом T+1 або T+2 днів після транзакції</li>
+                    <li>Кошти списуються з рахунків банків-емітентів</li>
+                    <li>Кошти зараховуються на рахунки банків-еквайєрів</li>
+                    <li>Еквайєр перераховує кошти на рахунок торговця (мінус merchant fees)</li>
+                </ul>
+            </div>
+
+            <div class="example-box">
+                <h4>🍔 Приклад: Оплата в McDonald's</h4>
+                <p><strong>Сценарій:</strong> Клієнт ПриватБанку оплачує 150 грн картою Visa у McDonald's</p>
+
+                <p><strong>Крок за кроком:</strong></p>
+                <ol>
+                    <li><strong>User action:</strong> Клієнт вставляє EMV-картку в POS-термінал McDonald's</li>
+                    <li><strong>Terminal request:</strong> POS (обслуговується Monobank Business як еквайєр) відправляє authorization request через Visa network</li>
+                    <li><strong>Routing:</strong> Visa маршрутизує запит до ПриватБанку на основі BIN (перші 6 цифр картки)</li>
+                    <li><strong>Issuer checks:</strong>
+                        <ul>
+                            <li>Баланс рахунку: ₴2,450 ✓</li>
+                            <li>Денний ліміт: в межах норми ✓</li>
+                            <li>Fraud detection system: No alerts ✓</li>
+                            <li>Блокує ₴150 на рахунку</li>
+                        </ul>
+                    </li>
+                    <li><strong>Response:</strong> ПриватБанк відповідає APPROVED, термінал друкує чек</li>
+                    <li><strong>Timing:</strong> Вся операція зайняла 2.1 секунди</li>
+                </ol>
+
+                <p><strong>Комісії (за прикладом):</strong></p>
+                <ul>
+                    <li>Interchange fee (еквайєр → емітент): 1.2% = ₴1.80</li>
+                    <li>Network fee (еквайєр → Visa): 0.1% = ₴0.15</li>
+                    <li>Merchant fee (McDonald's → еквайєр): 2.5% = ₴3.75</li>
+                </ul>
+            </div>
+
+            <h3 id="visa-mastercard">1.3. Visa vs Mastercard: Порівняльний аналіз</h3>
+
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Характеристика</th>
+                        <th>Visa</th>
+                        <th>Mastercard</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Частка ринку (глобально)</strong></td>
+                        <td>~40%</td>
+                        <td>~25%</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Транзакцій на рік</strong></td>
+                        <td>193 млрд</td>
+                        <td>118 млрд</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Interchange fees</strong></td>
+                        <td>1.15% - 2.40%</td>
+                        <td>1.15% - 2.50%</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Технології токенізації</strong></td>
+                        <td>Visa Token Service (VTS)</td>
+                        <td>Digital Enablement Service (MDES)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Security платформа</strong></td>
+                        <td>Visa Advanced Authorization</td>
+                        <td>Decision Intelligence</td>
+                    </tr>
+                    <tr>
+                        <td><strong>3D Secure брендинг</strong></td>
+                        <td>Verified by Visa</td>
+                        <td>Mastercard SecureCode</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3 id="iso8583">1.4. ISO 8583 Message Format</h3>
+            <p>
+                ISO 8583 — це міжнародний стандарт для обміну даними про фінансові транзакції між учасниками платіжних систем.
+                Розроблений у 1987 році, він досі залишається основою для комунікації в card industry.
+            </p>
+
+            <h4>Структура ISO 8583 повідомлення:</h4>
+            <ul>
+                <li><strong>MTI (Message Type Indicator)</strong> — 4-значний код типу повідомлення:
+                    <ul>
+                        <li>0100 = Authorization request</li>
+                        <li>0110 = Authorization response</li>
+                        <li>0200 = Financial transaction request</li>
+                        <li>0400 = Reversal request</li>
+                    </ul>
+                </li>
+                <li><strong>Bitmap</strong> — бітова карта (64 або 128 біт), що вказує, які data elements присутні в повідомленні</li>
+                <li><strong>Data Elements</strong> — до 128 полів з різноманітними даними транзакції</li>
+            </ul>
+
+            <h4>Ключові Data Elements:</h4>
+            <ul>
+                <li><strong>Field 2:</strong> PAN (Primary Account Number) — номер платіжної картки</li>
+                <li><strong>Field 3:</strong> Processing Code — тип транзакції (purchase, withdrawal, refund)</li>
+                <li><strong>Field 4:</strong> Transaction Amount — сума транзакції в мінімальних одиницях валюти</li>
+                <li><strong>Field 7:</strong> Transmission Date and Time — timestamp транзакції</li>
+                <li><strong>Field 11:</strong> STAN (Systems Trace Audit Number) — унікальний номер для трекінгу</li>
+                <li><strong>Field 39:</strong> Response Code — результат авторизації (00=approved, 51=insufficient funds, 05=do not honor)</li>
+                <li><strong>Field 49:</strong> Currency Code — валюта транзакції (UAH=980, USD=840, EUR=978)</li>
+                <li><strong>Field 55:</strong> EMV ICC Data — дані з чіпу EMV картки (криптограми, ATC)</li>
+            </ul>
+
+            <div class="info-box">
+                <h4>🔒 Security considerations для ISO 8583:</h4>
+                <ul>
+                    <li>Всі повідомлення мають передаватися через захищені канали (TLS 1.2+)</li>
+                    <li>Sensitive data (PAN, PIN block) повинні бути зашифровані додатково</li>
+                    <li>Message authentication codes (MAC) використовуються для перевірки цілісності</li>
+                    <li>Field 55 (EMV data) містить криптографічні докази автентичності транзакції</li>
+                </ul>
+            </div>
+
+            <h3 id="threats">1.5. Загрози платіжним мережам</h3>
+
+            <div class="warning-box">
+                <h4>⚠️ Man-in-the-Middle (MITM) атаки</h4>
+                <p><strong>Опис:</strong> Перехоплення та модифікація трафіку між учасниками платіжної мережі</p>
+                <p><strong>Вектори:</strong></p>
+                <ul>
+                    <li>Компрометація мережевого обладнання (routers, switches)</li>
+                    <li>BGP hijacking для редіректу трафіку</li>
+                    <li>Модифікація критичних полів ISO 8583 (Field 4 - amount, Field 39 - response code)</li>
+                </ul>
+                <p><strong>Захист:</strong> TLS 1.3 з mutual authentication, HSM для key management, network segmentation</p>
+            </div>
+
+            <div class="warning-box">
+                <h4>⚠️ Message Replay Attacks</h4>
+                <p><strong>Опис:</strong> Повторна передача перехоплених authorization messages</p>
+                <p><strong>Вектори:</strong></p>
+                <ul>
+                    <li>Capture і replay легітимних транзакцій для дублювання платежів</li>
+                    <li>Обхід систем одноразових кодів</li>
+                </ul>
+                <p><strong>Захист:</strong> STAN перевірка, timestamps validation, cryptographic nonces, transaction sequencing</p>
+            </div>
+
+            <div class="warning-box">
+                <h4>⚠️ BIN Attack (Bank Identification Number)</h4>
+                <p><strong>Опис:</strong> Brute force генерація валідних номерів карток</p>
+                <p><strong>Вектори:</strong></p>
+                <ul>
+                    <li>Використання відомих BIN баз даних банків</li>
+                    <li>Luhn algorithm для валідації згенерованих номерів</li>
+                    <li>Automated testing на малих merchant сайтах</li>
+                </ul>
+                <p><strong>Захист:</strong> Rate limiting, CAPTCHA after failed attempts, velocity checks, BIN rotation policies</p>
+            </div>
+
+            <div class="warning-box">
+                <h4>⚠️ Network Downtime Attacks</h4>
+                <p><strong>Опис:</strong> DDoS атаки на процесингові центри</p>
+                <p><strong>Наслідки:</strong></p>
+                <ul>
+                    <li>Fallback to stand-in processing (локальна авторизація з ризиками)</li>
+                    <li>Втрата revenue для merchants</li>
+                    <li>Reputational damage для банків та мереж</li>
+                </ul>
+                <p><strong>Захист:</strong> Geographic redundancy, load balancing, DDoS mitigation services, backup processing centers</p>
+            </div>
+
+            <h3 id="statistics">1.6. Глобальна статистика платіжних мереж</h3>
+            <ul>
+                <li><strong>Card payments globally:</strong> понад $40 трильйонів щорічно</li>
+                <li><strong>Безготівкові платежі в Україні (2024):</strong> 70% усіх транзакцій</li>
+                <li><strong>Visa транзакції:</strong> 193 млрд на рік</li>
+                <li><strong>Середній час авторизації:</strong> 2-3 секунди</li>
+            </ul>
+
+            <div class="example-box">
+                <h4>🇺🇦 Український ринок:</h4>
+                <ul>
+                    <li><strong>ПриватБанк:</strong> понад 40 млн клієнтів, більше 1 млрд транзакцій на місяць</li>
+                    <li><strong>Monobank:</strong> понад 8 млн клієнтів, 100% digital-only банк</li>
+                    <li><strong>Contactless growth:</strong> 60% усіх транзакцій здійснюються безконтактно</li>
+                    <li><strong>Mobile payments adoption:</strong> 35% користувачів використовують Apple Pay або Google Pay</li>
+                </ul>
+            </div>
+
+            <!-- ТЕМА 2: EMV ТА ТОКЕНІЗАЦІЯ -->
+            <h2 id="tema2">Тема 2: EMV стандарти та токенізація</h2>
+
+            <h3 id="emv-intro">2.1. Що таке EMV?</h3>
+            <p>
+                <strong>EMV (Europay, Mastercard, Visa)</strong> — це глобальний стандарт для чіпових платіжних карток, розроблений консорціумом
+                EMVCo у 1990-х роках. EMV революціонізував безпеку карткових платежів, замінивши статичні дані магнітної смуги на
+                динамічну криптографічну автентифікацію.
+            </p>
+
+            <h4>Ключові переваги EMV над магнітною смугою:</h4>
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Аспект</th>
+                        <th>❌ Магнітна смуга</th>
+                        <th>✅ EMV чіп</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Тип даних</strong></td>
+                        <td>Статичні (PAN, expiry завжди однакові)</td>
+                        <td>Динамічні (криптограма унікальна для кожної транзакції)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Клонування</strong></td>
+                        <td>Легко клонувати через skimming</td>
+                        <td>Практично неможливо клонувати</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Fraud reduction</strong></td>
+                        <td>Baseline</td>
+                        <td>75% зменшення counterfeit fraud</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Offline verification</strong></td>
+                        <td>Немає</td>
+                        <td>Chip може верифікувати PIN offline</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3 id="emv-flow">2.2. EMV Transaction Flow</h3>
+
+            <div class="info-box">
+                <h4>Етап 1: Card Authentication (Автентифікація картки)</h4>
+                <ol>
+                    <li>Картка вставляється в чіп-рідер терміналу</li>
+                    <li>Terminal запитує Application Identifier (AID) у чіпа</li>
+                    <li>Card надає свій public key certificate (підписаний емітентом)</li>
+                    <li>Terminal перевіряє certificate з root CA ключем</li>
+                    <li>Terminal переконується, що картка справжня та не підроблена</li>
+                </ol>
+            </div>
+
+            <div class="info-box">
+                <h4>Етап 2: Cardholder Verification (Верифікація власника)</h4>
+                <p><strong>CVM (Cardholder Verification Method)</strong> — методи підтвердження, що картка використовується власником:</p>
+                <ul>
+                    <li><strong>Online PIN:</strong> PIN шифрується та відправляється до емітента для перевірки</li>
+                    <li><strong>Offline PIN:</strong> PIN перевіряється чіпом картки без зв'язку з емітентом</li>
+                    <li><strong>Signature:</strong> підпис клієнта на чеку (застарілий метод)</li>
+                    <li><strong>No CVM:</strong> для contactless транзакцій до ₴500 (залежить від країни)</li>
+                </ul>
+            </div>
+
+            <div class="info-box">
+                <h4>Етап 3: Transaction Authorization (Авторизація транзакції)</h4>
+                <ol>
+                    <li>Чіп картки генерує <strong>ARQC (Authorization Request Cryptogram)</strong></li>
+                    <li>ARQC включає: PAN, amount, date, terminal unpredictable number, Application Transaction Counter (ATC)</li>
+                    <li>ARQC відправляється до емітента через ISO 8583 Field 55</li>
+                    <li>Емітент валідує ARQC використовуючи master key (відомий тільки емітенту та чіпу)</li>
+                    <li>Якщо ARQC валідний, емітент генерує <strong>ARPC (Authorization Response Cryptogram)</strong></li>
+                    <li>Card перевіряє ARPC та завершує транзакцію</li>
+                </ol>
+                <p><strong>Ключовий момент:</strong> ARQC — це одноразовий криптографічний код, який неможливо підробити без знання secret keys</p>
+            </div>
+
+            <h3 id="contactless">2.3. Contactless EMV (NFC)</h3>
+            <p>
+                Безконтактні платежі використовують <strong>NFC (Near Field Communication)</strong> технологію для бездротової передачі даних
+                між карткою та терміналом на відстані до 4 см.
+            </p>
+
+            <h4>Характеристики NFC payments:</h4>
+            <ul>
+                <li><strong>Частота:</strong> 13.56 MHz (ISM band)</li>
+                <li><strong>Дальність дії:</strong> до 4 см (практично виключає віддалені атаки)</li>
+                <li><strong>Швидкість транзакції:</strong> менше 1 секунди</li>
+                <li><strong>Візуальний індикатор:</strong> ))) логотип на картці та терміналі</li>
+            </ul>
+
+            <h4>Ліміти без PIN коду:</h4>
+            <ul>
+                <li><strong>Україна:</strong> ₴500 (станом на 2024 рік)</li>
+                <li><strong>Європейський Союз:</strong> €50</li>
+                <li><strong>США:</strong> $100-250 (залежить від merchant та банку)</li>
+            </ul>
+
+            <h4>Безпека contactless платежів:</h4>
+            <ul>
+                <li>Використовується той самий EMV криптографічний механізм (ARQC/ARPC)</li>
+                <li>Після N транзакцій або сумарної суми автоматично запитується PIN</li>
+                <li><strong>iCVV (intelligent CVV):</strong> CVV код динамічно змінюється для кожної транзакції</li>
+                <li>Потрібна близька відстань (4 см), що ускладнює relay attacks</li>
+            </ul>
+
+            <div class="warning-box">
+                <h4>⚠️ Relay Attacks на NFC</h4>
+                <p>
+                    <strong>Вразливість:</strong> Зловмисники можуть створити "міст" між справжньою карткою жертви (в кишені) та терміналом,
+                    збільшуючи ефективну дальність NFC до 50+ метрів.
+                </p>
+                <p><strong>Захист:</strong> Distance bounding protocols, time-based checks, EMV terminals з anti-relay механізмами</p>
+            </div>
+
+            <h3 id="tokenization">2.4. Apple Pay та токенізація</h3>
+            <p>
+                <strong>Токенізація</strong> — це процес заміни реального номера картки (PAN) на унікальний token (DAN — Device Account Number),
+                який не має цінності поза конкретним пристроєм та контекстом використання.
+            </p>
+
+            <div class="example-box">
+                <h4>📱 Як працює Apple Pay:</h4>
+
+                <p><strong>Крок 1: Реєстрація картки в Wallet</strong></p>
+                <ol>
+                    <li>Користувач відкриває Apple Wallet та фотографує картку Visa</li>
+                    <li>Apple відправляє запит до Visa Token Service (VTS)</li>
+                    <li>VTS запитує у банку-емітента дозвіл на provisioning</li>
+                    <li>Банк може запитати додаткову автентифікацію (SMS OTP, push notification)</li>
+                    <li>Після підтвердження VTS генерує <strong>Device Account Number (DAN)</strong></li>
+                    <li>DAN зберігається в <strong>Secure Element</strong> iPhone (ізольований криптографічний чіп)</li>
+                    <li><strong>Важливо:</strong> Реальний PAN ніколи не зберігається на пристрої</li>
+                </ol>
+
+                <p><strong>Крок 2: Здійснення платежу</strong></p>
+                <ol>
+                    <li>Користувач прикладає iPhone до NFC терміналу</li>
+                    <li>Face ID або Touch ID автентифікує користувача</li>
+                    <li>Secure Element генерує transaction-specific cryptogram (подібно до EMV ARQC)</li>
+                    <li>Передається: DAN + cryptogram + transaction details</li>
+                    <li>Merchant бачить тільки token, а не справжній номер картки</li>
+                    <li>Visa Token Service detokenizes (перетворює DAN назад на PAN) та маршрутизує до емітента</li>
+                    <li>Емітент авторизує транзакцію на основі реального PAN</li>
+                </ol>
+            </div>
+
+            <h4>Переваги токенізації для безпеки:</h4>
+            <ul>
+                <li>✅ <strong>PAN не зберігається на пристрої:</strong> навіть якщо пристрій украдений, зловмисник не може витягти реальний номер</li>
+                <li>✅ <strong>Merchant не бачить PAN:</strong> зменшує ризики data breaches у merchants</li>
+                <li>✅ <strong>Biometric authentication:</strong> Face ID/Touch ID додає додатковий рівень захисту</li>
+                <li>✅ <strong>Transaction-specific cryptogram:</strong> кожен платіж має унікальний одноразовий код</li>
+                <li>✅ <strong>Token domain restrictions:</strong> token валідний тільки для конкретного пристрою та merchant категорії</li>
+            </ul>
+
+            <h3 id="3ds">2.5. 3D Secure 2.0</h3>
+            <p>
+                <strong>3D Secure (3DS)</strong> — це протокол аутентифікації для онлайн card-not-present (CNP) транзакцій, розроблений EMVCo.
+                Версія 2.0 вирішує проблеми UX першої версії та впроваджує risk-based authentication.
+            </p>
+
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Характеристика</th>
+                        <th>❌ 3DS 1.0 (застарілий)</th>
+                        <th>✅ 3DS 2.0 (сучасний)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>User Experience</strong></td>
+                        <td>Pop-up вікно з паролем (погано працює на mobile)</td>
+                        <td>Frictionless у 95% випадків</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Authentication</strong></td>
+                        <td>Статичний пароль</td>
+                        <td>Biometric, SMS OTP, push notifications</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Risk assessment</strong></td>
+                        <td>Мінімальний</td>
+                        <td>100+ data points для ML-based risk scoring</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Mobile support</strong></td>
+                        <td>Проблематичний</td>
+                        <td>Нативна підтримка in-app та mobile browser</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h4>Процес 3DS 2.0:</h4>
+            <ol>
+                <li><strong>Checkout:</strong> Користувач натискає "Pay" на сайті merchant</li>
+                <li><strong>Data collection:</strong> 3DS Server збирає понад 100 data points (device fingerprint, IP, transaction history, behavioral biometrics)</li>
+                <li><strong>Authentication request:</strong> Merchant відправляє 3DS AReq (Authentication Request) до ACS (Access Control Server) банку-емітента</li>
+                <li><strong>Risk assessment:</strong> ACS аналізує дані та визначає ризик:
+                    <ul>
+                        <li><strong>Low risk (85-95%):</strong> Frictionless approval без додаткових дій користувача</li>
+                        <li><strong>Medium/High risk:</strong> Challenge flow — SMS OTP, biometric, або push notification</li>
+                    </ul>
+                </li>
+                <li><strong>Authorization:</strong> Після успішної аутентифікації транзакція проходить авторизацію з 3DS cryptogram</li>
+            </ol>
+
+            <div class="info-box">
+                <h4>📊 Результати впровадження 3DS 2.0:</h4>
+                <ul>
+                    <li>Підвищення conversion rate на 70% порівняно з 3DS 1.0</li>
+                    <li>Зменшення cart abandonment rate з 25% до 5%</li>
+                    <li>Fraud reduction на 40-50% для CNP транзакцій</li>
+                    <li>Liability shift: якщо merchant використовує 3DS, відповідальність за fraud переходить на емітента</li>
+                </ul>
+            </div>
+
+            <h3 id="emv-attacks">2.6. Атаки на EMV систему</h3>
+
+            <div class="warning-box">
+                <h4>⚠️ Card-Not-Present (CNP) Fraud</h4>
+                <p>
+                    <strong>Проблема:</strong> EMV захищає тільки card-present транзакції. Для онлайн-платежів потрібні тільки PAN, CVV, expiry.
+                </p>
+                <p><strong>Статистика:</strong> Після масового впровадження EMV, CNP fraud зріс на 300%, оскільки шахраї перемістилися онлайн</p>
+                <p><strong>Захист:</strong> 3D Secure 2.0, tokenization для e-commerce, behavioral analytics, device fingerprinting</p>
+            </div>
+
+            <div class="warning-box">
+                <h4>⚠️ Chip Skimming</h4>
+                <p>
+                    <strong>Метод:</strong> Модифіковані POS-термінали з прихованими логерами можуть захоплювати PAN під час EMV транзакцій
+                </p>
+                <p><strong>Примітка:</strong> Вони не можуть клонувати чіп, але можуть використовувати PAN для CNP fraud</p>
+                <p><strong>Захист:</strong> Regular terminal security audits, tamper-evident seals, PCI PTS certifications</p>
+            </div>
+
+            <!-- ТЕМА 3: FRAUD PREVENTION -->
+            <h2 id="tema3">Тема 3: Card Fraud Prevention</h2>
+
+            <h3 id="fraud-types">3.1. Типи card fraud</h3>
+
+            <div class="warning-box">
+                <h4>1. Counterfeit Fraud (Підробка карток)</h4>
+                <p><strong>Метод:</strong> Клонування магнітної смуги за допомогою skimming пристроїв</p>
+                <p><strong>Статус:</strong> ❌ EMV зменшив counterfeit fraud на 75% у країнах з high EMV adoption</p>
+                <p><strong>Сучасні варіанти:</strong> Shimmer attacks — тонкі пристрої між чіпом та рідером для capture EMV data</p>
+            </div>
+
+            <div class="warning-box">
+                <h4>2. Lost/Stolen Fraud (Втрачена/Вкрадена картка)</h4>
+                <p><strong>Метод:</strong> Використання фізичної картки без відома власника</p>
+                <p><strong>Статус:</strong> 🔒 Зменшено на 50% завдяки EMV PIN verification</p>
+                <p><strong>Захист:</strong> Instant push notifications, геолокація, швидке блокування через mobile app</p>
+            </div>
+
+            <div class="warning-box">
+                <h4>3. Card-Not-Present (CNP) Fraud</h4>
+                <p><strong>Метод:</strong> Онлайн-покупки використовуючи викрадені PAN + CVV + expiry</p>
+                <p><strong>Статус:</strong> 📈 60% всього card fraud — найбільша проблема сьогодні</p>
+                <p><strong>Джерела PAN:</strong> Data breaches, phishing, malware, dark web databases</p>
+                <p><strong>Захист:</strong> 3D Secure 2.0, ML fraud detection, velocity limits, device fingerprinting</p>
+            </div>
+
+            <div class="warning-box">
+                <h4>4. Account Takeover (ATO)</h4>
+                <p><strong>Метод:</strong> Компрометація облікового запису через credential stuffing, phishing, malware</p>
+                <p><strong>Дії зловмисника:</strong></p>
+                <ul>
+                    <li>Змінює email/телефон у профілі</li>
+                    <li>Замовляє нову картку на свою адресу</li>
+                    <li>Робить unauthorized transactions</li>
+                </ul>
+                <p><strong>Захист:</strong> Multi-factor authentication, behavioral biometrics, anomaly detection при зміні контактів</p>
+            </div>
+
+            <div class="warning-box">
+                <h4>5. Friendly Fraud (Chargeback Abuse)</h4>
+                <p><strong>Метод:</strong> Клієнт робить легітимну покупку, а потім оспорює транзакцію</p>
+                <p><strong>Claim:</strong> "I didn't authorize this transaction" або "I didn't receive the goods"</p>
+                <p><strong>Проблема для merchants:</strong> Chargeback fees ($20-100) + втрата товару + reputation damage</p>
+                <p><strong>Захист:</strong> Детальна документація доставки, delivery confirmations, чіткі return policies</p>
+            </div>
+
+            <h3 id="fraud-methods">3.2. Популярні методи шахрайства</h3>
+
+            <h4>Технічні атаки:</h4>
+            <ul>
+                <li><strong>Card Skimming:</strong>
+                    <ul>
+                        <li>Пристрої на ATM або POS для копіювання магнітної смуги</li>
+                        <li>Hidden cameras для capture PIN коду</li>
+                        <li>Bluetooth-enabled skimmers для remote data exfiltration</li>
+                    </ul>
+                </li>
+                <li><strong>Carding (BIN attacks):</strong>
+                    <ul>
+                        <li>Автоматизоване тестування згенерованих номерів карт</li>
+                        <li>Brute force CVV (000-999 для 3-значного коду)</li>
+                        <li>Продаж validated cards на dark web ($5-50 за картку)</li>
+                    </ul>
+                </li>
+                <li><strong>E-commerce bot attacks:</strong>
+                    <ul>
+                        <li>Automated checkout bots для швидкої купівлі</li>
+                        <li>Використання stolen cards для gift cards або cryptocurrency</li>
+                        <li>Cash-out перед виявленням fraud</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <h4>Social Engineering:</h4>
+            <ul>
+                <li><strong>Phishing/Vishing:</strong>
+                    <ul>
+                        <li>Fake bank websites з SSL сертифікатами</li>
+                        <li>Телефонні дзвінки від "bank security department"</li>
+                        <li>SMS з посиланням: "Your card is blocked, click to reactivate"</li>
+                        <li>Social engineering для отримання SMS OTP</li>
+                    </ul>
+                </li>
+                <li><strong>SIM Swap Fraud:</strong>
+                    <ul>
+                        <li>Зловмисник переконує mobile operator перевидати SIM на свій пристрій</li>
+                        <li>Перехоплює SMS OTP коди</li>
+                        <li>Отримує доступ до mobile banking та email</li>
+                        <li>Проводить account takeover та unauthorized transactions</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <h3 id="fraud-detection">3.3. ML-based Fraud Detection</h3>
+
+            <div class="example-box">
+                <h4>🤖 Fraud Detection система Monobank</h4>
+                <p>
+                    Monobank використовує AI-powered real-time fraud prevention з латентністю менше 100ms на авторизаційне рішення.
+                </p>
+
+                <p><strong>Transaction Analysis (100+ features):</strong></p>
+                <ul>
+                    <li><strong>Amount deviation:</strong> транзакція на ₴50,000 від клієнта з average ₴500 → High risk</li>
+                    <li><strong>Unusual merchant category:</strong> перша транзакція в ювелірному магазині за 2 роки → Medium risk</li>
+                    <li><strong>Geographic anomalies:</strong> транзакція в Лондоні через 10 хвилин після транзакції в Києві → High risk</li>
+                    <li><strong>Time of day patterns:</strong> транзакція о 3:00 AM від клієнта, який зазвичай активний о 10:00-22:00 → Medium risk</li>
+                    <li><strong>Velocity checks:</strong> 5 транзакцій за 10 хвилин → High risk</li>
+                </ul>
+
+                <p><strong>Device Intelligence:</strong></p>
+                <ul>
+                    <li>Known device (iPhone з ID збережений 2 роки) → Low risk</li>
+                    <li>New device (Android emulator з VPN) → High risk</li>
+                    <li>Jailbroken/rooted detection → Medium risk</li>
+                    <li>VPN/Proxy/Tor usage → Risk score +20%</li>
+                </ul>
+
+                <p><strong>Behavioral Biometrics:</strong></p>
+                <ul>
+                    <li>Typing patterns (швидкість, паузи між символами)</li>
+                    <li>Swipe dynamics (how user swipes in app)</li>
+                    <li>Device position sensors (accelerometer patterns)</li>
+                    <li>Mouse movement patterns (для web)</li>
+                </ul>
+            </div>
+
+            <h4>Machine Learning алгоритми:</h4>
+
+            <p><strong>Supervised Learning (навчання на labeled datasets):</strong></p>
+            <ul>
+                <li><strong>Random Forest:</strong>
+                    <ul>
+                        <li>Ensemble з decision trees</li>
+                        <li>Feature importance analysis</li>
+                        <li>Interpretable results для compliance</li>
+                    </ul>
+                </li>
+                <li><strong>Gradient Boosting (XGBoost, LightGBM):</strong>
+                    <ul>
+                        <li>State-of-the-art accuracy для fraud detection</li>
+                        <li>Використовується Visa, Mastercard, більшість банків</li>
+                        <li>Може досягати 99%+ precision/recall на test set</li>
+                    </ul>
+                </li>
+                <li><strong>Neural Networks (Deep Learning):</strong>
+                    <ul>
+                        <li>LSTM (Long Short-Term Memory) для sequence analysis</li>
+                        <li>Виявлення складних temporal patterns</li>
+                        <li>Transfer learning з pre-trained моделей</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <p><strong>Unsupervised Learning (виявлення невідомих patterns):</strong></p>
+            <ul>
+                <li><strong>Anomaly Detection:</strong>
+                    <ul>
+                        <li>Isolation Forest — швидко ідентифікує outliers</li>
+                        <li>One-class SVM — виявляє девіації від "normal" behavior</li>
+                        <li>Autoencoder reconstruction error — deep learning підхід</li>
+                    </ul>
+                </li>
+                <li><strong>Clustering:</strong>
+                    <ul>
+                        <li>Виявлення fraud rings (групи зловмисників)</li>
+                        <li>Групування attack patterns</li>
+                        <li>Network analysis для виявлення organized crime</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <h3 id="response-actions">3.4. Response Actions за Risk Level</h3>
+
+            <div class="info-box">
+                <h4>🟢 Low Risk (85-90% транзакцій)</h4>
+                <p><strong>Risk Score:</strong> 0-30%</p>
+                <p><strong>Action:</strong> Approve seamlessly без додаткових перевірок</p>
+                <p><strong>Example:</strong> ₴200 в супермаркеті о 18:00 на known device</p>
+            </div>
+
+            <div class="warning-box">
+                <h4>🟡 Medium Risk (10-12% транзакцій)</h4>
+                <p><strong>Risk Score:</strong> 30-70%</p>
+                <p><strong>Action:</strong> Step-up authentication</p>
+                <ul>
+                    <li>Push notification: "Did you authorize ₴5,000 at Apple Store?"</li>
+                    <li>SMS OTP для підтвердження</li>
+                    <li>3D Secure challenge</li>
+                </ul>
+                <p><strong>Example:</strong> ₴5,000 транзакція в новій категорії merchants</p>
+            </div>
+
+            <div class="important-box">
+                <h4>🔴 High Risk (1-3% транзакцій)</h4>
+                <p><strong>Risk Score:</strong> 70-100%</p>
+                <p><strong>Action:</strong> Decline + SMS alert + временное блокування картки</p>
+                <ul>
+                    <li>Транзакція відхиляється автоматично</li>
+                    <li>SMS: "We blocked ₴50,000 suspicious transaction. If it was you, call us"</li>
+                    <li>Push notification з можливістю розблокувати</li>
+                    <li>Card може бути тимчасово заблокована</li>
+                </ul>
+                <p><strong>Example:</strong> ₴50,000 в 3 AM у країні, де клієнт ніколи не був, на новому пристрої</p>
+            </div>
+
+            <h4>📊 Результати Monobank fraud prevention:</h4>
+            <ul>
+                <li><strong>False positive rate:</strong> менше 0.5% (легітимні транзакції помилково заблоковані)</li>
+                <li><strong>Fraud catch rate:</strong> 99.2% (виявлено fraud до завершення транзакції)</li>
+                <li><strong>Average decision time:</strong> 87ms (latency не помітна для користувача)</li>
+                <li><strong>Model retraining:</strong> щотижня з новими fraud patterns</li>
+            </ul>
+
+            <h3 id="fraud-case">3.5. Кейс: BIN Attack на ПриватБанк</h3>
+
+            <div class="important-box">
+                <h4>💥 Масова BIN Attack у 2019 році</h4>
+
+                <p><strong>Що сталося:</strong></p>
+                <ol>
+                    <li>Зловмисники отримали BIN ПриватБанку (516xxx — Visa Premier)</li>
+                    <li>Згенерували можливі номери карт використовуючи Luhn algorithm</li>
+                    <li>Automated bots тестували згенеровані номери на малих e-commerce сайтах</li>
+                    <li>Використовували small amounts (₴1-10) щоб уникнути detection</li>
+                    <li>Validated cards (approved transactions) збирали в базу</li>
+                    <li>Продавали на dark web ($10-30 за валідну картку з CVV)</li>
+                </ol>
+
+                <p><strong>Масштаб атаки:</strong></p>
+                <ul>
+                    <li>50,000+ згенерованих номерів протестовано</li>
+                    <li>~500 валідних карт знайдено</li>
+                    <li>Attack duration: 48 годин до виявлення</li>
+                </ul>
+
+                <p><strong>Як виявили:</strong></p>
+                <ul>
+                    <li>Anomaly detection: spike у declined transactions від одного merchant ID</li>
+                    <li>Pattern recognition: sequential PANs у запитах</li>
+                    <li>Geographic clustering: більшість requests з вузького діапазону IP адрес</li>
+                    <li>Velocity anomaly: 1000+ requests за годину (звичайний merchant робить 50-100)</li>
+                </ul>
+
+                <p><strong>Відповідь ПриватБанку:</strong></p>
+                <ol>
+                    <li>✅ Temporary block усіх 516xxx BIN транзакцій на конкретного merchant</li>
+                    <li>✅ Rate limiting посилено: 3 failed attempts = 1 hour IP ban</li>
+                    <li>✅ CAPTCHA обов'язковий після failed transaction</li>
+                    <li>✅ BIN rotation policy: нові картки отримують різні BINs</li>
+                    <li>✅ Merchant education: як виявляти та блокувати carding attacks</li>
+                </ol>
+
+                <p><strong>Результат:</strong></p>
+                <ul>
+                    <li>Атака зупинена протягом 4 годин після виявлення</li>
+                    <li>0 успішних fraudulent transactions з validated cards (всі заблоковані превентивно)</li>
+                    <li>Merchant partnerships strengthened</li>
+                </ul>
+            </div>
+
+            <!-- ТЕМА 4: PCI DSS -->
+            <h2 id="tema4">Тема 4: PCI DSS Compliance</h2>
+
+            <h3 id="pci-intro">4.1. Що таке PCI DSS?</h3>
+            <p>
+                <strong>PCI DSS (Payment Card Industry Data Security Standard)</strong> — це комплексний набір вимог безпеки для будь-якої
+                організації, що обробляє, зберігає або передає дані власників платіжних карток (cardholder data).
+            </p>
+
+            <h4>Історія та управління:</h4>
+            <ul>
+                <li><strong>Створено:</strong> 2004 року консорціумом п'яти провідних платіжних систем (Visa, Mastercard, American Express, Discover, JCB)</li>
+                <li><strong>Управління:</strong> PCI Security Standards Council (PCI SSC) — незалежна організація</li>
+                <li><strong>Поточна версія:</strong> PCI DSS v4.0 (active з March 2024)</li>
+                <li><strong>Transition deadline:</strong> PCI DSS v3.2.1 retired у March 2025</li>
+            </ul>
+
+            <h4>Хто повинен дотримуватись PCI DSS:</h4>
+            <ul>
+                <li>🏦 <strong>Issuing Banks</strong> — видають картки клієнтам</li>
+                <li>🏧 <strong>Acquiring Banks</strong> — обслуговують merchants</li>
+                <li>🏪 <strong>Merchants</strong> — будь-який бізнес, що приймає card payments (від супермаркетів до інтернет-магазинів)</li>
+                <li>⚙️ <strong>Service Providers</strong> — payment gateways, processors, hosting providers, SaaS platforms</li>
+            </ul>
+
+            <h4>Рівні сертифікації для merchants (Visa classification):</h4>
+            <ul>
+                <li><strong>Level 1:</strong> понад 6 млн транзакцій/рік
+                    <ul>
+                        <li>Annual onsite audit від QSA (Qualified Security Assessor)</li>
+                        <li>Quarterly network vulnerability scans від ASV (Approved Scanning Vendor)</li>
+                        <li>Report on Compliance (ROC) до 300+ сторінок</li>
+                    </ul>
+                </li>
+                <li><strong>Level 2:</strong> 1-6 млн транзакцій/рік
+                    <ul>
+                        <li>Annual Self-Assessment Questionnaire (SAQ)</li>
+                        <li>Quarterly ASV scans</li>
+                    </ul>
+                </li>
+                <li><strong>Level 3:</strong> 20,000-1 млн e-commerce транзакцій/рік
+                    <ul>
+                        <li>Annual SAQ</li>
+                        <li>Quarterly ASV scans</li>
+                    </ul>
+                </li>
+                <li><strong>Level 4:</strong> менше 20,000 e-commerce або менше 1 млн інших транзакцій
+                    <ul>
+                        <li>Annual SAQ (simplified)</li>
+                        <li>Quarterly ASV scans (можуть бути optional)</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <h3 id="12-requirements">4.2. 12 Вимог PCI DSS</h3>
+
+            <p>PCI DSS організований навколо 6 цілей та 12 вимог, що покривають всі аспекти безпеки cardholder data:</p>
+
+            <div class="info-box">
+                <h4>🏗️ Goal 1: Build and Maintain a Secure Network</h4>
+                <p><strong>Requirement 1:</strong> Install and maintain network security controls (firewalls, network segmentation)</p>
+                <p><strong>Requirement 2:</strong> Apply secure configurations to all system components (no vendor defaults, hardening)</p>
+            </div>
+
+            <div class="info-box">
+                <h4>🔐 Goal 2: Protect Account Data</h4>
+                <p><strong>Requirement 3:</strong> Protect stored account data (encryption, key management, data retention policies)</p>
+                <p><strong>Requirement 4:</strong> Protect cardholder data with strong cryptography during transmission (TLS 1.2+)</p>
+            </div>
+
+            <div class="info-box">
+                <h4>🛡️ Goal 3: Maintain a Vulnerability Management Program</h4>
+                <p><strong>Requirement 5:</strong> Protect all systems and networks from malicious software (anti-malware, EDR)</p>
+                <p><strong>Requirement 6:</strong> Develop and maintain secure systems and software (SDLC, patching, WAF)</p>
+            </div>
+
+            <div class="info-box">
+                <h4>🔒 Goal 4: Implement Strong Access Control Measures</h4>
+                <p><strong>Requirement 7:</strong> Restrict access to cardholder data by business need-to-know</p>
+                <p><strong>Requirement 8:</strong> Identify users and authenticate access to system components (MFA, password policies)</p>
+                <p><strong>Requirement 9:</strong> Restrict physical access to cardholder data (datacenter security, badge access)</p>
+            </div>
+
+            <div class="info-box">
+                <h4>📊 Goal 5: Regularly Monitor and Test Networks</h4>
+                <p><strong>Requirement 10:</strong> Log and monitor all access to system components and cardholder data</p>
+                <p><strong>Requirement 11:</strong> Test security of systems and networks regularly (penetration testing, vulnerability scans)</p>
+            </div>
+
+            <div class="info-box">
+                <h4>📚 Goal 6: Maintain an Information Security Policy</h4>
+                <p><strong>Requirement 12:</strong> Support information security with organizational policies and programs</p>
+            </div>
+
+            <h3 id="requirement-3">4.3. Requirement 3 — Захист даних (детально)</h3>
+            <p>
+                Requirement 3 є найкритичнішою вимогою PCI DSS, оскільки він визначає, як організації можуть зберігати та захищати
+                найбільш чутливі дані — Primary Account Number (PAN) та інші cardholder data elements.
+            </p>
+
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Дані</th>
+                        <th>Можна зберігати?</th>
+                        <th>Вимоги</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>PAN (Primary Account Number)</strong></td>
+                        <td>✅ Так</td>
+                        <td>Тільки encrypted (AES-256, RSA-2048+) або tokenized</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Cardholder Name</strong></td>
+                        <td>✅ Так</td>
+                        <td>Може зберігатися в plaintext (якщо не разом з PAN)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Expiration Date</strong></td>
+                        <td>✅ Так</td>
+                        <td>Може зберігатися в plaintext</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Service Code</strong></td>
+                        <td>✅ Так</td>
+                        <td>Може зберігатися в plaintext</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Full Magnetic Stripe Data</strong></td>
+                        <td>❌ НІ</td>
+                        <td>ЗАБОРОНЕНО зберігати після authorization</td>
+                    </tr>
+                    <tr>
+                        <td><strong>CVV/CVC/CID (3-4 digit security code)</strong></td>
+                        <td>❌ НІ</td>
+                        <td>ЗАБОРОНЕНО зберігати після authorization</td>
+                    </tr>
+                    <tr>
+                        <td><strong>PIN або PIN Block</strong></td>
+                        <td>❌ НІ</td>
+                        <td>ЗАБОРОНЕНО зберігати (навіть encrypted, крім HSM у банках)</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h4>Вимоги до шифрування PAN:</h4>
+            <ul>
+                <li><strong>Strong cryptography:</strong>
+                    <ul>
+                        <li>Symmetric: AES-256, 3DES (triple DES)</li>
+                        <li>Asymmetric: RSA-2048 або вище, ECC 224-bit або вище</li>
+                    </ul>
+                </li>
+                <li><strong>Key management:</strong>
+                    <ul>
+                        <li>Key generation у secure environment (HSM рекомендується)</li>
+                        <li>Secure key distribution</li>
+                        <li>Encrypted key storage</li>
+                        <li>Regular key rotation (щонайменше щорічно)</li>
+                        <li>Secure key destruction після expiration</li>
+                        <li>Dual control and split knowledge для key management</li>
+                    </ul>
+                </li>
+                <li><strong>Encryption at rest:</strong>
+                    <ul>
+                        <li>Database-level: Transparent Data Encryption (TDE)</li>
+                        <li>File-level encryption</li>
+                        <li>Full disk encryption (додатковий layer)</li>
+                    </ul>
+                </li>
+                <li><strong>Encryption in transit:</strong>
+                    <ul>
+                        <li>TLS 1.2 або вище для всіх cardholder data transmissions</li>
+                        <li>Strong cipher suites (no weak ciphers, no SSL/early TLS)</li>
+                        <li>Certificate validation</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <div class="info-box">
+                <h4>🔄 Альтернатива шифруванню: Токенізація</h4>
+                <p>
+                    <strong>Tokenization</strong> замінює PAN на surrogate value (token), що не має математичного зв'язку з оригінальним PAN.
+                </p>
+                <p><strong>Переваги:</strong></p>
+                <ul>
+                    <li>Значне зменшення PCI DSS scope (token vault окремо)</li>
+                    <li>Token безцінний поза системою tokenization</li>
+                    <li>Може використовуватися для recurring payments</li>
+                    <li>Спрощує compliance для merchants</li>
+                </ul>
+                <p><strong>Примітка:</strong> Token vault (де зберігається mapping PAN↔Token) все одно повинен бути PCI DSS compliant</p>
+            </div>
+
+            <h3 id="pci-bank">4.4. PCI DSS у банку (Приклад: Ощадбанк)</h3>
+
+            <div class="example-box">
+                <h4>🏦 Compliance Architecture Ощадбанку</h4>
+
+                <p><strong>Network Segmentation:</strong></p>
+                <ul>
+                    <li><strong>CDE (Cardholder Data Environment):</strong> ізольована мережа з усіма системами, що обробляють PAN</li>
+                    <li><strong>DMZ:</strong> демілітаризована зона для card processing systems з обмеженим доступом</li>
+                    <li><strong>Internal network:</strong> корпоративна мережа без доступу до CDE</li>
+                    <li><strong>Firewall rules:</strong> строго контрольовані, документовані, reviewed щоквартально</li>
+                </ul>
+
+                <p><strong>Encryption Infrastructure:</strong></p>
+                <ul>
+                    <li>TLS 1.3 для всіх external connections (ATM network, acquiring, internet banking)</li>
+                    <li>Oracle TDE (Transparent Data Encryption) для всіх databases з cardholder data</li>
+                    <li>Thales HSM (Hardware Security Modules) для PIN blocks та key management</li>
+                    <li>End-to-end encryption для ATM network (від ATM до HSM)</li>
+                </ul>
+
+                <p><strong>Access Controls:</strong></p>
+                <ul>
+                    <li>Multi-Factor Authentication (MFA) обов'язкова для всіх адміністраторів CDE</li>
+                    <li>Role-Based Access Control (RBAC) з least privilege principle</li>
+                    <li>Quarterly access reviews з revocation непотрібних прав</li>
+                    <li>Privileged Access Management (PAM) для всіх адміністративних дій</li>
+                </ul>
+
+                <p><strong>Monitoring and Testing:</strong></p>
+                <ul>
+                    <li>24/7 Security Operations Center (SOC) monitoring</li>
+                    <li>SIEM (Security Information and Event Management) з correlation rules</li>
+                    <li>File Integrity Monitoring (FIM) для критичних system files</li>
+                    <li>Quarterly vulnerability scans від Approved Scanning Vendor (ASV)</li>
+                    <li>Annual penetration testing від сертифікованих пентестерів</li>
+                </ul>
+            </div>
+
+            <h3 id="compliance-process">4.5. Процес сертифікації</h3>
+
+            <p><strong>Для Level 1 організації (банку):</strong></p>
+            <ol>
+                <li><strong>Scoping (1-2 тижні):</strong>
+                    <ul>
+                        <li>Визначення CDE boundary</li>
+                        <li>Network diagram з усіма системами</li>
+                        <li>Data flow diagrams</li>
+                        <li>Inventory усіх систем, що мають доступ до cardholder data</li>
+                    </ul>
+                </li>
+                <li><strong>Documentation Review (2-3 тижні):</strong>
+                    <ul>
+                        <li>Policies та procedures</li>
+                        <li>Network diagrams</li>
+                        <li>System configurations</li>
+                        <li>Logs from SIEM</li>
+                    </ul>
+                </li>
+                <li><strong>Onsite Assessment (2-4 тижні):</strong>
+                    <ul>
+                        <li>Interviews з IT staff, security team, management</li>
+                        <li>Observation of processes</li>
+                        <li>Technical testing (sampling)</li>
+                        <li>Physical security inspection</li>
+                    </ul>
+                </li>
+                <li><strong>Technical Testing (2-3 тижні):</strong>
+                    <ul>
+                        <li>Vulnerability scans</li>
+                        <li>Penetration testing (internal and external)</li>
+                        <li>Configuration reviews</li>
+                        <li>Encryption strength testing</li>
+                    </ul>
+                </li>
+                <li><strong>Reporting (2-3 тижні):</strong>
+                    <ul>
+                        <li>Report on Compliance (ROC) — детальний звіт (200-400 сторінок)</li>
+                        <li>Attestation of Compliance (AOC) — короткий summary</li>
+                        <li>Executive summary для management</li>
+                    </ul>
+                </li>
+                <li><strong>Remediation (якщо потрібно):</strong>
+                    <ul>
+                        <li>Виправлення виявлених non-compliances</li>
+                        <li>Re-testing після remediation</li>
+                        <li>Updated ROC</li>
+                    </ul>
+                </li>
+            </ol>
+
+            <p><strong>Витрати на PCI DSS compliance (Level 1 банк):</strong></p>
+            <ul>
+                <li><strong>QSA audit:</strong> $100,000 - $150,000 щорічно</li>
+                <li><strong>ASV scans:</strong> $5,000 - $10,000 щорічно</li>
+                <li><strong>Internal resources:</strong> 3-5 FTE (Full-Time Employees) dedicated PCI compliance team</li>
+                <li><strong>Technology investments:</strong> $500K+ для encryption, SIEM, PAM, monitoring tools</li>
+            </ul>
+
+            <h3 id="penalties">4.6. Penalties за non-compliance</h3>
+
+            <div class="important-box">
+                <h4>💰 Фінансові штрафи від платіжних мереж</h4>
+                <p><strong>Monthly penalties:</strong> $5,000 - $100,000 per month</p>
+                <ul>
+                    <li>Залежить від severity порушення</li>
+                    <li>Залежить від тривалості non-compliance</li>
+                    <li>Платить acquiring bank, але зазвичай перекладає на merchant</li>
+                </ul>
+            </div>
+
+            <div class="important-box">
+                <h4>💸 Додаткові витрати після data breach</h4>
+                <ul>
+                    <li><strong>Forensic investigation:</strong> $50,000 - $500,000 (PCI Forensic Investigator)</li>
+                    <li><strong>Card reissuance:</strong> $3-5 за кожну скомпрометовану картку</li>
+                    <li><strong>Legal fees:</strong> $100,000+ для class action lawsuits</li>
+                    <li><strong>Regulatory fines:</strong> від GDPR, місцевих регуляторів</li>
+                    <li><strong>Reputation damage:</strong> втрата клієнтів, падіння ціни акцій</li>
+                    <li><strong>Підвищені processing fees:</strong> на 1-2 роки після breach</li>
+                </ul>
+            </div>
+
+            <h4>Приклади реальних penalties:</h4>
+            <ul>
+                <li><strong>Target (2013 breach):</strong> $202 млн total settlements (banks, payment processors, customers)</li>
+                <li><strong>Home Depot (2014 breach):</strong> $179 млн total costs (56 млн compromised cards)</li>
+                <li><strong>British Airways (2018 breach):</strong> £183 млн GDPR fine від UK ICO</li>
+                <li><strong>Marriott (2018 breach):</strong> £99 млн GDPR fine (хоча breach був у Starwood до acquisition)</li>
+            </ul>
+
+            <div class="warning-box">
+                <h4>⚠️ Extreme consequences</h4>
+                <p><strong>Revocation of card acceptance rights:</strong></p>
+                <ul>
+                    <li>Платіжні мережі можуть повністю заборонити організації приймати card payments</li>
+                    <li>Банк може втратити можливість issuing або acquiring</li>
+                    <li>Ефективно "death sentence" для payment business</li>
+                </ul>
+            </div>
+
+            <h3 id="heartland-case">4.7. Кейс: Heartland Payment Systems Breach</h3>
+
+            <div class="important-box">
+                <h4>💔 Найбільший payment processor breach в історії</h4>
+
+                <p><strong>Компанія:</strong> Heartland Payment Systems — 5th largest payment processor у США</p>
+                <p><strong>Дата:</strong> 2008 рік</p>
+                <p><strong>Масштаб:</strong> 130 мільйонів номерів карток скомпрометовано</p>
+
+                <p><strong>Як сталася breach:</strong></p>
+                <ol>
+                    <li><strong>Initial compromise:</strong> SQL injection на corporate web application</li>
+                    <li><strong>Malware installation:</strong> Зловмисники встановили custom malware на internal network</li>
+                    <li><strong>Lateral movement:</strong> Malware поширився на payment processing systems</li>
+                    <li><strong>Memory scraping:</strong> Sniffer software захоплював unencrypted PANs у RAM під час processing</li>
+                    <li><strong>Data exfiltration:</strong> Щоденна передача stolen data протягом 6 місяців</li>
+                </ol>
+
+                <p><strong>Статус PCI compliance:</strong></p>
+                <ul>
+                    <li>✅ Heartland був PCI DSS certified на момент breach</li>
+                    <li>✅ Пройшов QSA audit кілька місяців до breach</li>
+                    <li>❌ Але malware обходив встановлені controls</li>
+                    <li>❌ Недостатній monitoring не виявив exfiltration протягом 6 місяців</li>
+                </ul>
+
+                <p><strong>Наслідки:</strong></p>
+                <ul>
+                    <li>$140 млн total costs (settlements, fines, remediation)</li>
+                    <li>Class action lawsuits від банків та клієнтів</li>
+                    <li>Падіння ціни акцій на 77%</li>
+                    <li>Reputation damage у payment industry</li>
+                </ul>
+
+                <p><strong>Changes після Heartland breach:</strong></p>
+                <ul>
+                    <li>Heartland розробив і впровадив <strong>E3 (End-to-End Encryption)</strong></li>
+                    <li>PCI DSS updated з новими requirements для memory scraping protection</li>
+                    <li>Industry-wide focus на <strong>P2PE (Point-to-Point Encryption)</strong></li>
+                    <li>Enhanced requirements для secure coding та application security</li>
+                </ul>
+
+                <div class="warning-box">
+                    <h4>📖 Урок для індустрії</h4>
+                    <p>
+                        <strong>PCI compliance ≠ immune to breaches</strong>
+                    </p>
+                    <p>
+                        PCI DSS — це baseline requirements, але не гарантія абсолютної безпеки. Організації повинні впроваджувати
+                        defense-in-depth strategy, continuous monitoring, та залишатися vigilant проти emerging threats.
+                    </p>
+                </div>
+            </div>
+
+            <h3 id="pci-v4">4.8. PCI DSS v4.0 — Що нового?</h3>
+
+            <p><strong>Timeline:</strong></p>
+            <ul>
+                <li><strong>March 2024:</strong> PCI DSS v4.0 стає активним стандартом</li>
+                <li><strong>March 2025:</strong> PCI DSS v3.2.1 повністю retired</li>
+                <li><strong>March 2025:</strong> Future-dated requirements стають обов'язковими</li>
+            </ul>
+
+            <h4>Ключові нововведення v4.0:</h4>
+            <ul>
+                <li><strong>🔒 Customized Approach:</strong>
+                    <ul>
+                        <li>Flexibility у implementation методів</li>
+                        <li>Організації можуть використовувати альтернативні controls, якщо досягають тієї самої security мети</li>
+                        <li>Потребує детальної документації targeted risk analysis</li>
+                    </ul>
+                </li>
+                <li><strong>🤖 Automated Compliance Monitoring:</strong>
+                    <ul>
+                        <li>Continuous compliance замість point-in-time assessments</li>
+                        <li>Automated evidence collection</li>
+                    </ul>
+                </li>
+                <li><strong>☁️ Cloud Environment Guidance:</strong>
+                    <ul>
+                        <li>Specific requirements для cloud deployments</li>
+                        <li>Shared responsibility models</li>
+                        <li>Container security</li>
+                    </ul>
+                </li>
+                <li><strong>🌐 Multi-Factor Authentication Expanded:</strong>
+                    <ul>
+                        <li>MFA required для ALL access до CDE (не тільки remote)</li>
+                        <li>Phishing-resistant MFA recommended</li>
+                    </ul>
+                </li>
+                <li><strong>🔐 Encryption Requirements Strengthened:</strong>
+                    <ul>
+                        <li>TLS 1.2 minimum (TLS 1.3 рекомендується)</li>
+                        <li>Strong cipher suites only</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <h4>New/Enhanced Requirements у v4.0:</h4>
+            <ul>
+                <li><strong>Req 6.4.3:</strong> Scripts на payment pages повинні бути managed для запобігання e-skimming (Magecart attacks)</li>
+                <li><strong>Req 8.3:</strong> MFA для всіх типів доступу до CDE (не тільки remote)</li>
+                <li><strong>Req 8.6:</strong> Inventory усіх authentication credentials та mechanisms</li>
+                <li><strong>Req 11.3.2:</strong> Internal penetration testing як окрема вимога (раніше було частиною Req 11.3)</li>
+                <li><strong>Req 11.6:</strong> Detect і alert на unauthorized changes до payment pages</li>
+                <li><strong>Req 12.3:</strong> Targeted risk analysis для кожного PCI DSS requirement</li>
+            </ul>
+
+            <div class="info-box">
+                <h4>🎯 Фокус v4.0</h4>
+                <p>
+                    PCI DSS v4.0 зосереджується на <strong>continuous security</strong>, <strong>cloud environments</strong>, та
+                    <strong>emerging threats</strong> (e-skimming, supply chain attacks). Новий стандарт визнає, що безпека — це не
+                    point-in-time checkbox, а ongoing process з постійним моніторингом та адаптацією.
+                </p>
+            </div>
+
+            <!-- SUMMARY -->
+            <h2 id="summary">Підсумок лекції</h2>
+
+            <h3>Ключові висновки з усієї лекції:</h3>
+
+            <div class="info-box">
+                <h4>Тема 1: Visa та Mastercard</h4>
+                <ul>
+                    <li>Глобальна екосистема з 6 ключових учасників забезпечує trillion-dollar card payments economy</li>
+                    <li>Три фази транзакції (Authorization, Clearing, Settlement) з різними security requirements</li>
+                    <li>ISO 8583 — universal protocol з 1987 року, досі актуальний</li>
+                    <li>MITM, replay, BIN attacks потребують multi-layered defense</li>
+                </ul>
+            </div>
+
+            <div class="info-box">
+                <h4>Тема 2: EMV та токенізація</h4>
+                <ul>
+                    <li>EMV революціонізував безпеку з 75% зменшенням counterfeit fraud</li>
+                    <li>Contactless NFC — 60% transactions в Україні, безпечно та швидко</li>
+                    <li>Токенізація (Apple Pay, Google Pay) — DAN замість PAN для maximum security</li>
+                    <li>3D Secure 2.0 — frictionless у 95% випадків з risk-based approach</li>
+                    <li>CNP fraud challenge — EMV вирішив фізичний fraud, але онлайн-шахрайство зросло</li>
+                </ul>
+            </div>
+
+            <div class="info-box">
+                <h4>Тема 3: Fraud Prevention</h4>
+                <ul>
+                    <li>CNP fraud — 60% всього card fraud, основна проблема індустрії</li>
+                    <li>ML-based detection — XGBoost, Neural Networks з 100+ features для real-time scoring</li>
+                    <li>Risk-based actions — seamless для low risk, step-up для medium, block для high</li>
+                    <li>Continuous improvement — weekly model retraining, false positive analysis</li>
+                </ul>
+            </div>
+
+            <div class="info-box">
+                <h4>Тема 4: PCI DSS Compliance</h4>
+                <ul>
+                    <li>Обов'язковий стандарт для всіх учасників card ecosystem</li>
+                    <li>12 вимог, 6 цілей — від network security до organizational policies</li>
+                    <li>Requirement 3 — найкритичніший: що можна/не можна зберігати</li>
+                    <li>Compliance ≠ security — Heartland case показав потребу defense-in-depth</li>
+                    <li>High costs of non-compliance — penalties, breach costs, reputation damage</li>
+                    <li>v4.0 updates — continuous monitoring, cloud, emerging threats</li>
+                </ul>
+            </div>
+
+            <h3>Best Practices для payment security:</h3>
+            <ul>
+                <li>✅ <strong>Multi-layered defense:</strong> EMV + 3DS + ML fraud detection + PCI DSS compliance</li>
+                <li>✅ <strong>Real-time monitoring:</strong> &lt;200ms decision latency для fraud detection</li>
+                <li>✅ <strong>Tokenization:</strong> де можливо, для зменшення PCI scope</li>
+                <li>✅ <strong>Customer education:</strong> про phishing, SIM swap, social engineering</li>
+                <li>✅ <strong>Industry collaboration:</strong> threat intelligence sharing між банками</li>
+                <li>✅ <strong>Continuous improvement:</strong> regular penetration testing, vulnerability assessments</li>
+            </ul>
+
+        </div>
+    </main>
+
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar-nav">
+        <h3>📚 Зміст конспекту</h3>
+        <ul>
+            <li><a href="#tema1">Тема 1: Visa та Mastercard</a>
+                <ul class="nav-subsection">
+                    <li><a href="#ecosystem">1.1. Екосистема</a></li>
+                    <li><a href="#transaction-flow">1.2. Цикл транзакції</a></li>
+                    <li><a href="#visa-mastercard">1.3. Порівняння</a></li>
+                    <li><a href="#iso8583">1.4. ISO 8583</a></li>
+                    <li><a href="#threats">1.5. Загрози</a></li>
+                    <li><a href="#statistics">1.6. Статистика</a></li>
+                </ul>
+            </li>
+            <li><a href="#tema2">Тема 2: EMV та токенізація</a>
+                <ul class="nav-subsection">
+                    <li><a href="#emv-intro">2.1. Що таке EMV</a></li>
+                    <li><a href="#emv-flow">2.2. Transaction Flow</a></li>
+                    <li><a href="#contactless">2.3. Contactless NFC</a></li>
+                    <li><a href="#tokenization">2.4. Apple Pay</a></li>
+                    <li><a href="#3ds">2.5. 3D Secure 2.0</a></li>
+                    <li><a href="#emv-attacks">2.6. Атаки на EMV</a></li>
+                </ul>
+            </li>
+            <li><a href="#tema3">Тема 3: Fraud Prevention</a>
+                <ul class="nav-subsection">
+                    <li><a href="#fraud-types">3.1. Типи fraud</a></li>
+                    <li><a href="#fraud-methods">3.2. Методи шахрайства</a></li>
+                    <li><a href="#fraud-detection">3.3. ML Detection</a></li>
+                    <li><a href="#response-actions">3.4. Response Actions</a></li>
+                    <li><a href="#fraud-case">3.5. BIN Attack кейс</a></li>
+                </ul>
+            </li>
+            <li><a href="#tema4">Тема 4: PCI DSS</a>
+                <ul class="nav-subsection">
+                    <li><a href="#pci-intro">4.1. Що таке PCI DSS</a></li>
+                    <li><a href="#12-requirements">4.2. 12 Вимог</a></li>
+                    <li><a href="#requirement-3">4.3. Requirement 3</a></li>
+                    <li><a href="#pci-bank">4.4. PCI у банку</a></li>
+                    <li><a href="#compliance-process">4.5. Процес сертифікації</a></li>
+                    <li><a href="#penalties">4.6. Penalties</a></li>
+                    <li><a href="#heartland-case">4.7. Heartland кейс</a></li>
+                    <li><a href="#pci-v4">4.8. PCI DSS v4.0</a></li>
+                </ul>
+            </li>
+            <li><a href="#summary">📖 Підсумок</a></li>
+        </ul>
+    </aside>
+</div>
+
+<!-- Back to top button -->
+<button class="back-to-top" id="backToTop" onclick="scrollToTop()">↑</button>
+
+<!-- Footer -->
+<footer class="footer">
+    <div class="container">
+        <div class="text-center">
+            <p>&copy; 2024 Інформаційні банківські технології</p>
+            <div class="footer-links mt-4">
+                <a href="../../../index.html">Головна</a>
+                <a href="../../index.html">Модуль 3</a>
+                <a href="index.html">Лекція 7</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script>
+    // Reading progress bar
+    window.addEventListener('scroll', function() {
+        const scrollTop = window.pageYOffset;
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const scrollPercent = (scrollTop / docHeight) * 100;
+        document.getElementById('progressBar').style.width = scrollPercent + '%';
+    });
+
+    // Back to top button
+    window.addEventListener('scroll', function() {
+        const backToTop = document.getElementById('backToTop');
+        if (window.pageYOffset > 300) {
+            backToTop.classList.add('show');
+        } else {
+            backToTop.classList.remove('show');
+        }
+    });
+
+    function scrollToTop() {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    }
+
+    // Active section highlighting in sidebar
+    const sections = document.querySelectorAll('h2[id], h3[id]');
+    const navLinks = document.querySelectorAll('.sidebar-nav a');
+
+    window.addEventListener('scroll', function() {
+        let current = '';
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.clientHeight;
+            if (window.pageYOffset >= (sectionTop - 200)) {
+                current = section.getAttribute('id');
+            }
+        });
+
+        navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === '#' + current) {
+                link.classList.add('active');
+            }
+        });
+    });
+
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
+</script>
+
+</body>
+</html>

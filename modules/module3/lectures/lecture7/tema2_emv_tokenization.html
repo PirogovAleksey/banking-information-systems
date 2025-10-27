@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тема 2: EMV стандарти та токенізація</title>
+    <link rel="stylesheet" href="../../../../assets/css/slides-horizontal.css">
+</head>
+<body>
+<div class="slide-navigation">
+    <button class="slide-btn" onclick="previousSlide()">◀</button>
+    <span class="slide-counter" id="slideCounter">1 / 8</span>
+    <button class="slide-btn" onclick="nextSlide()">▶</button>
+    <button class="slide-btn" onclick="toggleFullscreen()">⛶</button>
+    <button class="slide-btn" onclick="exitPresentation()">✕</button>
+</div>
+<div class="slide-progress">
+    <div class="slide-progress-bar" id="progressBar"></div>
+</div>
+<div class="slide-container" id="slideContainer">
+    <!-- Slide 1: Title -->
+    <div class="slide">
+        <div class="slide-counter-display">1 / 8</div>
+        <h1>EMV стандарти та токенізація</h1>
+        <div style="font-size: 1.5rem; opacity: 0.9; margin-bottom: 40px;">Чіпові картки та захист мобільних платежів</div>
+        <div style="font-size: 1.2rem; opacity: 0.8;">
+            <p><strong>Модуль 3:</strong> Платіжні системи та технології</p>
+            <p style="margin-top: 10px;"><strong>Лекція 7:</strong> Картковий бізнес та платіжні мережі</p>
+            <p style="margin-top: 10px;"><strong>Тема 2</strong></p>
+        </div>
+    </div>
+
+    <!-- Slide 2: Що таке EMV -->
+    <div class="slide">
+        <div class="slide-counter-display">2 / 8</div>
+        <div class="content-box" style="max-width: 1200px;">
+            <h2>💳 Що таке EMV?</h2>
+            <h3>Europay, Mastercard, Visa standard</h3>
+            <ul class="slide-list">
+                <li>🔐 <strong>Chip-based authentication</strong> - криптографічний чіп в картці</li>
+                <li>🛡️ <strong>Динамічна авторизація</strong> - кожна транзакція унікальна</li>
+                <li>📝 <strong>Специфікації EMVCo</strong> - консорціум платіжних систем</li>
+                <li>🌍 <strong>Глобальний стандарт</strong> - обов'язковий в більшості країн</li>
+            </ul>
+            <h3 style="margin-top: 40px;">Переваги над магнітною смугою:</h3>
+            <div class="content-grid" style="margin-top: 20px;">
+                <div style="background: rgba(255,0,0,0.1); padding: 20px; border-radius: 10px;">
+                    <h4>❌ Магнітна смуга:</h4>
+                    <ul>
+                        <li>Статичні дані</li>
+                        <li>Легко клонувати</li>
+                        <li>Skimming attacks</li>
+                    </ul>
+                </div>
+                <div style="background: rgba(0,255,0,0.1); padding: 20px; border-radius: 10px;">
+                    <h4>✅ EMV чіп:</h4>
+                    <ul>
+                        <li>Динамічні cryptograms</li>
+                        <li>Неможливо клонувати</li>
+                        <li>75% зменшення fraud</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 3: EMV Transaction Flow -->
+    <div class="slide">
+        <div class="slide-counter-display">3 / 8</div>
+        <div class="content-box" style="max-width: 1200px;">
+            <h2>🔄 EMV Transaction Flow</h2>
+            <h3>Етап 1: Card Authentication</h3>
+            <ol class="slide-list">
+                <li>Card inserted в чіп-рідер</li>
+                <li>Terminal requests Application Identifier (AID)</li>
+                <li>Card provides public key certificate</li>
+                <li>Terminal validates картка справжня</li>
+            </ol>
+            <h3 style="margin-top: 30px;">Етап 2: Cardholder Verification</h3>
+            <ul class="slide-list">
+                <li><strong>CVM (Cardholder Verification Method):</strong>
+                    <ul>
+                        <li>Online PIN (encrypted)</li>
+                        <li>Offline PIN (verified by chip)</li>
+                        <li>Signature</li>
+                        <li>No CVM (contactless &lt;₴500)</li>
+                    </ul>
+                </li>
+            </ul>
+            <h3 style="margin-top: 30px;">Етап 3: Transaction Authorization</h3>
+            <ul class="slide-list">
+                <li>Card generates <strong>ARQC</strong> (Authorization Request Cryptogram)</li>
+                <li>Cryptogram includes: PAN, amount, date, unpredictable number</li>
+                <li>Issuer validates cryptogram з master key</li>
+                <li>Issuer returns <strong>ARPC</strong> (Authorization Response Cryptogram)</li>
+            </ul>
+            <div class="alert alert-success" style="margin-top: 20px;">
+                <strong>ARQC</strong> - це одноразовий код, який неможливо підробити
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 4: Contactless EMV -->
+    <div class="slide">
+        <div class="slide-counter-display">4 / 8</div>
+        <div class="content-box" style="max-width: 1200px;">
+            <h2>📡 Contactless EMV (NFC)</h2>
+            <h3>Безконтактні платежі:</h3>
+            <ul class="slide-list">
+                <li><strong>Технологія NFC</strong>
+                    <ul>
+                        <li>Near Field Communication (13.56 MHz)</li>
+                        <li>Дальність: до 4 см</li>
+                        <li>Швидкість: &lt;1 секунда</li>
+                        <li>))) логотип на картці та терміналі</li>
+                    </ul>
+                </li>
+                <li><strong>Ліміти без PIN:</strong>
+                    <ul>
+                        <li>Україна: ₴500 (2024)</li>
+                        <li>EU: €50 | USA: $100-250</li>
+                    </ul>
+                </li>
+                <li><strong>Безпека contactless:</strong>
+                    <ul>
+                        <li>Той же EMV cryptogram</li>
+                        <li>Потребує близької відстані</li>
+                        <li>Після N транзакцій потрібен PIN</li>
+                        <li>CVV змінюється (iCVV - intelligent CVV)</li>
+                    </ul>
+                </li>
+            </ul>
+            <div class="alert alert-info" style="margin-top: 20px;">
+                <strong>Статистика:</strong> Contactless зріс до 60% всіх card transactions в Україні
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 5: Apple Pay Tokenization -->
+    <div class="slide">
+        <div class="slide-counter-display">5 / 8</div>
+        <div class="content-box" style="max-width: 1200px;">
+            <h2>📱 Apple Pay Tokenization</h2>
+            <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 25px; border-radius: 15px; margin-bottom: 20px;">
+                <h3 style="margin: 0;">Як працює Apple Pay</h3>
+            </div>
+            <div class="content-grid">
+                <div>
+                    <h3>Реєстрація картки:</h3>
+                    <ol class="slide-list">
+                        <li>User додає картку Visa в Wallet</li>
+                        <li>Apple → Visa Token Service</li>
+                        <li>Visa генерує <strong>DAN</strong> (Device Account Number)</li>
+                        <li>Token зберігається в Secure Element</li>
+                        <li><strong>PAN ніколи не зберігається</strong></li>
+                    </ol>
+                </div>
+                <div>
+                    <h3>Платіж в магазині:</h3>
+                    <ol class="slide-list">
+                        <li>User прикладає iPhone</li>
+                        <li>Face ID/Touch ID authentication</li>
+                        <li>Secure Element генерує cryptogram</li>
+                        <li>Відправляється: DAN + cryptogram</li>
+                        <li>Merchant бачить тільки token</li>
+                        <li>Visa detokenizes і маршрутизує</li>
+                    </ol>
+                </div>
+            </div>
+            <h3 style="margin-top: 30px;">Переваги безпеки:</h3>
+            <ul class="slide-list">
+                <li>✅ PAN не зберігається на пристрої</li>
+                <li>✅ Merchant не бачить справжній номер</li>
+                <li>✅ Biometric authentication</li>
+                <li>✅ Transaction-specific cryptogram</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Slide 6: 3D Secure 2.0 -->
+    <div class="slide">
+        <div class="slide-counter-display">6 / 8</div>
+        <div class="content-box" style="max-width: 1200px;">
+            <h2>🔐 3D Secure 2.0</h2>
+            <h3>Аутентифікація онлайн-платежів</h3>
+            <div class="content-grid">
+                <div style="background: rgba(255,0,0,0.1); padding: 20px; border-radius: 10px;">
+                    <h4>❌ Версія 1.0 (старий):</h4>
+                    <ul>
+                        <li>Pop-up вікно з паролем</li>
+                        <li>Поганий UX</li>
+                        <li>Не працює на mobile</li>
+                        <li>Статичний пароль</li>
+                    </ul>
+                </div>
+                <div style="background: rgba(0,255,0,0.1); padding: 20px; border-radius: 10px;">
+                    <h4>✅ Версія 2.0 (сучасний):</h4>
+                    <ul>
+                        <li>Frictionless 95% випадків</li>
+                        <li>Risk-based authentication</li>
+                        <li>Biometric support</li>
+                        <li>100+ data points</li>
+                    </ul>
+                </div>
+            </div>
+            <h3 style="margin-top: 30px;">Процес 3DS 2.0:</h3>
+            <ol class="slide-list">
+                <li>Checkout - user натискає Pay</li>
+                <li>Merchant відправляє 3DS authentication request</li>
+                <li>ACS (Access Control Server) емітента оцінює ризик</li>
+                <li><strong>Low risk:</strong> Frictionless approval (95%)</li>
+                <li><strong>High risk:</strong> Challenge (SMS OTP, biometric)</li>
+                <li>Authorization proceeds з 3DS cryptogram</li>
+            </ol>
+            <div class="alert alert-success" style="margin-top: 20px;">
+                3DS 2.0 підвищив conversion rate на 70% порівняно з 1.0
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 7: Атаки на EMV -->
+    <div class="slide">
+        <div class="slide-counter-display">7 / 8</div>
+        <div class="slide-cyber-security">
+            <h2>🚨 Атаки на EMV систему</h2>
+            <h3>Відомі вразливості EMV:</h3>
+            <ul class="slide-list">
+                <li><strong>Relay attacks (MitM)</strong>
+                    <ul>
+                        <li>Передача сигналів між справжньою карткою та терміналом</li>
+                        <li>Збільшення дальності NFC до 50+ метрів</li>
+                        <li><strong>Захист:</strong> distance bounding, time limits</li>
+                    </ul>
+                </li>
+                <li><strong>Card-not-present (CNP) fraud</strong>
+                    <ul>
+                        <li>EMV не захищає онлайн-транзакції</li>
+                        <li>Потрібен 3D Secure</li>
+                        <li>CNP fraud зріс на 300% після введення EMV</li>
+                    </ul>
+                </li>
+                <li><strong>Chip skimming</strong>
+                    <ul>
+                        <li>Модифіковані термінали з логерами</li>
+                        <li>Capture PAN під час EMV транзакції</li>
+                        <li><strong>Захист:</strong> terminal security, audits</li>
+                    </ul>
+                </li>
+            </ul>
+            <h3 style="margin-top: 30px;">📊 Статистика fraud після EMV:</h3>
+            <ul class="slide-list">
+                <li>✅ Counterfeit fraud: -75%</li>
+                <li>✅ Lost/stolen fraud: -50%</li>
+                <li>❌ CNP fraud: +300% (фрод мігрував онлайн)</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Slide 8: Підсумок -->
+    <div class="slide">
+        <div class="slide-counter-display">8 / 8</div>
+        <div class="content-box" style="max-width: 1200px;">
+            <h2>🎯 Підсумок теми</h2>
+            <h3>Ключові висновки:</h3>
+            <ul class="slide-list">
+                <li><strong>EMV революціонізував безпеку</strong> - зменшив counterfeit fraud на 75% завдяки динамічним cryptograms</li>
+                <li><strong>Contactless NFC</strong> - 60% транзакцій в Україні, швидко та безпечно для сум &lt;₴500</li>
+                <li><strong>Токенізація</strong> - Apple Pay, Google Pay використовують DAN замість PAN для максимального захисту</li>
+                <li><strong>3D Secure 2.0</strong> - frictionless authentication в 95% випадків з risk-based підходом</li>
+                <li><strong>CNP fraud challenge</strong> - EMV вирішив фізичний fraud, але онлайн-шахрайство зросло</li>
+            </ul>
+            <div class="alert alert-success" style="margin-top: 30px;">
+                <strong>Наступна тема:</strong> Card Fraud Prevention - детальний розгляд методів боротьби з шахрайством та ML detection
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+let currentSlide = 0;
+const totalSlides = 8;
+
+function showSlide(n) {
+    const slides = document.getElementsByClassName('slide');
+    if (n >= totalSlides) currentSlide = totalSlides - 1;
+    if (n < 0) currentSlide = 0;
+
+    for (let i = 0; i < slides.length; i++) {
+        slides[i].style.display = 'none';
+    }
+
+    slides[currentSlide].style.display = 'flex';
+    document.getElementById('slideCounter').textContent = `${currentSlide + 1} / ${totalSlides}`;
+    const progress = ((currentSlide + 1) / totalSlides) * 100;
+    document.getElementById('progressBar').style.width = progress + '%';
+}
+
+function nextSlide() {
+    currentSlide++;
+    if (currentSlide >= totalSlides) currentSlide = totalSlides - 1;
+    showSlide(currentSlide);
+}
+
+function previousSlide() {
+    currentSlide--;
+    if (currentSlide < 0) currentSlide = 0;
+    showSlide(currentSlide);
+}
+
+function toggleFullscreen() {
+    if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen();
+    } else {
+        if (document.exitFullscreen) {
+            document.exitFullscreen();
+        }
+    }
+}
+
+function exitPresentation() {
+    if (document.fullscreenElement) {
+        document.exitFullscreen();
+    }
+    window.location.href = 'index.html';
+}
+
+document.addEventListener('keydown', function(event) {
+    if (event.key === 'ArrowRight' || event.key === ' ') {
+        event.preventDefault();
+        nextSlide();
+    } else if (event.key === 'ArrowLeft') {
+        event.preventDefault();
+        previousSlide();
+    } else if (event.key === 'Escape') {
+        exitPresentation();
+    } else if (event.key === 'f' || event.key === 'F') {
+        event.preventDefault();
+        toggleFullscreen();
+    }
+});
+
+showSlide(currentSlide);
+</script>
+</body>
+</html>

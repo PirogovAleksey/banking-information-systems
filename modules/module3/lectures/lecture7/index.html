@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Лекція 7: Картковий бізнес та платіжні мережі - Payment Card Industry для спеціальності Кібербезпека">
+    <title>Лекція 7: Картковий бізнес та платіжні мережі | Модуль 3</title>
+
+    <!-- Використовуємо існуючі стилі проекту -->
+    <link rel="stylesheet" href="../../../../assets/css/base.css">
+    <link rel="stylesheet" href="../../../../assets/css/layout.css">
+    <link rel="stylesheet" href="../../../../assets/css/components.css">
+    <link rel="stylesheet" href="../../../../assets/css/pages.css">
+</head>
+<body class="page">
+<!-- Header with Breadcrumbs -->
+<header class="header">
+    <div class="container">
+        <nav class="breadcrumb">
+            <a href="../../../../index.html">🏠 Головна</a>
+            <span class="breadcrumb-separator">→</span>
+            <a href="../../index.html">Модуль 3</a>
+            <span class="breadcrumb-separator">→</span>
+            <span>Лекція 7</span>
+        </nav>
+    </div>
+</header>
+
+<!-- Lecture Header -->
+<section class="landing-hero" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+    <div class="container">
+        <div class="landing-hero-content">
+            <h1 class="landing-title">Картковий бізнес та платіжні мережі</h1>
+            <p class="landing-subtitle">
+                Лекція 7 • Модуль 3: Платіжні системи та технології
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- Main Content -->
+<main class="main">
+    <div class="container">
+        <!-- Lecture Overview -->
+        <section class="card mb-8">
+            <div class="card-header">
+                <h2 class="card-title">📋 Огляд лекції</h2>
+            </div>
+            <div class="card-body">
+                <p class="text-large mb-4">
+                    Детальний розгляд глобальної екосистеми платіжних карток: архітектура Visa та Mastercard, стандарти EMV чіпових карт,
+                    технології токенізації, методи боротьби з card fraud та обов'язковий стандарт PCI DSS compliance.
+                </p>
+                <div class="alert alert-info">
+                    <div class="alert-title">🎯 Мета лекції</div>
+                    Вивчити архітектуру міжнародних платіжних мереж, зрозуміти криптографічні механізми EMV та токенізації,
+                    проаналізувати сучасні методи fraud detection включаючи Machine Learning підходи, та детально розібрати всі 12 вимог PCI DSS v4.0.
+                </div>
+            </div>
+        </section>
+
+        <!-- Topics Section -->
+        <section class="module-section">
+            <h2 class="section-title">📚 Теми лекції</h2>
+            <p class="section-subtitle mb-8">
+                Оберіть тему для детального вивчення
+            </p>
+
+            <div class="modules-grid">
+                <!-- Тема 1: Visa and Mastercard -->
+                <div class="card card-module">
+                    <div class="card-header">
+                        <div class="flex justify-between items-center">
+                            <span class="badge badge-primary">Тема 1</span>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="module-number">🌐</div>
+                        <h3 class="card-title">Visa та Mastercard: Архітектура і протоколи</h3>
+                        <p class="card-subtitle mb-4">
+                            Глобальна платіжна мережа, учасники екосистеми, потік транзакцій та ISO 8583 протокол
+                        </p>
+
+                        <div class="module-items">
+                            <div class="module-item">
+                                <span class="module-item-title">Екосистема платіжних карток</span>
+                                <span class="module-item-meta">10 хв</span>
+                            </div>
+                            <div class="module-item">
+                                <span class="module-item-title">Authorization, Clearing, Settlement</span>
+                                <span class="module-item-meta">15 хв</span>
+                            </div>
+                            <div class="module-item">
+                                <span class="module-item-title">ISO 8583 Message Format</span>
+                                <span class="module-item-meta">10 хв</span>
+                            </div>
+                            <div class="module-item">
+                                <span class="module-item-title">Загрози платіжним мережам</span>
+                                <span class="module-item-meta">10 хв</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <div class="btn-group">
+                            <a href="tema1_visa_mastercard.html" class="btn btn-primary">
+                                🎨 Презентація
+                            </a>
+                            <a href="tema1_visa_mastercard_konspekt.md" class="btn btn-outline">
+                                📖 Конспект
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Тема 2: EMV and Tokenization -->
+                <div class="card card-module">
+                    <div class="card-header">
+                        <div class="flex justify-between items-center">
+                            <span class="badge badge-primary">Тема 2</span>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="module-number">💎</div>
+                        <h3 class="card-title">EMV стандарти та токенізація</h3>
+                        <p class="card-subtitle mb-4">
+                            Чіпові картки, криптографічна автентифікація, contactless NFC та токенізація для мобільних платежів
+                        </p>
+
+                        <div class="module-items">
+                            <div class="module-item">
+                                <span class="module-item-title">EMV chip authentication</span>
+                                <span class="module-item-meta">15 хв</span>
+                            </div>
+                            <div class="module-item">
+                                <span class="module-item-title">Contactless NFC payments</span>
+                                <span class="module-item-meta">10 хв</span>
+                            </div>
+                            <div class="module-item">
+                                <span class="module-item-title">Apple Pay tokenization</span>
+                                <span class="module-item-meta">15 хв</span>
+                            </div>
+                            <div class="module-item">
+                                <span class="module-item-title">3D Secure 2.0</span>
+                                <span class="module-item-meta">15 хв</span>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="card-footer">
+                        <div class="btn-group">
+                            <a href="tema2_emv_tokenization.html" class="btn btn-primary">
+                                🎨 Презентація
+                            </a>
+                            <a href="tema2_emv_tokenization_konspekt.md" class="btn btn-outline">
+                                📖 Конспект
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Тема 3: Card Fraud Prevention -->
+                <div class="card card-module">
+                    <div class="card-header">
+                        <div class="flex justify-between items-center">
+                            <span class="badge badge-error">Тема 3</span>
+                            <span class="badge badge-outline">🛡️ Security Focus</span>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="module-number">🛡️</div>
+                        <h3 class="card-title">Card Fraud Prevention та 3D Secure</h3>
+                        <p class="card-subtitle mb-4">
+                            Типи card fraud, ML-based detection, real-time scoring та захист онлайн-транзакцій
+                        </p>
+
+                        <div class="module-items">
+                            <div class="module-item">
+                                <span class="module-item-title">Типи card fraud</span>
+                                <span class="module-item-meta">15 хв</span>
+                            </div>
+                            <div class="module-item">
+                                <span class="module-item-title">Machine Learning detection</span>
+                                <span class="module-item-meta">20 хв</span>
+                            </div>
+                            <div class="module-item">
+                                <span class="module-item-title">3D Secure 2.0 authentication</span>
+                                <span class="module-item-meta">15 хв</span>
+                            </div>
+                            <div class="module-item">
+                                <span class="module-item-title">Реальні кейси fraud</span>
+                                <span class="module-item-meta">10 хв</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <div class="btn-group">
+                            <a href="tema3_fraud_prevention.html" class="btn btn-primary">
+                                🎨 Презентація
+                            </a>
+                            <a href="tema3_fraud_prevention_konspekt.md" class="btn btn-outline">
+                                📖 Конспект
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Тема 4: PCI DSS Compliance -->
+                <div class="card card-module">
+                    <div class="card-header">
+                        <div class="flex justify-between items-center">
+                            <span class="badge badge-primary">Тема 4</span>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="module-number">📜</div>
+                        <h3 class="card-title">PCI DSS Compliance – детальний розгляд</h3>
+                        <p class="card-subtitle mb-4">
+                            Payment Card Industry Data Security Standard v4.0: всі 12 вимог, процес сертифікації та penalties
+                        </p>
+
+                        <div class="module-items">
+                            <div class="module-item">
+                                <span class="module-item-title">Структура PCI DSS</span>
+                                <span class="module-item-meta">15 хв</span>
+                            </div>
+                            <div class="module-item">
+                                <span class="module-item-title">12 вимог та 6 цілей</span>
+                                <span class="module-item-meta">20 хв</span>
+                            </div>
+                            <div class="module-item">
+                                <span class="module-item-title">Requirement 3: Захист даних</span>
+                                <span class="module-item-meta">15 хв</span>
+                            </div>
+                            <div class="module-item">
+                                <span class="module-item-title">PCI DSS v4.0 зміни</span>
+                                <span class="module-item-meta">10 хв</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <div class="btn-group">
+                            <a href="tema4_pci_dss.html" class="btn btn-primary">
+                                🎨 Презентація
+                            </a>
+                            <a href="tema4_pci_dss_konspekt.md" class="btn btn-outline">
+                                📖 Конспект
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Practice Section -->
+        <section class="module-section">
+            <h2 class="section-title">💻 Практичні завдання</h2>
+
+            <div class="practicals-grid">
+                <div class="practical-card">
+                    <div class="practical-header">
+                        <div class="practical-icon">🔬</div>
+                        <div class="practical-meta">
+                            <span class="practical-type">Лабораторна</span>
+                            <span class="practical-module">До лекції 7</span>
+                        </div>
+                    </div>
+                    <h3 class="practical-title">Fraud Detection System Analysis</h3>
+                    <p class="practical-description">
+                        Аналіз існуючої системи fraud detection банку, оцінка ефективності та рекомендації щодо покращення
+                    </p>
+                    <div class="practical-time">
+                        ⏱️ Приблизний час: 120 хв
+                    </div>
+                </div>
+
+                <div class="practical-card">
+                    <div class="practical-header">
+                        <div class="practical-icon">💻</div>
+                        <div class="practical-meta">
+                            <span class="practical-type">Практична</span>
+                            <span class="practical-module">До лекції 7</span>
+                        </div>
+                    </div>
+                    <h3 class="practical-title">PCI DSS Gap Analysis</h3>
+                    <p class="practical-description">
+                        Проведення gap analysis відповідності payment системи вимогам PCI DSS та складання remediation плану
+                    </p>
+                    <div class="practical-time">
+                        ⏱️ Приблизний час: 90 хв
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Resources -->
+        <section class="card mt-8">
+            <div class="card-header">
+                <h3 class="card-title">📚 Додаткові матеріали</h3>
+            </div>
+            <div class="card-body">
+                <div class="grid grid-cols-2 gap-6">
+                    <div>
+                        <h4 class="font-semibold mb-3">📖 Література</h4>
+                        <ul class="text-secondary">
+                            <li>EMV Integrated Circuit Card Specifications</li>
+                            <li>PCI DSS v4.0 Requirements and Testing Procedures</li>
+                            <li>Visa Core Rules and Visa Product Regulations</li>
+                            <li>Mastercard Rules Manual</li>
+                            <li>3D Secure 2.0 Protocol Specification</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold mb-3">🔗 Корисні посилання</h4>
+                        <ul>
+                            <li><a href="https://www.emvco.com/" target="_blank" class="text-primary">EMVCo Specifications</a></li>
+                            <li><a href="https://www.pcisecuritystandards.org/" target="_blank" class="text-primary">PCI Security Standards Council</a></li>
+                            <li><a href="https://usa.visa.com/support/small-business/security-compliance.html" target="_blank" class="text-primary">Visa Security</a></li>
+                            <li><a href="https://www.mastercard.us/en-us/business/overview/safety-and-security.html" target="_blank" class="text-primary">Mastercard Security</a></li>
+                            <li><a href="https://www.emvco.com/emv-technologies/3d-secure/" target="_blank" class="text-primary">3D Secure EMVCo</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Navigation Buttons -->
+        <section class="flex justify-between items-center mt-12 mb-8">
+            <a href="../../index.html" class="btn btn-outline">
+                ← Повернутися до модуля
+            </a>
+            <a href="../../../../index.html" class="btn btn-primary">
+                Головна →
+            </a>
+        </section>
+    </div>
+</main>
+
+<!-- Footer -->
+<footer class="footer">
+    <div class="container">
+        <div class="text-center">
+            <div class="footer-links mt-4">
+                <a href="../../../../index.html">Головна</a>
+                <a href="../../index.html">Модуль 3</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- JavaScript for progress tracking -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Save lecture progress
+        try {
+            const progress = {
+                module: 3,
+                lecture: '7',
+                title: 'Картковий бізнес та платіжні мережі',
+                lastVisit: new Date().toISOString(),
+                topics: ['Visa and Mastercard', 'EMV and Tokenization', 'Card Fraud Prevention', 'PCI DSS Compliance']
+            };
+            localStorage.setItem('lecture_7_progress', JSON.stringify(progress));
+
+            // Update module progress
+            const moduleProgress = JSON.parse(localStorage.getItem('module3_progress') || '{}');
+            if (!moduleProgress.completedLectures) {
+                moduleProgress.completedLectures = [];
+            }
+            if (!moduleProgress.completedLectures.includes('7')) {
+                moduleProgress.completedLectures.push('7');
+            }
+            localStorage.setItem('module3_progress', JSON.stringify(moduleProgress));
+        } catch(e) {
+            console.log('LocalStorage не доступний');
+        }
+    });
+
+    // Smooth scroll for internal links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
+</script>
+</body>
+</html>
