@@ -38,23 +38,23 @@
             <h3>Історія та структура стандарту:</h3>
             <ul class="slide-list">
                 <li><strong>Створено:</strong> 2004 року Visa, Mastercard, AmEx, Discover, JCB</li>
-                <li><strong>Керується:</strong> PCI Security Standards Council</li>
-                <li><strong>Поточна версія:</strong> PCI DSS v4.0 (March 2024)</li>
-                <li><strong>Застосовується до:</strong> Будь-яка організація, що обробляє, зберігає або передає cardholder data</li>
+                <li><strong>Керується:</strong> PCI Security Standards Council (Рада стандартів безпеки PCI)</li>
+                <li><strong>Поточна версія:</strong> PCI DSS v4.0 (березень 2024)</li>
+                <li><strong>Застосовується до:</strong> Будь-яка організація, що обробляє, зберігає або передає дані держателів карток</li>
             </ul>
             <h3 style="margin-top: 30px;">Хто повинен дотримуватись:</h3>
             <ul class="slide-list">
                 <li>🏦 <strong>Банки-емітенти</strong> - видають картки</li>
-                <li>🏧 <strong>Банки-еквайєри</strong> - обслуговують merchants</li>
-                <li>🏪 <strong>Мерчанти</strong> - приймають картки (всі, від супермаркетів до інтернет-магазинів)</li>
-                <li>⚙️ <strong>Сервіс-провайдери</strong> - payment gateways, processors, hosting</li>
+                <li>🏧 <strong>Банки-еквайєри</strong> - обслуговують торговців</li>
+                <li>🏪 <strong>Торговці</strong> - приймають картки (всі, від супермаркетів до інтернет-магазинів)</li>
+                <li>⚙️ <strong>Сервіс-провайдери</strong> - платіжні шлюзи, процесори, хостинг</li>
             </ul>
-            <h3 style="margin-top: 30px;">Рівні сертифікації merchants:</h3>
+            <h3 style="margin-top: 30px;">Рівні сертифікації торговців:</h3>
             <ul class="slide-list">
-                <li><strong>Level 1:</strong> &gt;6M транзакцій/рік - Annual on-site audit</li>
-                <li><strong>Level 2:</strong> 1-6M транзакцій/рік - Annual SAQ + quarterly scans</li>
-                <li><strong>Level 3:</strong> 20K-1M e-commerce - Annual SAQ</li>
-                <li><strong>Level 4:</strong> &lt;20K - Annual SAQ</li>
+                <li><strong>Рівень 1:</strong> &gt;6M транзакцій/рік - Щорічний аудит на місці</li>
+                <li><strong>Рівень 2:</strong> 1-6M транзакцій/рік - Щорічна SAQ + щоквартальні скани</li>
+                <li><strong>Рівень 3:</strong> 20K-1M e-commerce - Щорічна SAQ</li>
+                <li><strong>Рівень 4:</strong> &lt;20K - Щорічна SAQ</li>
             </ul>
         </div>
     </div>
@@ -67,37 +67,37 @@
             <h3>Шість цілей та 12 вимог:</h3>
             <div class="content-grid">
                 <div>
-                    <h4 style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 10px; border-radius: 5px;">🏗️ Goal 1: Secure Network</h4>
+                    <h4 style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 10px; border-radius: 5px;">🏗️ Ціль 1: Захищена мережа</h4>
                     <ul class="slide-list">
-                        <li><strong>Req 1:</strong> Firewall configuration</li>
-                        <li><strong>Req 2:</strong> No vendor defaults</li>
+                        <li><strong>Вимога 1:</strong> Конфігурація firewall</li>
+                        <li><strong>Вимога 2:</strong> Відмова від заводських налаштувань</li>
                     </ul>
-                    <h4 style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); padding: 10px; border-radius: 5px; margin-top: 20px;">🔐 Goal 2: Protect Data</h4>
+                    <h4 style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); padding: 10px; border-radius: 5px; margin-top: 20px;">🔐 Ціль 2: Захист даних</h4>
                     <ul class="slide-list">
-                        <li><strong>Req 3:</strong> Protect stored data</li>
-                        <li><strong>Req 4:</strong> Encrypt transmission</li>
+                        <li><strong>Вимога 3:</strong> Захист збережених даних</li>
+                        <li><strong>Вимога 4:</strong> Шифрування передачі</li>
                     </ul>
-                    <h4 style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); padding: 10px; border-radius: 5px; margin-top: 20px;">🛡️ Goal 3: Vulnerability Mgmt</h4>
+                    <h4 style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); padding: 10px; border-radius: 5px; margin-top: 20px;">🛡️ Ціль 3: Управління вразливостями</h4>
                     <ul class="slide-list">
-                        <li><strong>Req 5:</strong> Protect against malware</li>
-                        <li><strong>Req 6:</strong> Secure systems</li>
+                        <li><strong>Вимога 5:</strong> Захист від malware</li>
+                        <li><strong>Вимога 6:</strong> Безпечні системи</li>
                     </ul>
                 </div>
                 <div>
-                    <h4 style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); padding: 10px; border-radius: 5px;">🔒 Goal 4: Access Control</h4>
+                    <h4 style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); padding: 10px; border-radius: 5px;">🔒 Ціль 4: Контроль доступу</h4>
                     <ul class="slide-list">
-                        <li><strong>Req 7:</strong> Need-to-know access</li>
-                        <li><strong>Req 8:</strong> Ідентифікація та автентифікація</li>
-                        <li><strong>Req 9:</strong> Physical access</li>
+                        <li><strong>Вимога 7:</strong> Доступ за принципом необхідності</li>
+                        <li><strong>Вимога 8:</strong> Ідентифікація та автентифікація</li>
+                        <li><strong>Вимога 9:</strong> Фізичний доступ</li>
                     </ul>
-                    <h4 style="background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%); padding: 10px; border-radius: 5px; margin-top: 20px;">📊 Goal 5: Monitor & Test</h4>
+                    <h4 style="background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%); padding: 10px; border-radius: 5px; margin-top: 20px;">📊 Ціль 5: Моніторинг та тестування</h4>
                     <ul class="slide-list">
-                        <li><strong>Req 10:</strong> Трекінг та моніторинг</li>
-                        <li><strong>Req 11:</strong> Test security</li>
+                        <li><strong>Вимога 10:</strong> Відстеження та моніторинг</li>
+                        <li><strong>Вимога 11:</strong> Тестування безпеки</li>
                     </ul>
-                    <h4 style="background: linear-gradient(135deg, #fbc2eb 0%, #a6c1ee 100%); padding: 10px; border-radius: 5px; margin-top: 20px;">📚 Goal 6: Info Security Policy</h4>
+                    <h4 style="background: linear-gradient(135deg, #fbc2eb 0%, #a6c1ee 100%); padding: 10px; border-radius: 5px; margin-top: 20px;">📚 Ціль 6: Політика інформаційної безпеки</h4>
                     <ul class="slide-list">
-                        <li><strong>Req 12:</strong> Maintain policy</li>
+                        <li><strong>Вимога 12:</strong> Підтримка політики</li>
                     </ul>
                 </div>
             </div>
@@ -108,29 +108,29 @@
     <div class="slide">
         <div class="slide-counter-display">4 / 10</div>
         <div class="content-box" style="max-width: 1400px; padding: 18px;">
-            <h2 style="font-size: 1.9rem; margin-bottom: 8px;">🔐 Requirement 3: Захист даних</h2>
+            <h2 style="font-size: 1.9rem; margin-bottom: 8px;">🔐 Вимога 3: Захист даних</h2>
             <div class="content-grid" style="gap: 12px; font-size: 0.75rem; margin-bottom: 10px;">
                 <div style="background: rgba(0,255,0,0.08); padding: 12px; border-radius: 8px;">
-                    <h4 style="font-size: 0.95rem;">✅ МОЖНА:</h4>
-                    <ul class="slide-list" style="font-size: 0.74rem;"><li>PAN (encrypted only) | Name | Expiry | Service Code</li></ul>
+                    <h4 style="font-size: 0.95rem;">✅ МОЖНА зберігати:</h4>
+                    <ul class="slide-list" style="font-size: 0.74rem;"><li>PAN (тільки зашифрований) | Ім'я | Термін дії | Service Code</li></ul>
                 </div>
                 <div style="background: rgba(255,0,0,0.08); padding: 12px; border-radius: 8px;">
-                    <h4 style="font-size: 0.95rem;">❌ ЗАБОРОНЕНО:</h4>
-                    <ul class="slide-list" style="font-size: 0.74rem;"><li>Magnetic stripe | CVV2/CVC2 | PIN block</li></ul>
+                    <h4 style="font-size: 0.95rem;">❌ ЗАБОРОНЕНО зберігати:</h4>
+                    <ul class="slide-list" style="font-size: 0.74rem;"><li>Магнітна смуга | CVV2/CVC2 | PIN block</li></ul>
                 </div>
             </div>
             <h3 style="font-size: 1.05rem; margin-bottom: 6px;">Вимоги до шифрування:</h3>
             <ul class="slide-list" style="font-size: 0.74rem; line-height: 1.25;">
-                <li><strong>Cryptography (3.5.1):</strong> AES-256, RSA-2048+, SHA-256 | ❌ DES, MD5, SHA-1</li>
-                <li><strong>Key mgmt (3.6):</strong> HSM generation | Encrypted distribution | Annual rotation | 7+ overwrites destruction</li>
-                <li><strong>At rest (3.5):</strong> DB TDE (Oracle/SQL) | File: BitLocker/VeraCrypt | Keys окремо від data</li>
-                <li><strong>In transit (4.1-4.2):</strong> TLS 1.2+ (1.3 preferred) | AES-GCM cipher | ❌ SSL/TLS 1.0/1.1</li>
+                <li><strong>Криптографія (3.5.1):</strong> AES-256, RSA-2048+, SHA-256 | ❌ Заборонено: DES, MD5, SHA-1</li>
+                <li><strong>Управління ключами (3.6):</strong> Генерація в HSM | Зашифрований розподіл | Щорічна ротація | Знищення (7+ overwrites)</li>
+                <li><strong>Дані у спокої (3.5):</strong> БД TDE (Oracle/SQL) | Файли: BitLocker/VeraCrypt | Ключі окремо від даних</li>
+                <li><strong>Дані в транзиті (4.1-4.2):</strong> TLS 1.2+ (1.3 рекомендовано) | AES-GCM cipher | ❌ Заборонено: SSL/TLS 1.0/1.1</li>
             </ul>
-            <h3 style="font-size: 1.05rem; margin-bottom: 6px; margin-top: 10px;">⚡ Tokenization (знижує PCI scope 80%):</h3>
+            <h3 style="font-size: 1.05rem; margin-bottom: 6px; margin-top: 10px;">⚡ Токенізація (зменшує PCI scope на 80%):</h3>
             <ul class="slide-list" style="font-size: 0.74rem; line-height: 1.25;">
-                <li>PAN → random token (same format, irreversible) | Token vault: token ↔ PAN mapping</li>
-                <li>App працює з tokens, PAN never stored | CDE = vault only</li>
-                <li><strong>Vendors:</strong> Visa Token Service, Mastercard MDES, Stripe, Adyen</li>
+                <li>PAN → випадковий token (той же формат, необоротний) | Token vault: відповідність token ↔ PAN</li>
+                <li>Додаток працює з tokens, PAN ніколи не зберігається | CDE = тільки vault</li>
+                <li><strong>Постачальники:</strong> Visa Token Service, Mastercard MDES, Stripe, Adyen</li>
             </ul>
         </div>
     </div>
@@ -138,66 +138,48 @@
     <!-- Slide 5: PCI DSS в українському банку -->
     <div class="slide">
         <div class="slide-counter-display">5 / 10</div>
-        <div class="content-box" style="max-width: 1200px;">
-            <h2>🏦 PCI DSS в Ощадбанку</h2>
-            <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 25px; border-radius: 15px; margin-bottom: 20px;">
-                <h3 style="margin: 0;">Compliance infrastructure</h3>
+        <div class="content-box" style="max-width: 1300px; padding: 15px;">
+            <h2 style="font-size: 1.8rem; margin-bottom: 8px;">🏦 PCI DSS в українському банку</h2>
+            <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 15px; border-radius: 10px; margin-bottom: 12px;">
+                <h3 style="margin: 0; font-size: 1.1rem;">Compliance infrastructure</h3>
             </div>
-            <h3>Архітектура compliance:</h3>
-            <ul class="slide-list">
-                <li><strong>Network segmentation (Requirement 1):</strong>
-                    <ul>
-                        <li><strong>CDE (Cardholder Data Environment) ізольовано:</strong>
-                            <ul>
-                                <li>Окрема VLAN для card processing systems</li>
-                                <li>Layer 3 firewall з whitelist rules (deny all by default)</li>
-                                <li>Ingress: тільки authorized endpoints</li>
-                                <li>Egress: контрольовані connections (database, HSM, external gateways)</li>
-                            </ul>
-                        </li>
-                        <li><strong>DMZ architecture:</strong>
-                            <ul>
-                                <li>External DMZ: internet-facing web servers, APIs</li>
-                                <li>Internal DMZ: payment gateways, tokenization service</li>
-                                <li>CDE Core: databases з PAN, HSMs, processing servers</li>
-                            </ul>
-                        </li>
-                        <li><strong>Firewall rules (Req 1.2-1.3):</strong>
-                            <ul>
-                                <li>Stateful inspection, no direct connections CDE ↔ Internet</li>
-                                <li>Rules reviewed quarterly + change management</li>
-                                <li>Inbound: block all except approved (port 443, 8443 до payment gateway)</li>
-                                <li>Outbound from CDE: тільки до approved IPs (issuer connections, networks)</li>
-                            </ul>
-                        </li>
+            <div class="content-grid" style="gap: 10px; font-size: 0.72rem; line-height: 1.2;">
+                <div>
+                    <h3 style="font-size: 0.95rem; margin-bottom: 6px;">🔒 Network segmentation (Req 1):</h3>
+                    <ul class="slide-list" style="font-size: 0.7rem;">
+                        <li><strong>CDE ізольовано:</strong> Окрема VLAN, Layer 3 firewall (whitelist), контрольовані connections</li>
+                        <li><strong>DMZ:</strong> External (web, APIs) → Internal (gateways) → CDE Core (DB, HSM)</li>
+                        <li><strong>Firewall:</strong> Stateful inspection, quarterly reviews, deny all by default</li>
                     </ul>
-                </li>
-                <li><strong>Encryption everywhere:</strong>
-                    <ul>
-                        <li>TLS 1.3 для всіх external connections</li>
+                    <h3 style="font-size: 0.95rem; margin-bottom: 6px; margin-top: 8px;">🔐 Шифрування (Req 3-4):</h3>
+                    <ul class="slide-list" style="font-size: 0.7rem;">
+                        <li>TLS 1.3 для external connections</li>
                         <li>TDE для Oracle databases</li>
                         <li>HSM для PIN blocks</li>
-                        <li>E2E encryption для ATM network</li>
+                        <li>E2E encryption для ATM мережі</li>
                     </ul>
-                </li>
-                <li><strong>Access controls:</strong>
-                    <ul>
-                        <li>MFA для всіх адміністраторів</li>
-                        <li>Role-based access (RBAC)</li>
+                </div>
+                <div>
+                    <h3 style="font-size: 0.95rem; margin-bottom: 6px;">👤 Контроль доступу (Req 7-9):</h3>
+                    <ul class="slide-list" style="font-size: 0.7rem;">
+                        <li>MFA для всіх адміністраторів CDE</li>
+                        <li>RBAC (Role-Based Access Control)</li>
                         <li>Quarterly access reviews</li>
-                        <li>Privileged access management (PAM)</li>
+                        <li>PAM (Privileged Access Mgmt)</li>
                     </ul>
-                </li>
-                <li><strong>Monitoring:</strong>
-                    <ul>
-                        <li>24/7 SOC monitoring</li>
-                        <li>SIEM correlation rules</li>
-                        <li>File integrity monitoring (FIM)</li>
-                        <li>Quarterly vulnerability scans</li>
-                        <li>Annual penetration testing</li>
+                    <h3 style="font-size: 0.95rem; margin-bottom: 6px; margin-top: 8px;">📊 Моніторинг (Req 10-11):</h3>
+                    <ul class="slide-list" style="font-size: 0.7rem;">
+                        <li>24/7 SOC моніторинг</li>
+                        <li>SIEM correlation правила</li>
+                        <li>FIM (File Integrity Monitoring)</li>
+                        <li>Quarterly ASV scans</li>
+                        <li>Annual pentest</li>
                     </ul>
-                </li>
-            </ul>
+                </div>
+            </div>
+            <div class="alert alert-info" style="margin-top: 10px; padding: 8px; font-size: 0.72rem;">
+                <strong>Compliance вартість:</strong> ~$150K/рік (QSA audit, ASV scans, 5 FTE dedicated team)
+            </div>
         </div>
     </div>
 
@@ -205,37 +187,37 @@
     <div class="slide">
         <div class="slide-counter-display">6 / 10</div>
         <div class="content-box" style="max-width: 1200px;">
-            <h2>📊 Compliance процес</h2>
-            <h3>Для банку (Level 1):</h3>
+            <h2>📊 Процес сертифікації PCI DSS</h2>
+            <h3>Для банку (Рівень 1):</h3>
             <div class="slide-statistics">
                 <div class="stat-item">
-                    <div class="stat-value">Annual</div>
-                    <div class="stat-description">Onsite audit від QSA</div>
+                    <div class="stat-value">Щорічно</div>
+                    <div class="stat-description">Аудит на місці від QSA</div>
                 </div>
                 <div class="stat-item">
-                    <div class="stat-value">Quarterly</div>
-                    <div class="stat-description">ASV vulnerability scans</div>
+                    <div class="stat-value">Щоквартально</div>
+                    <div class="stat-description">ASV сканування вразливостей</div>
                 </div>
                 <div class="stat-item">
                     <div class="stat-value">~$150K</div>
-                    <div class="stat-description">Cost annually</div>
+                    <div class="stat-description">Вартість на рік</div>
                 </div>
                 <div class="stat-item">
                     <div class="stat-value">5 FTE</div>
-                    <div class="stat-description">Dedicated team</div>
+                    <div class="stat-description">Виділена команда</div>
                 </div>
             </div>
-            <h3 style="margin-top: 40px;">Етапи audit:</h3>
+            <h3 style="margin-top: 40px;">Етапи аудиту:</h3>
             <ol class="slide-list">
-                <li><strong>Scoping:</strong> Визначення CDE boundary</li>
-                <li><strong>Documentation review:</strong> Policies, procedures, diagrams</li>
-                <li><strong>Onsite assessment:</strong> Interview, observe, test</li>
-                <li><strong>Technical testing:</strong> Vulnerability scans, penetration tests</li>
-                <li><strong>Reporting:</strong> Report on Compliance (ROC)</li>
-                <li><strong>Attestation:</strong> Certificate of Compliance</li>
+                <li><strong>Визначення обсягу (Scoping):</strong> Визначення меж CDE</li>
+                <li><strong>Перевірка документації:</strong> Політики, процедури, діаграми</li>
+                <li><strong>Оцінка на місці:</strong> Інтерв'ю, спостереження, тестування</li>
+                <li><strong>Технічне тестування:</strong> Сканування вразливостей, пентести</li>
+                <li><strong>Звітування:</strong> Звіт про відповідність (ROC)</li>
+                <li><strong>Атестація:</strong> Сертифікат відповідності</li>
             </ol>
             <div class="alert alert-info" style="margin-top: 20px;">
-                <strong>QSA</strong> - Qualified Security Assessor, сертифікований PCI SSC аудитор
+                <strong>QSA</strong> - Qualified Security Assessor, кваліфікований аудитор безпеки, сертифікований PCI SSC
             </div>
         </div>
     </div>
@@ -245,30 +227,30 @@
         <div class="slide-counter-display">7 / 10</div>
         <div class="slide-cyber-security">
             <h2>💰 Penalties за порушення PCI DSS</h2>
-            <h3>Щомісячні штрафи від card networks:</h3>
+            <h3>Щомісячні штрафи від платіжних мереж:</h3>
             <ul class="slide-list">
-                <li><strong>$5,000 - $100,000 per month</strong></li>
-                <li>Залежить від severity та тривалості</li>
-                <li>Платить еквайєр, але перекладає на мерчанта</li>
+                <li><strong>$5,000 - $100,000 на місяць</strong></li>
+                <li>Залежить від серйозності порушення та тривалості</li>
+                <li>Платить еквайєр, але перекладає на торговця</li>
             </ul>
-            <h3 style="margin-top: 30px;">Додаткові costs після breach:</h3>
+            <h3 style="margin-top: 30px;">Додаткові витрати після breach:</h3>
             <ul class="slide-list">
-                <li><strong>Forensic investigation:</strong> $50K-500K</li>
-                <li><strong>Card reissuance:</strong> $3-5 per card</li>
-                <li><strong>Legal fees</strong> та litigation</li>
-                <li><strong>Reputation damage</strong></li>
-                <li><strong>Підвищені processing fees</strong> (1-2 роки)</li>
+                <li><strong>Forensic розслідування:</strong> $50K-500K</li>
+                <li><strong>Перевипуск карт:</strong> $3-5 за картку</li>
+                <li><strong>Юридичні витрати</strong> та судові процеси</li>
+                <li><strong>Репутаційні збитки</strong></li>
+                <li><strong>Підвищені комісії обробки</strong> (1-2 роки)</li>
             </ul>
             <h3 style="margin-top: 30px;">Приклади реальних штрафів:</h3>
             <ul class="slide-list">
-                <li><strong>Target (2013):</strong> $202M settlements</li>
-                <li><strong>Home Depot (2014):</strong> $179M total costs</li>
-                <li><strong>British Airways (2018):</strong> £183M GDPR fine</li>
+                <li><strong>Target (2013):</strong> $202M врегулювання</li>
+                <li><strong>Home Depot (2014):</strong> $179M загальні витрати</li>
+                <li><strong>British Airways (2018):</strong> £183M штраф GDPR</li>
             </ul>
-            <h3 style="margin-top: 30px;">Extreme cases:</h3>
+            <h3 style="margin-top: 30px;">Екстремальні випадки:</h3>
             <ul class="slide-list">
-                <li>Revocation of card acceptance rights</li>
-                <li>Bank може втратити можливість issuing/acquiring</li>
+                <li>Відкликання права приймати картки</li>
+                <li>Банк може втратити можливість випуску/еквайрингу</li>
             </ul>
         </div>
     </div>
@@ -286,26 +268,26 @@
             </div>
             <h3>Як сталася breach:</h3>
             <ol class="slide-list">
-                <li>SQL injection на corporate web application</li>
-                <li>Malware installation на internal network</li>
-                <li>Lateral movement до payment processing systems</li>
-                <li>Sniffer software captured unencrypted PANs в memory</li>
-                <li>Data exfiltration протягом 6 місяців</li>
+                <li>SQL injection на корпоративному веб-додатку</li>
+                <li>Встановлення malware у внутрішню мережу</li>
+                <li>Lateral movement до систем обробки платежів</li>
+                <li>Sniffer software перехопив незашифровані PAN у пам'яті</li>
+                <li>Викрадення даних (exfiltration) протягом 6 місяців</li>
             </ol>
-            <h3 style="margin-top: 30px;">PCI compliance status:</h3>
+            <h3 style="margin-top: 30px;">PCI compliance статус:</h3>
             <ul class="slide-list">
-                <li>✅ Heartland був PCI certified на момент breach</li>
-                <li>❌ Але malware обходив controls</li>
-                <li>❌ Недостатній monitoring виявлення</li>
+                <li>✅ Heartland був сертифікований PCI DSS на момент breach</li>
+                <li>❌ Але malware обходило контролі</li>
+                <li>❌ Недостатній моніторинг для виявлення</li>
             </ul>
-            <h3 style="margin-top: 30px;">Changes після:</h3>
+            <h3 style="margin-top: 30px;">Зміни після інциденту:</h3>
             <ul class="slide-list">
-                <li>Heartland pioneers end-to-end encryption (E3)</li>
-                <li>PCI DSS updated з requirements для memory scraping</li>
-                <li>Industry focus на P2PE (Point-to-Point Encryption)</li>
+                <li>Heartland став піонером наскрізного шифрування (E2E)</li>
+                <li>PCI DSS оновлено з вимогами щодо memory scraping</li>
+                <li>Галузь сфокусувалася на P2PE (Point-to-Point Encryption)</li>
             </ul>
             <div class="alert alert-danger" style="margin-top: 20px;">
-                <strong>Урок:</strong> PCI compliance ≠ immune to breaches
+                <strong>Урок:</strong> PCI DSS сертифікація ≠ імунітет до зломів
             </div>
         </div>
     </div>
@@ -313,71 +295,71 @@
     <!-- Slide 9: PCI DSS v4.0 -->
     <div class="slide">
         <div class="slide-counter-display">9 / 10</div>
-        <div class="content-box" style="max-width: 1200px;">
-            <h2>🆕 PCI DSS v4.0 - Що нового?</h2>
-            <h3>Effective dates:</h3>
-            <ul class="slide-list">
-                <li><strong>March 2024</strong> - v4.0 active</li>
-                <li><strong>March 2025</strong> - v3.2.1 retired</li>
-                <li>Future-dated requirements до March 2025</li>
+        <div class="content-box" style="max-width: 1350px; padding: 12px; overflow-y: auto; max-height: 90vh;">
+            <h2 style="font-size: 1.8rem; margin-bottom: 8px;">🆕 PCI DSS v4.0 - Що нового?</h2>
+            <div style="background: rgba(102, 126, 234, 0.15); padding: 10px; border-radius: 8px; margin-bottom: 10px; font-size: 0.75rem;">
+                <strong>Дати:</strong> March 2024 - v4.0 active | March 2025 - v3.2.1 retired
+            </div>
+            <h3 style="font-size: 1rem; margin-bottom: 6px;">Ключові нововведення:</h3>
+            <ul class="slide-list" style="font-size: 0.72rem; line-height: 1.15; margin-bottom: 10px;">
+                <li>🔒 <strong>Customized approach</strong> - гнучкість у впровадженні</li>
+                <li>🤖 <strong>Автоматизований моніторинг</strong> compliance</li>
+                <li>☁️ <strong>Рекомендації для хмарних середовищ</strong></li>
+                <li>🌐 <strong>Розширена MFA</strong> для всіх доступів</li>
             </ul>
-            <h3 style="margin-top: 30px;">Ключові нововведення:</h3>
-            <ul class="slide-list">
-                <li>🔒 <strong>Customized approach</strong> - flexibility в implementation</li>
-                <li>🤖 <strong>Automated compliance monitoring</strong></li>
-                <li>☁️ <strong>Cloud environment guidance</strong></li>
-                <li>🌐 <strong>Multi-factor authentication expanded</strong></li>
-                <li>🔐 <strong>Encryption requirements strengthened</strong></li>
-            </ul>
-            <h3 style="margin-top: 30px;">New/enhanced requirements (детально):</h3>
-            <ul class="slide-list">
-                <li><strong>Req 6.4.3:</strong> Scripts на payment pages managed to prevent web skimming (Magecart attacks)
-                    <ul>
-                        <li>Inventory всіх JavaScript на checkout</li>
-                        <li>CSP (Content Security Policy) headers обов'язкові</li>
-                        <li>SRI (Subresource Integrity) для external scripts</li>
-                        <li>Monitoring змін scripts real-time</li>
+            <h3 style="font-size: 1rem; margin-bottom: 6px;">Нові/покращені вимоги:</h3>
+            <div class="content-grid" style="gap: 8px; font-size: 0.68rem; line-height: 1.2;">
+                <div>
+                    <ul class="slide-list" style="font-size: 0.68rem;">
+                        <li><strong>Req 6.4.3 (NEW):</strong> Захист від web skimming
+                            <ul style="font-size: 0.65rem;">
+                                <li>Inventory JavaScript на checkout</li>
+                                <li>CSP headers + SRI для scripts</li>
+                                <li>Real-time monitoring змін</li>
+                            </ul>
+                        </li>
+                        <li><strong>Req 8.3 (Enhanced):</strong> MFA розширено
+                            <ul style="font-size: 0.65rem;">
+                                <li>Для ВСІХ доступів до CDE (не тільки remote)</li>
+                                <li>Covers: admins, devs, vendors</li>
+                                <li>Приклади: Authenticator, YubiKey, Duo</li>
+                            </ul>
+                        </li>
+                        <li><strong>Req 8.6 (NEW):</strong> Інвентаризація credentials
+                            <ul style="font-size: 0.65rem;">
+                                <li>Tracking accounts, API keys, certificates</li>
+                                <li>Політика ротації + автоматичне закінчення</li>
+                            </ul>
+                        </li>
                     </ul>
-                </li>
-                <li><strong>Req 8.3:</strong> MFA (Multi-Factor Authentication) розширено
-                    <ul>
-                        <li>Обов'язково для ALL access до CDE (було: тільки remote)</li>
-                        <li>Covers: admins, developers, vendors, support</li>
-                        <li>MFA factors: something you know (password) + something you have (token/phone) + something you are (biometric)</li>
-                        <li>Examples: Google Authenticator, YubiKey, Duo Security</li>
+                </div>
+                <div>
+                    <ul class="slide-list" style="font-size: 0.68rem;">
+                        <li><strong>Req 11.3.2 (Enhanced):</strong> Internal pentest
+                            <ul style="font-size: 0.65rem;">
+                                <li>Щорічно + після змін</li>
+                                <li>Тестування сегментації мережі</li>
+                                <li>Перевірка ізоляції CDE</li>
+                            </ul>
+                        </li>
+                        <li><strong>Req 11.6 (NEW):</strong> Change detection
+                            <ul style="font-size: 0.65rem;">
+                                <li>FIM (Tripwire, OSSEC) на критичних системах</li>
+                                <li>Алерти на неавторизовані зміни файлів</li>
+                                <li>Щотижневе порівняння з baseline</li>
+                            </ul>
+                        </li>
+                        <li><strong>Req 12.3 (Enhanced):</strong> Risk analysis
+                            <ul style="font-size: 0.65rem;">
+                                <li>Документована методологія оцінки ризиків</li>
+                                <li>Щорічні огляди + після значних змін</li>
+                            </ul>
+                        </li>
                     </ul>
-                </li>
-                <li><strong>Req 8.6 (NEW):</strong> Inventory of authentication credentials
-                    <ul>
-                        <li>Tracking всіх application/system accounts</li>
-                        <li>Service accounts, API keys, certificates inventory</li>
-                        <li>Rotation policy і automated expiration</li>
-                    </ul>
-                </li>
-                <li><strong>Req 11.3.2 (Enhanced):</strong> Internal penetration testing annually + after significant changes
-                    <ul>
-                        <li>Must include: network segmentation testing</li>
-                        <li>CDE isolation validation</li>
-                        <li>Lateral movement prevention testing</li>
-                    </ul>
-                </li>
-                <li><strong>Req 11.6 (NEW):</strong> Change detection mechanism на critical systems
-                    <ul>
-                        <li>File Integrity Monitoring (FIM): Tripwire, OSSEC</li>
-                        <li>Alert на unauthorized file changes</li>
-                        <li>Weekly comparison baseline</li>
-                    </ul>
-                </li>
-                <li><strong>Req 12.3 (Enhanced):</strong> Targeted risk analysis methodology
-                    <ul>
-                        <li>Document risk assessment process</li>
-                        <li>Identify threats, vulnerabilities, impact</li>
-                        <li>Annual reviews + after significant changes</li>
-                    </ul>
-                </li>
-            </ul>
-            <div class="alert alert-info" style="margin-top: 20px;">
-                <strong>v4.0 ключові фокуси:</strong> Continuous security monitoring, cloud environments flexibility, automated controls, zero trust principles, securing payment pages від web skimming
+                </div>
+            </div>
+            <div class="alert alert-info" style="margin-top: 10px; padding: 8px; font-size: 0.7rem;">
+                <strong>v4.0 фокус:</strong> Continuous monitoring, cloud flexibility, automated controls, zero trust, захист від web skimming (Magecart)
             </div>
         </div>
     </div>
