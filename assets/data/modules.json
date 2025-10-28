@@ -153,7 +153,15 @@
           "description": "Розробка стратегії резервного копіювання та плану відновлення після катастроф для комерційного банку",
           "estimatedTime": 160,
           "type": "planning",
-          "url": "modules/module2/practicals/practical_2.html"
+          "url": "modules/module2/practicals/practical_3.html"
+        },
+        {
+          "id": "P4",
+          "title": "Практична робота 4",
+          "description": "Аналіз логів банківських систем з використанням ELK Stack - виявлення шахрайства та моніторинг безпеки",
+          "estimatedTime": 240,
+          "type": "technical",
+          "url": "modules/module2/practicals/practical_4.html"
         }
       ],
       "keywords": ["CBS", "API Security", "OAuth", "Vendor Risk", "Access Controls"]
@@ -213,16 +221,7 @@
           "status": "planned"
         }
       ],
-      "practicalTasks": [
-        {
-          "id": "P4",
-          "title": "Практична робота 4",
-          "description": "Тестування безпеки мобільного додатка банку та аналіз виявлених вразливостей",
-          "estimatedTime": 160,
-          "type": "security-analysis",
-          "url": "modules/module3/practicals/practicat_3_1.html"
-        }
-      ],
+      "practicalTasks": [],
       "keywords": ["Payment Systems", "PCI DSS", "Mobile Security", "Blockchain", "CBDC"]
     },
     {
