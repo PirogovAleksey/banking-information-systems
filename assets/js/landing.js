@@ -315,6 +315,7 @@ class LandingPage {
     getStatusBadge(status) {
         const statusConfig = {
             'active': { text: 'Активний', class: 'badge-success' },
+            'available': { text: 'Доступний', class: 'badge-success' },
             'completed': { text: 'Завершено', class: 'badge-primary' },
             'planned': { text: 'Заплановано', class: 'badge-outline' },
             'in_progress': { text: 'В процесі', class: 'badge-warning' }
@@ -343,7 +344,7 @@ class LandingPage {
         console.log(`📖 Відкриття лекції ${moduleId}.${lectureId}`);
 
         // Список доступних лекцій (за номерами)
-        const availableLectures = ['3', '4', '5', '6', '7'];
+        const availableLectures = ['3', '4', '5', '6', '7', '8'];
 
         // Перевіряємо чи лекція доступна
         if (availableLectures.includes(lectureId)) {

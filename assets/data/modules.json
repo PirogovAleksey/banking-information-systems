@@ -171,7 +171,7 @@
       "title": "Платіжні системи та технології",
       "description": "Вивчення сучасних платіжних систем, карткового бізнесу, мобільних платежів та криптовалют у контексті безпеки.",
       "emoji": "💳",
-      "status": "planned",
+      "status": "available",
       "difficulty": "intermediate",
       "estimatedHours": 9,
       "lectures": [
@@ -203,7 +203,7 @@
           ],
           "securityFocus": "Mobile app security, biometric authentication",
           "bankingExamples": ["Apple Pay tokenization", "Google Pay security", "Samsung Pay MST"],
-          "status": "planned"
+          "status": "active"
         },
         {
           "id": "9",
