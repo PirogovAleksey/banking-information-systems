@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тема 4: Безпека блокчейн та криптовалютні загрози</title>
+    <link rel="stylesheet" href="../../../../new_assets/presentation/css/styles.css">
+</head>
+<body>
+
+<div class="presentation">
+    <!-- Slide Counter -->
+    <div class="slide-counter">
+        <span id="currentSlide">1</span> / <span id="totalSlides">17</span>
+    </div>
+
+    <!-- Slide 1: Title -->
+    <div class="slide active title-slide">
+        <div class="python-logo">🔐</div>
+        <h1>Безпека блокчейн та криптовалютні загрози</h1>
+        <p class="subtitle">Модуль 3: Платіжні системи та технології</p>
+        <p class="subtitle">Лекція 9 • Тема 4</p>
+    </div>
+
+    <!-- Slide 2: Threat Landscape -->
+    <div class="slide">
+        <h2>Ландшафт загроз блокчейн-систем</h2>
+
+        <h3>🎯 Категорії атак:</h3>
+        <ul>
+            <li><strong>Атаки на консенсус</strong> — 51% атака, Selfish Mining, Nothing-at-Stake</li>
+            <li><strong>Атаки на мережу</strong> — Eclipse, Sybil, DDoS</li>
+            <li><strong>Вразливості смарт-контрактів</strong> — reentrancy, overflow, logic errors</li>
+            <li><strong>Криптовалютне шахрайство</strong> — фішинг, rug pulls, Ponzi схеми</li>
+            <li><strong>Атаки на гаманці</strong> — malware, seed phrase theft</li>
+            <li><strong>Exchange hacks</strong> — крадіжка з централізованих бірж</li>
+        </ul>
+
+        <div class="warning-box">
+            <strong>Статистика 2023:</strong> Понад $3.8 млрд втрачено через хаки, експлойти та шахрайство в криптоіндустрії.
+        </div>
+    </div>
+
+    <!-- Slide 3: 51% Attack -->
+    <div class="slide">
+        <h2>51% атака (Majority Attack)</h2>
+
+        <h3>⚠️ Що таке 51% атака?</h3>
+        <p><strong>51% атака</strong> — сценарій, коли атакувач контролює більше 50% обчислювальної потужності (hash rate) PoW мережі або стейку в PoS, що дозволяє маніпулювати блокчейном.</p>
+
+        <h3 style="margin-top: 20px;">🔓 Можливості атакувача:</h3>
+        <ul>
+            <li><strong>Double-spending</strong> — витрата одних і тих же монет двічі</li>
+            <li><strong>Prevent confirmations</strong> — блокування транзакцій</li>
+            <li><strong>Rewrite history</strong> — перезапис блоків (до певної глибини)</li>
+            <li><strong>Censor transactions</strong> — відмова включати транзакції в блоки</li>
+        </ul>
+
+        <div class="code-block">
+Double-spending сценарій:
+1. Атакувач відправляє 1000 BTC на біржу
+2. Біржа чекає 6 confirmations → зараховує депозит
+3. Атакувач продає BTC за USDT, виводить USDT
+4. Атакувач майнить альтернативний ланцюг без транзакції #1
+5. Альтернативний ланцюг стає довшим → оригінальний ланцюг відкидається
+6. Атакувач тепер має і BTC, і USDT</div>
+
+        <div class="info-box">
+            <strong>Вартість 51% атаки на Bitcoin:</strong> >$20 млрд на ASIC обладнання + електроенергія. Економічно недоцільно.
+        </div>
+    </div>
+
+    <!-- Slide 4: Historical 51% Attacks -->
+    <div class="slide">
+        <h2>Історичні 51% атаки</h2>
+
+        <table>
+            <tr>
+                <th>Криптовалюта</th>
+                <th>Рік</th>
+                <th>Втрати</th>
+                <th>Деталі</th>
+            </tr>
+            <tr>
+                <td><strong>Bitcoin Gold</strong></td>
+                <td>2018</td>
+                <td>$18 млн</td>
+                <td>Double-spending на біржах</td>
+            </tr>
+            <tr>
+                <td><strong>Ethereum Classic</strong></td>
+                <td>2019, 2020</td>
+                <td>$5.6 млн</td>
+                <td>Множинні 51% атаки</td>
+            </tr>
+            <tr>
+                <td><strong>Vertcoin</strong></td>
+                <td>2018</td>
+                <td>$100k</td>
+                <td>Reorganization attacks</td>
+            </tr>
+            <tr>
+                <td><strong>Grin</strong></td>
+                <td>2020</td>
+                <td>N/A</td>
+                <td>57% hash rate одним майнером</td>
+            </tr>
+        </table>
+
+        <div class="warning-box">
+            <strong>Вразливі мережі:</strong> Невеликі PoW блокчейни з низьким хешрейтом найбільш вразливі. Атаку можна орендувати через NiceHash за ~$10k/годину.
+        </div>
+    </div>
+
+    <!-- Slide 5: Sybil Attack -->
+    <div class="slide">
+        <h2>Sybil атака</h2>
+
+        <h3>👥 Що таке Sybil атака?</h3>
+        <p><strong>Sybil атака</strong> — створення множини фейкових ідентичностей (вузлів) для впливу на мережу. Названа на честь книги про жінку з розладом множинної особистості.</p>
+
+        <h3 style="margin-top: 20px;">🎯 Цілі Sybil атаки:</h3>
+        <ul>
+            <li><strong>Voting manipulation</strong> — маніпуляція голосуванням в DAO</li>
+            <li><strong>Eclipse attack</strong> — ізоляція жертви від чесної мережі</li>
+            <li><strong>DDoS amplification</strong> — посилення DoS атак</li>
+            <li><strong>Reputation gaming</strong> — маніпуляція reputation системами</li>
+        </ul>
+
+        <div class="code-block">
+Захист від Sybil:
+1. Proof of Work — вартість створення identity
+2. Proof of Stake — фінансова застава
+3. Proof of Authority — дозвіл від trusted parties
+4. Resource testing — перевірка computational ресурсів
+5. Social graphs — аналіз соціальних зв'язків</div>
+
+        <div class="info-box">
+            <strong>Bitcoin захист:</strong> PoW робить створення множини вузлів дорогим, оскільки потрібна обчислювальна потужність.
+        </div>
+    </div>
+
+    <!-- Slide 6: Eclipse Attack -->
+    <div class="slide">
+        <h2>Eclipse атака</h2>
+
+        <h3>🌑 Ізоляція вузла від мережі:</h3>
+        <p><strong>Eclipse атака</strong> — атакувач оточує (eclipses) жертву власними вузлами, ізолюючи її від чесної P2P мережі.</p>
+
+        <div class="code-block">
+Нормальна мережа:        Eclipse атака:
+     [Вузли]                  [Вузли]
+    /   |   \                    |
+  [A] [B] [C]              [Атакувач вузли]
+    \  |  /                 /  |  |  |  \
+    [Жертва]           [Жертва] (ізольована)</div>
+
+        <h3 style="margin-top: 20px;">⚠️ Наслідки:</h3>
+        <ul>
+            <li><strong>Подвійна витрата</strong> — жертва бачить фальшиві підтвердження</li>
+            <li><strong>Mining power waste</strong> — жертва майнить на wrong chain</li>
+            <li><strong>Fraud</strong> — прийняття invalid транзакцій</li>
+            <li><strong>Deanonymization</strong> — відстеження транзакцій жертви</li>
+        </ul>
+
+        <div class="success-box">
+            <strong>Захист:</strong> Використання довірених вузлів, обмеження з'єднань з одного IP, різноманітність вихідних з'єднань.
+        </div>
+    </div>
+
+    <!-- Slide 7: Smart Contract Vulnerabilities -->
+    <div class="slide">
+        <h2>Топ-10 вразливостей смарт-контрактів</h2>
+
+        <table>
+            <tr>
+                <th>Вразливість</th>
+                <th>Опис</th>
+                <th>Приклад атаки</th>
+            </tr>
+            <tr>
+                <td><strong>Reentrancy</strong></td>
+                <td>Повторний виклик функції</td>
+                <td>The DAO (2016)</td>
+            </tr>
+            <tr>
+                <td><strong>Integer Overflow</strong></td>
+                <td>Переповнення змінних</td>
+                <td>BeautyChain (2018)</td>
+            </tr>
+            <tr>
+                <td><strong>Access Control</strong></td>
+                <td>Неправильні права доступу</td>
+                <td>Parity Multisig (2017)</td>
+            </tr>
+            <tr>
+                <td><strong>Unchecked Call</strong></td>
+                <td>Ігнорування return values</td>
+                <td>King of Ether</td>
+            </tr>
+            <tr>
+                <td><strong>Front-Running</strong></td>
+                <td>MEV exploitation</td>
+                <td>DEX arbitrage bots</td>
+            </tr>
+            <tr>
+                <td><strong>Timestamp Depend</strong></td>
+                <td>Покладання на block.timestamp</td>
+                <td>Gambling contracts</td>
+            </tr>
+        </table>
+    </div>
+
+    <!-- Slide 8: The DAO Hack -->
+    <div class="slide">
+        <h2>The DAO Hack (2016) — Case Study</h2>
+
+        <h3>💔 Найбільша reentrancy атака в історії:</h3>
+        <p>The DAO — децентралізована автономна організація на Ethereum. У червні 2016 атакувач викрав 3.6 млн ETH (~$50 млн тоді, ~$7 млрд сьогодні).</p>
+
+        <div class="code-block">
+Вразливий код The DAO:
+<span class="keyword">function</span> <span class="function">splitDAO</span>(...) {
+    <span class="comment">// 1. Створює дочірню DAO</span>
+    <span class="comment">// 2. VULNERABILITY: Відправляє ETH перед оновлення балансу</span>
+    withdrawRewardFor(msg.sender);
+
+    <span class="comment">// 3. Оновлює баланс (занадто пізно!)</span>
+    balances[msg.sender] = 0;
+}
+
+Атака:
+1. Атакувач викликає splitDAO()
+2. withdrawRewardFor() відправляє ETH атакувачу
+3. Fallback function атакувача викликає splitDAO() знову
+4. Баланс ще не оновлений → цикл повторюється
+5. Вкрадено 3.6 млн ETH</div>
+
+        <div class="warning-box">
+            <strong>Наслідок:</strong> Ethereum community провело хардфорк для повернення викрадених коштів, що призвело до поділу на ETH і ETC.
+        </div>
+    </div>
+
+    <!-- Slide 9: Crypto Phishing -->
+    <div class="slide">
+        <h2>Криптовалютний фішинг</h2>
+
+        <h3>🎣 Типи фішинг атак:</h3>
+
+        <ul>
+            <li><strong>Fake wallet apps</strong> — підроблені мобільні додатки гаманців</li>
+            <li><strong>Phishing websites</strong> — клони офіційних сайтів (uniswap.com vs unisẃap.com)</li>
+            <li><strong>Malicious browser extensions</strong> — fake MetaMask extensions</li>
+            <li><strong>Social engineering</strong> — Discord/Telegram scams</li>
+            <li><strong>Clipboard hijacking</strong> — заміна адрес в clipboard</li>
+            <li><strong>QR code poisoning</strong> — підміна QR кодів для депозитів</li>
+        </ul>
+
+        <div class="code-block">
+Приклад clipboard hijacker:
+import pyperclip
+
+while True:
+    clipboard = pyperclip.paste()
+
+    <span class="comment"># Детект Bitcoin адреси (починається з 1, 3, або bc1)</span>
+    if re.match(r'^(1|3|bc1)[a-zA-Z0-9]{25,}$', clipboard):
+        <span class="comment"># Заміна на адресу атакувача</span>
+        pyperclip.copy('1AtTaCkErAdDrEsS...')
+</div>
+
+        <div class="warning-box">
+            <strong>Статистика:</strong> У 2023 році понад $300 млн втрачено через фішинг-атаки. Найпоширеніший вектор — фальшива підтримка в Telegram/Discord.
+        </div>
+    </div>
+
+    <!-- Slide 10: Wallet Security -->
+    <div class="slide">
+        <h2>Безпека криптогаманців</h2>
+
+        <h3>🔐 Типи гаманців:</h3>
+
+        <table>
+            <tr>
+                <th>Тип</th>
+                <th>Безпека</th>
+                <th>Зручність</th>
+                <th>Приклади</th>
+            </tr>
+            <tr>
+                <td><strong>Hardware (Cold)</strong></td>
+                <td>⭐⭐⭐⭐⭐</td>
+                <td>⭐⭐</td>
+                <td>Ledger, Trezor</td>
+            </tr>
+            <tr>
+                <td><strong>Paper Wallet</strong></td>
+                <td>⭐⭐⭐⭐</td>
+                <td>⭐</td>
+                <td>Printed keys</td>
+            </tr>
+            <tr>
+                <td><strong>Desktop (Hot)</strong></td>
+                <td>⭐⭐⭐</td>
+                <td>⭐⭐⭐⭐</td>
+                <td>Exodus, Electrum</td>
+            </tr>
+            <tr>
+                <td><strong>Mobile (Hot)</strong></td>
+                <td>⭐⭐</td>
+                <td>⭐⭐⭐⭐⭐</td>
+                <td>Trust Wallet, MetaMask</td>
+            </tr>
+            <tr>
+                <td><strong>Exchange (Custodial)</strong></td>
+                <td>⭐</td>
+                <td>⭐⭐⭐⭐⭐</td>
+                <td>Binance, Coinbase</td>
+            </tr>
+        </table>
+
+        <div class="success-box">
+            <strong>Best Practice:</strong> Холодні гаманці для довгострокового зберігання, гарячі для щоденних транзакцій. "Not your keys, not your coins."
+        </div>
+    </div>
+
+    <!-- Slide 11: Seed Phrase Security -->
+    <div class="slide">
+        <h2>Безпека seed phrase (мнемонічна фраза)</h2>
+
+        <h3>🔑 Що таке seed phrase?</h3>
+        <p><strong>Seed phrase</strong> — 12 або 24 слова (BIP39 standard), що генерують всі приватні ключі гаманця. Володіння seed = повний контроль над коштами.</p>
+
+        <div class="code-block">
+Приклад BIP39 seed phrase:
+witch collapse practice feed shame open despair
+creek road again ice least
+
+З цієї фрази генеруються:
+- Master private key
+- Дочірні ключі для Bitcoin, Ethereum, тощо
+- Всі адреси гаманця</div>
+
+        <h3 style="margin-top: 20px;">✅ Безпечне зберігання seed phrase:</h3>
+        <ul>
+            <li><strong>НІКОЛИ не зберігати в цифровому вигляді</strong> (фото, нотаток, хмарному сховищі)</li>
+            <li><strong>Записати на папері</strong> та зберігати в сейфі</li>
+            <li><strong>Metal backup</strong> — гравірування на металі (вогнестійке)</li>
+            <li><strong>Shamir Secret Sharing</strong> — розділення фрази на частини</li>
+            <li><strong>Geographic distribution</strong> — різні локації для резервних копій</li>
+        </ul>
+    </div>
+
+    <!-- Slide 12: Exchange Hacks -->
+    <div class="slide">
+        <h2>Хаки криптобірж — історія втрат</h2>
+
+        <table>
+            <tr>
+                <th>Біржа</th>
+                <th>Рік</th>
+                <th>Втрати</th>
+                <th>Причина</th>
+            </tr>
+            <tr>
+                <td><strong>Mt. Gox</strong></td>
+                <td>2014</td>
+                <td>850,000 BTC ($450M)</td>
+                <td>Hot wallet hack, insider</td>
+            </tr>
+            <tr>
+                <td><strong>Coincheck</strong></td>
+                <td>2018</td>
+                <td>$530M (NEM)</td>
+                <td>Hot wallet, no multisig</td>
+            </tr>
+            <tr>
+                <td><strong>Binance</strong></td>
+                <td>2019</td>
+                <td>7,000 BTC ($40M)</td>
+                <td>Phishing, API keys</td>
+            </tr>
+            <tr>
+                <td><strong>KuCoin</strong></td>
+                <td>2020</td>
+                <td>$280M</td>
+                <td>Private key compromise</td>
+            </tr>
+            <tr>
+                <td><strong>FTX</strong></td>
+                <td>2022</td>
+                <td>$8 billion</td>
+                <td>Fraud (not hack)</td>
+            </tr>
+        </table>
+
+        <div class="warning-box">
+            <strong>Тенденція:</strong> Більшість хаків пов'язані з гарячими гаманцями та скомпрометованими приватними ключами. Сучасні біржі використовують понад 95% холодного зберігання.
+        </div>
+    </div>
+
+    <!-- Slide 13: Rug Pulls -->
+    <div class="slide">
+        <h2>Rug Pulls та Exit Scams</h2>
+
+        <h3>🏃 Що таке Rug Pull?</h3>
+        <p><strong>Rug Pull</strong> — шахрайство, коли розробники криптопроекту раптово виводять всю ліквідність, залишаючи інвесторів з беззмістовними токенами.</p>
+
+        <h3 style="margin-top: 20px;">🚩 Red flags для виявлення:</h3>
+        <ul>
+            <li><strong>Анонімна команда</strong> — без доксу (doxxed identities)</li>
+            <li><strong>Відсутність аудиту</strong> — контракт не перевірений</li>
+            <li><strong>Mint function</strong> — можливість необмеженої емісії</li>
+            <li><strong>Locked liquidity</strong> — ліквідність не заблокована</li>
+            <li><strong>Honeypot code</strong> — можна купити, але не продати</li>
+            <li><strong>Unrealistic APY</strong> — обіцянки >1000% APY</li>
+        </ul>
+
+        <div class="code-block">
+Honeypot приклад (Solidity):
+<span class="keyword">function</span> <span class="function">transfer</span>(...) <span class="keyword">public</span> {
+    <span class="keyword">require</span>(msg.sender == owner, "Only owner can sell!");
+    <span class="comment">// Тільки власник може продати токени</span>
+}</div>
+
+        <div class="warning-box">
+            <strong>Squid Game Token (2021):</strong> Rug pull на $3.3 млн. Токен виріс на 45,000%, але продати було неможливо.
+        </div>
+    </div>
+
+    <!-- Slide 14: DeFi Protocol Hacks -->
+    <div class="slide">
+        <h2>Атаки на DeFi протоколи</h2>
+
+        <h3>💥 Великі DeFi exploits 2020-2023:</h3>
+
+        <ul>
+            <li><strong>Poly Network (2021)</strong> — $611M (повернуто) — cross-chain bridge exploit</li>
+            <li><strong>Wormhole (2022)</strong> — $325M — signature verification bypass</li>
+            <li><strong>Ronin Bridge (2022)</strong> — $625M — compromised validator keys</li>
+            <li><strong>BNB Chain (2022)</strong> — $586M — proof verification bug</li>
+            <li><strong>Euler Finance (2023)</strong> — $197M — donation attack</li>
+        </ul>
+
+        <div class="code-block">
+Типові вектори DeFi атак:
+1. Oracle manipulation (flash loan price manipulation)
+2. Bridge exploits (cross-chain vulnerabilities)
+3. Governance attacks (malicious proposals)
+4. Flash loan attacks (undercollateralized liquidations)
+5. Front-running / MEV extraction
+6. Smart contract logic errors</div>
+
+        <div class="info-box">
+            <strong>Тенденція 2023:</strong> Найбільші втрати від компрометації приватних ключів та експлойтів мостів, а не від логічних помилок.
+        </div>
+    </div>
+
+    <!-- Slide 15: MEV and Front-Running -->
+    <div class="slide">
+        <h2>MEV (Maximal Extractable Value)</h2>
+
+        <h3>⚡ Що таке MEV?</h3>
+        <p><strong>MEV</strong> — прибуток, який може бути отриманий через маніпуляцію порядком транзакцій в блоці (front-running, back-running, sandwich attacks).</p>
+
+        <h3 style="margin-top: 20px;">🥪 Sandwich Attack:</h3>
+        <div class="code-block">
+Mempool: User wants to swap 100 ETH → USDT
+
+MEV Bot:
+1. [Front-run] Buy USDT (ціна USDT зростає)
+2. [User TX]   User swaps 100 ETH → USDT (гірша ціна!)
+3. [Back-run]  Sell USDT (прибуток від різниці)
+
+MEV Bot profit: ~$5,000
+User slippage loss: ~$5,000</div>
+
+        <h3 style="margin-top: 15px;">🛡️ Захист від MEV:</h3>
+        <ul>
+            <li><strong>Flashbots</strong> — private transaction relay</li>
+            <li><strong>MEV-Boost</strong> — справедливий розподіл MEV</li>
+            <li><strong>CowSwap</strong> — batch auctions замість AMM</li>
+            <li><strong>Slippage tolerance</strong> — обмеження максимального slippage</li>
+        </ul>
+    </div>
+
+    <!-- Slide 16: Banking Defense -->
+    <div class="slide">
+        <h2>Захист банківських крипто-сервісів</h2>
+
+        <h3>🏦 Best practices для банків, що працюють з криптовалютами:</h3>
+
+        <ul>
+            <li><strong>Custody</strong> — використання institutional-grade custody (Fireblocks, BitGo)</li>
+            <li><strong>Multi-sig</strong> — множинні підписи для транзакцій (3-of-5, 5-of-7)</li>
+            <li><strong>Cold storage</strong> — 95%+ активів в холодному зберіганні</li>
+            <li><strong>Transaction monitoring</strong> — real-time AML/CFT screening</li>
+            <li><strong>Smart contract audits</strong> — перевірка всіх DeFi інтеграцій</li>
+            <li><strong>Insurance</strong> — криптовалютне страхування (Lloyd's, BitGo)</li>
+            <li><strong>Whitelisting</strong> — pre-approved withdrawal addresses</li>
+            <li><strong>Time delays</strong> — затримки для великих виводів</li>
+        </ul>
+
+        <div class="success-box">
+            <strong>Приклад:</strong> JPMorgan Onyx використовує Quorum (приватний Ethereum) з permissioned validators та HSM для ключів.
+        </div>
+    </div>
+
+    <!-- Slide 17: Summary -->
+    <div class="slide">
+        <h2>Підсумки теми</h2>
+
+        <ul class="checklist">
+            <li>51% атака — контроль majority hash rate, дозволяє double-spending</li>
+            <li>Sybil та Eclipse — мережеві атаки на P2P connectivity</li>
+            <li>Reentrancy, overflow — топ вразливості смарт-контрактів</li>
+            <li>The DAO Hack (2016) — $50M reentrancy, призвело до ETH/ETC fork</li>
+            <li>Фішинг, clipboard hijacking — основні вектори соціальної інженерії</li>
+            <li>Cold wallets + seed phrase security — критично для зберігання</li>
+            <li>Exchange hacks — Mt. Gox, Coincheck, понад $8 млрд втрат історично</li>
+            <li>Rug pulls, MEV — нові типи загроз в DeFi</li>
+        </ul>
+
+        <div style="margin-top: 30px; text-align: center;">
+            <p><strong>Кінець лекції 9</strong></p>
+            <p style="margin-top: 10px;">Криптовалюти та блокчейн у банкінгу</p>
+            <p style="margin-top: 10px; opacity: 0.7;">Натисніть ESC або закрийте вікно для повернення</p>
+        </div>
+    </div>
+
+</div>
+
+<!-- Navigation -->
+<div class="navigation">
+    <button class="nav-btn" id="prevBtn" onclick="changeSlide(-1)">← Попередній</button>
+    <button class="nav-btn" onclick="window.location.href='index.html'">🏠 Головна</button>
+    <button class="nav-btn" id="nextBtn" onclick="changeSlide(1)">Наступний →</button>
+</div>
+
+<script src="../../../../new_assets/presentation/js/presentation.js"></script>
+</body>
+</html>

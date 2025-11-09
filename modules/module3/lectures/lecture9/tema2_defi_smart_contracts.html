@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тема 2: DeFi (Децентралізовані фінанси) та смарт-контракти</title>
+    <link rel="stylesheet" href="../../../../new_assets/presentation/css/styles.css">
+</head>
+<body>
+
+<div class="presentation">
+    <!-- Slide Counter -->
+    <div class="slide-counter">
+        <span id="currentSlide">1</span> / <span id="totalSlides">16</span>
+    </div>
+
+    <!-- Slide 1: Title -->
+    <div class="slide active title-slide">
+        <div class="python-logo">🏦</div>
+        <h1>DeFi (Децентралізовані фінанси) та смарт-контракти</h1>
+        <p class="subtitle">Модуль 3: Платіжні системи та технології</p>
+        <p class="subtitle">Лекція 9 • Тема 2</p>
+    </div>
+
+    <!-- Slide 2: What is DeFi -->
+    <div class="slide">
+        <h2>Що таке DeFi?</h2>
+
+        <h3>📖 Визначення</h3>
+        <p><strong>DeFi (Decentralized Finance)</strong> — це фінансова екосистема, побудована на блокчейні, що надає традиційні фінансові послуги (кредитування, обмін, страхування) без посередників через смарт-контракти.</p>
+
+        <h3 style="margin-top: 20px;">🔑 Ключові принципи DeFi:</h3>
+        <ul>
+            <li><strong>Permissionless</strong> — доступ без дозволу (будь-хто може користуватися)</li>
+            <li><strong>Non-custodial</strong> — користувач контролює свої активи</li>
+            <li><strong>Transparent</strong> — весь код та транзакції відкриті</li>
+            <li><strong>Composable</strong> — протоколи можуть взаємодіяти (Money Legos)</li>
+            <li><strong>Programmable</strong> — автоматизація через смарт-контракти</li>
+        </ul>
+    </div>
+
+    <!-- Slide 3: DeFi Stack -->
+    <div class="slide">
+        <h2>DeFi стек: Рівні екосистеми</h2>
+
+        <div class="code-block">
+┌─────────────────────────────────────────┐
+│  Layer 5: Aggregators / Interfaces     │
+│  (1inch, Zapper, DeBank)                │
+├─────────────────────────────────────────┤
+│  Layer 4: Applications (dApps)          │
+│  (Uniswap, Aave, Compound, MakerDAO)    │
+├─────────────────────────────────────────┤
+│  Layer 3: Protocols & Standards         │
+│  (ERC-20, ERC-721, ERC-4626)            │
+├─────────────────────────────────────────┤
+│  Layer 2: Scaling Solutions             │
+│  (Polygon, Arbitrum, Optimism)          │
+├─────────────────────────────────────────┤
+│  Layer 1: Blockchain                    │
+│  (Ethereum, Binance Smart Chain, Solana)│
+└─────────────────────────────────────────┘</div>
+
+        <div class="info-box">
+            <strong>TVL (Total Value Locked):</strong> Станом на 2024 рік в DeFi протоколах заблоковано понад $50 млрд активів.
+        </div>
+    </div>
+
+    <!-- Slide 4: DEX -->
+    <div class="slide">
+        <h2>DEX (Децентралізовані біржі)</h2>
+
+        <h3>🔄 Uniswap: Automated Market Maker (AMM)</h3>
+        <p>Uniswap використовує модель AMM замість традиційної книги ордерів. Ліквідність надається пулами (liquidity pools), а ціни визначаються формулою.</p>
+
+        <div class="code-block">
+<span class="comment">// Constant Product Formula (x * y = k)</span>
+Token_A_Reserve * Token_B_Reserve = Constant
+
+Приклад:
+Pool: 100 ETH × 200,000 USDT = 20,000,000 (k)
+
+Swap 10 ETH → ?USDT:
+(100 + 10) * (200,000 - X) = 20,000,000
+X = 18,181 USDT (мінус комісія 0.3%)</div>
+
+        <h3 style="margin-top: 20px;">💧 Liquidity Providers (LP):</h3>
+        <p>Користувачі надають ліквідність пулу (50/50 за вартістю) і отримують LP токени + комісії від свопів (0.3%).</p>
+    </div>
+
+    <!-- Slide 5: Impermanent Loss -->
+    <div class="slide">
+        <h2>Impermanent Loss (Тимчасова втрата)</h2>
+
+        <h3>⚠️ Що таке Impermanent Loss?</h3>
+        <p><strong>Impermanent Loss</strong> — це втрата вартості активів при наданні ліквідності порівняно з простим холдингом, викликана зміною ціни токенів.</p>
+
+        <div class="code-block">
+Приклад:
+Початковий депозит: 1 ETH ($2000) + 2000 USDT
+Загальна вартість: $4000
+
+Ціна ETH зросла до $4000:
+Pool AMM rebalance: 0.707 ETH + 2828 USDT = $5656
+Just HODL: 1 ETH ($4000) + 2000 USDT = $6000
+
+Impermanent Loss: $6000 - $5656 = $344 (5.73%)</div>
+
+        <div class="warning-box">
+            <strong>Важливо:</strong> IL називається «тимчасовою» (impermanent), тому що втрата зникає, якщо ціна повертається до початкового рівня. Але якщо ви виводите активи при іншій ціні — втрата стає постійною.
+        </div>
+    </div>
+
+    <!-- Slide 6: Lending Protocols -->
+    <div class="slide">
+        <h2>Протоколи кредитування: Aave та Compound</h2>
+
+        <h3>💰 Як працює DeFi кредитування:</h3>
+        <ul>
+            <li><strong>Depositors (постачальники)</strong> — депонують активи в пул і отримують відсотки</li>
+            <li><strong>Borrowers (позичальники)</strong> — надають заставу (collateral) і беруть кредит</li>
+            <li><strong>Over-collateralization</strong> — застава > 100% (зазвичай 150-200%)</li>
+            <li><strong>Liquidation</strong> — автоматична ліквідація при падінні застави нижче порогу</li>
+        </ul>
+
+        <div class="code-block">
+Приклад Aave:
+1. Депозит: 10 ETH ($20,000)
+2. Collateral Factor: 75% → Max borrow: $15,000
+3. Borrow: 10,000 USDT
+4. Health Factor = Collateral / Borrowed = 1.5
+
+Якщо Health Factor < 1.0 → Liquidation!
+Liquidator отримує бонус 5-10%</div>
+    </div>
+
+    <!-- Slide 7: Interest Rate Models -->
+    <div class="slide">
+        <h2>Моделі процентних ставок у DeFi</h2>
+
+        <h3>📊 Utilization Rate Model:</h3>
+        <p>Процентна ставка динамічно змінюється залежно від коефіцієнту використання (utilization rate).</p>
+
+        <div class="code-block">
+Utilization Rate = Total Borrowed / Total Supplied
+
+Interest Rate Model (Compound):
+- Base Rate: 2%
+- Multiplier: залежить від utilization
+- Jump Rate: стрімке зростання при high utilization
+
+Borrow APY = Base + Utilization × Multiplier
+Supply APY = Borrow APY × Utilization × (1 - Reserve Factor)</div>
+
+        <div class="info-box">
+            <strong>Приклад:</strong> Якщо utilization = 80% і borrow APY = 8%, то supply APY ≈ 6.4% (80% × 8%).
+        </div>
+    </div>
+
+    <!-- Slide 8: Stablecoins -->
+    <div class="slide">
+        <h2>Стейблкоїни в DeFi</h2>
+
+        <h3>💵 Типи стейблкоїнів:</h3>
+
+        <table>
+            <tr>
+                <th>Тип</th>
+                <th>Приклад</th>
+                <th>Забезпечення</th>
+                <th>Централізація</th>
+            </tr>
+            <tr>
+                <td><strong>Fiat-collateralized</strong></td>
+                <td>USDT, USDC</td>
+                <td>1:1 фіатні резерви</td>
+                <td>Централізовані</td>
+            </tr>
+            <tr>
+                <td><strong>Crypto-collateralized</strong></td>
+                <td>DAI (MakerDAO)</td>
+                <td>Over-collateralized ETH</td>
+                <td>Децентралізовані</td>
+            </tr>
+            <tr>
+                <td><strong>Algorithmic</strong></td>
+                <td>FRAX, UST (failed)</td>
+                <td>Алгоритмічна модель</td>
+                <td>Децентралізовані</td>
+            </tr>
+        </table>
+
+        <div class="warning-box">
+            <strong>Terra UST Collapse (2022):</strong> Алгоритмічний стейблкоїн UST втратив прив'язку до долара, що призвело до краху екосистеми Terra (~$40 млрд втрат).
+        </div>
+    </div>
+
+    <!-- Slide 9: MakerDAO -->
+    <div class="slide">
+        <h2>MakerDAO та DAI стейблкоїн</h2>
+
+        <h3>🏛️ Як працює DAI:</h3>
+        <p>DAI — децентралізований стейблкоїн, забезпечений криптовалютами через систему Collateralized Debt Positions (CDP), тепер відомих як Vaults.</p>
+
+        <div class="code-block">
+Створення DAI:
+1. Депозит застави: 10 ETH ($20,000)
+2. Collateralization Ratio: 150%
+3. Mint DAI: до $13,333 (66% від застави)
+4. Stability Fee: ~1-5% річних
+
+Погашення:
+1. Повернути DAI + Stability Fee
+2. Отримати ETH назад
+
+Liquidation: якщо ETH падає і ratio < 150%</div>
+
+        <div class="success-box">
+            <strong>MKR Token:</strong> Токен управління MakerDAO. Власники MKR голосують за параметри системи (stability fee, collateral types).
+        </div>
+    </div>
+
+    <!-- Slide 10: Yield Farming -->
+    <div class="slide">
+        <h2>Yield Farming та Liquidity Mining</h2>
+
+        <h3>🌾 Що таке Yield Farming?</h3>
+        <p><strong>Yield Farming</strong> — стратегія максимізації прибутку шляхом надання ліквідності або стейкінгу активів у різних DeFi протоколах для отримання винагород (yield).</p>
+
+        <h3 style="margin-top: 20px;">💎 Джерела доходу:</h3>
+        <ul>
+            <li><strong>Trading fees</strong> — комісії від DEX (Uniswap 0.3%)</li>
+            <li><strong>Lending interest</strong> — відсотки від кредитування (Aave, Compound)</li>
+            <li><strong>Liquidity Mining rewards</strong> — нативні токени протоколу</li>
+            <li><strong>Staking rewards</strong> — винагороди за стейкінг governance токенів</li>
+        </ul>
+
+        <div class="code-block">
+Приклад стратегії:
+1. Deposit USDC в Aave → отримати aUSDC + 3% APY
+2. Використати aUSDC як collateral → borrow ETH
+3. Swap ETH → USDC на Uniswap
+4. Повторити (leveraged yield farming)
+
+APY може досягати 50-200%+, але з високим ризиком!</div>
+    </div>
+
+    <!-- Slide 11: Smart Contract Security -->
+    <div class="slide">
+        <h2>Безпека смарт-контрактів</h2>
+
+        <h3>🔐 Основні вразливості:</h3>
+        <ul>
+            <li><strong>Reentrancy Attack</strong> — повторний виклик функції до завершення попереднього</li>
+            <li><strong>Integer Overflow/Underflow</strong> — переповнення змінних</li>
+            <li><strong>Access Control</strong> — неправильна перевірка прав доступу</li>
+            <li><strong>Front-Running</strong> — атака через спостереження mempool</li>
+            <li><strong>Oracle Manipulation</strong> — маніпуляція зовнішніми даними</li>
+        </ul>
+
+        <div class="warning-box">
+            <strong>The DAO Hack (2016):</strong> Reentrancy атака дозволила вкрасти 3.6 млн ETH (~$50 млн). Це призвело до хардфорку Ethereum (ETH/ETC split).
+        </div>
+    </div>
+
+    <!-- Slide 12: Reentrancy Attack -->
+    <div class="slide">
+        <h2>Reentrancy Attack — детальніше</h2>
+
+        <h3>⚠️ Вразливий контракт:</h3>
+        <div class="code-block">
+<span class="comment">// ВРАЗЛИВИЙ КОД</span>
+<span class="keyword">function</span> <span class="function">withdraw</span>() <span class="keyword">public</span> {
+    uint amount = balances[msg.sender];
+
+    <span class="comment">// НЕБЕЗПЕЧНО: external call перед зміною стану</span>
+    (bool success,) = msg.sender.call{value: amount}("");
+    <span class="keyword">require</span>(success);
+
+    balances[msg.sender] = 0;  <span class="comment">// Занадто пізно!</span>
+}
+
+<span class="comment">// Атакуючий контракт</span>
+<span class="keyword">receive</span>() <span class="keyword">external</span> <span class="keyword">payable</span> {
+    <span class="comment">// Повторно викликає withdraw() перед зміною балансу</span>
+    <span class="keyword">if</span> (address(victim).balance > 0) {
+        victim.withdraw();
+    }
+}</div>
+
+        <h3 style="margin-top: 15px;">✅ Захист: Checks-Effects-Interactions Pattern</h3>
+        <div class="code-block">
+<span class="keyword">function</span> <span class="function">withdraw</span>() <span class="keyword">public</span> {
+    uint amount = balances[msg.sender];
+    <span class="keyword">require</span>(amount > 0);
+
+    balances[msg.sender] = 0;  <span class="comment">// СПОЧАТКУ змінити стан</span>
+
+    (bool success,) = msg.sender.call{value: amount}("");
+    <span class="keyword">require</span>(success);
+}</div>
+    </div>
+
+    <!-- Slide 13: Flash Loans -->
+    <div class="slide">
+        <h2>Flash Loans (Блискавичні кредити)</h2>
+
+        <h3>⚡ Що таке Flash Loan?</h3>
+        <p><strong>Flash Loan</strong> — незабезпечений кредит, який має бути повернутий в межах однієї транзакції блокчейн. Якщо кредит не повернутий — вся транзакція відкочується (revert).</p>
+
+        <div class="code-block">
+<span class="comment">// Приклад Flash Loan в Aave</span>
+<span class="keyword">function</span> <span class="function">executeOperation</span>(
+    address[] assets,
+    uint[] amounts,
+    uint[] premiums
+) <span class="keyword">external</span> <span class="keyword">returns</span> (bool) {
+    <span class="comment">// 1. Отримано flash loan (millions $)</span>
+
+    <span class="comment">// 2. Виконати арбітраж/ліквідацію/атаку</span>
+    performArbitrage();
+
+    <span class="comment">// 3. Повернути loan + 0.09% fee</span>
+    <span class="keyword">return</span> true;
+}</div>
+
+        <div class="warning-box">
+            <strong>Атаки з використанням Flash Loans:</strong> У 2020-2022 роках блискавичні кредити використовувалися для атак на DeFi протоколи, загальні втрати — понад $500 млн (bZx, Harvest Finance, Cream Finance).
+        </div>
+    </div>
+
+    <!-- Slide 14: Smart Contract Audits -->
+    <div class="slide">
+        <h2>Аудит смарт-контрактів</h2>
+
+        <h3>🔍 Процес аудиту:</h3>
+        <ul>
+            <li><strong>Manual Code Review</strong> — експертна перевірка коду</li>
+            <li><strong>Automated Tools</strong> — Slither, Mythril, Securify</li>
+            <li><strong>Formal Verification</strong> — математичне доведення коректності</li>
+            <li><strong>Fuzzing</strong> — тестування випадковими входами</li>
+            <li><strong>Bug Bounty</strong> — винагорода за знайдені вразливості</li>
+        </ul>
+
+        <div class="two-column">
+            <div class="column">
+                <h3>Аудиторські компанії</h3>
+                <ul style="margin-left: 0;">
+                    <li>OpenZeppelin</li>
+                    <li>Trail of Bits</li>
+                    <li>ConsenSys Diligence</li>
+                    <li>CertiK</li>
+                </ul>
+            </div>
+            <div class="column">
+                <h3>Автоматизовані інструменти</h3>
+                <ul style="margin-left: 0;">
+                    <li>Slither (static analysis)</li>
+                    <li>Mythril (symbolic execution)</li>
+                    <li>Echidna (fuzzing)</li>
+                    <li>Manticore</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 15: DeFi in Banking -->
+    <div class="slide">
+        <h2>DeFi та традиційний банкінг</h2>
+
+        <h3>🏦 Порівняння DeFi vs Traditional Finance:</h3>
+        <table>
+            <tr>
+                <th>Характеристика</th>
+                <th>Traditional Finance</th>
+                <th>DeFi</th>
+            </tr>
+            <tr>
+                <td><strong>Доступ</strong></td>
+                <td>KYC, банківський рахунок</td>
+                <td>Гаманець (permissionless)</td>
+            </tr>
+            <tr>
+                <td><strong>Час операцій</strong></td>
+                <td>Робочі години, 1-3 дні</td>
+                <td>24/7, секунди-хвилини</td>
+            </tr>
+            <tr>
+                <td><strong>Прозорість</strong></td>
+                <td>Непрозорі процеси</td>
+                <td>Відкритий код та blockchain</td>
+            </tr>
+            <tr>
+                <td><strong>Custody</strong></td>
+                <td>Банк зберігає активи</td>
+                <td>Self-custody</td>
+            </tr>
+            <tr>
+                <td><strong>Регулювання</strong></td>
+                <td>Суворе регулювання</td>
+                <td>Регуляторна невизначеність</td>
+            </tr>
+        </table>
+
+        <div class="success-box">
+            <strong>Гібридні моделі:</strong> Деякі банки інтегрують DeFi: JPMorgan Onyx, Societe Generale (SG-FORGE), HSBC (Digital Custody).
+        </div>
+    </div>
+
+    <!-- Slide 16: Summary -->
+    <div class="slide">
+        <h2>Підсумки теми</h2>
+
+        <ul class="checklist">
+            <li>DeFi — децентралізована фінансова екосистема на базі блокчейн</li>
+            <li>DEX (Uniswap) використовують AMM замість книги ордерів</li>
+            <li>Протоколи кредитування (Aave, Compound) — over-collateralized</li>
+            <li>Стейблкоїни (USDT, DAI) — прив'язка до фіату</li>
+            <li>Yield Farming — стратегії максимізації прибутку з високим ризиком</li>
+            <li>Reentrancy, Flash Loans — основні вектори атак</li>
+            <li>Аудит смарт-контрактів критично важливий для безпеки</li>
+        </ul>
+
+        <div style="margin-top: 30px; text-align: center;">
+            <p><strong>Наступна тема:</strong> CBDC (Цифрові валюти центральних банків)</p>
+            <p style="margin-top: 10px; opacity: 0.7;">Натисніть ESC або закрийте вікно для повернення</p>
+        </div>
+    </div>
+
+</div>
+
+<!-- Navigation -->
+<div class="navigation">
+    <button class="nav-btn" id="prevBtn" onclick="changeSlide(-1)">← Попередній</button>
+    <button class="nav-btn" onclick="window.location.href='index.html'">🏠 Головна</button>
+    <button class="nav-btn" id="nextBtn" onclick="changeSlide(1)">Наступний →</button>
+</div>
+
+<script src="../../../../new_assets/presentation/js/presentation.js"></script>
+</body>
+</html>

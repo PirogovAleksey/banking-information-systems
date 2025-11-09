@@ -208,17 +208,17 @@
         {
           "id": "9",
           "title": "Криптовалюти та блокчейн у банкінгу",
-          "description": "CBDC, DeFi інтеграція та регуляторні виклики криптовалютного банкінгу",
+          "description": "Bitcoin, Ethereum, DeFi, CBDC та безпека блокчейн-технологій",
           "duration": 80,
           "topics": [
-            "Central Bank Digital Currencies (CBDC)",
-            "DeFi та традиційний банкінг",
-            "Кібербезпека: Blockchain security, smart contract auditing",
-            "Regulatory challenges для crypto-banking"
+            "Bitcoin та Ethereum: основи блокчейн-технологій",
+            "DeFi (Децентралізовані фінанси) та смарт-контракти",
+            "CBDC (Цифрові валюти центральних банків)",
+            "Безпека блокчейн та криптовалютні загрози"
           ],
-          "securityFocus": "Blockchain security, smart contract auditing",
-          "bankingExamples": ["Digital Euro pilot", "JP Morgan JPM Coin", "Bank for International Settlements"],
-          "status": "planned"
+          "securityFocus": "Blockchain security, smart contract auditing, 51% attacks, wallet security",
+          "bankingExamples": ["e-CNY (Китай)", "Sand Dollar (Багами)", "e-Гривня (Україна)", "JPMorgan Onyx"],
+          "status": "active"
         }
       ],
       "practicalTasks": [],

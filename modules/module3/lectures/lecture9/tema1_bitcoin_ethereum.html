@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тема 1: Bitcoin та Ethereum - Основи блокчейн-технологій</title>
+    <link rel="stylesheet" href="../../../../new_assets/presentation/css/styles.css">
+</head>
+<body>
+
+<div class="presentation">
+    <!-- Slide Counter -->
+    <div class="slide-counter">
+        <span id="currentSlide">1</span> / <span id="totalSlides">15</span>
+    </div>
+
+    <!-- Slide 1: Title -->
+    <div class="slide active title-slide">
+        <div class="python-logo">₿</div>
+        <h1>Bitcoin та Ethereum: Основи блокчейн-технологій</h1>
+        <p class="subtitle">Модуль 3: Платіжні системи та технології</p>
+        <p class="subtitle">Лекція 9 • Тема 1</p>
+    </div>
+
+    <!-- Slide 2: Що таке блокчейн -->
+    <div class="slide">
+        <h2>Що таке блокчейн?</h2>
+        <h3>📖 Визначення</h3>
+        <p><strong>Блокчейн (Blockchain)</strong> — це розподілений реєстр (distributed ledger), що складається з ланцюга блоків, кожен з яких містить набір транзакцій та криптографічно пов'язаний з попереднім блоком.</p>
+
+        <h3 style="margin-top: 20px;">🔑 Ключові характеристики:</h3>
+        <ul>
+            <li><strong>Незмінність (Immutability)</strong> — дані не можуть бути змінені після запису</li>
+            <li><strong>Прозорість</strong> — всі транзакції видимі всім учасникам мережі</li>
+            <li><strong>Децентралізація</strong> — відсутність центрального контролю</li>
+            <li><strong>Криптографічний захист</strong> — використання хеш-функцій та цифрових підписів</li>
+        </ul>
+    </div>
+
+    <!-- Slide 3: Структура блоку -->
+    <div class="slide">
+        <h2>Структура блоку блокчейн</h2>
+
+        <div class="code-block">
+Block {
+    Block Header:
+        - Previous Block Hash (32 bytes)
+        - Merkle Root (32 bytes)
+        - Timestamp
+        - Difficulty Target (nBits)
+        - Nonce (4 bytes)
+
+    Block Body:
+        - Transaction Counter
+        - Transactions List
+}</div>
+
+        <h3>🔗 Зв'язок між блоками:</h3>
+        <p>Кожен блок містить хеш попереднього блоку, що створює криптографічний ланцюг. Зміна даних у будь-якому блоці змінить його хеш, що порушить весь наступний ланцюг.</p>
+
+        <div class="info-box">
+            <strong>Хеш-функція SHA-256:</strong> Bitcoin використовує SHA-256 для хешування блоків. Це односпрямована функція, яка генерує унікальний 256-бітний відбиток даних.
+        </div>
+    </div>
+
+    <!-- Slide 4: Bitcoin Architecture -->
+    <div class="slide">
+        <h2>Bitcoin: Архітектура та основні компоненти</h2>
+
+        <h3>🏗️ Основні компоненти Bitcoin:</h3>
+        <ul>
+            <li><strong>P2P мережа</strong> — децентралізована мережа вузлів (nodes)</li>
+            <li><strong>Блокчейн</strong> — розподілений реєстр всіх транзакцій</li>
+            <li><strong>Консенсус Proof of Work (PoW)</strong> — механізм досягнення згоди</li>
+            <li><strong>UTXO модель</strong> — модель невитрачених виходів транзакцій</li>
+            <li><strong>Цифрові підписи (ECDSA)</strong> — криптографічна автентифікація</li>
+        </ul>
+
+        <div class="success-box">
+            <strong>Bitcoin Whitepaper (2008):</strong> Satoshi Nakamoto опублікував першу технічну специфікацію (whitepaper), що описує peer-to-peer електронну готівкову систему без необхідності довіреної третьої сторони.
+        </div>
+    </div>
+
+    <!-- Slide 5: UTXO Model -->
+    <div class="slide">
+        <h2>UTXO модель у Bitcoin</h2>
+
+        <h3>💰 Unspent Transaction Output (UTXO):</h3>
+        <p>Bitcoin використовує модель UTXO замість балансів рахунків. Кожна транзакція споживає попередні UTXO (входи) та створює нові UTXO (виходи).</p>
+
+        <div class="code-block">
+Transaction {
+    Inputs: [
+        {
+            Previous TX Hash,
+            Output Index,
+            Signature (Unlocking Script)
+        }
+    ],
+    Outputs: [
+        {
+            Amount: 0.5 BTC,
+            Public Key Hash (Locking Script)
+        },
+        {
+            Amount: 0.3 BTC (change),
+            Public Key Hash
+        }
+    ]
+}</div>
+
+        <div class="warning-box">
+            <strong>Приклад:</strong> Якщо у вас є UTXO на 1 BTC і ви хочете надіслати 0.5 BTC, транзакція створить два виходи: 0.5 BTC отримувачу і 0.5 BTC (решта) назад вам.
+        </div>
+    </div>
+
+    <!-- Slide 6: Proof of Work -->
+    <div class="slide">
+        <h2>Proof of Work (PoW) — Консенсус Bitcoin</h2>
+
+        <h3>⚙️ Як працює PoW:</h3>
+        <p>Майнери шукають nonce (число), яке при хешуванні блоку дасть хеш, що задовольняє умову складності (difficulty target).</p>
+
+        <div class="code-block">
+SHA-256(Block Header + Nonce) < Target
+
+Target = 2^(256 - Difficulty)
+
+Приклад результату:
+000000000000000000045a... (багато нулів на початку)
+</div>
+
+        <ul style="margin-top: 15px;">
+            <li><strong>Складність (Difficulty)</strong> — автоматично коригується кожні 2016 блоків (~2 тижні)</li>
+            <li><strong>Час блоку</strong> — ~10 хвилин (цільовий час)</li>
+            <li><strong>Енергоємність</strong> — PoW вимагає великих обчислювальних потужностей</li>
+        </ul>
+
+        <div class="info-box">
+            <strong>Безпека PoW:</strong> Щоб змінити історію транзакцій, атакувач має контролювати >51% хешрейту мережі, що економічно недоцільно.
+        </div>
+    </div>
+
+    <!-- Slide 7: Ethereum Intro -->
+    <div class="slide">
+        <h2>Ethereum: Світовий комп'ютер</h2>
+
+        <h3>🌐 Що таке Ethereum?</h3>
+        <p><strong>Ethereum</strong> — це децентралізована платформа для запуску смарт-контрактів та децентралізованих застосунків (dApps). На відміну від Bitcoin, Ethereum є повним за Тьюрінгом (Turing-complete) і дозволяє виконувати довільний код.</p>
+
+        <h3 style="margin-top: 20px;">🔑 Ключові відмінності від Bitcoin:</h3>
+        <ul>
+            <li><strong>Смарт-контракти</strong> — програмований код на блокчейні</li>
+            <li><strong>EVM (Ethereum Virtual Machine)</strong> — віртуальна машина для виконання коду</li>
+            <li><strong>Account-based модель</strong> — замість UTXO</li>
+            <li><strong>Gas система</strong> — плата за обчислення</li>
+            <li><strong>Proof of Stake (з 2022)</strong> — перехід від PoW до PoS</li>
+        </ul>
+
+        <div class="success-box">
+            <strong>Ethereum 2.0 (The Merge, 2022):</strong> Перехід на Proof of Stake зменшив енергоспоживання мережі на ~99.95%.
+        </div>
+    </div>
+
+    <!-- Slide 8: Smart Contracts -->
+    <div class="slide">
+        <h2>Смарт-контракти в Ethereum</h2>
+
+        <h3>📜 Що таке смарт-контракт?</h3>
+        <p><strong>Смарт-контракт</strong> — це програма, що зберігається на блокчейні та автоматично виконується при виконанні певних умов.</p>
+
+        <div class="code-block">
+<span class="comment">// Solidity - мова для смарт-контрактів Ethereum</span>
+<span class="keyword">pragma</span> solidity ^0.8.0;
+
+<span class="keyword">contract</span> <span class="function">SimpleBank</span> {
+    <span class="keyword">mapping</span>(address => uint) <span class="keyword">public</span> balances;
+
+    <span class="keyword">function</span> <span class="function">deposit</span>() <span class="keyword">public</span> <span class="keyword">payable</span> {
+        balances[msg.sender] += msg.value;
+    }
+
+    <span class="keyword">function</span> <span class="function">withdraw</span>(uint amount) <span class="keyword">public</span> {
+        <span class="keyword">require</span>(balances[msg.sender] >= amount);
+        balances[msg.sender] -= amount;
+        payable(msg.sender).transfer(amount);
+    }
+}</div>
+
+        <div class="warning-box">
+            <strong>Незмінність контрактів:</strong> Після розгортання смарт-контракт не можна змінити. Це робить безпеку критично важливою.
+        </div>
+    </div>
+
+    <!-- Slide 9: EVM -->
+    <div class="slide">
+        <h2>Ethereum Virtual Machine (EVM)</h2>
+
+        <h3>⚙️ Архітектура EVM:</h3>
+        <ul>
+            <li><strong>Stack-based VM</strong> — стекова віртуальна машина (256-bit words)</li>
+            <li><strong>Bytecode</strong> — Solidity компілюється в EVM байткод</li>
+            <li><strong>Gas</strong> — кожна операція коштує певну кількість Gas</li>
+            <li><strong>Детермінованість</strong> — однаковий вхід дає однаковий результат</li>
+        </ul>
+
+        <div class="two-column">
+            <div class="column">
+                <h3>Gas механізм</h3>
+                <p><strong>Gas Price</strong> — ціна в Gwei (10^-9 ETH) за одиницю Gas</p>
+                <p><strong>Gas Limit</strong> — максимальна кількість Gas для транзакції</p>
+                <p><strong>Transaction Fee</strong> = Gas Used × Gas Price</p>
+            </div>
+            <div class="column">
+                <h3>Приклад операцій</h3>
+                <ul style="margin-left: 0;">
+                    <li>ADD: 3 Gas</li>
+                    <li>MUL: 5 Gas</li>
+                    <li>SSTORE: 20,000 Gas</li>
+                    <li>Transfer ETH: 21,000 Gas</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 10: Consensus Mechanisms -->
+    <div class="slide">
+        <h2>Консенсус-механізми: PoW vs PoS</h2>
+
+        <table>
+            <tr>
+                <th>Характеристика</th>
+                <th>Proof of Work (PoW)</th>
+                <th>Proof of Stake (PoS)</th>
+            </tr>
+            <tr>
+                <td><strong>Принцип</strong></td>
+                <td>Обчислювальна робота (mining)</td>
+                <td>Стейкінг криптовалюти</td>
+            </tr>
+            <tr>
+                <td><strong>Енергоспоживання</strong></td>
+                <td>Дуже високе (~150 TWh/рік Bitcoin)</td>
+                <td>Низьке (~0.01% від PoW)</td>
+            </tr>
+            <tr>
+                <td><strong>Безпека</strong></td>
+                <td>51% атака (контроль хешрейту)</td>
+                <td>51% атака (контроль стейку)</td>
+            </tr>
+            <tr>
+                <td><strong>Винагорода</strong></td>
+                <td>Block reward + комісії</td>
+                <td>Комісії + стейкінг rewards</td>
+            </tr>
+            <tr>
+                <td><strong>Приклади</strong></td>
+                <td>Bitcoin, Litecoin, Dogecoin</td>
+                <td>Ethereum 2.0, Cardano, Polkadot</td>
+            </tr>
+        </table>
+    </div>
+
+    <!-- Slide 11: PoS Details -->
+    <div class="slide">
+        <h2>Proof of Stake (PoS) у Ethereum 2.0</h2>
+
+        <h3>🔐 Як працює PoS:</h3>
+        <ul>
+            <li><strong>Validators</strong> — учасники стейкають 32 ETH для участі в консенсусі</li>
+            <li><strong>Слоти та епохи</strong> — час поділено на слоти (12 секунд) та епохи (32 слоти)</li>
+            <li><strong>Attestations</strong> — валідатори голосують за правильність блоків</li>
+            <li><strong>Slashing</strong> — покарання за шкідливу поведінку (втрата частини стейку)</li>
+        </ul>
+
+        <div class="code-block">
+Validator Rewards:
+    - Base reward: залежить від кількості валідаторів
+    - Attestation reward: за правильні голоси
+    - Proposer reward: за пропозицію блоку
+    - Sync committee reward: за участь у комітеті
+
+Slashing conditions:
+    - Double signing (два блоки на одній висоті)
+    - Surround vote (суперечливі голоси)</div>
+
+        <div class="success-box">
+            <strong>Ethereum Staking:</strong> Станом на 2024 рік у Ethereum 2.0 застейкано понад 30 мільйонів ETH.
+        </div>
+    </div>
+
+    <!-- Slide 12: BFT Consensus -->
+    <div class="slide">
+        <h2>Byzantine Fault Tolerance (BFT)</h2>
+
+        <h3>🛡️ Проблема візантійських генералів:</h3>
+        <p>Як досягти консенсусу в розподіленій системі, де деякі учасники можуть бути шкідливими або ненадійними?</p>
+
+        <h3 style="margin-top: 20px;">BFT алгоритми в блокчейн:</h3>
+        <ul>
+            <li><strong>PBFT (Practical BFT)</strong> — використовується в Hyperledger Fabric</li>
+            <li><strong>Tendermint</strong> — BFT консенсус для Cosmos</li>
+            <li><strong>HotStuff</strong> — використовується в Diem (Libra)</li>
+            <li><strong>Casper FFG</strong> — BFT компонент в Ethereum 2.0 PoS</li>
+        </ul>
+
+        <div class="info-box">
+            <strong>Теорема:</strong> BFT система може витримати до f = (n-1)/3 зловмисних вузлів, де n — загальна кількість вузлів.
+        </div>
+    </div>
+
+    <!-- Slide 13: Cryptography in Blockchain -->
+    <div class="slide">
+        <h2>Криптографія в блокчейн</h2>
+
+        <h3>🔐 Основні криптографічні примітиви:</h3>
+
+        <div class="two-column">
+            <div class="column">
+                <h3>Хеш-функції</h3>
+                <ul style="margin-left: 0;">
+                    <li><strong>SHA-256</strong> (Bitcoin)</li>
+                    <li><strong>Keccak-256</strong> (Ethereum)</li>
+                    <li><strong>BLAKE2</strong> (Zcash)</li>
+                </ul>
+                <p>Властивості: collision-resistant, pre-image resistant, avalanche effect</p>
+            </div>
+            <div class="column">
+                <h3>Цифрові підписи</h3>
+                <ul style="margin-left: 0;">
+                    <li><strong>ECDSA</strong> (secp256k1)</li>
+                    <li><strong>EdDSA</strong> (Ed25519)</li>
+                    <li><strong>Schnorr</strong> (BIP340)</li>
+                </ul>
+                <p>Забезпечують автентифікацію та неможливість відмови</p>
+            </div>
+        </div>
+
+        <div class="code-block">
+<span class="comment"># Приклад ECDSA підпису в Bitcoin</span>
+Private Key (256-bit) → Public Key (ECDSA) → Address (Base58Check)
+
+Signature = ECDSA_sign(Private_Key, Transaction_Hash)
+Verify = ECDSA_verify(Public_Key, Signature, Transaction_Hash)</div>
+    </div>
+
+    <!-- Slide 14: Banking Examples -->
+    <div class="slide">
+        <h2>Блокчейн у банківському секторі</h2>
+
+        <h3>🏦 Приклади використання:</h3>
+        <ul>
+            <li><strong>JPMorgan Quorum</strong> — приватний блокчейн на базі Ethereum для міжбанківських розрахунків</li>
+            <li><strong>SWIFT gpi</strong> — інтеграція блокчейн для відстеження трансграничних платежів</li>
+            <li><strong>R3 Corda</strong> — DLT платформа для фінансових інститутів</li>
+            <li><strong>Santander One Pay FX</strong> — міжнародні перекази на базі Ripple</li>
+        </ul>
+
+        <div class="success-box">
+            <strong>Переваги для банків:</strong> Зменшення часу розрахунків з 3-5 днів до хвилин, прозорість транзакцій, зниження операційних витрат на 30-50%.
+        </div>
+
+        <div class="warning-box">
+            <strong>Виклики:</strong> Регуляторна невизначеність, масштабованість (throughput), інтеграція із застарілими системами.
+        </div>
+    </div>
+
+    <!-- Slide 15: Summary -->
+    <div class="slide">
+        <h2>Підсумки теми</h2>
+
+        <ul class="checklist">
+            <li>Блокчейн — розподілений незмінний реєстр з криптографічним захистом</li>
+            <li>Bitcoin використовує UTXO модель та Proof of Work консенсус</li>
+            <li>Ethereum — програмована платформа зі смарт-контрактами та EVM</li>
+            <li>PoS (Ethereum 2.0) — енергоефективна альтернатива PoW</li>
+            <li>BFT консенсус забезпечує толерантність до візантійських помилок</li>
+            <li>Криптографія (хеші, ECDSA) — основа безпеки блокчейн</li>
+            <li>Банки впроваджують блокчейн для оптимізації розрахунків</li>
+        </ul>
+
+        <div style="margin-top: 30px; text-align: center;">
+            <p><strong>Наступна тема:</strong> DeFi та смарт-контракти</p>
+            <p style="margin-top: 10px; opacity: 0.7;">Натисніть ESC або закрийте вікно для повернення</p>
+        </div>
+    </div>
+
+</div>
+
+<!-- Navigation -->
+<div class="navigation">
+    <button class="nav-btn" id="prevBtn" onclick="changeSlide(-1)">← Попередній</button>
+    <button class="nav-btn" onclick="window.location.href='index.html'">🏠 Головна</button>
+    <button class="nav-btn" id="nextBtn" onclick="changeSlide(1)">Наступний →</button>
+</div>
+
+<script src="../../../../new_assets/presentation/js/presentation.js"></script>
+</body>
+</html>
