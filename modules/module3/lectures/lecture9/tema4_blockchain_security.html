@@ -158,9 +158,9 @@ Double-spending сценарій:
         <h3 style="margin-top: 20px;">⚠️ Наслідки:</h3>
         <ul>
             <li><strong>Подвійна витрата</strong> — жертва бачить фальшиві підтвердження</li>
-            <li><strong>Mining power waste</strong> — жертва майнить на wrong chain</li>
-            <li><strong>Fraud</strong> — прийняття invalid транзакцій</li>
-            <li><strong>Deanonymization</strong> — відстеження транзакцій жертви</li>
+            <li><strong>Марне витрачання потужності майнінгу</strong> — жертва майнить на неправильному ланцюгу</li>
+            <li><strong>Шахрайство</strong> — прийняття недійсних транзакцій</li>
+            <li><strong>Деанонімізація</strong> — відстеження транзакцій жертви</li>
         </ul>
 
         <div class="success-box">
@@ -248,12 +248,12 @@ Double-spending сценарій:
         <h3>🎣 Типи фішинг атак:</h3>
 
         <ul>
-            <li><strong>Fake wallet apps</strong> — підроблені мобільні додатки гаманців</li>
-            <li><strong>Phishing websites</strong> — клони офіційних сайтів (uniswap.com vs unisẃap.com)</li>
-            <li><strong>Malicious browser extensions</strong> — fake MetaMask extensions</li>
-            <li><strong>Social engineering</strong> — Discord/Telegram scams</li>
-            <li><strong>Clipboard hijacking</strong> — заміна адрес в clipboard</li>
-            <li><strong>QR code poisoning</strong> — підміна QR кодів для депозитів</li>
+            <li><strong>Фальшиві додатки гаманців</strong> — підроблені мобільні додатки гаманців</li>
+            <li><strong>Фішингові веб-сайти</strong> — клони офіційних сайтів (uniswap.com vs unisẃap.com)</li>
+            <li><strong>Шкідливі розширення браузера</strong> — фальшиві розширення MetaMask</li>
+            <li><strong>Соціальна інженерія</strong> — шахрайство в Discord/Telegram</li>
+            <li><strong>Перехоплення буфера обміну</strong> — заміна адрес у буфері обміну</li>
+            <li><strong>Підміна QR кодів</strong> — підміна QR кодів для депозитів</li>
         </ul>
 
         <div class="code-block">
@@ -320,7 +320,7 @@ while True:
         </table>
 
         <div class="success-box">
-            <strong>Best Practice:</strong> Холодні гаманці для довгострокового зберігання, гарячі для щоденних транзакцій. "Not your keys, not your coins."
+            <strong>Найкращі практики:</strong> Холодні гаманці для довгострокового зберігання, гарячі для щоденних транзакцій. "Не твої ключі — не твої монети."
         </div>
     </div>
 
@@ -366,31 +366,31 @@ creek road again ice least
                 <td><strong>Mt. Gox</strong></td>
                 <td>2014</td>
                 <td>850,000 BTC ($450M)</td>
-                <td>Hot wallet hack, insider</td>
+                <td>Злом гарячого гаманця, внутрішня крадіжка</td>
             </tr>
             <tr>
                 <td><strong>Coincheck</strong></td>
                 <td>2018</td>
                 <td>$530M (NEM)</td>
-                <td>Hot wallet, no multisig</td>
+                <td>Гарячий гаманець без мультипідпису</td>
             </tr>
             <tr>
                 <td><strong>Binance</strong></td>
                 <td>2019</td>
                 <td>7,000 BTC ($40M)</td>
-                <td>Phishing, API keys</td>
+                <td>Фішинг, крадіжка API ключів</td>
             </tr>
             <tr>
                 <td><strong>KuCoin</strong></td>
                 <td>2020</td>
                 <td>$280M</td>
-                <td>Private key compromise</td>
+                <td>Компрометація приватних ключів</td>
             </tr>
             <tr>
                 <td><strong>FTX</strong></td>
                 <td>2022</td>
                 <td>$8 billion</td>
-                <td>Fraud (not hack)</td>
+                <td>Шахрайство (не злом)</td>
             </tr>
         </table>
 
@@ -419,7 +419,7 @@ creek road again ice least
         <div class="code-block">
 Honeypot приклад (Solidity):
 <span class="keyword">function</span> <span class="function">transfer</span>(...) <span class="keyword">public</span> {
-    <span class="keyword">require</span>(msg.sender == owner, "Only owner can sell!");
+    <span class="keyword">require</span>(msg.sender == owner, "Тільки власник може продати!");
     <span class="comment">// Тільки власник може продати токени</span>
 }</div>
 

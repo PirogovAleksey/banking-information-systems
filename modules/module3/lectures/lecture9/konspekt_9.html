@@ -258,13 +258,13 @@ contract SimpleBank {
     event Withdrawal(address indexed user, uint amount);
 
     function deposit() public payable {
-        require(msg.value > 0, "Deposit must be greater than 0");
+        require(msg.value > 0, "Депозит має бути більшим за 0");
         balances[msg.sender] += msg.value;
         emit Deposit(msg.sender, msg.value);
     }
 
     function withdraw(uint amount) public {
-        require(balances[msg.sender] >= amount, "Insufficient balance");
+        require(balances[msg.sender] >= amount, "Недостатній баланс");
         balances[msg.sender] -= amount;
         payable(msg.sender).transfer(amount);
         emit Withdrawal(msg.sender, amount);
@@ -529,7 +529,7 @@ Supply APY = Borrow APY × Utilization × (1 - Reserve Factor)
                         <td>FRAX, UST (failed)</td>
                         <td>Алгоритмічна модель</td>
                         <td>Децентралізовані</td>
-                        <td>Death spiral risk, confidence loss</td>
+                        <td>Ризик спіралі смерті, втрата довіри</td>
                     </tr>
                 </tbody>
             </table>
@@ -587,7 +587,7 @@ Governance:
             <ol>
                 <li><strong>Reentrancy Attack</strong> — повторний виклик функції до завершення попереднього (The DAO hack)</li>
                 <li><strong>Integer Overflow/Underflow</strong> — переповнення змінних (BeautyChain)</li>
-                <li><strong>Access Control</strong> — неправильна перевірка прав доступу (Parity Multisig)</li>
+                <li><strong>Контроль доступу</strong> — неправильна перевірка прав доступу (Parity Multisig)</li>
                 <li><strong>Unchecked Low-Level Calls</strong> — ігнорування return values</li>
                 <li><strong>Front-Running (MEV)</strong> — атака через спостереження mempool</li>
                 <li><strong>Timestamp Dependence</strong> — покладання на block.timestamp (маніпулюється майнерами)</li>
@@ -640,7 +640,7 @@ receive() external payable {
 // БЕЗПЕЧНИЙ КОД
 function withdraw() public {
     uint amount = balances[msg.sender];
-    require(amount > 0, "No balance");
+    require(amount > 0, "Немає балансу");
 
     // 1. CHECKS: перевірки
     // 2. EFFECTS: зміна стану СПОЧАТКУ
@@ -648,12 +648,12 @@ function withdraw() public {
 
     // 3. INTERACTIONS: зовнішні виклики В КІНЦІ
     (bool success,) = msg.sender.call{value: amount}("");
-    require(success, "Transfer failed");
+    require(success, "Переказ не вдався");
 }
 
 Альтернатива: ReentrancyGuard modifier (OpenZeppelin)
 modifier nonReentrant() {
-    require(!locked, "Reentrant call");
+    require(!locked, "Повторний виклик");
     locked = true;
     _;
     locked = false;
@@ -930,7 +930,7 @@ Sand Dollar Wallet Tiers:
                 <h4>Для центральних банків:</h4>
                 <ul>
                     <li><strong>Монетарна політика:</strong> Прямий канал впливу (можливість negative rates, helicopter money)</li>
-                    <li><strong>Фінансова стабільність:</strong> Real-time моніторинг економіки, швидке реагування</li>
+                    <li><strong>Фінансова стабільність:</strong> Моніторинг економіки в реальному часі, швидке реагування</li>
                     <li><strong>AML/CFT:</strong> Кращий контроль за відмиванням грошей та фінансуванням тероризму</li>
                     <li><strong>Тіньова економіка:</strong> Зменшення обсягу готівки зменшує тіньову економіку</li>
                     <li><strong>Seigniorage:</strong> Збереження доходів від емісії грошей</li>
@@ -989,7 +989,7 @@ Sand Dollar Wallet Tiers:
    - Post-quantum cryptography (NIST стандарти)
    - Multi-signature для критичних операцій
    - Hardware Security Modules (HSM) для ключів емісії
-   - Regular penetration testing та bug bounties
+   - Регулярне тестування на проникнення та bug bounties
 
 4. Масштабованість:
    - Distributed ledger technology (Hyperledger, Corda)
@@ -1013,8 +1013,8 @@ Sand Dollar Wallet Tiers:
                 <li><strong>Вразливості смарт-контрактів:</strong> Reentrancy, Integer overflow, Access control, Logic errors</li>
                 <li><strong>Атаки на протоколи DeFi:</strong> Flash loan attacks, Oracle manipulation, Front-running (MEV)</li>
                 <li><strong>Криптовалютне шахрайство:</strong> Phishing, Rug pulls, Ponzi schemes, Fake ICOs</li>
-                <li><strong>Атаки на гаманці:</strong> Malware, Seed phrase theft, Clipboard hijacking</li>
-                <li><strong>Exchange hacks:</strong> Hot wallet compromise, API key theft, Insider attacks</li>
+                <li><strong>Атаки на гаманці:</strong> Зловмисне ПЗ, крадіжка мнемонічної фрази, перехоплення буфера обміну</li>
+                <li><strong>Хаки бірж:</strong> Компрометація гарячих гаманців, крадіжка API ключів, внутрішні атаки</li>
             </ol>
 
             <div class="warning-box">
@@ -1167,8 +1167,8 @@ Bitcoin node має ~125 connections:
 Наслідки:
 - Жертва бачить fake blockchain
 - Double-spend attacks (жертва приймає invalid transactions)
-- Mining power waste (майнинг на wrong chain)
-- Deanonymization (відстеження всіх транзакцій жертви)
+- Марне витрачання потужності майнінгу (майнинг на неправильному ланцюгу)
+- Деанонімізація (відстеження всіх транзакцій жертви)
 
 Захист:
 - Використання trusted seed nodes
@@ -1264,12 +1264,12 @@ witch collapse practice feed shame open despair creek road again ice least
 
             <h4>Атаки на гаманці:</h4>
             <ol>
-                <li><strong>Clipboard Hijacking:</strong> Malware замінює криптоадресу в clipboard на адресу атакувача</li>
-                <li><strong>Seed Phrase Phishing:</strong> Fake wallet apps просять ввести seed для "verification"</li>
-                <li><strong>Man-in-the-Middle:</strong> Підміна адреси при відображенні транзакції</li>
-                <li><strong>Supply Chain Attack:</strong> Компрометовані hardware wallets з передустановленим seed</li>
-                <li><strong>Malware:</strong> Keyloggers, screen recorders, RATs (Remote Access Trojans)</li>
-                <li><strong>Physical Theft:</strong> Крадіжка hardware wallet + brute force PIN</li>
+                <li><strong>Перехоплення буфера обміну:</strong> Зловмисне ПЗ замінює криптоадресу в буфері обміну на адресу атакувача</li>
+                <li><strong>Фішинг мнемонічних фраз:</strong> Фальшиві додатки гаманців просять ввести seed для "верифікації"</li>
+                <li><strong>Атака "людина посередині":</strong> Підміна адреси при відображенні транзакції</li>
+                <li><strong>Атака на ланцюг постачання:</strong> Компрометовані апаратні гаманці з передустановленим seed</li>
+                <li><strong>Зловмисне ПЗ:</strong> Клавіатурні шпигуни, програми запису екрану, RAT (троянці віддаленого доступу)</li>
+                <li><strong>Фізична крадіжка:</strong> Крадіжка апаратного гаманця + підбір PIN-коду</li>
             </ol>
 
             <h3 id="phishing">4.5. Криптовалютний фішинг та соціальна інженерія</h3>
@@ -1278,13 +1278,13 @@ witch collapse practice feed shame open despair creek road again ice least
 
             <div class="warning-box">
                 <ol>
-                    <li><strong>Fake Wallet Apps:</strong> Підроблені мобільні додатки в App Store/Google Play
+                    <li><strong>Фальшиві додатки гаманців:</strong> Підроблені мобільні додатки в App Store/Google Play
                         <ul>
-                            <li>Fake MetaMask, Fake Trust Wallet з високим рейтингом (купленими reviews)</li>
-                            <li>App просить seed phrase → атакувач крадне кошти</li>
+                            <li>Фальшиві MetaMask, Trust Wallet з високим рейтингом (купленими відгуками)</li>
+                            <li>Додаток просить seed phrase → атакувач крадне кошти</li>
                         </ul>
                     </li>
-                    <li><strong>Phishing Websites:</strong> Клони офіційних сайтів з подібним доменом
+                    <li><strong>Фішингові веб-сайти:</strong> Клони офіційних сайтів з подібним доменом
                         <ul>
                             <li>uniswap.com vs unisẃap.com (Cyrillic 'w')</li>
                             <li>pancakeswap.finance vs pancakeswap-finance.com</li>
@@ -1312,7 +1312,7 @@ witch collapse practice feed shame open despair creek road again ice least
             </div>
 
             <pre class="code-block">
-Clipboard Hijacker Malware (приклад):
+Зловмисне ПЗ для перехоплення буфера обміну (приклад):
 
 import pyperclip
 import re
@@ -1371,35 +1371,35 @@ while True:
                         <td><strong>Mt. Gox</strong></td>
                         <td>2014</td>
                         <td>850,000 BTC ($450M)</td>
-                        <td>Hot wallet hack, insider theft</td>
+                        <td>Злом гарячого гаманця, внутрішня крадіжка</td>
                         <td>Банкрутство, судові справи до 2024</td>
                     </tr>
                     <tr>
                         <td><strong>Coincheck</strong></td>
                         <td>2018</td>
                         <td>$530M (NEM)</td>
-                        <td>Hot wallet без multisig</td>
+                        <td>Гарячий гаманець без мультипідпису</td>
                         <td>Компенсували користувачам</td>
                     </tr>
                     <tr>
                         <td><strong>Binance</strong></td>
                         <td>2019</td>
                         <td>7,000 BTC ($40M)</td>
-                        <td>Phishing, API key compromise</td>
+                        <td>Фішинг, компрометація API ключів</td>
                         <td>Покрито через SAFU fund</td>
                     </tr>
                     <tr>
                         <td><strong>KuCoin</strong></td>
                         <td>2020</td>
                         <td>$280M</td>
-                        <td>Private key compromise</td>
+                        <td>Компрометація приватних ключів</td>
                         <td>Повернуто 84% через співпрацю</td>
                     </tr>
                     <tr>
                         <td><strong>FTX</strong></td>
                         <td>2022</td>
                         <td>$8 BILLION</td>
-                        <td>Fraud (not hack), misuse of funds</td>
+                        <td>Шахрайство (не злом), нецільове використання коштів</td>
                         <td>Банкрутство, Sam Bankman-Fried arrested</td>
                     </tr>
                 </tbody>
@@ -1408,11 +1408,11 @@ while True:
             <div class="warning-box">
                 <h4>Уроки від хаків бірж:</h4>
                 <ul>
-                    <li><strong>Hot vs Cold:</strong> Сучасні біржі тримають >95% коштів в cold storage</li>
-                    <li><strong>Multisig:</strong> Критично важливо для hot wallets (3-of-5, 5-of-7 signatures)</li>
-                    <li><strong>Proof of Reserves:</strong> Прозорість reserves через Merkle tree proofs</li>
-                    <li><strong>Insurance Funds:</strong> Binance SAFU, Coinbase insurance ($255M)</li>
-                    <li><strong>Regulatory Compliance:</strong> Ліцензування, аудити (SOC 2, ISO 27001)</li>
+                    <li><strong>Гарячі проти холодних:</strong> Сучасні біржі тримають >95% коштів у холодному зберіганні</li>
+                    <li><strong>Мультипідпис:</strong> Критично важливо для гарячих гаманців (3-з-5, 5-з-7 підписів)</li>
+                    <li><strong>Підтвердження резервів:</strong> Прозорість резервів через Merkle tree докази</li>
+                    <li><strong>Страхові фонди:</strong> Binance SAFU, страхування Coinbase ($255M)</li>
+                    <li><strong>Регуляторна відповідність:</strong> Ліцензування, аудити (SOC 2, ISO 27001)</li>
                 </ul>
             </div>
 
@@ -1420,21 +1420,21 @@ while True:
 
             <h4>Великі DeFi Exploits 2020-2024:</h4>
             <ul>
-                <li><strong>Poly Network (2021):</strong> $611M — cross-chain bridge exploit (повернуто whithe hat hacker)</li>
-                <li><strong>Wormhole (2022):</strong> $325M — signature verification bypass в bridge</li>
-                <li><strong>Ronin Bridge (2022):</strong> $625M — compromised 5 з 9 validator private keys</li>
-                <li><strong>BNB Chain (2022):</strong> $586M — proof verification bug в bridge</li>
-                <li><strong>Euler Finance (2023):</strong> $197M — donation attack exploit</li>
+                <li><strong>Poly Network (2021):</strong> $611M — експлойт міжланцюгового мосту (повернуто білим хакером)</li>
+                <li><strong>Wormhole (2022):</strong> $325M — обхід перевірки підпису в мості</li>
+                <li><strong>Ronin Bridge (2022):</strong> $625M — скомпрометовано 5 з 9 приватних ключів валідаторів</li>
+                <li><strong>BNB Chain (2022):</strong> $586M — помилка перевірки доказів у мості</li>
+                <li><strong>Euler Finance (2023):</strong> $197M — експлойт атаки через донат</li>
             </ul>
 
             <h4>Типові вектори DeFi атак:</h4>
             <ol>
-                <li><strong>Oracle Manipulation:</strong> Flash loan → маніпуляція ціною → ліквідація позицій</li>
-                <li><strong>Bridge Exploits:</strong> Cross-chain bridges — найбільші втрати (>$2 млрд)</li>
-                <li><strong>Flash Loan Attacks:</strong> Незабезпечені кредити для exploitation</li>
-                <li><strong>Reentrancy:</strong> Класична атака (The DAO 2016)</li>
-                <li><strong>Governance Attacks:</strong> Купівля токенів управління → malicious proposals</li>
-                <li><strong>Front-Running / MEV:</strong> Sandwich attacks, liquidation bots</li>
+                <li><strong>Маніпуляція оракулами:</strong> Блискавичний кредит → маніпуляція ціною → ліквідація позицій</li>
+                <li><strong>Експлойти мостів:</strong> Міжланцюгові мости — найбільші втрати (>$2 млрд)</li>
+                <li><strong>Атаки з блискавичними кредитами:</strong> Незабезпечені кредити для експлуатації вразливостей</li>
+                <li><strong>Повторний вхід:</strong> Класична атака (The DAO 2016)</li>
+                <li><strong>Атаки на управління:</strong> Купівля токенів управління → шкідливі пропозиції</li>
+                <li><strong>Випередження / MEV:</strong> Sandwich атаки, боти ліквідації</li>
             </ol>
 
             <pre class="code-block">
@@ -1471,61 +1471,61 @@ Flash Loan Attack Example (спрощений):
                 найвищих стандартів безпеки.
             </p>
 
-            <h4>Best Practices для банків:</h4>
+            <h4>Найкращі практики для банків:</h4>
 
             <div class="success-box">
                 <ol>
-                    <li><strong>Institutional Custody:</strong>
+                    <li><strong>Інституційне зберігання:</strong>
                         <ul>
-                            <li>Використання enterprise-grade custody (Fireblocks, BitGo, Anchorage)</li>
-                            <li>Multi-party computation (MPC) для ключів — no single point of failure</li>
-                            <li>Hardware Security Modules (HSM) для зберігання ключів</li>
+                            <li>Використання професійних сервісів зберігання (Fireblocks, BitGo, Anchorage)</li>
+                            <li>Багатосторонні обчислення (MPC) для ключів — немає єдиної точки відмови</li>
+                            <li>Апаратні модулі безпеки (HSM) для зберігання ключів</li>
                         </ul>
                     </li>
-                    <li><strong>Cold Storage:</strong>
+                    <li><strong>Холодне зберігання:</strong>
                         <ul>
-                            <li>95-99% коштів в cold storage (offline)</li>
-                            <li>Geographic distribution cold wallets (різні data centers)</li>
-                            <li>Air-gapped signing (offline computers для підписів)</li>
+                            <li>95-99% коштів у холодному зберіганні (офлайн)</li>
+                            <li>Географічний розподіл холодних гаманців (різні дата-центри)</li>
+                            <li>Ізольоване підписання (офлайн-комп'ютери для підписів)</li>
                         </ul>
                     </li>
-                    <li><strong>Transaction Security:</strong>
+                    <li><strong>Безпека транзакцій:</strong>
                         <ul>
-                            <li>Multi-signature wallets (3-of-5, 5-of-7, 7-of-10)</li>
-                            <li>Time delays для великих withdrawals (24-72h)</li>
-                            <li>Whitelisting адрес (pre-approved destinations)</li>
-                            <li>Manual approval для >$100k транзакцій</li>
+                            <li>Гаманці з мультипідписом (3-з-5, 5-з-7, 7-з-10)</li>
+                            <li>Затримки для великих виведень (24-72 год)</li>
+                            <li>Білий список адрес (попередньо схвалені адреси призначення)</li>
+                            <li>Ручне схвалення для транзакцій >$100k</li>
                         </ul>
                     </li>
-                    <li><strong>Monitoring and Compliance:</strong>
+                    <li><strong>Моніторинг та відповідність:</strong>
                         <ul>
-                            <li>Real-time transaction monitoring (AML/CFT screening)</li>
-                            <li>Blockchain analytics (Chainalysis, Elliptic, CipherTrace)</li>
-                            <li>Travel Rule compliance для cross-border >$1000</li>
-                            <li>SIEM integration для security events</li>
+                            <li>Моніторинг транзакцій у режимі реального часу (AML/CFT перевірка)</li>
+                            <li>Блокчейн-аналітика (Chainalysis, Elliptic, CipherTrace)</li>
+                            <li>Відповідність правилу подорожей для трансграничних >$1000</li>
+                            <li>Інтеграція SIEM для подій безпеки</li>
                         </ul>
                     </li>
-                    <li><strong>Smart Contract Security:</strong>
+                    <li><strong>Безпека смарт-контрактів:</strong>
                         <ul>
                             <li>Аудити від топ компаній (OpenZeppelin, Trail of Bits)</li>
-                            <li>Bug bounties (Immunefi) — до $1M rewards</li>
-                            <li>Formal verification критичних контрактів</li>
-                            <li>Upgradeable contracts через proxy patterns</li>
+                            <li>Програми винагород за баги (Immunefi) — до $1M винагороди</li>
+                            <li>Формальна верифікація критичних контрактів</li>
+                            <li>Оновлювані контракти через proxy патерни</li>
                         </ul>
                     </li>
-                    <li><strong>Insurance:</strong>
+                    <li><strong>Страхування:</strong>
                         <ul>
-                            <li>Crypto insurance (Lloyd's of London, BitGo insurance)</li>
-                            <li>Coverage для custody, hot wallet, cold storage</li>
-                            <li>Typical coverage: $100M-$500M per policy</li>
+                            <li>Крипто-страхування (Lloyd's of London, страхування BitGo)</li>
+                            <li>Покриття для зберігання, гарячих гаманців, холодного зберігання</li>
+                            <li>Типове покриття: $100M-$500M на поліс</li>
                         </ul>
                     </li>
-                    <li><strong>Regulatory Compliance:</strong>
+                    <li><strong>Регуляторна відповідність:</strong>
                         <ul>
-                            <li>Ліцензування (BitLicense NY, MiCA EU, VASP licenses)</li>
-                            <li>SOC 2 Type II certification</li>
-                            <li>ISO 27001 (Information Security Management)</li>
-                            <li>Regular third-party penetration testing</li>
+                            <li>Ліцензування (BitLicense NY, MiCA EU, ліцензії VASP)</li>
+                            <li>Сертифікація SOC 2 Type II</li>
+                            <li>ISO 27001 (Управління інформаційною безпекою)</li>
+                            <li>Регулярне тестування на проникнення третіми сторонами</li>
                         </ul>
                     </li>
                 </ol>
@@ -1535,25 +1535,25 @@ Flash Loan Attack Example (спрощений):
             <pre class="code-block">
 JPMorgan Onyx — institutional blockchain platform:
 
-Security Architecture:
-1. Permissioned Blockchain (Quorum — fork of Ethereum)
-2. Know Your Customer (KYC) для всіх validators
-3. Hardware Security Modules для validator keys
-4. Multi-signature wallets (5-of-7) для treasury
-5. Zero-Knowledge proofs для privacy (ZK-SNARKs)
-6. Regular security audits by third parties
-7. 24/7 SOC (Security Operations Center)
+Архітектура безпеки:
+1. Дозволений блокчейн (Quorum — форк Ethereum)
+2. Знай свого клієнта (KYC) для всіх валідаторів
+3. Апаратні модулі безпеки для ключів валідаторів
+4. Гаманці з мультипідписом (5-з-7) для казначейства
+5. Докази з нульовим розголошенням для конфіденційності (ZK-SNARKs)
+6. Регулярні аудити безпеки третіми сторонами
+7. 24/7 Центр операцій безпеки (SOC)
 
-Governance:
-- Consortium governance (JPMorgan + partner banks)
-- Voting on network upgrades
-- Incident response protocols
+Управління:
+- Консорціумне управління (JPMorgan + банки-партнери)
+- Голосування за оновлення мережі
+- Протоколи реагування на інциденти
 
-Compliance:
-- Built-in AML/CFT screening
-- Real-time transaction monitoring
-- Regulatory reporting automation
-- GDPR compliance для EU operations</pre>
+Відповідність:
+- Вбудована перевірка AML/CFT
+- Моніторинг транзакцій у режимі реального часу
+- Автоматизація регуляторної звітності
+- Відповідність GDPR для операцій у ЄС</pre>
 
             <h2 id="conclusion">Підсумки лекції</h2>
 
