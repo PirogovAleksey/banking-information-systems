@@ -418,6 +418,21 @@
     color: #dc2626;
 }
 
+.badge-critical {
+    background: #dc3545;
+    color: white;
+}
+
+.badge-medium {
+    background: #fd7e14;
+    color: white;
+}
+
+.badge-high {
+    background: #ffc107;
+    color: black;
+}
+
 /* ----------------------------------------------------------------
    НАВІГАЦІЯ
    ---------------------------------------------------------------- */
@@ -534,6 +549,168 @@
 
     pre {
         page-break-inside: avoid;
+    }
+}
+
+/* ----------------------------------------------------------------
+   ADDITIONAL COMPONENTS (для practical_4 та practical_5)
+   ---------------------------------------------------------------- */
+
+/* Code blocks */
+.code-block {
+    background: #f4f4f4;
+    border: 1px solid #ddd;
+    border-left: 3px solid #0066cc;
+    padding: 15px;
+    margin: 15px 0;
+    border-radius: 5px;
+    font-family: 'Courier New', monospace;
+    overflow-x: auto;
+    white-space: pre-wrap;
+}
+
+.code-diagram {
+    background: #2d2d2d;
+    color: #10b981;
+    padding: 20px;
+    border-radius: 8px;
+    font-family: 'Courier New', monospace;
+    overflow-x: auto;
+    margin: 15px 0;
+    white-space: pre;
+}
+
+/* Step cards */
+.step-card {
+    background: white;
+    border: 2px solid #0066cc;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 15px 0;
+}
+
+.step-number {
+    display: inline-block;
+    width: 35px;
+    height: 35px;
+    background: #0066cc;
+    color: white;
+    text-align: center;
+    line-height: 35px;
+    border-radius: 50%;
+    margin-right: 10px;
+    font-weight: bold;
+    font-size: 1.1em;
+}
+
+/* Example boxes */
+.example-box {
+    background: #f0f8ff;
+    border: 1px dashed #0066cc;
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 5px;
+}
+
+/* Query examples */
+.query-example {
+    background: #282c34;
+    color: #61dafb;
+    padding: 10px 15px;
+    border-radius: 5px;
+    font-family: 'Courier New', monospace;
+    margin: 10px 0;
+    white-space: pre-wrap;
+}
+
+/* Screenshot placeholder */
+.screenshot-placeholder {
+    background: #e9ecef;
+    border: 2px dashed #6c757d;
+    padding: 40px;
+    text-align: center;
+    color: #6c757d;
+    margin: 15px 0;
+    border-radius: 8px;
+}
+
+/* Vulnerability list */
+.vulnerability-list {
+    list-style: none;
+    padding-left: 0;
+}
+
+.vulnerability-list li {
+    padding: 10px;
+    margin: 8px 0;
+    background: #f8f9fa;
+    border-left: 4px solid #dc3545;
+    border-radius: 4px;
+}
+
+/* Danger box */
+.danger-box {
+    background: #f8d7da;
+    border: 1px solid #f5c6cb;
+    padding: 15px;
+    margin: 15px 0;
+    border-radius: 6px;
+    color: #721c24;
+}
+
+/* ----------------------------------------------------------------
+   GRID SYSTEM
+   ---------------------------------------------------------------- */
+
+.grid {
+    display: grid;
+}
+
+.grid-cols-2 {
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.gap-4 {
+    gap: 1.5rem;
+}
+
+/* ----------------------------------------------------------------
+   UTILITY CLASSES
+   ---------------------------------------------------------------- */
+
+.mb-6 {
+    margin-bottom: 2rem;
+}
+
+.mb-8 {
+    margin-bottom: 3rem;
+}
+
+.text-secondary {
+    color: #666;
+    font-size: 1.1rem;
+}
+
+.text-center {
+    text-align: center;
+}
+
+/* Footer */
+.practical-footer {
+    text-align: center;
+    margin-top: 40px;
+    color: #999;
+    padding-bottom: 20px;
+    font-size: 0.9rem;
+}
+
+/* ----------------------------------------------------------------
+   RESPONSIVE GRID
+   ---------------------------------------------------------------- */
+
+@media (max-width: 768px) {
+    .grid-cols-2 {
+        grid-template-columns: 1fr;
     }
 }
 

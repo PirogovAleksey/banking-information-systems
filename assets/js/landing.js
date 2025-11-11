@@ -33,12 +33,35 @@ class LandingPage {
             await this.loadCourseData();
             this.updateStats();
             this.setupTabs();
+            this.checkUrlHash();
             this.renderActiveTab();
             console.log('✅ Головна сторінка ініціалізована успішно');
         } catch (error) {
             console.error('❌ Помилка завантаження даних курсу:', error);
             this.showError();
         }
+    }
+
+    /**
+     * Перевірка URL hash для активації правильного табу
+     */
+    checkUrlHash() {
+        const hash = window.location.hash.substring(1); // Видаляємо #
+        if (hash === 'practicals') {
+            this.activeTab = 'practicals';
+        } else if (hash === 'lectures') {
+            this.activeTab = 'lectures';
+        }
+
+        // Оновити візуальний стан кнопок табів
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.classList.toggle('active', btn.dataset.tab === this.activeTab);
+        });
+
+        // Оновити видимість контенту табів
+        document.querySelectorAll('.tab-content').forEach(content => {
+            content.classList.toggle('active', content.id === `${this.activeTab}-tab`);
+        });
     }
 
     /**
@@ -90,6 +113,9 @@ class LandingPage {
     switchTab(tabName) {
         // Оновити активний таб
         this.activeTab = tabName;
+
+        // Оновити URL hash
+        window.location.hash = tabName;
 
         // Оновити кнопки табів
         document.querySelectorAll('.tab-btn').forEach(btn => {

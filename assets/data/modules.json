@@ -78,7 +78,7 @@
           "description": "Дослідження та документування архітектури реальної банківської системи з фокусом на безпеку",
           "estimatedTime": 160,
           "type": "analysis",
-          "url": "modules/module1/practicals/practical_1_1.html"
+          "url": "practicals/practical_1_1.html"
         },
         {
           "id": "P2",
@@ -86,7 +86,7 @@
           "description": "Міграція даних між банківськими системами - планування та ризики міграції даних при заміні або модернізації Core Banking System",
           "estimatedTime": 160,
           "type": "planning",
-          "url": "modules/module1/practicals/practical_2.html"
+          "url": "practicals/practical_2.html"
         }
       ],
       "keywords": ["Banking Architecture", "Core Banking", "Database Security", "Threat Modeling"]
@@ -153,7 +153,7 @@
           "description": "Розробка стратегії резервного копіювання та плану відновлення після катастроф для комерційного банку",
           "estimatedTime": 160,
           "type": "planning",
-          "url": "modules/module2/practicals/practical_3.html"
+          "url": "practicals/practical_3.html"
         },
         {
           "id": "P4",
@@ -161,7 +161,7 @@
           "description": "Аналіз логів банківських систем з використанням ELK Stack - виявлення шахрайства та моніторинг безпеки",
           "estimatedTime": 240,
           "type": "technical",
-          "url": "modules/module2/practicals/practical_4.html"
+          "url": "practicals/practical_4.html"
         }
       ],
       "keywords": ["CBS", "API Security", "OAuth", "Vendor Risk", "Access Controls"]
@@ -221,7 +221,16 @@
           "status": "active"
         }
       ],
-      "practicalTasks": [],
+      "practicalTasks": [
+        {
+          "id": "P5",
+          "title": "Практична робота 5",
+          "description": "Тестування безпеки веб-додатків - виявлення та експлуатація вразливостей у контрольованому середовищі Vulnerable Bank",
+          "estimatedTime": 240,
+          "type": "technical",
+          "url": "practicals/practical_5.html"
+        }
+      ],
       "keywords": ["Payment Systems", "PCI DSS", "Mobile Security", "Blockchain", "CBDC"]
     },
     {
@@ -393,7 +402,7 @@
     },
     "practicalProgress": {
       "completed": 0,
-      "total": 4
+      "total": 5
     }
   },
   "assessment": {

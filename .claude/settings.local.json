@@ -4,7 +4,17 @@
       "Bash(mkdir:*)",
       "Bash(done)",
       "Bash(git checkout:*)",
-      "Bash(start konspekt_9.html)"
+      "Bash(start konspekt_9.html)",
+      "Bash(move \"modules\\module1\\practicals\\practical_1_1.html\" \"practicals\\practical_1_1.html\")",
+      "Bash(move \"modules\\module1\\practicals\\practical_2.html\" \"practicals\\practical_2.html\")",
+      "Bash(move \"modules\\module2\\practicals\\practical_3.html\" \"practicals\\practical_3.html\")",
+      "Bash(move \"modules\\module2\\practicals\\practical_4.html\" \"practicals\\practical_4.html\")",
+      "Bash(mv:*)",
+      "Bash(find:*)",
+      "Bash(node -e:*)",
+      "WebFetch(domain:github.com)",
+      "Bash(practicals/practical_4_temp.html)",
+      "Bash(practicals/practical_5_temp.html)"
     ],
     "deny": [],
     "ask": []
