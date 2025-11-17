@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Лекція 10: Кіберзагрози в банківській сфері - Banking Cybersecurity для спеціальності Кібербезпека">
+    <title>Лекція 10: Кіберзагрози в банківській сфері | Модуль 4</title>
+
+    <!-- Використовуємо існуючі стилі проекту -->
+    <link rel="stylesheet" href="../../../../assets/css/base.css">
+    <link rel="stylesheet" href="../../../../assets/css/layout.css">
+    <link rel="stylesheet" href="../../../../assets/css/components.css">
+    <link rel="stylesheet" href="../../../../assets/css/pages.css">
+</head>
+<body class="page">
+<!-- Header with Breadcrumbs -->
+<header class="header">
+    <div class="container">
+        <nav class="breadcrumb">
+            <a href="../../../../index.html">🏠 Головна</a>
+            <span class="breadcrumb-separator">→</span>
+            <a href="../../index.html">Модуль 4</a>
+            <span class="breadcrumb-separator">→</span>
+            <span>Лекція 10</span>
+        </nav>
+    </div>
+</header>
+
+<!-- Lecture Header -->
+<section class="landing-hero" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+    <div class="container">
+        <div class="landing-hero-content">
+            <h1 class="landing-title">Кіберзагрози в банківській сфері</h1>
+            <p class="landing-subtitle">
+                Лекція 10 • Модуль 4: Безпека банківських систем
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- Main Content -->
+<main class="main">
+    <div class="container">
+        <!-- Lecture Overview -->
+        <section class="card mb-8">
+            <div class="card-header">
+                <h2 class="card-title">📋 Огляд лекції</h2>
+            </div>
+            <div class="card-body">
+                <p class="text-large mb-4">
+                    Комплексний аналіз кіберзагроз, що націлені на банківську інфраструктуру: від APT груп світового рівня
+                    (Lazarus, Carbanak) до спеціалізованих banking trojans (Zeus, Emotet, Trickbot). Вивчення методології
+                    threat intelligence, аналізу векторів атак та застосування Cyber Kill Chain для виявлення та протидії загрозам.
+                </p>
+                <div class="alert alert-info">
+                    <div class="alert-title">🎯 Мета лекції</div>
+                    Навчитися ідентифікувати та аналізувати сучасні кіберзагрози для банків, розуміти тактики, техніки та процедури (TTPs)
+                    APT груп, застосовувати фреймворк MITRE ATT&CK для threat modeling, використовувати threat intelligence feeds
+                    та проводити Kill Chain аналіз для побудови ефективного захисту банківських систем.
+                </div>
+                <div class="mt-4 flex justify-center">
+                    <a href="konspekt_10.html" class="btn btn-primary">
+                        📖 Переглянути повний конспект лекції
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Topics Section -->
+        <section class="module-section">
+            <h2 class="section-title">📚 Теми лекції</h2>
+            <p class="section-subtitle mb-8">
+                Оберіть тему для детального вивчення
+            </p>
+
+            <div class="modules-grid">
+                <!-- Тема 1: APT Groups -->
+                <div class="card card-module">
+                    <div class="card-header">
+                        <div class="flex justify-between items-center">
+                            <span class="badge badge-error">Тема 1</span>
+                            <span class="badge badge-outline">🛡️ Security Focus</span>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="module-number">🎯</div>
+                        <h3 class="card-title">APT групи, що атакують банки</h3>
+                        <p class="card-subtitle mb-4">
+                            Lazarus Group, Carbanak (Anunak), APT38 — найнебезпечніші кіберзлочинні організації у фінсекторі
+                        </p>
+
+                        <div class="module-items">
+                            <div class="module-item">
+                                <span class="module-item-title">Lazarus Group та Bangladesh Bank heist ($81M)</span>
+                            </div>
+                            <div class="module-item">
+                                <span class="module-item-title">Carbanak campaign — $1 млрд крадіжка</span>
+                            </div>
+                            <div class="module-item">
+                                <span class="module-item-title">APT38: SWIFT network attacks</span>
+                            </div>
+                            <div class="module-item">
+                                <span class="module-item-title">Тактики, техніки та процедури (TTPs)</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <div class="btn-group">
+                            <a href="tema1_apt_groups.html" class="btn btn-primary">
+                                🎨 Презентація
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Тема 2: Banking Trojans -->
+                <div class="card card-module">
+                    <div class="card-header">
+                        <div class="flex justify-between items-center">
+                            <span class="badge badge-error">Тема 2</span>
+                            <span class="badge badge-outline">🛡️ Security Focus</span>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="module-number">🦠</div>
+                        <h3 class="card-title">Banking Trojans: Zeus, Emotet, Trickbot</h3>
+                        <p class="card-subtitle mb-4">
+                            Еволюція банківських троянів, механізми заражання, Man-in-the-Browser атаки та сучасні загрози
+                        </p>
+
+                        <div class="module-items">
+                            <div class="module-item">
+                                <span class="module-item-title">Zeus trojan: історія та механізми</span>
+                            </div>
+                            <div class="module-item">
+                                <span class="module-item-title">Emotet: модульна malware infrastructure</span>
+                            </div>
+                            <div class="module-item">
+                                <span class="module-item-title">Trickbot та Dridex: сучасні загрози</span>
+                            </div>
+                            <div class="module-item">
+                                <span class="module-item-title">Web injection та MITB attacks</span>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="card-footer">
+                        <div class="btn-group">
+                            <a href="tema2_banking_trojans.html" class="btn btn-primary">
+                                🎨 Презентація
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Тема 3: Threat Intelligence -->
+                <div class="card card-module">
+                    <div class="card-header">
+                        <div class="flex justify-between items-center">
+                            <span class="badge badge-primary">Тема 3</span>
+                            <span class="badge badge-outline">🛡️ Security Focus</span>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="module-number">🔍</div>
+                        <h3 class="card-title">Threat Intelligence для банків</h3>
+                        <p class="card-subtitle mb-4">
+                            MITRE ATT&CK фреймворк, Indicators of Compromise, threat feeds та інформаційний обмін у фінсекторі
+                        </p>
+
+                        <div class="module-items">
+                            <div class="module-item">
+                                <span class="module-item-title">MITRE ATT&CK для financial services</span>
+                            </div>
+                            <div class="module-item">
+                                <span class="module-item-title">Indicators of Compromise (IoC)</span>
+                            </div>
+                            <div class="module-item">
+                                <span class="module-item-title">Threat intelligence platforms</span>
+                            </div>
+                            <div class="module-item">
+                                <span class="module-item-title">FS-ISAC: інформаційний обмін</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <div class="btn-group">
+                            <a href="tema3_threat_intelligence.html" class="btn btn-primary">
+                                🎨 Презентація
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Тема 4: Kill Chain Analysis -->
+                <div class="card card-module">
+                    <div class="card-header">
+                        <div class="flex justify-between items-center">
+                            <span class="badge badge-primary">Тема 4</span>
+                            <span class="badge badge-outline">🛡️ Security Focus</span>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="module-number">⛓️</div>
+                        <h3 class="card-title">Attack Vectors та Kill Chain Analysis</h3>
+                        <p class="card-subtitle mb-4">
+                            Cyber Kill Chain фреймворк Lockheed Martin, вектори атак на банки та стратегії виявлення на кожному етапі
+                        </p>
+
+                        <div class="module-items">
+                            <div class="module-item">
+                                <span class="module-item-title">7 етапів Cyber Kill Chain</span>
+                            </div>
+                            <div class="module-item">
+                                <span class="module-item-title">Вектори атак на банківську інфраструктуру</span>
+                            </div>
+                            <div class="module-item">
+                                <span class="module-item-title">Detection strategies для кожного етапу</span>
+                            </div>
+                            <div class="module-item">
+                                <span class="module-item-title">Breaking the Kill Chain: defensive playbooks</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <div class="btn-group">
+                            <a href="tema4_attack_vectors.html" class="btn btn-primary">
+                                🎨 Презентація
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Resources -->
+        <section class="card mt-8">
+            <div class="card-header">
+                <h3 class="card-title">📚 Додаткові матеріали</h3>
+            </div>
+            <div class="card-body">
+                <div class="grid grid-cols-2 gap-6">
+                    <div>
+                        <h4 class="font-semibold mb-3">📖 Література</h4>
+                        <ul class="text-secondary">
+                            <li>MITRE ATT&CK for Financial Services</li>
+                            <li>Lockheed Martin Cyber Kill Chain White Paper</li>
+                            <li>Kaspersky APT Reports: Lazarus, Carbanak</li>
+                            <li>US-CERT Banking Sector Threat Analysis</li>
+                            <li>FS-ISAC Threat Intelligence Reports</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold mb-3">🔗 Корисні посилання</h4>
+                        <ul>
+                            <li><a href="https://attack.mitre.org/" target="_blank" class="text-primary">MITRE ATT&CK Framework</a></li>
+                            <li><a href="https://www.fsisac.com/" target="_blank" class="text-primary">FS-ISAC Portal</a></li>
+                            <li><a href="https://www.us-cert.gov/ncas" target="_blank" class="text-primary">US-CERT Alerts</a></li>
+                            <li><a href="https://www.virustotal.com/" target="_blank" class="text-primary">VirusTotal Intelligence</a></li>
+                            <li><a href="https://www.hybrid-analysis.com/" target="_blank" class="text-primary">Hybrid Analysis Sandbox</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Navigation Buttons -->
+        <section class="flex justify-between items-center mt-12 mb-8">
+            <a href="../../index.html" class="btn btn-outline">
+                ← Повернутися до модуля
+            </a>
+            <a href="../../../../index.html" class="btn btn-primary">
+                Головна →
+            </a>
+        </section>
+    </div>
+</main>
+
+<!-- Footer -->
+<footer class="footer">
+    <div class="container">
+        <div class="text-center">
+            <div class="footer-links mt-4">
+                <a href="../../../../index.html">Головна</a>
+                <a href="../../index.html">Модуль 4</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- JavaScript for progress tracking -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Save lecture progress
+        try {
+            const progress = {
+                module: 4,
+                lecture: '10',
+                title: 'Кіберзагрози в банківській сфері',
+                lastVisit: new Date().toISOString(),
+                topics: ['APT Groups', 'Banking Trojans', 'Threat Intelligence', 'Kill Chain Analysis']
+            };
+            localStorage.setItem('lecture_10_progress', JSON.stringify(progress));
+
+            // Update module progress
+            const moduleProgress = JSON.parse(localStorage.getItem('module4_progress') || '{}');
+            if (!moduleProgress.completedLectures) {
+                moduleProgress.completedLectures = [];
+            }
+            if (!moduleProgress.completedLectures.includes('10')) {
+                moduleProgress.completedLectures.push('10');
+            }
+            localStorage.setItem('module4_progress', JSON.stringify(moduleProgress));
+        } catch(e) {
+            console.log('LocalStorage не доступний');
+        }
+    });
+
+    // Smooth scroll for internal links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
+</script>
+</body>
+</html>

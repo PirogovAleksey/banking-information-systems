@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тема 4: Attack Vectors та Kill Chain Analysis</title>
+    <link rel="stylesheet" href="../../../../new_assets/presentation/css/styles.css">
+</head>
+<body>
+
+<div class="presentation">
+    <!-- Slide Counter -->
+    <div class="slide-counter">
+        <span id="currentSlide">1</span> / <span id="totalSlides">12</span>
+    </div>
+
+    <!-- Slide 1: Title -->
+    <div class="slide active title-slide">
+        <div class="python-logo">⛓️</div>
+        <h1>Attack Vectors та Kill Chain Analysis</h1>
+        <p class="subtitle">Модуль 4: Безпека банківських систем</p>
+        <p class="subtitle">Лекція 10 • Тема 4</p>
+    </div>
+
+    <!-- Slide 2: Cyber Kill Chain - Intro -->
+    <div class="slide">
+        <h2>⛓️ Cyber Kill Chain Framework</h2>
+
+        <div class="info-box" style="margin-bottom: 20px;">
+            <strong>Lockheed Martin (2011)</strong> — фреймворк для опису етапів cyber attack
+            від початкової розвідки до досягнення цілей
+        </div>
+
+        <h3>🎯 Мета Kill Chain:</h3>
+        <ul>
+            <li><strong>"Break the Chain"</strong> — блокування атаки на будь-якому етапі</li>
+            <li>Чим раніше виявлено → менше шкоди</li>
+            <li>Ешелонований захист (Defense in Depth)</li>
+            <li>Багаторівневі контролі безпеки на кожному етапі</li>
+        </ul>
+
+        <div class="success-box" style="margin-top: 20px;">
+            <strong>💡 Ідея:</strong> Defender потрібно заблокувати лише на ОДНОМУ етапі, attacker має пройти всі 7 етапів для успіху
+        </div>
+    </div>
+
+    <!-- Slide 3: 7 Етапів Kill Chain -->
+    <div class="slide">
+        <h2>7 Етапів Cyber Kill Chain</h2>
+
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 5%;">#</th>
+                    <th style="width: 25%;">Етап</th>
+                    <th>Дії атакуючого</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td><strong>Розвідка<br>(Reconnaissance)</strong></td>
+                    <td>Збір інформації про ціль (OSINT, сканування мережі, перелік співробітників)</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td><strong>Озброєння<br>(Weaponization)</strong></td>
+                    <td>Створення шкідливого payload (експлойт + backdoor/malware)</td>
+                </tr>
+                <tr style="background-color: rgba(231, 76, 60, 0.1);">
+                    <td>3</td>
+                    <td><strong>Доставка<br>(Delivery)</strong></td>
+                    <td>Доставка payload до жертви (email, USB, скомпрометовані сайти, supply chain)</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td><strong>Експлуатація<br>(Exploitation)</strong></td>
+                    <td>Активація вразливості, виконання коду на цільовій системі</td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td><strong>Встановлення<br>(Installation)</strong></td>
+                    <td>Встановлення malware, механізми закріплення (реєстр, заплановані завдання)</td>
+                </tr>
+                <tr style="background-color: rgba(231, 76, 60, 0.1);">
+                    <td>6</td>
+                    <td><strong>Командування та контроль<br>(Command & Control)</strong></td>
+                    <td>Вихідне з'єднання до C2 сервера для віддаленого керування</td>
+                </tr>
+                <tr style="background-color: rgba(231, 76, 60, 0.1);">
+                    <td>7</td>
+                    <td><strong>Дії для досягнення цілей<br>(Actions on Objectives)</strong></td>
+                    <td>Досягнення цілей атакуючих (ексфільтрація даних, маніпуляція, знищення)</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Slide 4: Kill Chain приклад - Bangladesh Bank -->
+    <div class="slide">
+        <h2>Приклад: Bangladesh Bank Heist через призму Kill Chain</h2>
+        <h3>Lazarus Group (2016) — $81M крадіжка:</h3>
+
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 25%;">Етап</th>
+                    <th>Lazarus Group дії</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Reconnaissance</strong></td>
+                    <td>OSINT: Збір email адрес співробітників Bangladesh Bank через LinkedIn, social media</td>
+                </tr>
+                <tr>
+                    <td><strong>Weaponization</strong></td>
+                    <td>Створення PDF документу з embedded Adobe Reader 0-day exploit</td>
+                </tr>
+                <tr style="background-color: rgba(231, 76, 60, 0.1);">
+                    <td><strong>Delivery</strong></td>
+                    <td>Spear-phishing email: "Invoice attached, please review" з malicious PDF attachment</td>
+                </tr>
+                <tr>
+                    <td><strong>Exploitation</strong></td>
+                    <td>Employee відкриває PDF → Adobe exploit executes shellcode</td>
+                </tr>
+                <tr>
+                    <td><strong>Installation</strong></td>
+                    <td>Malware у %AppData%\{random}\, registry Run key persistence</td>
+                </tr>
+                <tr style="background-color: rgba(231, 76, 60, 0.1);">
+                    <td><strong>C2</strong></td>
+                    <td>HTTPS connection до 185.142.236.226:443 (C2 сервер)</td>
+                </tr>
+                <tr style="background-color: rgba(231, 76, 60, 0.1);">
+                    <td><strong>Actions on Objectives</strong></td>
+                    <td>Lateral movement → SWIFT workstation → Manipulation SWIFT messages → $81M transferred</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Slide 5: Attack Vectors - Класифікація -->
+    <div class="slide">
+        <h2>🎯 Вектори атак на банківську інфраструктуру</h2>
+        <h3>4 Основні категорії:</h3>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 20px;">
+            <div>
+                <h4 style="color: #3498db;">1. Social Engineering</h4>
+                <ul>
+                    <li><strong>Spear-phishing:</strong> Targeted emails до співробітників</li>
+                    <li><strong>Whaling:</strong> C-level targeting (CFO, CEO)</li>
+                    <li><strong>Vishing:</strong> Voice phishing (телефонні дзвінки)</li>
+                    <li><strong>Smishing:</strong> SMS phishing</li>
+                    <li><strong>Baiting:</strong> Infected USB drives</li>
+                </ul>
+            </div>
+            <div>
+                <h4 style="color: #9b59b6;">2. Network-Based</h4>
+                <ul>
+                    <li><strong>VPN/Firewall exploits:</strong> Perimeter breaches</li>
+                    <li><strong>SWIFT network compromise:</strong> Internal network lateral movement</li>
+                    <li><strong>Wi-Fi attacks:</strong> Rogue Access Points</li>
+                    <li><strong>Man-in-the-Middle:</strong> SSL stripping, ARP spoofing</li>
+                    <li><strong>DDoS:</strong> Distraction attacks</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 6: Attack Vectors (продовження) -->
+    <div class="slide">
+        <h2>Вектори атак (продовження)</h2>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 20px;">
+            <div>
+                <h4 style="color: #3498db;">3. Application-Based</h4>
+                <ul>
+                    <li><strong>Web app exploits:</strong> SQL injection, XSS, CSRF у banking portals</li>
+                    <li><strong>Zero-day vulnerabilities:</strong> CBS software unpatched bugs</li>
+                    <li><strong>Supply chain attacks:</strong> Compromised software vendors (SolarWinds-style)</li>
+                    <li><strong>API abuse:</strong> Open Banking APIs exploitation</li>
+                    <li><strong>Mobile app vulnerabilities:</strong> Banking app reverse engineering</li>
+                </ul>
+            </div>
+            <div>
+                <h4 style="color: #9b59b6;">4. Insider Threats</h4>
+                <ul>
+                    <li><strong>Malicious Insider:</strong> Співробітник свідомо працює з злочинцями</li>
+                    <li><strong>Compromised Account:</strong> Legitimate account зламано через phishing</li>
+                    <li><strong>Negligent Insider:</strong> Ненавмисне порушення security policies</li>
+                    <li><strong>Privileged Abuse:</strong> Sysadmin/DBA misuse privileged access</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 7: Detection Strategies - Overview -->
+    <div class="slide">
+        <h2>🛡️ Detection Strategies для кожного етапу Kill Chain</h2>
+
+        <div class="info-box" style="margin-bottom: 20px;">
+            <strong>Підхід ешелонованого захисту:</strong> Блокувати атаку на БУДЬ-ЯКОМУ етапі Kill Chain.<br>
+            Block на Delivery → набагато краще ніж block на Actions on Objectives
+        </div>
+
+        <h3>🔑 Принципи Detection:</h3>
+        <ul>
+            <li><strong>Layered Security:</strong> Множинні контролі на кожному етапі (якщо один fails → інший спрацює)</li>
+            <li><strong>Assume Breach:</strong> Завжди маємо detection/response для пост-exploitation етапів</li>
+            <li><strong>Fast Response:</strong> Автоматизоване реагування (SOAR platforms)</li>
+            <li><strong>Threat Intel Integration:</strong> IoC feeds → automated blocking</li>
+        </ul>
+
+        <div class="warning-box" style="margin-top: 20px;">
+            <strong>⚠️ Статистика:</strong> 80%+ attacks можна зупинити на етапах Delivery/Exploitation (email security, endpoint protection)
+        </div>
+    </div>
+
+    <!-- Slide 8: Detection по етапам -->
+    <div class="slide">
+        <h2>Методи виявлення по етапам Kill Chain</h2>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Етап</th>
+                    <th>Методи виявлення</th>
+                    <th>Інструменти/Технології</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Розвідка</strong></td>
+                    <td>Honeypots, аналіз веб-логів, моніторинг периметру</td>
+                    <td>Сповіщення Shodan, моніторинг DNS</td>
+                </tr>
+                <tr style="background-color: rgba(52, 152, 219, 0.1);">
+                    <td><strong>Доставка</strong></td>
+                    <td>Email security gateway, пісочниця для вкладень, фільтрація URL</td>
+                    <td>Proofpoint, Mimecast, FireEye</td>
+                </tr>
+                <tr>
+                    <td><strong>Експлуатація</strong></td>
+                    <td>Поведінковий аналіз EDR, сигнатури IDS/IPS, захист пам'яті</td>
+                    <td>CrowdStrike, SentinelOne, Defender ATP</td>
+                </tr>
+                <tr>
+                    <td><strong>Встановлення</strong></td>
+                    <td>Моніторинг цілісності файлів, логування Sysmon, моніторинг реєстру</td>
+                    <td>Carbon Black, OSSEC, Windows Defender</td>
+                </tr>
+                <tr style="background-color: rgba(52, 152, 219, 0.1);">
+                    <td><strong>C2</strong></td>
+                    <td>Аналіз мережевого трафіку, виявлення beaconing, виявлення DGA</td>
+                    <td>Palo Alto, Darktrace, Zeek (Bro)</td>
+                </tr>
+                <tr style="background-color: rgba(52, 152, 219, 0.1);">
+                    <td><strong>Дії для цілей</strong></td>
+                    <td>UEBA, моніторинг активності БД, виявлення ексфільтрації даних</td>
+                    <td>Splunk, Exabeam, Imperva</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Slide 9: Defensive Playbook 1 - Phishing -->
+    <div class="slide">
+        <h2>📋 Defensive Playbook #1: Blocking Spear-Phishing</h2>
+        <h3>🎯 Мета: Блокувати phishing emails до того, як вони досягнуть співробітників</h3>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 20px;">
+            <div>
+                <h4 style="color: #3498db;">Defensive Tactics:</h4>
+                <ol>
+                    <li><strong>Email Authentication</strong>
+                        <ul>
+                            <li>SPF, DKIM, DMARC enforcement</li>
+                            <li>Reject emails з failed authentication</li>
+                        </ul>
+                    </li>
+                    <li><strong>SEG Deployment</strong>
+                        <ul>
+                            <li>Secure Email Gateway</li>
+                            <li>Attachment sandboxing (.doc, .pdf, .xls)</li>
+                            <li>URL rewriting та scanning</li>
+                        </ul>
+                    </li>
+                    <li><strong>User Training</strong>
+                        <ul>
+                            <li>Monthly phishing simulations</li>
+                            <li>Security awareness campaigns</li>
+                        </ul>
+                    </li>
+                </ol>
+            </div>
+            <div>
+                <h4 style="color: #9b59b6;">Success Metrics:</h4>
+                <ul>
+                    <li>📊 % emails blocked pre-delivery (&gt;95% target)</li>
+                    <li>📊 Phishing click rate (&lt;5% target)</li>
+                    <li>📊 Employee reporting rate (&gt;80% report suspicious)</li>
+                    <li>📊 MTTD (Mean Time To Detect) &lt; 5 min</li>
+                    <li>📊 MTTR (Mean Time To Respond) &lt; 15 min</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 10: Playbook 2 - Lateral Movement -->
+    <div class="slide">
+        <h2>📋 Defensive Playbook #2: Detecting Lateral Movement</h2>
+        <h3>🎯 Мета: Виявити APT lateral movement у внутрішній мережі</h3>
+
+        <h4 style="color: #3498db;">🚨 Detection Signals (Indicators of Attack):</h4>
+        <ul>
+            <li><strong>Abnormal SMB Traffic:</strong> Workstation-to-workstation connections (зазвичай неможливо в сегментованій мережі)</li>
+            <li><strong>PsExec/WMI Usage:</strong> SYSTEM account spawning processes remotely</li>
+            <li><strong>Credential Dumping:</strong> Process (non-LSASS) accessing LSASS memory (Sysmon EventID 10)</li>
+            <li><strong>Domain Enumeration:</strong> Множинні LDAP queries за короткий період (net group, net user commands)</li>
+            <li><strong>Pass-the-Hash:</strong> NTLM authentication без попереднього Kerberos login</li>
+        </ul>
+
+        <h4 style="color: #e74c3c; margin-top: 20px;">⚡ Automated Response Actions:</h4>
+        <ol>
+            <li>Isolate affected workstations (network quarantine via NAC)</li>
+            <li>Disable compromised user accounts</li>
+            <li>Reset Domain Admin credentials (якщо є підозра на compromise)</li>
+            <li>Forensic memory dump для malware analysis</li>
+            <li>Escalate до Incident Response team (P1 severity)</li>
+        </ol>
+    </div>
+
+    <!-- Slide 11: Playbook 3 - SWIFT Monitoring -->
+    <div class="slide">
+        <h2>📋 Defensive Playbook #3: SWIFT Transaction Monitoring</h2>
+        <h3>🎯 Мета: Виявити шахрайські SWIFT повідомлення до виконання</h3>
+
+        <h4 style="color: #3498db;">🔍 Monitoring Rules та Anomalies:</h4>
+        <ul>
+            <li><strong>Temporal Anomalies:</strong> MT103 payment messages sent поза business hours (2-6 AM suspicious)</li>
+            <li><strong>Amount Anomalies:</strong> Transaction amount &gt; historical baseline (e.g., &gt;$10M коли average $2M)</li>
+            <li><strong>Destination Risk:</strong> Transfers до high-risk countries (DPRK, sanctioned entities)</li>
+            <li><strong>System Integrity:</strong> File integrity monitoring на SWIFT Alliance Access workstations</li>
+            <li><strong>Behavior Changes:</strong> SWIFT user suddenly accessing systems remotely (VPN) вночі</li>
+        </ul>
+
+        <div class="error-box" style="margin-top: 20px;">
+            <h4 style="margin-top: 0;">🚨 Automated Incident Response Workflow:</h4>
+            <ol style="margin: 0;">
+                <li><strong>Alert:</strong> SOC receives P1 critical alert (Slack, PagerDuty)</li>
+                <li><strong>Freeze:</strong> Automatically freeze suspicious transaction (pre-execution if possible)</li>
+                <li><strong>Contact:</strong> Contact receiving bank (recall SWIFT message if вже sent)</li>
+                <li><strong>Investigate:</strong> Incident response team перевіряє logs, malware</li>
+                <li><strong>Report:</strong> NBU notification (regulatory requirement in Ukraine)</li>
+            </ol>
+        </div>
+    </div>
+
+    <!-- Slide 12: Висновки -->
+    <div class="slide">
+        <h2>📌 Висновки: Kill Chain та Defensive Strategies</h2>
+
+        <ul class="checklist">
+            <li>Cyber Kill Chain — structured approach для розуміння етапів attacks</li>
+            <li>7 етапів: Reconnaissance → Weaponization → Delivery → Exploitation → Installation → C2 → Actions on Objectives</li>
+            <li>Ешелонований захист: блокування на КОЖНОМУ етапі (якщо один layer fails → інші тримають)</li>
+            <li>Detection &gt; Prevention: Assume Breach mindset критично важливий</li>
+            <li>4 категорії attack vectors: Social Engineering (найпопулярніший), Network-Based, Application-Based, Insider Threats</li>
+            <li>Playbooks для типових сценаріїв: Phishing, Lateral Movement, SWIFT fraud</li>
+            <li>Automation критично важлива: SOAR platforms для fast response (MTTD/MTTR optimization)</li>
+        </ul>
+
+        <div class="success-box" style="margin-top: 30px;">
+            <strong>⛓️ "Break the Chain Early"</strong> — чим раніше detect attack, тим менший impact та легше containment
+        </div>
+
+        <div style="margin-top: 30px; text-align: center;">
+            <p><strong>Завершення Лекції 10</strong></p>
+            <p style="margin-top: 10px; opacity: 0.7;">Натисніть ESC або закрийте вікно для повернення</p>
+        </div>
+    </div>
+
+</div>
+
+<!-- Navigation -->
+<div class="navigation">
+    <button class="nav-btn" id="prevBtn" onclick="changeSlide(-1)">← Попередній</button>
+    <button class="nav-btn" onclick="window.location.href='index.html'">🏠 Головна</button>
+    <button class="nav-btn" id="nextBtn" onclick="changeSlide(1)">Наступний →</button>
+</div>
+
+<script src="../../../../new_assets/presentation/js/presentation.js"></script>
+</body>
+</html>

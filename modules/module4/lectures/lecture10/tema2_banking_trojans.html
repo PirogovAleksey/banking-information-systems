@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тема 2: Banking Trojans - Zeus, Emotet, Trickbot</title>
+    <link rel="stylesheet" href="../../../../new_assets/presentation/css/styles.css">
+</head>
+<body>
+
+<div class="presentation">
+    <!-- Slide Counter -->
+    <div class="slide-counter">
+        <span id="currentSlide">1</span> / <span id="totalSlides">11</span>
+    </div>
+
+    <!-- Slide 1: Title -->
+    <div class="slide active title-slide">
+        <div class="python-logo">🦠</div>
+        <h1>Banking Trojans: Zeus, Emotet, Trickbot</h1>
+        <p class="subtitle">Модуль 4: Безпека банківських систем</p>
+        <p class="subtitle">Лекція 10 • Тема 2</p>
+    </div>
+
+    <!-- Slide 2: Еволюція Banking Malware -->
+    <div class="slide">
+        <h2>📊 Еволюція Banking Malware</h2>
+        <h3>5 Поколінь банківських троянів</h3>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Період</th>
+                    <th>Gen</th>
+                    <th>Приклади</th>
+                    <th>Ключові можливості</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>2003-2007</td>
+                    <td>1</td>
+                    <td>Beast, Banker.A</td>
+                    <td>Перехоплення клавіатури, захоплення форм</td>
+                </tr>
+                <tr style="background-color: rgba(52, 152, 219, 0.1);">
+                    <td>2007-2011</td>
+                    <td>2</td>
+                    <td><strong>Zeus, SpyEye</strong></td>
+                    <td>Web ін'єкції, атаки Man-in-the-Browser</td>
+                </tr>
+                <tr>
+                    <td>2011-2016</td>
+                    <td>3</td>
+                    <td>Dridex, Dyre</td>
+                    <td>ATS, віддалений доступ (VNC), MITM SSL</td>
+                </tr>
+                <tr style="background-color: rgba(52, 152, 219, 0.1);">
+                    <td>2016-2020</td>
+                    <td>4</td>
+                    <td><strong>Emotet, Trickbot</strong></td>
+                    <td>Модульна архітектура, lateral movement, ransomware</td>
+                </tr>
+                <tr>
+                    <td>2020-now</td>
+                    <td>5</td>
+                    <td>IcedID, BazarLoader</td>
+                    <td>Обхід EDR, fileless malware</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Slide 3: Zeus - Профіль -->
+    <div class="slide">
+        <h2>👑 Zeus (Zbot) — "Король" banking trojans</h2>
+
+        <div class="info-box" style="margin-bottom: 20px;">
+            <strong>2006-2014:</strong> Найвідоміший banking trojan в історії. Source code зліт у 2010 → сотні варіантів (Citadel, GameOver Zeus, Ice IX)
+        </div>
+
+        <h3>🎯 Ключові характеристики Zeus:</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Параметр</th>
+                    <th>Деталі</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Target</strong></td>
+                    <td>Banking websites по всьому світу</td>
+                </tr>
+                <tr>
+                    <td><strong>Method</strong></td>
+                    <td>Man-in-the-Browser (MITB) attacks</td>
+                </tr>
+                <tr>
+                    <td><strong>Injection</strong></td>
+                    <td>Browser process hooking (IE, Firefox, Chrome)</td>
+                </tr>
+                <tr>
+                    <td><strong>Persistence</strong></td>
+                    <td>Registry Run keys, process injection</td>
+                </tr>
+                <tr>
+                    <td><strong>C2</strong></td>
+                    <td>HTTP-based botnet infrastructure</td>
+                </tr>
+                <tr>
+                    <td><strong>Variants</strong></td>
+                    <td>Citadel, GameOver Zeus, Ice IX, Floki Bot</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Slide 4: Zeus Архітектура -->
+    <div class="slide">
+        <h2>🏗️ Zeus Архітектура</h2>
+        <h3>Компоненти Zeus Trojan:</h3>
+
+        <ol>
+            <li><strong>Dropper (Initial Infection)</strong>
+                <ul>
+                    <li>Spear-phishing email attachment</li>
+                    <li>Drive-by download exploits (IE, Flash, Java)</li>
+                    <li>Malvertising campaigns</li>
+                </ul>
+            </li>
+            <li><strong>Loader (Persistence Module)</strong>
+                <ul>
+                    <li>Location: <code>C:\Users\%USERNAME%\AppData\Roaming\{random}\sdra64.exe</code></li>
+                    <li>Registry: <code>HKCU\Software\Microsoft\Windows\CurrentVersion\Run\{GUID}</code></li>
+                    <li>Code injection у <code>explorer.exe</code>, <code>winlogon.exe</code></li>
+                </ul>
+            </li>
+            <li><strong>Configuration File (config.bin)</strong>
+                <ul>
+                    <li>Targeted banking URLs (web injection targets)</li>
+                    <li>C2 server addresses (часто DGA domains)</li>
+                    <li>Web injection scripts (JavaScript)</li>
+                </ul>
+            </li>
+            <li><strong>Web Injection Engine</strong>
+                <ul>
+                    <li>Browser process injection → Man-in-the-Browser attacks</li>
+                </ul>
+            </li>
+        </ol>
+    </div>
+
+    <!-- Slide 5: Man-in-the-Browser Attack -->
+    <div class="slide">
+        <h2>🎭 Man-in-the-Browser (MITB) Attack</h2>
+        <h3>Як Zeus краде banking credentials:</h3>
+
+        <ol>
+            <li>Користувач відкриває <code>https://bank.com/login</code></li>
+            <li style="color: #e74c3c;"><strong>Zeus перехоплює browser HTTP response</strong></li>
+            <li style="color: #e74c3c;"><strong>Zeus модифікує HTML форму</strong>, додаючи підроблені поля:
+                <ul>
+                    <li>CVV code input field</li>
+                    <li>SMS verification code field</li>
+                    <li>Mother's maiden name (security question)</li>
+                </ul>
+            </li>
+            <li>Користувач вводить всі дані (думає, що це легітимний запит від банку)</li>
+            <li style="color: #e74c3c;"><strong>Zeus перехоплює form submit</strong>, відсилає на C2</li>
+            <li>Zeus пропускає оригінальний запит до банку → користувач успішно входить</li>
+        </ol>
+
+        <div class="error-box" style="margin-top: 20px;">
+            <strong>⚠️ Жертва не підозрює нічого — banking session виглядає абсолютно легітимною!</strong>
+        </div>
+    </div>
+
+    <!-- Slide 6: Emotet - Профіль -->
+    <div class="slide">
+        <h2>🦠 Emotet — Modular Malware Infrastructure</h2>
+
+        <div class="info-box" style="margin-bottom: 20px;">
+            <strong>2014-2021 (takedown), 2021-теперішній час (reborn):</strong> Еволюція від banking trojan до malware loader платформи<br>
+            💰 <strong>$2.5+ млрд збитків</strong> по всьому світу
+        </div>
+
+        <h3>🔄 Еволюція Emotet:</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Період</th>
+                    <th>Роль</th>
+                    <th>Функціональність</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>2014-2016</td>
+                    <td>Banking Trojan</td>
+                    <td>Web injection, credential stealing</td>
+                </tr>
+                <tr style="background-color: rgba(231, 76, 60, 0.1);">
+                    <td>2017-2021</td>
+                    <td><strong>Malware Loader</strong></td>
+                    <td>Modular architecture, delivery Trickbot/Ryuk ransomware</td>
+                </tr>
+                <tr>
+                    <td>2021-now</td>
+                    <td>Reborn (Trickbot operators)</td>
+                    <td>Продовження malware-as-a-service operations</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Slide 7: Emotet Модулі -->
+    <div class="slide">
+        <h2>Модульна архітектура Emotet</h2>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Модуль</th>
+                    <th>Функціональність</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Основний модуль<br>(Core Module)</strong></td>
+                    <td>Головний завантажувач, зв'язок з C2, механізми закріплення</td>
+                </tr>
+                <tr>
+                    <td><strong>Збирач email<br>(Email Harvester)</strong></td>
+                    <td>Крадіжка email контактів з Outlook, Thunderbird для розсилки спаму</td>
+                </tr>
+                <tr>
+                    <td><strong>Викрадач облікових даних<br>(Credential Stealer)</strong></td>
+                    <td>Збережені паролі з браузерів (Chrome, Firefox, Edge, IE)</td>
+                </tr>
+                <tr style="background-color: rgba(231, 76, 60, 0.1);">
+                    <td><strong>Модуль поширення<br>(Spreader/Worm)</strong></td>
+                    <td>Lateral movement через SMB, підбір паролів адміністраторів</td>
+                </tr>
+                <tr style="background-color: rgba(231, 76, 60, 0.1);">
+                    <td><strong>Модуль спаму<br>(Spamming Module)</strong></td>
+                    <td>Відправка фішингових emails з зараженої машини для самопоширення</td>
+                </tr>
+                <tr>
+                    <td><strong>Банківський модуль<br>(Banking Module)</strong></td>
+                    <td>Web ін'єкції для банківських сайтів (застаріла функція)</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Slide 8: Emotet Infection Chain -->
+    <div class="slide">
+        <h2>Emotet Infection Chain</h2>
+        <h3>📧 Типовий сценарій заражання:</h3>
+
+        <div class="code-block">
+<strong>Stage 1: Phishing Email</strong>
+Subject: "Invoice #3847291" або "Payment Confirmation"
+Attachment: Invoice_3847291.doc (malicious VBA macro)
+Social Engineering: "Enable Content to view invoice"
+
+<strong>Stage 2: Macro Execution</strong>
+User clicks "Enable Editing" → VBA macro executes
+PowerShell command:
+  powershell.exe -NoP -sta -NonI -W Hidden -Enc &lt;base64_payload&gt;
+
+<strong>Stage 3: Emotet Loader установка</strong>
+Downloads Emotet DLL з compromised website:
+  http://compromised-site.com/wp-content/ab12cd/
+Drops: C:\Users\%USERNAME%\AppData\Local\{random}\{random}.exe
+Registry persistence + Scheduled Task backup
+
+<strong>Stage 4: Module Download + 2nd-stage payloads</strong>
+C2 connection (100+ IP addresses, fast-flux network)
+Downloads modules: email harvester, browser stealer
+Downloads payloads:
+  • Trickbot (banking trojan)
+  • Qakbot (info stealer)
+  • Ryuk/Conti (ransomware) ← enterprise destruction
+        </div>
+    </div>
+
+    <!-- Slide 9: Trickbot - Профіль -->
+    <div class="slide">
+        <h2>🎯 Trickbot — Enterprise-Targeted Trojan</h2>
+
+        <div class="info-box" style="margin-bottom: 20px;">
+            <strong>2016-теперішній час:</strong> Наступник Dyre malware<br>
+            🎯 Спеціалізація: корпоративні мережі, фінансові установи, lateral movement
+        </div>
+
+        <h3>🔑 Ключові модулі Trickbot:</h3>
+        <ul>
+            <li><strong>systeminfo</strong> — System reconnaissance (OS, domain, installed AV)</li>
+            <li><strong>injectDll</strong> — Web injection для banking sites (як Zeus)</li>
+            <li><strong>pwgrab</strong> — Password stealing з browsers, email clients, FTP</li>
+            <li><strong>mimikatz</strong> — Credential dumping з LSASS процесу</li>
+            <li><strong>networkDll</strong> — Network scan, domain enumeration</li>
+            <li><strong>wormDll</strong> — EternalBlue/EternalRomance SMB exploits</li>
+            <li><strong>tabDll</strong> — VNC module для remote control банківських систем</li>
+            <li><strong>shareDll</strong> — Enumeration network shares, sensitive files</li>
+        </ul>
+    </div>
+
+    <!-- Slide 10: Trickbot Attack Scenario -->
+    <div class="slide">
+        <h2>Trickbot Attack на банк (timeline)</h2>
+
+        <ul>
+            <li><strong>Day 1: Initial Infection</strong>
+                <ul><li>Delivered через Emotet botnet → workstation BANK-WS-0542</li></ul>
+            </li>
+            <li><strong>Day 2-7: Reconnaissance</strong>
+                <ul>
+                    <li>systeminfo → domain detected: BANK.LOCAL</li>
+                    <li>networkDll scan: 10.50.0.0/16 subnet</li>
+                    <li>Виявлено: DC (10.50.10.5), CBS server (10.50.20.10), SWIFT Gateway (10.50.30.15)</li>
+                </ul>
+            </li>
+            <li style="color: #e74c3c;"><strong>Day 8-14: Credential Harvesting</strong>
+                <ul>
+                    <li>mimikatz → dump LSASS credentials</li>
+                    <li>pwgrab → browser passwords</li>
+                    <li>Зібрано 200+ credentials, включно з Domain Admin!</li>
+                </ul>
+            </li>
+            <li style="color: #e74c3c;"><strong>Day 15-21: Lateral Movement</strong>
+                <ul>
+                    <li>Domain Admin → compromised Domain Controller</li>
+                    <li>wormDll (EternalBlue) → CBS-PROD-01 infected</li>
+                    <li>tabDll (VNC) → remote access до SWIFT Gateway</li>
+                </ul>
+            </li>
+            <li><strong>Day 22+: Objective Execution</strong>
+                <ul><li>Передача access до APT group / Ransomware deployment (Ryuk, Conti)</li></ul>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Slide 11: Висновки -->
+    <div class="slide">
+        <h2>📌 Висновки: Banking Trojans</h2>
+
+        <ul class="checklist">
+            <li>Banking trojans еволюціонували від simple keyloggers до complex modular frameworks</li>
+            <li>Zeus: Man-in-the-Browser pioneer, web injection standard</li>
+            <li>Emotet: transformation від trojan до malware-as-a-service loader</li>
+            <li>Trickbot: enterprise targeting, lateral movement, ransomware delivery pipeline</li>
+            <li>Modern trojans = initial access brokers для APT groups та ransomware operators</li>
+            <li>Захист: Email security gateway, EDR, disable macros, network segmentation</li>
+            <li>PAM (Privileged Access Management) критично важливий проти lateral movement</li>
+        </ul>
+
+        <div class="success-box" style="margin-top: 30px;">
+            <strong>🛡️ Ешелонований захист</strong> — багаторівневий захист на кожному етапі infection chain: email → endpoint → network → identity
+        </div>
+
+        <div style="margin-top: 30px; text-align: center;">
+            <p><strong>Наступна тема:</strong> Threat Intelligence для банків</p>
+            <p style="margin-top: 10px; opacity: 0.7;">Натисніть ESC або закрийте вікно для повернення</p>
+        </div>
+    </div>
+
+</div>
+
+<!-- Navigation -->
+<div class="navigation">
+    <button class="nav-btn" id="prevBtn" onclick="changeSlide(-1)">← Попередній</button>
+    <button class="nav-btn" onclick="window.location.href='index.html'">🏠 Головна</button>
+    <button class="nav-btn" id="nextBtn" onclick="changeSlide(1)">Наступний →</button>
+</div>
+
+<script src="../../../../new_assets/presentation/js/presentation.js"></script>
+</body>
+</html>

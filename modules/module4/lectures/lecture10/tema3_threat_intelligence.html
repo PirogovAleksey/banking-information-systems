@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тема 3: Threat Intelligence для банків</title>
+    <link rel="stylesheet" href="../../../../new_assets/presentation/css/styles.css">
+</head>
+<body>
+
+<div class="presentation">
+    <!-- Slide Counter -->
+    <div class="slide-counter">
+        <span id="currentSlide">1</span> / <span id="totalSlides">10</span>
+    </div>
+
+    <!-- Slide 1: Title -->
+    <div class="slide active title-slide">
+        <div class="python-logo">🔍</div>
+        <h1>Threat Intelligence для банків</h1>
+        <p class="subtitle">Модуль 4: Безпека банківських систем</p>
+        <p class="subtitle">Лекція 10 • Тема 3</p>
+    </div>
+
+    <!-- Slide 2: Що таке Threat Intelligence -->
+    <div class="slide">
+        <h2>🔍 Що таке Threat Intelligence?</h2>
+
+        <div class="info-box" style="margin-bottom: 20px;">
+            <strong>Threat Intelligence (TI)</strong> — це доказове знання про існуючі або нові загрози,
+            включаючи контекст, механізми, індикатори, наслідки та практичні рекомендації
+        </div>
+
+        <h3>🎯 Чому TI критично важливий для банків?</h3>
+        <ul>
+            <li><strong>Проактивний захист:</strong> Передбачення атак замість реактивного реагування після інциденту</li>
+            <li><strong>Швидше виявлення:</strong> Раннє попередження про нові загрози (нові APT campaigns, malware)</li>
+            <li><strong>Краще реагування:</strong> Знання TTPs атакуючих → ефективні incident response playbooks</li>
+            <li><strong>Зниження ризиків:</strong> Пріоритизація вразливостей на основі реальних загроз</li>
+            <li><strong>Комплаєнс:</strong> Регуляторні вимоги (NBU, ECB, PCI DSS)</li>
+            <li><strong>Економія коштів:</strong> Запобігання атаці дешевше ніж відновлення після</li>
+        </ul>
+    </div>
+
+    <!-- Slide 3: Рівні Threat Intelligence -->
+    <div class="slide">
+        <h2>📊 4 Рівні Threat Intelligence</h2>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Рівень</th>
+                    <th>Аудиторія</th>
+                    <th>Приклад для банку</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Strategic TI</strong></td>
+                    <td>C-level, Board of Directors</td>
+                    <td>Звіт: "Зростання APT38 активності в регіоні, ризик SWIFT attacks"</td>
+                </tr>
+                <tr style="background-color: rgba(52, 152, 219, 0.1);">
+                    <td><strong>Operational TI</strong></td>
+                    <td>Security managers, IR teams</td>
+                    <td>Аналіз Carbanak campaign TTPs та recommended countermeasures</td>
+                </tr>
+                <tr style="background-color: rgba(52, 152, 219, 0.1);">
+                    <td><strong>Tactical TI</strong></td>
+                    <td>SOC analysts, security engineers</td>
+                    <td>YARA rules для Trickbot detection, C2 IP blacklist</td>
+                </tr>
+                <tr>
+                    <td><strong>Technical TI</strong></td>
+                    <td>Malware analysts, researchers</td>
+                    <td>Reverse engineering Emotet DLL, IoC extraction, malware behavior analysis</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Slide 4: MITRE ATT&CK - Intro -->
+    <div class="slide">
+        <h2>🎯 MITRE ATT&CK Framework</h2>
+
+        <div class="info-box" style="margin-bottom: 20px;">
+            <strong>ATT&CK</strong> (Adversarial Tactics, Techniques, and Common Knowledge) —
+            глобально доступна база знань про тактики та техніки атакуючих, заснована на реальних спостереженнях
+        </div>
+
+        <h3>🔑 Ключові елементи ATT&CK:</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Елемент</th>
+                    <th>Опис</th>
+                    <th>Приклад</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Тактики<br>(Tactics)</strong></td>
+                    <td>"Чому" — цілі атакуючих</td>
+                    <td>Початковий доступ, Закріплення, Доступ до облікових даних</td>
+                </tr>
+                <tr>
+                    <td><strong>Техніки<br>(Techniques)</strong></td>
+                    <td>"Як" — методи досягнення цілей</td>
+                    <td>T1566.001 Цільовий фішинг, T1003 Дамп облікових даних</td>
+                </tr>
+                <tr>
+                    <td><strong>Процедури<br>(Procedures)</strong></td>
+                    <td>Конкретна реалізація техніки</td>
+                    <td>Lazarus використовує шкідливі PDF з Adobe експлойтом</td>
+                </tr>
+                <tr>
+                    <td><strong>Групи<br>(Groups)</strong></td>
+                    <td>Профілювання APT груп</td>
+                    <td>Lazarus Group (G0032), Carbanak (G0008)</td>
+                </tr>
+                <tr>
+                    <td><strong>ПЗ<br>(Software)</strong></td>
+                    <td>Каталог malware</td>
+                    <td>Zeus (S0161), Trickbot (S0266), Emotet (S0367)</td>
+                </tr>
+                <tr>
+                    <td><strong>Протидії<br>(Mitigations)</strong></td>
+                    <td>Контрзаходи</td>
+                    <td>M1049 Антивірус, M1032 Багатофакторна автентифікація</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Slide 5: MITRE ATT&CK 14 Tactics -->
+    <div class="slide">
+        <h2>14 Tactics у MITRE ATT&CK Enterprise</h2>
+
+        <div class="code-block">
+<strong>Повний Kill Chain від reconnaissance до impact:</strong>
+
+TA0043  Reconnaissance          → Збір інформації про target
+TA0042  Resource Development    → Підготовка infrastructure (C2, malware)
+TA0001  Initial Access          → Проникнення в мережу
+TA0002  Execution               → Виконання malicious code
+TA0003  Persistence             → Збереження foothold в системі
+TA0004  Privilege Escalation    → Отримання вищих прав доступу
+TA0005  Defense Evasion         → Уникнення детектування
+TA0006  Credential Access       → Крадіжка credentials
+TA0007  Discovery               → Розвідка внутрішньої мережі
+TA0008  Lateral Movement        → Переміщення в мережі
+TA0009  Collection              → Збір цільових даних
+TA0011  Command and Control     → Зв'язок з C2 infrastructure
+TA0010  Exfiltration            → Витік зібраних даних
+TA0040  Impact                  → Disruption, manipulation, destruction
+        </div>
+    </div>
+
+    <!-- Slide 6: ATT&CK приклад - Lazarus -->
+    <div class="slide">
+        <h2>Mapping Lazarus → MITRE ATT&CK</h2>
+        <h3>Bangladesh Bank Heist (приклад):</h3>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Tactic</th>
+                    <th>Tech ID</th>
+                    <th>Lazarus дія</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Initial Access</td>
+                    <td>T1566.001</td>
+                    <td>Spearphishing Attachment (malicious PDF)</td>
+                </tr>
+                <tr>
+                    <td>Execution</td>
+                    <td>T1204.002</td>
+                    <td>User opens PDF → exploit executes</td>
+                </tr>
+                <tr>
+                    <td>Persistence</td>
+                    <td>T1547.001</td>
+                    <td>Registry Run Keys для reboot persistence</td>
+                </tr>
+                <tr>
+                    <td>Credential Access</td>
+                    <td>T1555.003</td>
+                    <td>Browser credentials + T1056.001 Keylogging SWIFT passwords</td>
+                </tr>
+                <tr>
+                    <td>Discovery</td>
+                    <td>T1082, T1057</td>
+                    <td>System info / Process discovery (SWIFT Alliance Access)</td>
+                </tr>
+                <tr>
+                    <td>Command & Control</td>
+                    <td>T1071.001</td>
+                    <td>HTTPS C2 до 185.142.236.226</td>
+                </tr>
+                <tr style="background-color: rgba(231, 76, 60, 0.1);">
+                    <td><strong>Impact</strong></td>
+                    <td><strong>T1565.001</strong></td>
+                    <td><strong>Stored Data Manipulation → SWIFT messages → $81M stolen</strong></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Slide 7: Indicators of Compromise (IoC) -->
+    <div class="slide">
+        <h2>🚨 Indicators of Compromise (IoC)</h2>
+        <h3>Типи IoC та їх lifecycle:</h3>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Тип IoC</th>
+                    <th>Приклад</th>
+                    <th>Тривалість життя</th>
+                    <th>Використання</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Хеш файлу<br>(File Hash)</strong></td>
+                    <td>SHA-256: a1b2c3...</td>
+                    <td style="color: #e74c3c;">Коротка</td>
+                    <td>Виявлення malware, блокування</td>
+                </tr>
+                <tr>
+                    <td><strong>IP-адреса</strong></td>
+                    <td>185.142.236.226</td>
+                    <td style="color: #f39c12;">Середня</td>
+                    <td>Правила фаєрволу, блокування C2</td>
+                </tr>
+                <tr>
+                    <td><strong>Доменне ім'я</strong></td>
+                    <td>malicious-update.com</td>
+                    <td style="color: #f39c12;">Середня-Довга</td>
+                    <td>DNS фільтрація, sinkholing</td>
+                </tr>
+                <tr>
+                    <td><strong>Ключ реєстру<br>(Registry Key)</strong></td>
+                    <td>HKCU\Software\Malware\{GUID}</td>
+                    <td style="color: #27ae60;">Довга</td>
+                    <td>Виявлення EDR, індикатори атак (IOA)</td>
+                </tr>
+                <tr>
+                    <td><strong>М'ютекс<br>(Mutex)</strong></td>
+                    <td>Global\TrickbotMutex</td>
+                    <td style="color: #27ae60;">Довга</td>
+                    <td>Ідентифікація malware</td>
+                </tr>
+                <tr>
+                    <td><strong>Шлях до файлу</strong></td>
+                    <td>%AppData%\{random}\bot.exe</td>
+                    <td style="color: #27ae60;">Довга</td>
+                    <td>Моніторинг цілісності файлів</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Slide 8: Threat Intelligence Platforms -->
+    <div class="slide">
+        <h2>🛠️ Threat Intelligence Platforms</h2>
+
+        <h3 style="color: #3498db;">Commercial Providers:</h3>
+        <ul>
+            <li><strong>Recorded Future</strong> — AI-powered TI, real-time threat detection з web/dark web</li>
+            <li><strong>Mandiant (Google Cloud)</strong> — APT tracking, M-Trends reports, incident response intel</li>
+            <li><strong>CrowdStrike Falcon Intelligence</strong> — Adversary tracking, threat actor profiling</li>
+            <li><strong>Kaspersky Threat Intelligence</strong> — APT reports, финансовий sector focus</li>
+            <li><strong>IBM X-Force</strong> — Threat exchange platform, финансовий industry insights</li>
+        </ul>
+
+        <h3 style="color: #27ae60; margin-top: 20px;">Open-Source / Community:</h3>
+        <ul>
+            <li><strong>AlienVault OTX</strong> — Crowdsourced threat intelligence, open community</li>
+            <li><strong>MISP</strong> — Malware Information Sharing Platform, event sharing</li>
+            <li><strong>Abuse.ch</strong> — URLhaus, MalwareBazaar, ThreatFox feeds</li>
+            <li><strong>VirusTotal</strong> — Hash/URL/domain reputation, sandboxing</li>
+            <li><strong>Spamhaus</strong> — IP/domain blocklists (DBL, ZEN)</li>
+        </ul>
+    </div>
+
+    <!-- Slide 9: FS-ISAC -->
+    <div class="slide">
+        <h2>🏦 FS-ISAC — Financial Services ISAC</h2>
+
+        <div class="info-box" style="margin-bottom: 20px;">
+            <strong>Найбільша TI sharing організація для фінансового сектору</strong><br>
+            🌍 7000+ фінансових установ по всьому світу (банки, insurance, fintech)
+        </div>
+
+        <h3>🔑 Що надає FS-ISAC:</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Сервіс</th>
+                    <th>Опис</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Threat Intelligence Feeds</strong></td>
+                    <td>Real-time IoC feeds (IP, domains, hashes) специфічні для banking malware</td>
+                </tr>
+                <tr>
+                    <td><strong>Alerts та Advisories</strong></td>
+                    <td>Негайні повідомлення про active campaigns (APT, trojans, fraud schemes)</td>
+                </tr>
+                <tr>
+                    <td><strong>Information Sharing Portal</strong></td>
+                    <td>Secure platform для anonymous sharing incident details між members</td>
+                </tr>
+                <tr>
+                    <td><strong>Analysis Reports</strong></td>
+                    <td>Детальні звіти про Lazarus, Carbanak campaigns, TTPs, mitigation strategies</td>
+                </tr>
+                <tr>
+                    <td><strong>Cyber Exercises</strong></td>
+                    <td>Cyber range exercises, tabletop simulations для incident response training</td>
+                </tr>
+                <tr>
+                    <td><strong>Regulatory Liaison</strong></td>
+                    <td>Координація з регуляторами (Fed, ECB, NBU) та law enforcement</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Slide 10: Висновки -->
+    <div class="slide">
+        <h2>📌 Висновки: Threat Intelligence</h2>
+
+        <ul class="checklist">
+            <li>TI — критичний елемент proactive defense для банків</li>
+            <li>4 рівні TI: Strategic (C-level) → Operational → Tactical (SOC) → Technical (analysts)</li>
+            <li>MITRE ATT&CK — universal мова для опису TTPs adversaries, 14 tactics, 100+ techniques</li>
+            <li>IoC мають різний lifecycle: file hashes (short) vs behaviors (long)</li>
+            <li>Комбінація commercial (Mandiant, CrowdStrike) та open-source (MISP, OTX) feeds</li>
+            <li>FS-ISAC — обов'язковий membership для банків (7000+ members, industry collaboration)</li>
+            <li>Threat Intel → SIEM rules → Automated detection/response → Faster MTTD/MTTR</li>
+        </ul>
+
+        <div class="success-box" style="margin-top: 30px;">
+            <strong>💡 "Intelligence-Driven Defense"</strong> — знання про adversaries дає конкурентну перевагу в кіберзахисті
+        </div>
+
+        <div style="margin-top: 30px; text-align: center;">
+            <p><strong>Наступна тема:</strong> Attack Vectors та Kill Chain Analysis</p>
+            <p style="margin-top: 10px; opacity: 0.7;">Натисніть ESC або закрийте вікно для повернення</p>
+        </div>
+    </div>
+
+</div>
+
+<!-- Navigation -->
+<div class="navigation">
+    <button class="nav-btn" id="prevBtn" onclick="changeSlide(-1)">← Попередній</button>
+    <button class="nav-btn" onclick="window.location.href='index.html'">🏠 Головна</button>
+    <button class="nav-btn" id="nextBtn" onclick="changeSlide(1)">Наступний →</button>
+</div>
+
+<script src="../../../../new_assets/presentation/js/presentation.js"></script>
+</body>
+</html>

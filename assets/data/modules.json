@@ -255,7 +255,7 @@
           ],
           "securityFocus": "Threat intelligence для банків, Kill chain analysis",
           "bankingExamples": ["Carbanak campaign", "Bangladesh Bank heist", "SWIFT attacks"],
-          "status": "planned"
+          "status": "active"
         },
         {
           "id": "11",

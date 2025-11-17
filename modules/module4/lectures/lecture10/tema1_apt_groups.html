@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тема 1: APT групи, що атакують банки</title>
+    <link rel="stylesheet" href="../../../../new_assets/presentation/css/styles.css">
+</head>
+<body>
+
+<div class="presentation">
+    <!-- Slide Counter -->
+    <div class="slide-counter">
+        <span id="currentSlide">1</span> / <span id="totalSlides">12</span>
+    </div>
+
+    <!-- Slide 1: Title -->
+    <div class="slide active title-slide">
+        <div class="python-logo">🎯</div>
+        <h1>APT групи, що атакують банки</h1>
+        <p class="subtitle">Модуль 4: Безпека банківських систем</p>
+        <p class="subtitle">Лекція 10 • Тема 1</p>
+    </div>
+
+    <!-- Slide 2: Що таке APT -->
+    <div class="slide">
+        <h2>Advanced Persistent Threat (APT)</h2>
+        <h3>🎯 Визначення</h3>
+        <p><strong>APT</strong> — високоорганізовані, добре фінансовані кіберзлочинні групи, часто спонсоровані державами (nation-state actors), що проводять тривалі цілеспрямовані атаки на критичну інфраструктуру.</p>
+
+        <h3 style="margin-top: 20px;">🔑 Ключові характеристики APT атак на банки:</h3>
+        <ul>
+            <li><strong>Цілеспрямованість</strong> — вибір конкретних банків, ретельна розвідка</li>
+            <li><strong>Тривалість</strong> — атаки можуть тривати місяцями під час розвідки та проникнення</li>
+            <li><strong>Складність</strong> — zero-days, custom malware, social engineering</li>
+            <li><strong>Приховування</strong> — уникнення детектування через anti-forensics</li>
+            <li><strong>Фінансова мотивація</strong> — крадіжка мільйонів доларів або геополітичні цілі</li>
+            <li><strong>Ресурси</strong> — професійна команда, значний бюджет, доступ до розробників експлойтів</li>
+        </ul>
+    </div>
+
+    <!-- Slide 3: Lazarus Group - Профіль -->
+    <div class="slide">
+        <h2>🇰🇵 Lazarus Group (Hidden Cobra)</h2>
+        <h3>Профіль найнебезпечнішої APT групи</h3>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Параметр</th>
+                    <th>Деталі</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Походження</strong></td>
+                    <td>Північна Корея (DPRK), підрозділ RGB (Reconnaissance General Bureau)</td>
+                </tr>
+                <tr>
+                    <td><strong>Активність</strong></td>
+                    <td>З 2009 року по теперішній час</td>
+                </tr>
+                <tr>
+                    <td><strong>Цілі</strong></td>
+                    <td>Банки, криптобіржі, SWIFT network</td>
+                </tr>
+                <tr>
+                    <td><strong>Мотивація</strong></td>
+                    <td>Фінансування DPRK режиму, обхід санкцій</td>
+                </tr>
+                <tr>
+                    <td><strong>Збитки</strong></td>
+                    <td style="color: #e74c3c;"><strong>Понад $2 млрд вкрадено</strong></td>
+                </tr>
+                <tr>
+                    <td><strong>Malware сім'ї</strong></td>
+                    <td>HOPLIGHT, Manuscrypt, TYPEFRAME, AppleJeus, PowerRatankba</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Slide 4: Bangladesh Bank Heist -->
+    <div class="slide">
+        <h2>💰 Bangladesh Bank Heist (2016)</h2>
+
+        <div class="error-box" style="margin-bottom: 20px;">
+            <strong>🚨 Найбільша кіберкрадіжка в історії — $81 мільйон</strong>
+        </div>
+
+        <h3>📅 Хронологія атаки:</h3>
+        <ol>
+            <li><strong>Січень 2016:</strong> Spear-phishing email на співробітників Bangladesh Bank</li>
+            <li><strong>Лютий 4-5, 2016:</strong> Компрометація SWIFT credentials</li>
+            <li>Створення 35 фейкових SWIFT повідомлень (MT103) на загальну суму $951 млн</li>
+            <li>Відправка до Federal Reserve Bank of New York</li>
+            <li><strong>Виявлення:</strong> Типографська помилка "fundation" → Deutsche Bank піднімає тривогу</li>
+            <li>Блокування 30 транзакцій на $870 млн</li>
+        </ol>
+
+        <div class="success-box" style="margin-top: 20px;">
+            <strong>Результат:</strong> 5 транзакцій успішні → $81M виведено через казино Філіппін (безповоротно втрачено)
+        </div>
+    </div>
+
+    <!-- Slide 5: Lazarus TTPs -->
+    <div class="slide">
+        <h2>Tactics, Techniques, and Procedures (TTPs)</h2>
+        <h3>🛠️ Методи Lazarus Group:</h3>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Категорія</th>
+                    <th>Методи</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Початковий доступ<br>(Initial Access)</strong></td>
+                    <td>Цільовий фішинг (spear-phishing), шкідливі PDF з експлойтами, атаки через скомпрометовані сайти (watering hole)</td>
+                </tr>
+                <tr>
+                    <td><strong>Закріплення<br>(Persistence)</strong></td>
+                    <td>Ключі автозапуску в реєстрі, заплановані завдання, системні служби Windows</td>
+                </tr>
+                <tr>
+                    <td><strong>Доступ до облікових даних<br>(Credential Access)</strong></td>
+                    <td>Перехоплення SWIFT паролів (keylogging), крадіжка паролів з браузерів, дамп пам'яті LSASS</td>
+                </tr>
+                <tr>
+                    <td><strong>Вплив<br>(Impact)</strong></td>
+                    <td>Маніпулювання SWIFT повідомленнями, видалення логів (anti-forensics), стирання дисків</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Slide 6: Carbanak - Профіль -->
+    <div class="slide">
+        <h2>🎭 Carbanak (Anunak / FIN7)</h2>
+        <h3>$1 мільярд — кіберзлочинна кампанія</h3>
+
+        <div class="info-box" style="margin-bottom: 20px;">
+            <strong>2013-2018:</strong> Понад $1 млрд вкрадено з 100+ банків у 40+ країнах
+        </div>
+
+        <h3>🌍 Географія атак:</h3>
+        <ul>
+            <li>🇺🇸 США — Wells Fargo, PNC Bank</li>
+            <li>🇪🇺 Європа — Німеччина, Великобританія, Іспанія</li>
+            <li>🇷🇺 Росія — десятки регіональних банків</li>
+            <li>🇺🇦 Україна — ПриватБанк та інші</li>
+            <li>🇨🇳 Китай — банки та payment processors</li>
+            <li>🇮🇳 Індія — комерційні банки</li>
+        </ul>
+    </div>
+
+    <!-- Slide 7: Carbanak Тактика -->
+    <div class="slide">
+        <h2>Унікальна тактика Carbanak</h2>
+        <h3>"Інсайдерський підхід" — 7 етапів операції:</h3>
+
+        <ol>
+            <li><strong>Reconnaissance</strong> — OSINT вивчення структури банку, ATM мережі, персоналу через LinkedIn, Facebook</li>
+            <li><strong>Initial Access</strong> — Spear-phishing на співробітників з malicious MS Office attachments</li>
+            <li><strong>Lateral Movement</strong> — Компрометація domain admin, розповсюдження RAT через мережу</li>
+            <li><strong>Monitoring</strong> — Встановлення screen capture malware на комп'ютери bank operators</li>
+            <li style="color: #e74c3c;"><strong>Learning (місяці!)</strong> — Спостереження як працюють CBS, ATM management, payment systems</li>
+            <li><strong>Manipulation</strong> — Маніпулювання балансами рахунків або ATM dispensers</li>
+            <li><strong>Cashout</strong> — Виведення готівки через ATM або переводи на мул-акаунти</li>
+        </ol>
+    </div>
+
+    <!-- Slide 8: Carbanak Методи крадіжки -->
+    <div class="slide">
+        <h2>💸 Методи крадіжки грошей Carbanak</h2>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Метод</th>
+                    <th>Опис</th>
+                    <th>Типова сума</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>ATM Jackpotting</strong></td>
+                    <td>Віддалене керування банкоматами для видачі готівки без карти</td>
+                    <td style="color: #e74c3c;">$500K - $10M</td>
+                </tr>
+                <tr>
+                    <td><strong>Account Balance Manipulation</strong></td>
+                    <td>Збільшення балансу рахунку → зняття грошей → відкат балансу назад</td>
+                    <td style="color: #e74c3c;">$2M - $10M</td>
+                </tr>
+                <tr>
+                    <td><strong>SWIFT Network Abuse</strong></td>
+                    <td>Fraudulent міжнародні перекази через SWIFT</td>
+                    <td style="color: #e74c3c;">$10M - $100M</td>
+                </tr>
+                <tr>
+                    <td><strong>E-payment Systems</strong></td>
+                    <td>Фейкові транзакції в платіжних системах</td>
+                    <td style="color: #e74c3c;">$1M - $5M</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Slide 9: APT38 - Профіль -->
+    <div class="slide">
+        <h2>🎯 APT38 — SWIFT Attack спеціалісти</h2>
+        <h3>Підрозділ Lazarus Group</h3>
+
+        <p><strong>APT38</strong> (також <em>TEMP.Hermit</em>, <em>Bluenoroff</em>) — спеціалізується виключно на атаках проти SWIFT network та міжнародних банківських переказів.</p>
+
+        <h3 style="margin-top: 20px;">💰 Відомі операції APT38:</h3>
+        <ul>
+            <li><strong>Bangladesh Bank (2016):</strong> $81M успішно вкрадено через SWIFT</li>
+            <li><strong>Banco del Austro, Еквадор (2015):</strong> $12M вкрадено</li>
+            <li><strong>Far Eastern International Bank, Тайвань (2017):</strong> Спроба крадіжки $60M (заблоковано)</li>
+            <li><strong>Bancomext, Мексика (2018):</strong> Атака на SWIFT infrastructure</li>
+            <li><strong>Banco de Chile (2018):</strong> $10M + супутній DDoS для відвернення уваги</li>
+        </ul>
+    </div>
+
+    <!-- Slide 10: MITRE ATT&CK для APT38 -->
+    <div class="slide">
+        <h2>MITRE ATT&CK Mapping: APT38</h2>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Тактика</th>
+                    <th>Техніка</th>
+                    <th>Використання APT38</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Початковий доступ<br>(Initial Access)</strong></td>
+                    <td>T1566.001 Цільовий фішинг з вкладенням</td>
+                    <td>Шкідливі PDF до співробітників банку</td>
+                </tr>
+                <tr>
+                    <td><strong>Виконання<br>(Execution)</strong></td>
+                    <td>T1059.003 Командна оболонка Windows</td>
+                    <td>PowerShell для виконання malware</td>
+                </tr>
+                <tr>
+                    <td><strong>Закріплення<br>(Persistence)</strong></td>
+                    <td>T1053.005 Заплановані завдання</td>
+                    <td>Створення scheduled tasks для збереження після перезавантаження</td>
+                </tr>
+                <tr>
+                    <td><strong>Доступ до облікових даних<br>(Credential Access)</strong></td>
+                    <td>T1003.001 Дамп пам'яті LSASS</td>
+                    <td>Mimikatz для крадіжки облікових даних з пам'яті</td>
+                </tr>
+                <tr>
+                    <td><strong>Lateral Movement</strong></td>
+                    <td>T1021.002 SMB/Windows Admin Shares</td>
+                    <td>PsExec, WMIC для переміщення в мережі</td>
+                </tr>
+                <tr style="background-color: rgba(231, 76, 60, 0.1);">
+                    <td><strong>Вплив<br>(Impact)</strong></td>
+                    <td>T1565.001 Маніпулювання збереженими даними</td>
+                    <td>Маніпулювання SWIFT повідомленнями та записами транзакцій</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Slide 11: Indicators of Compromise -->
+    <div class="slide">
+        <h2>🔍 Indicators of Compromise (IoC)</h2>
+        <h3>Як виявити Lazarus/APT38:</h3>
+
+        <div class="code-block">
+<strong>File Indicators:</strong>
+SHA-256 hashes:
+  e1b3f1f0b63b1e3c8d4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7 # HOPLIGHT RAT
+  2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5f6a7b8c9d0e1f2a3b4 # Manuscrypt
+
+File paths:
+  %AppData%\{random}\{random}.exe
+
+Registry:
+  HKCU\Software\Microsoft\Windows\CurrentVersion\Run\{GUID}
+
+<strong>Network Indicators:</strong>
+C2 Domains:
+  - updatecenter.info
+  - fastcloud.tech
+  - softwareupdate.online
+
+IP addresses:
+  - 103.246.242.202 (Singapore)
+  - 185.142.236.226 (Netherlands)
+        </div>
+
+        <div class="warning-box" style="margin-top: 20px;">
+            <strong>⚠️ Detection Strategy:</strong> Використовуйте YARA rules, threat intel feeds (FS-ISAC), моніторинг SWIFT workstation activity, EDR behavioral analysis
+        </div>
+    </div>
+
+    <!-- Slide 12: Висновки -->
+    <div class="slide">
+        <h2>📌 Висновки: APT загрози для банків</h2>
+
+        <ul class="checklist">
+            <li>APT групи — найсерйозніша загроза для банківського сектору</li>
+            <li>Lazarus Group: $2+ млрд вкрадено, державне спонсорування DPRK</li>
+            <li>Carbanak: $1 млрд campaign, "інсайдерський підхід" з моніторингом операторів</li>
+            <li>APT38: спеціалізація виключно на SWIFT network attacks</li>
+            <li>TTPs включають spear-phishing, lateral movement, SWIFT manipulation</li>
+            <li>Захист: Threat Intelligence (FS-ISAC), MITRE ATT&CK detection rules</li>
+            <li>SWIFT security controls, SIEM correlation, incident response playbooks</li>
+        </ul>
+
+        <div class="success-box" style="margin-top: 30px;">
+            <strong>🎯 "Know Your Enemy"</strong> — детальне вивчення TTPs attackers критично важливе для ефективного захисту
+        </div>
+
+        <div style="margin-top: 30px; text-align: center;">
+            <p><strong>Наступна тема:</strong> Banking Trojans (Zeus, Emotet, Trickbot)</p>
+            <p style="margin-top: 10px; opacity: 0.7;">Натисніть ESC або закрийте вікно для повернення</p>
+        </div>
+    </div>
+
+</div>
+
+<!-- Navigation -->
+<div class="navigation">
+    <button class="nav-btn" id="prevBtn" onclick="changeSlide(-1)">← Попередній</button>
+    <button class="nav-btn" onclick="window.location.href='index.html'">🏠 Головна</button>
+    <button class="nav-btn" id="nextBtn" onclick="changeSlide(1)">Наступний →</button>
+</div>
+
+<script src="../../../../new_assets/presentation/js/presentation.js"></script>
+</body>
+</html>

